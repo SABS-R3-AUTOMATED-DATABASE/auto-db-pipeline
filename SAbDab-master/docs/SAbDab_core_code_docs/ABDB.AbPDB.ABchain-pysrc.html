@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>ABDB.AbPDB.ABchain</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="ABDB-module.html">Package&nbsp;ABDB</a> ::
+        <a href="ABDB.AbPDB-module.html">Package&nbsp;AbPDB</a> ::
+        Module&nbsp;ABchain
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="ABDB.AbPDB.ABchain-module.html">Module ABDB.AbPDB.ABchain</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Created on 7 Feb 2013</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">@author: dunbar</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">@change: unnumbered list now contains the id's of the unnumbered residues. Unnumbered residues are now yielded by iterating over the list.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">@change: The child residues now have a chothia numbered flag (True if chothia numbered false otherwise).</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">@change: non-amino acid HETATMs now included in the children. (and reference in unnumbered)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">@change: ABchain.antigen is now a list. Each member of the list is a bound antigen. This handles multi-chain antigens. </tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">Bio</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module ABDB.ABDB_updater.PDB=ABDB.ABDB_updater.PDB-module.html"><a title="ABDB.ABDB_updater.PDB" class="py-name" href="#" onclick="return doclink('link-0', 'PDB', 'link-0');">PDB</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module ABDB.AbPDB.Chain=ABDB.AbPDB.Chain-module.html,Class ABDB.AbPDB.Chain.Chain=ABDB.AbPDB.Chain.Chain-class.html"><a title="ABDB.AbPDB.Chain
+ABDB.AbPDB.Chain.Chain" class="py-name" href="#" onclick="return doclink('link-1', 'Chain', 'link-1');">Chain</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package ABDB=ABDB-module.html"><a title="ABDB" class="py-name" href="#" onclick="return doclink('link-2', 'ABDB', 'link-2');">ABDB</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package ABDB.AbPDB=ABDB.AbPDB-module.html"><a title="ABDB.AbPDB" class="py-name" href="#" onclick="return doclink('link-3', 'AbPDB', 'link-3');">AbPDB</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module ABDB.AbPDB.Entity=ABDB.AbPDB.Entity-module.html,Class ABDB.AbPDB.Entity.Entity=ABDB.AbPDB.Entity.Entity-class.html"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-4', 'Entity', 'link-4');">Entity</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-5', 'Entity', 'link-4');">Entity</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="ABDB" class="py-name" href="#" onclick="return doclink('link-6', 'ABDB', 'link-2');">ABDB</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="ABDB.AbPDB" class="py-name" href="#" onclick="return doclink('link-7', 'AbPDB', 'link-3');">AbPDB</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module ABDB.AbPDB.Fragment=ABDB.AbPDB.Fragment-module.html,Class ABDB.AbPDB.Fragment.Fragment=ABDB.AbPDB.Fragment.Fragment-class.html"><a title="ABDB.AbPDB.Fragment
+ABDB.AbPDB.Fragment.Fragment" class="py-name" href="#" onclick="return doclink('link-8', 'Fragment', 'link-8');">Fragment</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name"><a title="ABDB.AbPDB.Fragment
+ABDB.AbPDB.Fragment.Fragment" class="py-name" href="#" onclick="return doclink('link-9', 'Fragment', 'link-8');">Fragment</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">Bio</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="ABDB.ABDB_updater.PDB" class="py-name" href="#" onclick="return doclink('link-10', 'PDB', 'link-0');">PDB</a></tt><tt class="py-op">.</tt><tt class="py-name">Polypeptide</tt> <tt class="py-keyword">import</tt> <tt class="py-name">three_to_one</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-11" class="py-name" targets="Function ABDB.ABDB_updater.getpdb.copy()=ABDB.ABDB_updater.getpdb-module.html#copy,Method ABDB.AbPDB.Entity.Entity.copy()=ABDB.AbPDB.Entity.Entity-class.html#copy"><a title="ABDB.ABDB_updater.getpdb.copy
+ABDB.AbPDB.Entity.Entity.copy" class="py-name" href="#" onclick="return doclink('link-11', 'copy', 'link-11');">copy</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name"><a title="ABDB.ABDB_updater.getpdb.copy
+ABDB.AbPDB.Entity.Entity.copy" class="py-name" href="#" onclick="return doclink('link-12', 'copy', 'link-11');">copy</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable ABDB.AB_Utils.AB_Utils.regions=ABDB.AB_Utils.AB_Utils-module.html#regions,Variable ABDB.AbPDB.ABchain.regions=ABDB.AbPDB.ABchain-module.html#regions"><a title="ABDB.AB_Utils.AB_Utils.regions
+ABDB.AbPDB.ABchain.regions" class="py-name" href="#" onclick="return doclink('link-13', 'regions', 'link-13');">regions</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">"H"</tt><tt class="py-op">:</tt><tt class="py-op">{</tt> <tt class="py-string">"fwH1"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">25</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"CDRH1"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">26</tt><tt class="py-op">,</tt><tt class="py-number">32</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"fwH2"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">33</tt><tt class="py-op">,</tt> <tt class="py-number">51</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"CDRH2"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">52</tt><tt class="py-op">,</tt><tt class="py-number">56</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"afwH3"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">57</tt><tt class="py-op">,</tt><tt class="py-number">75</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"bfwH3"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">76</tt><tt class="py-op">,</tt><tt class="py-number">94</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"CDRH3"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">95</tt><tt class="py-op">,</tt><tt class="py-number">102</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"fwH4"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">103</tt><tt class="py-op">,</tt><tt class="py-number">120</tt><tt class="py-op">)</tt> <tt class="py-op">}</tt> <tt class="py-op">}</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-14" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.regions
+ABDB.AbPDB.ABchain.regions" class="py-name" href="#" onclick="return doclink('link-14', 'regions', 'link-13');">regions</a></tt><tt class="py-op">[</tt><tt class="py-string">"L"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-string">"fwL1"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">23</tt><tt class="py-op">)</tt> <tt class="py-op">,</tt><tt class="py-string">"CDRL1"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">24</tt><tt class="py-op">,</tt><tt class="py-number">34</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"fwL2"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">35</tt><tt class="py-op">,</tt> <tt class="py-number">49</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"CDRL2"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">50</tt><tt class="py-op">,</tt><tt class="py-number">56</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"afwL3"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">57</tt><tt class="py-op">,</tt><tt class="py-number">72</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"bfwL3"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">73</tt><tt class="py-op">,</tt><tt class="py-number">88</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"CDRL3"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">89</tt><tt class="py-op">,</tt><tt class="py-number">97</tt><tt class="py-op">)</tt><tt class="py-op">,</tt>  <tt class="py-string">"fwL4"</tt><tt class="py-op">:</tt><tt class="py-op">(</tt><tt class="py-number">98</tt><tt class="py-op">,</tt><tt class="py-number">120</tt><tt class="py-op">)</tt> <tt class="py-op">}</tt>  </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="ABchain"></a><div id="ABchain-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="ABchain-toggle" onclick="return toggle('ABchain');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html">ABchain</a><tt class="py-op">(</tt><tt class="py-base-class">Bio</tt><tt class="py-op">.</tt><tt class="py-base-class">PDB</tt><tt class="py-op">.</tt><tt class="py-base-class">Chain</tt><tt class="py-op">.</tt><tt class="py-base-class">Chain</tt><tt class="py-op">,</tt><tt class="py-base-class">Entity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ABchain-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    A class to hold an antibody chain</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="ABchain.__init__"></a><div id="ABchain.__init__-def"><a name="L26"></a><tt class="py-lineno"> 26</tt> <a class="py-toggle" href="#" id="ABchain.__init__-toggle" onclick="return toggle('ABchain.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">id</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.__init__-expanded"><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-name">Bio</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="ABDB.ABDB_updater.PDB" class="py-name" href="#" onclick="return doclink('link-15', 'PDB', 'link-0');">PDB</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="ABDB.AbPDB.Chain
+ABDB.AbPDB.Chain.Chain" class="py-name" href="#" onclick="return doclink('link-16', 'Chain', 'link-1');">Chain</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="ABDB.AbPDB.Chain
+ABDB.AbPDB.Chain.Chain" class="py-name" href="#" onclick="return doclink('link-17', 'Chain', 'link-1');">Chain</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method ABDB.ABDB_updater.IMGT.IMGT.__init__()=ABDB.ABDB_updater.IMGT.IMGT-class.html#__init__,Method ABDB.ABDB_updater.Identify.Identify_AB.__init__()=ABDB.ABDB_updater.Identify.Identify_AB-class.html#__init__,Method ABDB.ABDB_updater.PDB.Download.__init__()=ABDB.ABDB_updater.PDB.Download-class.html#__init__,Method ABDB.ABDB_updater.PDB.Read.__init__()=ABDB.ABDB_updater.PDB.Read-class.html#__init__,Method ABDB.ABDB_updater.Populate.Populator.__init__()=ABDB.ABDB_updater.Populate.Populator-class.html#__init__,Method ABDB.AB_Utils.region_definitions.Accept.__init__()=ABDB.AB_Utils.region_definitions.Accept-class.html#__init__,Method ABDB.ABangle.abangle.__init__()=ABDB.ABangle.abangle-class.html#__init__,Method ABDB.ABangle.canonicals.Decision.__init__()=ABDB.ABangle.canonicals.Decision-class.html#__init__,Method ABDB.ABangle.predict.Profile.__init__()=ABDB.ABangle.predict.Profile-class.html#__init__,Method ABDB.ABangle.predict.Profile_set.__init__()=ABDB.ABangle.predict.Profile_set-class.html#__init__,Method ABDB.ABangle.predict.Template.__init__()=ABDB.ABangle.predict.Template-class.html#__init__,Method ABDB.ABangle.predictor.CDR.__init__()=ABDB.ABangle.predictor.CDR-class.html#__init__,Method ABDB.ABangle.predictor.Profile.__init__()=ABDB.ABangle.predictor.Profile-class.html#__init__,Method ABDB.ABangle.predictor.Residue.__init__()=ABDB.ABangle.predictor.Residue-class.html#__init__,Method ABDB.ABangle.visualise.__init__()=ABDB.ABangle.visualise-class.html#__init__,Method ABDB.AbPDB.ABchain.ABchain.__init__()=ABDB.AbPDB.ABchain.ABchain-class.html#__init__,Method ABDB.AbPDB.AGchain.AGchain.__init__()=ABDB.AbPDB.AGchain.AGchain-class.html#__init__,Method ABDB.AbPDB.AntibodyParser'.AntibodyParser.__init__()=ABDB.AbPDB.AntibodyParser%27.AntibodyParser-class.html#__init__,Method ABDB.AbPDB.AntibodyParser'.error_stream.__init__()=ABDB.AbPDB.AntibodyParser%27.error_stream-class.html#__init__,Method ABDB.AbPDB.AntibodyStructure.AntibodyStructure.__init__()=ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#__init__,Method ABDB.AbPDB.Chain.Chain.__init__()=ABDB.AbPDB.Chain.Chain-class.html#__init__,Method ABDB.AbPDB.Fab.Fab.__init__()=ABDB.AbPDB.Fab.Fab-class.html#__init__,Method ABDB.AbPDB.Fragment.Fragment.__init__()=ABDB.AbPDB.Fragment.Fragment-class.html#__init__,Method ABDB.AbPDB.Holder.Holder.__init__()=ABDB.AbPDB.Holder.Holder-class.html#__init__,Method ABDB.AbPDB.Model.Model.__init__()=ABDB.AbPDB.Model.Model-class.html#__init__,Method ABDB.AbPDB.Residue.Residue.__init__()=ABDB.AbPDB.Residue.Residue-class.html#__init__,Method ABDB.AbPDB.Scfv.Scfv.__init__()=ABDB.AbPDB.Scfv.Scfv-class.html#__init__,Method ABDB.AbPDB.Visualise.Pymol.Cmd.__init__()=ABDB.AbPDB.Visualise.Pymol.Cmd-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.Profile.__init__()=ABDB.Annotate.arnaci_depreciated.Profile-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.chothia.__init__()=ABDB.Annotate.arnaci_depreciated.chothia-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.position.__init__()=ABDB.Annotate.arnaci_depreciated.position-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.residue.__init__()=ABDB.Annotate.arnaci_depreciated.residue-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.segment.__init__()=ABDB.Annotate.arnaci_depreciated.segment-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.sequence.__init__()=ABDB.Annotate.arnaci_depreciated.sequence-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.tcr_imgt.__init__()=ABDB.Annotate.arnaci_depreciated.tcr_imgt-class.html#__init__,Method ABDB.Database_interface.Antigen_details.__init__()=ABDB.Database_interface.Antigen_details-class.html#__init__,Method ABDB.Database_interface.Database.__init__()=ABDB.Database_interface.Database-class.html#__init__,Method ABDB.Database_interface.Fab_details.__init__()=ABDB.Database_interface.Fab_details-class.html#__init__,Method ABDB.Database_interface.PDB_details.__init__()=ABDB.Database_interface.PDB_details-class.html#__init__,Method ABDB.command_line.Cmd.__init__()=ABDB.command_line.Cmd-class.html#__init__,Method ABDB.command_line.Selector.__init__()=ABDB.command_line.Selector-class.html#__init__,Method ABDB.command_line.Workspace.__init__()=ABDB.command_line.Workspace-class.html#__init__,Method ABDB.command_line.debug_Cmd.__init__()=ABDB.command_line.debug_Cmd-class.html#__init__"><a title="ABDB.ABDB_updater.IMGT.IMGT.__init__
+ABDB.ABDB_updater.Identify.Identify_AB.__init__
+ABDB.ABDB_updater.PDB.Download.__init__
+ABDB.ABDB_updater.PDB.Read.__init__
+ABDB.ABDB_updater.Populate.Populator.__init__
+ABDB.AB_Utils.region_definitions.Accept.__init__
+ABDB.ABangle.abangle.__init__
+ABDB.ABangle.canonicals.Decision.__init__
+ABDB.ABangle.predict.Profile.__init__
+ABDB.ABangle.predict.Profile_set.__init__
+ABDB.ABangle.predict.Template.__init__
+ABDB.ABangle.predictor.CDR.__init__
+ABDB.ABangle.predictor.Profile.__init__
+ABDB.ABangle.predictor.Residue.__init__
+ABDB.ABangle.visualise.__init__
+ABDB.AbPDB.ABchain.ABchain.__init__
+ABDB.AbPDB.AGchain.AGchain.__init__
+ABDB.AbPDB.AntibodyParser'.AntibodyParser.__init__
+ABDB.AbPDB.AntibodyParser'.error_stream.__init__
+ABDB.AbPDB.AntibodyStructure.AntibodyStructure.__init__
+ABDB.AbPDB.Chain.Chain.__init__
+ABDB.AbPDB.Fab.Fab.__init__
+ABDB.AbPDB.Fragment.Fragment.__init__
+ABDB.AbPDB.Holder.Holder.__init__
+ABDB.AbPDB.Model.Model.__init__
+ABDB.AbPDB.Residue.Residue.__init__
+ABDB.AbPDB.Scfv.Scfv.__init__
+ABDB.AbPDB.Visualise.Pymol.Cmd.__init__
+ABDB.Annotate.arnaci_depreciated.Profile.__init__
+ABDB.Annotate.arnaci_depreciated.chothia.__init__
+ABDB.Annotate.arnaci_depreciated.position.__init__
+ABDB.Annotate.arnaci_depreciated.residue.__init__
+ABDB.Annotate.arnaci_depreciated.segment.__init__
+ABDB.Annotate.arnaci_depreciated.sequence.__init__
+ABDB.Annotate.arnaci_depreciated.tcr_imgt.__init__
+ABDB.Database_interface.Antigen_details.__init__
+ABDB.Database_interface.Database.__init__
+ABDB.Database_interface.Fab_details.__init__
+ABDB.Database_interface.PDB_details.__init__
+ABDB.command_line.Cmd.__init__
+ABDB.command_line.Selector.__init__
+ABDB.command_line.Workspace.__init__
+ABDB.command_line.debug_Cmd.__init__" class="py-name" href="#" onclick="return doclink('link-18', '__init__', 'link-18');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt id="link-19" class="py-name"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-19', 'Entity', 'link-4');">Entity</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="ABDB.ABDB_updater.IMGT.IMGT.__init__
+ABDB.ABDB_updater.Identify.Identify_AB.__init__
+ABDB.ABDB_updater.PDB.Download.__init__
+ABDB.ABDB_updater.PDB.Read.__init__
+ABDB.ABDB_updater.Populate.Populator.__init__
+ABDB.AB_Utils.region_definitions.Accept.__init__
+ABDB.ABangle.abangle.__init__
+ABDB.ABangle.canonicals.Decision.__init__
+ABDB.ABangle.predict.Profile.__init__
+ABDB.ABangle.predict.Profile_set.__init__
+ABDB.ABangle.predict.Template.__init__
+ABDB.ABangle.predictor.CDR.__init__
+ABDB.ABangle.predictor.Profile.__init__
+ABDB.ABangle.predictor.Residue.__init__
+ABDB.ABangle.visualise.__init__
+ABDB.AbPDB.ABchain.ABchain.__init__
+ABDB.AbPDB.AGchain.AGchain.__init__
+ABDB.AbPDB.AntibodyParser'.AntibodyParser.__init__
+ABDB.AbPDB.AntibodyParser'.error_stream.__init__
+ABDB.AbPDB.AntibodyStructure.AntibodyStructure.__init__
+ABDB.AbPDB.Chain.Chain.__init__
+ABDB.AbPDB.Fab.Fab.__init__
+ABDB.AbPDB.Fragment.Fragment.__init__
+ABDB.AbPDB.Holder.Holder.__init__
+ABDB.AbPDB.Model.Model.__init__
+ABDB.AbPDB.Residue.Residue.__init__
+ABDB.AbPDB.Scfv.Scfv.__init__
+ABDB.AbPDB.Visualise.Pymol.Cmd.__init__
+ABDB.Annotate.arnaci_depreciated.Profile.__init__
+ABDB.Annotate.arnaci_depreciated.chothia.__init__
+ABDB.Annotate.arnaci_depreciated.position.__init__
+ABDB.Annotate.arnaci_depreciated.residue.__init__
+ABDB.Annotate.arnaci_depreciated.segment.__init__
+ABDB.Annotate.arnaci_depreciated.sequence.__init__
+ABDB.Annotate.arnaci_depreciated.tcr_imgt.__init__
+ABDB.Database_interface.Antigen_details.__init__
+ABDB.Database_interface.Database.__init__
+ABDB.Database_interface.Fab_details.__init__
+ABDB.Database_interface.PDB_details.__init__
+ABDB.command_line.Cmd.__init__
+ABDB.command_line.Selector.__init__
+ABDB.command_line.Workspace.__init__
+ABDB.command_line.debug_Cmd.__init__" class="py-name" href="#" onclick="return doclink('link-20', '__init__', 'link-18');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">level</tt><tt class="py-op">=</tt><tt class="py-string">"C"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">antigen</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">unnumbered</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Class ABDB.Annotate.arnaci_depreciated.sequence=ABDB.Annotate.arnaci_depreciated.sequence-class.html"><a title="ABDB.Annotate.arnaci_depreciated.sequence" class="py-name" href="#" onclick="return doclink('link-21', 'sequence', 'link-21');">sequence</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">residue_order</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engineered</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">         </tt>
+<a name="ABchain.__repr__"></a><div id="ABchain.__repr__-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="ABchain.__repr__-toggle" onclick="return toggle('ABchain.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.__repr__-expanded"><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;ABchain %s type: %s&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">     </tt>
+<a name="ABchain._add_antigen"></a><div id="ABchain._add_antigen-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="ABchain._add_antigen-toggle" onclick="return toggle('ABchain._add_antigen');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#_add_antigen">_add_antigen</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">antigen</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain._add_antigen-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain._add_antigen-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">antigen</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">antigen</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                 </tt>
+<a name="ABchain.analyse"></a><div id="ABchain.analyse-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="ABchain.analyse-toggle" onclick="return toggle('ABchain.analyse');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#analyse">analyse</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">chain_type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.analyse-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.analyse-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method ABDB.AbPDB.ABchain.ABchain.set_chain_type()=ABDB.AbPDB.ABchain.ABchain-class.html#set_chain_type,Method ABDB.Annotate.arnaci_depreciated.sequence.set_chain_type()=ABDB.Annotate.arnaci_depreciated.sequence-class.html#set_chain_type"><a title="ABDB.AbPDB.ABchain.ABchain.set_chain_type
+ABDB.Annotate.arnaci_depreciated.sequence.set_chain_type" class="py-name" href="#" onclick="return doclink('link-22', 'set_chain_type', 'link-22');">set_chain_type</a></tt><tt class="py-op">(</tt><tt class="py-name">chain_type</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method ABDB.AbPDB.ABchain.ABchain._init_fragments()=ABDB.AbPDB.ABchain.ABchain-class.html#_init_fragments"><a title="ABDB.AbPDB.ABchain.ABchain._init_fragments" class="py-name" href="#" onclick="return doclink('link-23', '_init_fragments', 'link-23');">_init_fragments</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method ABDB.AbPDB.ABchain.ABchain.annotate_children()=ABDB.AbPDB.ABchain.ABchain-class.html#annotate_children"><a title="ABDB.AbPDB.ABchain.ABchain.annotate_children" class="py-name" href="#" onclick="return doclink('link-24', 'annotate_children', 'link-24');">annotate_children</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method ABDB.AbPDB.ABchain.ABchain.set_sequence()=ABDB.AbPDB.ABchain.ABchain-class.html#set_sequence"><a title="ABDB.AbPDB.ABchain.ABchain.set_sequence" class="py-name" href="#" onclick="return doclink('link-25', 'set_sequence', 'link-25');">set_sequence</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="ABchain.set_chain_type"></a><div id="ABchain.set_chain_type-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="ABchain.set_chain_type-toggle" onclick="return toggle('ABchain.set_chain_type');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#set_chain_type">set_chain_type</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">chain_type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.set_chain_type-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.set_chain_type-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        Set the chain type to H or L </tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">=</tt> <tt class="py-name">chain_type</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">     </tt>
+<a name="ABchain.set_sequence"></a><div id="ABchain.set_sequence-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="ABchain.set_sequence-toggle" onclick="return toggle('ABchain.set_sequence');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#set_sequence">set_sequence</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">i</tt><tt class="py-op">=</tt><tt class="py-number">0</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-26" class="py-name" targets="Class ABDB.Annotate.arnaci_depreciated.residue=ABDB.Annotate.arnaci_depreciated.residue-class.html"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-26', 'residue', 'link-26');">residue</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-name">resname</tt><tt class="py-op">=</tt><tt class="py-name">three_to_one</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-27', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">get_resname</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-comment"># change this to use our chemical components.</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">KeyError</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-comment"># skip the residue if the code is not recognised - e.g. UNK</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">            <tt class="py-name">hetflag</tt><tt class="py-op">,</tt> <tt class="py-name">resseq</tt><tt class="py-op">,</tt> <tt class="py-name">icode</tt><tt class="py-op">=</tt><tt id="link-28" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-28', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method ABDB.ABangle.visualise.get_id()=ABDB.ABangle.visualise-class.html#get_id,Method ABDB.Annotate.arnaci_depreciated.position.get_id()=ABDB.Annotate.arnaci_depreciated.position-class.html#get_id"><a title="ABDB.ABangle.visualise.get_id
+ABDB.Annotate.arnaci_depreciated.position.get_id" class="py-name" href="#" onclick="return doclink('link-29', 'get_id', 'link-29');">get_id</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.sequence" class="py-name" href="#" onclick="return doclink('link-30', 'sequence', 'link-21');">sequence</a></tt><tt class="py-op">[</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">resseq</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">icode</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">resname</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">residue_order</tt><tt class="py-op">[</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">resseq</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">icode</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">            <tt class="py-name">i</tt><tt class="py-op">+=</tt><tt class="py-number">1</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">             </tt>
+<a name="ABchain.set_engineered"></a><div id="ABchain.set_engineered-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="ABchain.set_engineered-toggle" onclick="return toggle('ABchain.set_engineered');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#set_engineered">set_engineered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">engineered</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.set_engineered-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.set_engineered-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">engineered</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engineered</tt><tt class="py-op">=</tt><tt class="py-name">True</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engineered</tt><tt class="py-op">=</tt><tt class="py-name">False</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">             </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">             </tt>
+<a name="ABchain.add_unnumbered"></a><div id="ABchain.add_unnumbered-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="ABchain.add_unnumbered-toggle" onclick="return toggle('ABchain.add_unnumbered');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#add_unnumbered">add_unnumbered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">residue</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.add_unnumbered-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.add_unnumbered-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">unnumbered</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-31', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">id</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">         </tt>
+<a name="ABchain._get_region"></a><div id="ABchain._get_region-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="ABchain._get_region-toggle" onclick="return toggle('ABchain._get_region');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#_get_region">_get_region</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">residue</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain._get_region-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain._get_region-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-32" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-32', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">chothia_numbered</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">region</tt> <tt class="py-keyword">in</tt> <tt id="link-33" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.regions
+ABDB.AbPDB.ABchain.regions" class="py-name" href="#" onclick="return doclink('link-33', 'regions', 'link-13');">regions</a></tt><tt class="py-op">[</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-34" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-34', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">id</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">&gt;=</tt> <tt id="link-35" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.regions
+ABDB.AbPDB.ABchain.regions" class="py-name" href="#" onclick="return doclink('link-35', 'regions', 'link-13');">regions</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">region</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt id="link-36" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-36', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">id</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">&lt;=</tt> <tt id="link-37" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.regions
+ABDB.AbPDB.ABchain.regions" class="py-name" href="#" onclick="return doclink('link-37', 'regions', 'link-13');">regions</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">region</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt class="py-name">region</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"?"</tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">     </tt>
+<a name="ABchain.annotate_children"></a><div id="ABchain.annotate_children-def"><a name="L84"></a><tt class="py-lineno"> 84</tt> <a class="py-toggle" href="#" id="ABchain.annotate_children-toggle" onclick="return toggle('ABchain.annotate_children');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#annotate_children">annotate_children</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.annotate_children-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.annotate_children-expanded"><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-38" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-38', 'residue', 'link-26');">residue</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt id="link-39" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-39', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt id="link-40" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-40', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">region</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method ABDB.AbPDB.ABchain.ABchain._get_region()=ABDB.AbPDB.ABchain.ABchain-class.html#_get_region"><a title="ABDB.AbPDB.ABchain.ABchain._get_region" class="py-name" href="#" onclick="return doclink('link-41', '_get_region', 'link-41');">_get_region</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-42', 'residue', 'link-26');">residue</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">atom</tt> <tt class="py-keyword">in</tt> <tt id="link-43" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-43', 'residue', 'link-26');">residue</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                <tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">region</tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-44', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">region</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-45" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-45', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">region</tt> <tt class="py-op">!=</tt> <tt class="py-string">"?"</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fragments</tt><tt class="py-op">.</tt><tt class="py-name">child_dict</tt><tt class="py-op">[</tt><tt id="link-46" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-46', 'residue', 'link-26');">residue</a></tt><tt class="py-op">.</tt><tt class="py-name">region</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method ABDB.ABangle.predict.Profile.add()=ABDB.ABangle.predict.Profile-class.html#add,Method ABDB.ABangle.predict.Profile_set.add()=ABDB.ABangle.predict.Profile_set-class.html#add,Method ABDB.ABangle.predictor.CDR.add()=ABDB.ABangle.predictor.CDR-class.html#add,Method ABDB.ABangle.predictor.Contact.add()=ABDB.ABangle.predictor.Contact-class.html#add,Method ABDB.ABangle.predictor.Profile.add()=ABDB.ABangle.predictor.Profile-class.html#add,Method ABDB.ABangle.predictor.Residue.add()=ABDB.ABangle.predictor.Residue-class.html#add,Method ABDB.AbPDB.Fragment.Fragment.add()=ABDB.AbPDB.Fragment.Fragment-class.html#add"><a title="ABDB.ABangle.predict.Profile.add
+ABDB.ABangle.predict.Profile_set.add
+ABDB.ABangle.predictor.CDR.add
+ABDB.ABangle.predictor.Contact.add
+ABDB.ABangle.predictor.Profile.add
+ABDB.ABangle.predictor.Residue.add
+ABDB.AbPDB.Fragment.Fragment.add" class="py-name" href="#" onclick="return doclink('link-47', 'add', 'link-47');">add</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.residue" class="py-name" href="#" onclick="return doclink('link-48', 'residue', 'link-26');">residue</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">             </tt>
+<a name="ABchain._init_fragments"></a><div id="ABchain._init_fragments-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="ABchain._init_fragments-toggle" onclick="return toggle('ABchain._init_fragments');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#_init_fragments">_init_fragments</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain._init_fragments-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain._init_fragments-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fragments</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-49', 'Entity', 'link-4');">Entity</a></tt><tt class="py-op">(</tt><tt class="py-string">"Fragments"</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fragments</tt><tt class="py-op">.</tt><tt class="py-name">set_parent</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">region</tt> <tt class="py-keyword">in</tt> <tt id="link-50" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.regions
+ABDB.AbPDB.ABchain.regions" class="py-name" href="#" onclick="return doclink('link-50', 'regions', 'link-13');">regions</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chain_type</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fragments</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="ABDB.ABangle.predict.Profile.add
+ABDB.ABangle.predict.Profile_set.add
+ABDB.ABangle.predictor.CDR.add
+ABDB.ABangle.predictor.Contact.add
+ABDB.ABangle.predictor.Profile.add
+ABDB.ABangle.predictor.Residue.add
+ABDB.AbPDB.Fragment.Fragment.add" class="py-name" href="#" onclick="return doclink('link-51', 'add', 'link-47');">add</a></tt><tt class="py-op">(</tt> <tt id="link-52" class="py-name"><a title="ABDB.AbPDB.Fragment
+ABDB.AbPDB.Fragment.Fragment" class="py-name" href="#" onclick="return doclink('link-52', 'Fragment', 'link-8');">Fragment</a></tt><tt class="py-op">(</tt><tt class="py-name">region</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="ABchain.is_bound"></a><div id="ABchain.is_bound-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="ABchain.is_bound-toggle" onclick="return toggle('ABchain.is_bound');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#is_bound">is_bound</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.is_bound-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.is_bound-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        Check whether there is an antigen bound to the antibody chain</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Method ABDB.AbPDB.ABchain.ABchain.get_antigen()=ABDB.AbPDB.ABchain.ABchain-class.html#get_antigen,Method ABDB.AbPDB.Fab.Fab.get_antigen()=ABDB.AbPDB.Fab.Fab-class.html#get_antigen,Method ABDB.Database_interface.Fab_details.get_antigen()=ABDB.Database_interface.Fab_details-class.html#get_antigen"><a title="ABDB.AbPDB.ABchain.ABchain.get_antigen
+ABDB.AbPDB.Fab.Fab.get_antigen
+ABDB.Database_interface.Fab_details.get_antigen" class="py-name" href="#" onclick="return doclink('link-53', 'get_antigen', 'link-53');">get_antigen</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">         </tt>
+<a name="ABchain.is_engineered"></a><div id="ABchain.is_engineered-def"><a name="L110"></a><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="ABchain.is_engineered-toggle" onclick="return toggle('ABchain.is_engineered');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#is_engineered">is_engineered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.is_engineered-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.is_engineered-expanded"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engineered</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="ABchain.get_antigen"></a><div id="ABchain.get_antigen-def"><a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="ABchain.get_antigen-toggle" onclick="return toggle('ABchain.get_antigen');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#get_antigen">get_antigen</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.get_antigen-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.get_antigen-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">antigen</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">     </tt>
+<a name="ABchain.get_fragments"></a><div id="ABchain.get_fragments-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="ABchain.get_fragments-toggle" onclick="return toggle('ABchain.get_fragments');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#get_fragments">get_fragments</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.get_fragments-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.get_fragments-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">f</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fragments</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-name">f</tt> </tt>
+</div><a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">     </tt>
+<a name="ABchain.get_CDRs"></a><div id="ABchain.get_CDRs-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="ABchain.get_CDRs-toggle" onclick="return toggle('ABchain.get_CDRs');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#get_CDRs">get_CDRs</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.get_CDRs-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.get_CDRs-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">f</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fragments</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">id</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">"CDR"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">f</tt> </tt>
+</div><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">             </tt>
+<a name="ABchain.get_sequence"></a><div id="ABchain.get_sequence-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="ABchain.get_sequence-toggle" onclick="return toggle('ABchain.get_sequence');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#get_sequence">get_sequence</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">type</tt><tt class="py-op">=</tt><tt class="py-name">dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.get_sequence-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.get_sequence-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.sequence" class="py-name" href="#" onclick="return doclink('link-54', 'sequence', 'link-21');">sequence</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="ABDB.AbPDB.ABchain.ABchain.set_sequence" class="py-name" href="#" onclick="return doclink('link-55', 'set_sequence', 'link-25');">set_sequence</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">type</tt> <tt class="py-keyword">is</tt> <tt class="py-name">dict</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.sequence" class="py-name" href="#" onclick="return doclink('link-56', 'sequence', 'link-21');">sequence</a></tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-comment">#            ordered=sorted( self.sequence.items() , key=lambda x: int(x[0][1:]) if x[0][-1].isdigit() else float(x[0][1:-1] + "." + "%d"%"-ABCDEFGHIJKLMNOPQRSTUVWXYZ".index(x[0][-1].upper())  ))</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-name">ordered</tt><tt class="py-op">=</tt><tt class="py-name">sorted</tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="ABDB.Annotate.arnaci_depreciated.sequence" class="py-name" href="#" onclick="return doclink('link-57', 'sequence', 'link-21');">sequence</a></tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">residue_order</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt>  </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">type</tt> <tt class="py-keyword">is</tt> <tt class="py-name">str</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-string">""</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt> <tt class="py-op">[</tt><tt class="py-name">r</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">r</tt> <tt class="py-keyword">in</tt> <tt class="py-name">ordered</tt><tt class="py-op">]</tt> <tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">ordered</tt> </tt>
+</div><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">             </tt>
+<a name="ABchain.get_unnumbered"></a><div id="ABchain.get_unnumbered-def"><a name="L138"></a><tt class="py-lineno">138</tt> <a class="py-toggle" href="#" id="ABchain.get_unnumbered-toggle" onclick="return toggle('ABchain.get_unnumbered');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.ABchain.ABchain-class.html#get_unnumbered">get_unnumbered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ABchain.get_unnumbered-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ABchain.get_unnumbered-expanded"><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">r</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">unnumbered</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">child_dict</tt><tt class="py-op">[</tt><tt class="py-name">r</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  3 12:03:52 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

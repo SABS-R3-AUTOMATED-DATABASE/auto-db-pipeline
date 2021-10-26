@@ -1,0 +1,107 @@
+----------------------------------------------------------------------------------
+
+        SAbDab                                         \\    //
+        The OPIG Antibody Database                      \\  //
+        Authors: James Dunbar and Konrad Krawczyk         ||
+        2013-2015                                         || 
+
+Contact: dunbar@stats.ox.ac.uk
+
+----------------------------------------------------------------------------------
+
+To install the python interface package and script:
+    1. Put the ABDB python package (./lib/python/ABDB) in your PYTHONPATH
+    2. Put the SAbDab (./bin/SAbDab) script in your PATH
+    3. Copy over the data from the central repository to your machine's data dir.
+    4. Run the setup script: SAbDab --setup
+    
+N.B. For each machine you use the API on you will have to re-run the setup process.
+These settings will be saved for that machine. 
+
+
+See data/README for a summary of the data contents.
+
+
+To use ABDB package in a python program of your own:
+    import ABDB
+
+and to use the database api:
+    from ABDB import database
+
+For documentation of the API open the ../docs/html_documentation/index.html
+    or 
+help(database) in python
+
+
+----------------------------------------------------------------------------------
+Requirements:
+
+    o A local copy of the data files.
+
+    o Python 2.6 or higher
+        o numpy
+        o scipy
+        o matplotlib
+        o biopython (v 1.6+)
+        
+    Proprietry (these are now *not* required with ANARCI available):
+        o abysis (abnum)
+            or
+        o in-house numbering software 
+
+    or:
+        o ANARCI (email dunbar@stats.ox.ac.uk for a copy)    
+        
+    Network access:
+        o pdb ftp: ftp://ftp.wwpdb.org/pub/pdb  ( or access to internal pdb mirror )
+        o ligand expo site: http://ligand-expo.rcsb.org/files/    (three letter HETATM resid code will be sometimes be sent out)
+        o IMGT website: http://www.imgt.org/ ( data retrieved on update )
+        
+        Optional:
+            o abnum (only if no numbering software available) http://www.bioinf.org.uk/abs/abnum/  (sequence data will be sent out ) 
+            
+    Optional:
+        required for updating database:
+            o muscle
+        required for non-redundant set creation:
+            o cd-hit
+----------------------------------------------------------------------------------
+
+
+Example python api useage:
+
+    # Load information about the structure 12e8 from the database
+
+    # Import the database
+    from ABDB import database
+
+    # Fetch a pdb_details object for 12e8
+    p = database.fetch("12e8")  # p is a pdb_details object for 12e8
+
+    # Get the sequences for the chains in the structure
+    sequences = p.get_sequence()
+
+    # Use help(p) to see the other methods that can be used.
+
+    # Get a list of fab_details (fabs/paired chains) objects:
+    fabs = p.get_fabs()
+
+    # Get the lengths of the CDRs for the first fab in the list:
+    cdr_lengths = fabs[0].get_CDR_lengths()
+
+    # This is equivalent to:
+    cdr_lengths = p["HL"].get_CDR_lengths()
+
+    # Get the structure of 12e8:
+    s = p.get_structure() # returns a biopython structure object that has been put into an "antibody context".
+    # see help(s) for more information.
+
+    # Save only the variable region oordinates of the fab "HL" in a file named 12e8_HL_fv.pdb. (Resid's are chothia numbered)
+    from ABDB.AbPDB.Select import fv_only # import a selector (see help(ABDB.AbPDB.Select) for more info )
+    s[0]["HL"].save(output="12e8_HL_fv.pdb", selection=fv_only() )
+
+    # Similarly, just the VH domain of chain H
+    s[0]["HL"]["H"].save(output="12e8_H_VH.pdb", selection=fv_only() )
+
+    Any errors/bugs/un- or badly documented functions,  please let James know
+----------------------------------------------------------------------------------

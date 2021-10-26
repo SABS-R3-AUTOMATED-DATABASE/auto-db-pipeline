@@ -1,0 +1,119 @@
+#!python
+
+
+description="""
+
+DESCRIPTION
+    
+    SAbDab
+    An interface to the OPIG antibody database (SAbDab Backend)
+    
+    o To setup paths etc on your machine run:
+        SAbDab --setup
+        
+    o Update functionality is controlled from this script.
+    
+    o Users may find the python API useful for analysis and development:
+        o The ABDB python package can be imported using:
+        >>> import ABDB
+        o This contains various tools for analysing antibodies and the database
+        >>> from ABDB import database
+
+"""
+epilogue="""
+AUTHORS
+    
+    2013-2015
+    James Dunbar and Konrad Krawczyk
+    Prof C.Deane - Oxford protein informatics group.
+
+    Developed in collaboration with:
+    Dr Angelika Fuchs (Roche) and Dr Jiye Shi (UCB Celltech) and Dr Terry Baker (UCB Celltech)
+
+    Contact: dunbar@stats.ox.ac.uk
+    
+"""
+
+
+if __name__ == '__main__':
+    import sys
+    import argparse
+
+    parser = argparse.ArgumentParser(prog="SAbDab", description=description, epilog=epilogue,formatter_class=argparse.RawDescriptionHelpFormatter)
+
+    # Setup
+    parser.add_argument('--setup','-s',action='store_true',default=False, help="Run the setup script", dest="setup")
+    parser.add_argument('--config_dir','-cd',type=str,default="", help="Provide a path to the config directory (server setup only!) requires change of code atm", dest="config_dir")
+    
+    # PDBs + plots    
+    parser.add_argument('--list_pdbs','-l',action='store_true',default=False, help="List the PDBs from the database", dest="list_pdbs")
+    parser.add_argument('--deposition_plot','-dp',type=str,default=False, help="Output a deposition plot to file.",dest="deposition_plot")
+
+    # Updater commands
+    parser.add_argument( '--update','-u',action='store_true', help="Perform an update to a copy of the database that you have write permissions for")
+    parser.add_argument( '--dbpath','-db',type=str,default="", help="The absolute path to the database for update. Defaults to the setup database.")
+    parser.add_argument('--entries',type=str,nargs="+",default=[], help="PDB codes that you wish to run the update for")
+    parser.add_argument('--processes','-p',type=int,default=1, help="The number of processes to use for update.")
+    parser.add_argument('--overwrite','-o',action='store_true',default=False, help="Overwrite entries already in the database")
+    parser.add_argument('--generate_summary','-gs',type=str,default=False, help="Generate a summary file of the contents of the database.\nGive name of the output file.", dest="generate_summary") 
+
+    parser.add_argument('--crystal_contacts',type=str,nargs="+",default=[], help="A list of fab-ag pairs that should be considered crystal contacts. Only when entries has one argument. Should be in format HL:A")
+    parser.add_argument('--ignore_manual',action='store_true',default=False, help="Ignore manual flags for the entries provided. This provides a way to include structures that have been previously excluded.")
+
+    # Export commands for OPIG users.
+    parser.add_argument( '--export','-e',action='store_true', help="Export (sync with) the database from cockatrice (OPIG only)")
+    parser.add_argument( '--export_path','-ep',type=str,default="", help="If syncing for the first time, this should be absolute path to the directory to store the data in.")
+
+    # In house database update
+    parser.add_argument( '--inhouse_update',nargs=4, default=False, help="Update an in house structure. Expect a name, a fasta file, a pdb file and a details file. Run with dummay variables to get a template details file. e.g. --inhouse_update blah blah blah blah.", dest="inhouse_update")
+    
+    args=parser.parse_args()
+
+    if args.setup:
+        if args.config_dir:
+            while 1:
+                a=input("Config dir option requires modifying code for server setup atm. Continue? y/n: ")
+                if a.lower()=="y":break
+                else: sys.exit(1)
+        from ABDB.config import setup
+        setup(homedir=args.config_dir)
+    elif args.list_pdbs:
+        from ABDB import database
+        for p in database: print(p)
+    elif args.update:
+        # Pass to the update module.
+        from ABDB.ABDB_updater import update
+        if args.update:
+            if any( 0 if len(e)==4 or e == "all" else 1 for e in args.entries ):
+                print("PDB code in incorrect format", file=sys.stderr)
+                sys.exit(1)
+        try:
+            update(sys.argv[1:])
+        except Exception as e:
+            print("Error whilst updating: %s"%str(e), file=sys.stderr)
+            sys.exit(1)
+    elif args.inhouse_update:
+        from ABDB.ABDB_updater import update
+        update(sys.argv[1:])
+    elif args.export:
+        # Pass to the OPIG exporter.
+        from ABDB.ABDB_updater import OPIG_export
+        OPIG_export(args.export_path)
+    elif args.deposition_plot:
+        from ABDB import database
+        database.deposition_plot(png=args.deposition_plot)
+    elif args.generate_summary:
+        from ABDB.ABDB_updater.Generate_summary import generate_summary
+        if args.dbpath:
+            dbpath=args.dbpath
+        else:
+            from ABDB import database_path
+            dbpath=database_path
+        generate_summary(dbpath, entries=args.entries, outputfile=args.generate_summary)
+    else:
+        parser.print_help()
+    sys.exit(0)
+
+
+
+

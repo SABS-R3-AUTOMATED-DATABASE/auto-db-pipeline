@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>ABDB.Annotate.arnaci_depreciated</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="ABDB-module.html">Package&nbsp;ABDB</a> ::
+        <a href="ABDB.Annotate-module.html">Package&nbsp;Annotate</a> ::
+        Module&nbsp;arnaci_depreciated
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module arnaci_depreciated</h1><p class="nomargin-top"></p>
+<p>ARNACI - Antigen Receptor Numbering And ClassificatIon</p>
+  <p>A program to number a given antigen receptor (antibody or tcr) 
+  sequence.</p>
+
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        James Dunbar
+      </p>
+      <p><strong>Version:</strong>
+        0.1
+        <p>This code is in development and should be used with caution.</p>
+        <p>Its main purpose is to classify whether a sequence contains 
+        either a antibody or tcr variable region. One may force it to apply
+        antibody numbering (Chothia scheme) or tcr numbering (imgt scheme).
+        However, when screening for antibodies it is advisable to give it 
+        the freedom to decide. If it is a tcr chain, it will either be B or
+        A, if an antibody it will be either H or L. Therefore, the program 
+        can classify sequences by type.</p>
+        <p>Overview of the algorithm:</p>
+        <p>In the data folder we have profiles for several different 
+        species and chain types. A profile consists of a series of six 
+        residue segments containing the frequency amino acids observed at a
+        set of positions We have a segment defined at the start and end of 
+        each Chothia framework region. The algorithm scores each segment 
+        against each window of the sequence and finds the best position 
+        along the sequence for the segment. We know the expected order of 
+        these segments and so reject the profile if it puts the segments in
+        the incorrect order. The exception is if there is a single 
+        mis-ordering. In this case we attempt to fit the mis-ordered 
+        segment in the correct place.</p>
+        <p>This gives us anchor points from which a numbering scheme can be
+        applied. Each scheme has a number of heuristic rules and 
+        nomenclature. These rules are applied for the desired numbering 
+        scheme. If the algorithm is successful the numbered sequence will 
+        be output to screen or returned to the calling function. If it is 
+        unsuccessful nothing will be outputted.</p>
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.Profile-class.html" class="summary-name">Profile</a><br />
+      Class to store information about a given profile
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.chothia-class.html" class="summary-name">chothia</a><br />
+      A set of rules to number a sequence according to the chothia 
+        numbering scheme
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.position-class.html" class="summary-name">position</a><br />
+      Sequence profile information about a particular positions within a 
+        segment
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.residue-class.html" class="summary-name">residue</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.segment-class.html" class="summary-name">segment</a><br />
+      Typically 6 residue segments that appear at the start and end of 
+        the framework regions.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.sequence-class.html" class="summary-name">sequence</a><br />
+      The sequence object.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated.tcr_imgt-class.html" class="summary-name">tcr_imgt</a><br />
+      Rules: FR1-IMGT = 1-26   C @ 23 CDR1-IMGT = 27-38 5-12 amino acids 
+        FR2-IMGT = 39-55  W @ 41 CDR2-IMGT = 56-65 0-10 amino acids 
+        FR3-IMGT = 66-104  C @ 104 CDR3-IMGT = 105-117 - gap or insert.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_fw_lengths"></a><span class="summary-sig-name">check_fw_lengths</span>(<span class="summary-sig-arg">placements</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.arnaci_depreciated-module.html#load_profiles" class="summary-sig-name">load_profiles</a>(<span class="summary-sig-arg">t</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Load representative profiles for species and chain types.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.arnaci_depreciated-module.html#number" class="summary-sig-name">number</a>(<span class="summary-sig-arg">s</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">t</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">debug</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Given an amino acid sequence apply a numbering scheme to it.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="rescan"></a><span class="summary-sig-name">rescan</span>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">profile</span>,
+        <span class="summary-sig-arg">this_seg</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.arnaci_depreciated-module.html#scan_by_profile" class="summary-sig-name">scan_by_profile</a>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">profile</span>)</span><br />
+      Scan each segment of the profile against the sequence.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.arnaci_depreciated-module.html#scan_by_segment" class="summary-sig-name">scan_by_segment</a>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">segment</span>,
+        <span class="summary-sig-arg">goto</span>)</span><br />
+      Find the score of the segment against each window along the sequence.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="scan_profiles"></a><span class="summary-sig-name">scan_profiles</span>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">t</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Scan each of the loaded profiles against the sequence.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.arnaci_depreciated-module.html#score_window" class="summary-sig-name">score_window</a>(<span class="summary-sig-arg">sub</span>,
+        <span class="summary-sig-arg">segment</span>)</span><br />
+      Find the score of a segment against a window of the sequence.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'ABDB.Annotate'"><code class="variable-quote">'</code><code class="variable-string">ABDB.Annotate</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated-module.html#aa1" class="summary-name">aa1</a> = <code title="['Q',
+ 'W',
+ 'E',
+ 'R',
+ 'T',
+ 'Y',
+ 'I',
+ 'P',
+..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">W</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">R</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">T</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Y</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">I</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">P</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">A</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">S</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">D</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="fwlength_thresholds"></a><span class="summary-name">fwlength_thresholds</span> = <code title="[10, 10, 10, 10, 30, 30, 10, 10]"><code class="variable-group">[</code>10<code class="variable-op">, </code>10<code class="variable-op">, </code>10<code class="variable-op">, </code>10<code class="variable-op">, </code>30<code class="variable-op">, </code>30<code class="variable-op">, </code>10<code class="variable-op">, </code>10<code class="variable-group">]</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated-module.html#profiles" class="summary-name">profiles</a> = <code title="{'human_heavy': &lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0x\
+7f895484c350&gt;,
+ 'human_kappa': &lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0x\
+7f895488d950&gt;,
+ 'human_lambda': &lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0\
+x7f8954838550&gt;,
+ 'mouse_heavy': &lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0x\
+7f8954862150&gt;,
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">human_heavy</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;ABDB.Annotate.arnaci_depreciated.P<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.arnaci_depreciated-module.html#seg_hash" class="summary-name">seg_hash</a> = <code title="{'1e': 1,
+ '1s': 0,
+ '2e': 3,
+ '2s': 2,
+ '3e': 5,
+ '3s': 4,
+ '4e': 7,
+ '4s': 6}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">1e</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">1s</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">2e</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">2s</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">3e</code><code class="variable-quote">'</code><code class="variable-op">: </code>5<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">3s</code><code class="variable-quote">'</code><code class="variable-op">:</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="seg_list"></a><span class="summary-name">seg_list</span> = <code title="['1s', '1e', '2s', '2e', '3s', '3e', '4s', '4e']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">1s</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">1e</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">2s</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">2e</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">3s</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">3e</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">4s</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">4e</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="load_profiles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">load_profiles</span>(<span class="sig-arg">t</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Load representative profiles for species and chain types.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>t</code></strong> - The type of profile that should be loaded. Either &quot;ab&quot; 
+          for antibodies or &quot;tr&quot; for t-cell receptors. Leave as 
+          &quot;&quot; for both.
+          <p>Adding profiles may help with numbering more specific 
+          sequences - e.g. camelid or igNars . However, this will make the 
+          program slower.</p></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="number"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">number</span>(<span class="sig-arg">s</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">t</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">debug</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Given an amino acid sequence apply a numbering scheme to it.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>s</code></strong> - The amino acid sequence string</li>
+        <li><strong class="pname"><code>t</code></strong> - The type of profiles that should be loaded. Either &quot;ab&quot;
+          or &quot;tr&quot; or &quot;&quot; for both</li>
+        <li><strong class="pname"><code>debug</code></strong> - Flag to say whether to print error messages to screen.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="scan_by_profile"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">scan_by_profile</span>(<span class="sig-arg">seq</span>,
+        <span class="sig-arg">profile</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Scan each segment of the profile against the sequence. Find the best 
+  positioning for each. Find the total score for the profile. This is the 
+  sum of the maximum segment scores.</p>
+  <p>This function is the bottleneck of the program in terms of speed - I 
+  have done some optimisation but can probably go faster.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="scan_by_segment"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">scan_by_segment</span>(<span class="sig-arg">seq</span>,
+        <span class="sig-arg">segment</span>,
+        <span class="sig-arg">goto</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Find the score of the segment against each window along the sequence. 
+  Return the window scores and the index of the maximum</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="score_window"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">score_window</span>(<span class="sig-arg">sub</span>,
+        <span class="sig-arg">segment</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Find the score of a segment against a window of the sequence.
+
+This is the log sum of the frequency of a each amino acid at each position along the segment.
+
+    s1 s2 s3 s4 s5 s6           segment positions 
+. . a1 a2 a3 a4 a5 a6 . . .     window positions along the sequence
+
+window_score = sum[i=1:6] ( log2( F{ai @ si} ) )  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="aa1"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">aa1</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">W</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">R</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">T</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">Y</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">I</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">P</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="profiles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">profiles</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">human_heavy</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0x<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+7f895484c350&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">human_kappa</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0x<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+7f895488d950&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">human_lambda</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+x7f8954838550&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">mouse_heavy</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;ABDB.Annotate.arnaci_depreciated.Profile object at 0x<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+7f8954862150&gt;<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="seg_hash"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">seg_hash</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">1e</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1s</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">2e</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">2s</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">3e</code><code class="variable-quote">'</code><code class="variable-op">: </code>5<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">3s</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">4e</code><code class="variable-quote">'</code><code class="variable-op">: </code>7<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">4s</code><code class="variable-quote">'</code><code class="variable-op">: </code>6<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  3 12:03:45 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

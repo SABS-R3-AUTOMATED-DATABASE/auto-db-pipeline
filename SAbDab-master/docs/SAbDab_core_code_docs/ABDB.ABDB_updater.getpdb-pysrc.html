@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>ABDB.ABDB_updater.getpdb</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="ABDB-module.html">Package&nbsp;ABDB</a> ::
+        <a href="ABDB.ABDB_updater-module.html">Package&nbsp;ABDB_updater</a> ::
+        Module&nbsp;getpdb
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="ABDB.ABDB_updater.getpdb-module.html">Module ABDB.ABDB_updater.getpdb</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Created on 21 Feb 2013</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">@author: dunbar</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">,</tt> <tt class="py-name">urllib</tt><tt class="py-op">,</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package ABDB=ABDB-module.html"><a title="ABDB" class="py-name" href="#" onclick="return doclink('link-0', 'ABDB', 'link-0');">ABDB</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable ABDB.structure_mirror_path=ABDB-module.html#structure_mirror_path"><a title="ABDB.structure_mirror_path" class="py-name" href="#" onclick="return doclink('link-1', 'structure_mirror_path', 'link-1');">structure_mirror_path</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Variable ABDB.allow_ftp=ABDB-module.html#allow_ftp"><a title="ABDB.allow_ftp" class="py-name" href="#" onclick="return doclink('link-2', 'allow_ftp', 'link-2');">allow_ftp</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#pdb_dir = '/data/pegasus/DATABASES/pdb/'</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable ABDB.ABDB_updater.getpdb.pdb_dir=ABDB.ABDB_updater.getpdb-module.html#pdb_dir"><a title="ABDB.ABDB_updater.getpdb.pdb_dir" class="py-name" href="#" onclick="return doclink('link-3', 'pdb_dir', 'link-3');">pdb_dir</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="ABDB.structure_mirror_path" class="py-name" href="#" onclick="return doclink('link-4', 'structure_mirror_path', 'link-1');">structure_mirror_path</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable ABDB.ABDB_updater.getpdb.PDBurl=ABDB.ABDB_updater.getpdb-module.html#PDBurl"><a title="ABDB.ABDB_updater.getpdb.PDBurl" class="py-name" href="#" onclick="return doclink('link-5', 'PDBurl', 'link-5');">PDBurl</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"http://www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&amp;compression=NO&amp;structureId="</tt>  </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="get_pdb_path"></a><div id="get_pdb_path-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="get_pdb_path-toggle" onclick="return toggle('get_pdb_path');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.ABDB_updater.getpdb-module.html#get_pdb_path">get_pdb_path</a><tt class="py-op">(</tt><tt class="py-param">pdb_code</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get_pdb_path-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="get_pdb_path-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="ABDB.ABDB_updater.getpdb.pdb_dir" class="py-name" href="#" onclick="return doclink('link-6', 'pdb_dir', 'link-3');">pdb_dir</a></tt><tt class="py-op">,</tt><tt class="py-name">pdb_code</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">,</tt><tt class="py-string">'pdb'</tt><tt class="py-op">+</tt><tt class="py-name">pdb_code</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">+</tt><tt class="py-string">'.ent.gz'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="get"></a><div id="get-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="get-toggle" onclick="return toggle('get');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.ABDB_updater.getpdb-module.html#get">get</a><tt class="py-op">(</tt><tt class="py-param">name</tt><tt class="py-op">,</tt><tt class="py-param">out_dir</tt><tt class="py-op">=</tt><tt class="py-string">"."</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="get-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-name">stringpath</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Function ABDB.ABDB_updater.getpdb.get_pdb_path()=ABDB.ABDB_updater.getpdb-module.html#get_pdb_path"><a title="ABDB.ABDB_updater.getpdb.get_pdb_path" class="py-name" href="#" onclick="return doclink('link-7', 'get_pdb_path', 'link-7');">get_pdb_path</a></tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">stringpath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">contents</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">popen</tt><tt class="py-op">(</tt><tt class="py-string">"zcat "</tt><tt class="py-op">+</tt><tt class="py-name">stringpath</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">contents</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">            <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">out_dir</tt><tt class="py-op">,</tt><tt class="py-name">name</tt><tt class="py-op">+</tt><tt class="py-string">".pdb"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">            <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method ABDB.AbPDB.AntibodyParser'.error_stream.write()=ABDB.AbPDB.AntibodyParser%27.error_stream-class.html#write"><a title="ABDB.AbPDB.AntibodyParser'.error_stream.write" class="py-name" href="#" onclick="return doclink('link-8', 'write', 'link-8');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">contents</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"\n%s could not be retrieved from your local mirror directory. SAbDAb is looking for file %s."</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">stringpath</tt><tt class="py-op">)</tt>  </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-9" class="py-name"><a title="ABDB.allow_ftp" class="py-name" href="#" onclick="return doclink('link-9', 'allow_ftp', 'link-2');">allow_ftp</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt class="py-name">urlretrieve</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="ABDB.ABDB_updater.getpdb.PDBurl" class="py-name" href="#" onclick="return doclink('link-10', 'PDBurl', 'link-5');">PDBurl</a></tt><tt class="py-op">+</tt><tt class="py-name">name</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">out_dir</tt><tt class="py-op">,</tt><tt class="py-name">name</tt><tt class="py-op">+</tt><tt class="py-string">".pdb"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">out_dir</tt><tt class="py-op">,</tt><tt class="py-name">name</tt><tt class="py-op">+</tt><tt class="py-string">".pdb"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">            <tt class="py-name">Retrieved</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">out_dir</tt><tt class="py-op">,</tt><tt class="py-name">name</tt><tt class="py-op">+</tt><tt class="py-string">".pdb"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">Retrieved</tt><tt class="py-op">.</tt><tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">"ATOM"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"\n%s does not exist in PDB."</tt><tt class="py-op">%</tt><tt class="py-name">name</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">out_dir</tt><tt class="py-op">,</tt><tt class="py-name">name</tt><tt class="py-op">+</tt><tt class="py-string">".pdb"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"\n%s could not be retrieved from the PDB."</tt><tt class="py-op">%</tt><tt class="py-name">name</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"Failed to retrieve structure"</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-11" class="py-name"><a title="ABDB.allow_ftp" class="py-name" href="#" onclick="return doclink('link-11', 'allow_ftp', 'link-2');">allow_ftp</a></tt><tt class="py-op">:</tt> <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"online retrieval prohibited by current setup configuration"</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="copy"></a><div id="copy-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="copy-toggle" onclick="return toggle('copy');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.ABDB_updater.getpdb-module.html#copy">copy</a><tt class="py-op">(</tt><tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">infile</tt><tt class="py-op">,</tt> <tt class="py-param">out_dir</tt><tt class="py-op">=</tt><tt class="py-string">"."</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="copy-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="copy-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">infile</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">Retrieved</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">infile</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">Retrieved</tt><tt class="py-op">.</tt><tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">"ATOM"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"%s is not a PDB file."</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt>    </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-name">out</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">out_dir</tt><tt class="py-op">,</tt><tt class="py-name">name</tt><tt class="py-op">+</tt><tt class="py-string">".pdb"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-string">'w'</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt class="py-name">out</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="ABDB.AbPDB.AntibodyParser'.error_stream.write" class="py-name" href="#" onclick="return doclink('link-12', 'write', 'link-8');">write</a></tt><tt class="py-op">(</tt> <tt class="py-name">Retrieved</tt> <tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"%s could not be opened"</tt><tt class="py-op">%</tt><tt class="py-name">infile</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  3 12:03:52 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
