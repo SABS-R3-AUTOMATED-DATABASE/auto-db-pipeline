@@ -18,6 +18,9 @@ import re
 
 # given sequence as input, try and find structure from SAbDab or find closest structure based on seq identity to use as homology model 
 # sequence input might be light chain, heavy chain or both - need options 
+
+# NOTE wrap in function
+# NOTE set up loops - multiple articles to extract info from, will mean multiple sequences to find PDB ID for/multiple antibody structures to keep track of correctly 
    
 seq_options = ""
 while seq_options == "":
