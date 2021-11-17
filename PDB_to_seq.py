@@ -3,6 +3,7 @@ from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.PDBList import PDBList
 
 # NOTE will need to change input method to fit with rest of pipeline
+# NOTE input txt file containing string with PDB ID --> use same input format for finding Genbank IDs, do sequences as FASTA?
 
 pdb_id = ""
 while pdb_id == "":
