@@ -10,8 +10,11 @@ aa_convert_3to1 = bidict(Cys='C', Asp='D', Ser='S', Gln='Q', Lys='K',
     Gly='G', His='H', Leu='L', Arg='R', Trp='W', 
     Ala='A', Val='V', Glu='E', Tyr='Y', Met='M')
 
-# if amino acid sequence already in single-letter code form, then ready to add to database 
-# if in three-letter form e.g. Asp Tyr Phe, convert to single-letter form using dict 
-aa_convert_3to1.inv
+# if amino acid sequence already in single-letter code form, then ready to add to database - NOTE check light/heavy chain separated
+
+# if in three-letter form e.g. Asp Tyr Phe, convert to single-letter form using dict
+# NOTE how will you know which format it's in? need code that checks format then converts if necessary 
+aa_convert_3to1.inv # goes from e.g. C to Cys 
 
 # biopython SeqIO to convert between amino acid and nucleotide sequences 
+# genbank / ensembl ID conversion 
