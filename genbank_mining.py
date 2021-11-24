@@ -8,9 +8,9 @@
 
 from Bio import Entrez
 from Bio.Seq import Seq
+from PyEntrezId import Conversion
 
-# input genbank ID 
-
+# input genbank ID from text file 
 def genbank_mining(genbank_id):
 
     # get nucleotide sequence using entrez and convert to amino acid sequence 
@@ -19,8 +19,8 @@ def genbank_mining(genbank_id):
     records = Entrez.read(handle)
 
     amino_seq = str(Seq(records[0]["GBSeq_sequence"]).translate()) 
-    
+
     return amino_seq
 
 
-genbank_mining('AY851612')
+

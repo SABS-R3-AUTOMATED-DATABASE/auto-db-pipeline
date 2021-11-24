@@ -18,7 +18,6 @@ import re
 # given sequence as input, try and find structure from SAbDab or find closest structure based on seq identity to use as homology model 
 # sequence input might be light chain, heavy chain or both - need options 
 
-
 seq_options = ""
 while seq_options == "":
     seq_options = input("Do you want to base the structure extracted on a SINGLE antibody chain (light or heavy) or BOTH? (S/B)").upper()
