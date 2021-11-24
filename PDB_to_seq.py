@@ -1,10 +1,15 @@
+''' 
+PDB ID extracted from paper used to find corresponding sequences from PDB server 
+'''
+
+# TODO
+# will need to change input method to integrate with pipeline - txt file, read in PDB ID as variable (string)
+# function currently prints each chain sequence - which is/are VL/VH? need to use ANARCI numbering 
+# sequence output needs to be saved, separate VH and VL 
+
 # take PDB ID and return VH and VL sequences 
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
-
-
-# NOTE will need to change input method to fit with rest of pipeline
-# NOTE input txt file containing string with PDB ID --> use same input format for finding Genbank IDs, do sequences as FASTA?
 
 pdb_id = ""
 while pdb_id == "":
@@ -18,5 +23,3 @@ pdb_file = pdbl.retrieve_pdb_file(pdb_id, file_format='pdb')
 for record in SeqIO.parse(pdb_file, 'pdb-atom'):
     print('>' + record.id)
     print(record.seq)
-# NOTE atm prints each chain sequence - which is/are VL/VH? 
-# NOTE need to save output - as FASTA? 

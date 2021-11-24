@@ -3,52 +3,68 @@
 '''
 input: search in SAbDab for a certain antibody
 output: PDB structure from SAbDab or homology model (antibody prediction tools available at SAbPred)
-
-
-1. web scan for articles 
-2. extract info from articles 
-3. ***extract extra info from other sources or SAbDab***  <--- stage being covered by this script 
-4. update database 
-
 '''
+
+# TODO 
+# wrap in function
+# change input type (seqs from txt/fasta file not user input (was just to test))
+# integrate antibody homology modelling rather than using PDB with highest % identity 
+# visualisation in pymol 
 
 # import SAbDab database to search from 
 from ABDB import database 
 import re 
 
 # given sequence as input, try and find structure from SAbDab or find closest structure based on seq identity to use as homology model 
+# sequence input might be light chain, heavy chain or both - need options 
 
-input_correct = False
-while not input_correct:
 
-    ab_heavy_sequence = ""
-    while ab_heavy_sequence == "":
-        ab_heavy_sequence = input("Input sequence for antibody heavy chain: ")
+seq_options = ""
+while seq_options == "":
+    seq_options = input("Do you want to base the structure extracted on a SINGLE antibody chain (light or heavy) or BOTH? (S/B)").upper()
 
-    ab_light_sequence = ""
-    while ab_light_sequence == "":
-        ab_light_sequence = input("Input sequence for antibody light chain: ")
+    if seq_options == 'S':
+        ab_sequence = ""
+        while ab_sequence == "":
+            ab_sequence = input("Input sequence for a single antibody chain (light or heavy): ")
+        if database._validate_sequence(ab_sequence) == True:
+            inputs_correct = True
+        elif database._validate_sequence(ab_sequence) == False:
+            print('invalid input, not a protein sequence')
+                     
+    elif seq_options == "B":
+        ab_light_sequence = ""
+        while ab_light_sequence == "":
+            ab_light_sequence = input("Input sequence for antibody light chain: ")
+        ab_heavy_sequence = ""
+        while ab_heavy_sequence == "":
+            ab_heavy_sequence = input("Input sequence for antibody heavy chain: ")
+        if database._validate_sequence(ab_light_sequence) == True and database._validate_sequence(ab_heavy_sequence) == True:
+            inputs_correct = True
+        elif database._validate_sequence(ab_heavy_sequence) or database._validate_sequence(ab_light_sequence) == False:
+            print('invalid input, not a protein sequence')    
 
-    # NOTE need option to only use light or heavy? e.g. if not known/don't want to model 
-    
-    if database._validate_sequence(ab_heavy_sequence) == True and database._validate_sequence(ab_light_sequence) == True:
-        input_correct = True 
-    elif database._validate_sequence(ab_heavy_sequence) or database._validate_sequence(ab_light_sequence) == False:
-        print('invalid input, not a protein sequence')
-        # NOTE if invalid input need to return user to input line 
+# gets top template based on heavy and/or light chain sequences given - NOTE display % identity of top hit?
+seq_input = ""
+if seq_options == "S": 
+    seq_input = str(ab_sequence)
+elif seq_options == "B":
+    seq_input = str(ab_heavy_sequence + '/' + ab_light_sequence)
 
-# gets 5 top templates based on heavy and light chain sequences - NOTE need 5? just top one? display % identity of top hit?
-seq_input = str(ab_heavy_sequence + '/' + ab_light_sequence)
-templates = database.get_template(seq=seq_input, n=5) 
 # extract top PDB hit in a regex match object 
+print('Getting templates...')
+templates = database.get_template(seq=seq_input, n=1) 
 pdb_id = re.search('[a-z0-9]{4}', str(templates)) # extracts first instance that matches a PDB ID in get_template output, first = highest identity %
-# get structure from SAbDab
-pdb_structure = database.fetch(pdb_id.group(0)) # use match object as string for PDB ID (pdb_id.group(0) gives a string of PDB ID characters)
-pdb_structure.get_structure()
 
-# visualise in pymol  
+# get structure from SAbDab
+print('Getting PDB structure...')
+pdb_structure = database.fetch(pdb_id.group(0)) # use match object as string for PDB ID (pdb_id.group(0) gives a string of PDB ID characters)
+print('Best PDB structure based on sequence identity is: ', pdb_structure)
+
+# get structure object 
+pdb_structure.get_structure()
+# visualise in pymol?
 # write structure to file (.pdb or .pse)
 
- 
 
 

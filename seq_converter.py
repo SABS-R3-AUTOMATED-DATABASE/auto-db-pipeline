@@ -1,12 +1,12 @@
-# sequence converting function 
-# AA formats, amino acids <--> nucleotides
-# NOTE numbering issue converting nucleotide codons to amino acids? use ANARCI? 
-
-from bidict import bidict
-
+'''
+set of functions to convert between different formats of seq, ID so that other info can be extracted 
+'''
 # TODO read in sequence from file as input 
     # check whether seq is nt or aa 
     # pipe to correct function depending on outcome 
+    # accounting for 3-letter AA codes for modified AA (i.e. non-standard 3-letter codes) 
+
+from bidict import bidict
 
 def aa_convert_3_1(seq):
 
@@ -17,6 +17,8 @@ def aa_convert_3_1(seq):
     
     # if seq in format 3 letter code
         # convert to 1 letter symbols 
+        # if whitespace need to remove 
+        # change all to upper case then can use biopython dicts 
         # determine VH and VL seqs
         # save output in variable 
 
@@ -25,7 +27,7 @@ def aa_convert_3_1(seq):
         # determine VH and VL seqs
         # save output in variable
     
-    return 
+    return # seq in single letter format 
 
 def nt_to_aa():
 
