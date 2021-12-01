@@ -20,7 +20,7 @@ for pdb_id in pdb_ids:
     pdb_id = pdb_id.upper()
     pdb_file = pdbl.retrieve_pdb_file(pdb_id, file_format='pdb')
     # if pdb_file empty, remove PDB ID from original list 
-    is_pdb_file_found = bool(pdb_file) 
+    is_pdb_file_found = bool(pdb_file) # NOTE returning True even if PDB returns 'desired structure doesn't exist' 
     if is_pdb_file_found == False:
         print(pdb_id, 'is not a PDB ID')
         pdb_ids.remove(pdb_id)
@@ -36,7 +36,7 @@ for pdb_id in pdb_ids:
             pdb_ids.remove(pdb_id)
         elif is_antibody == True: 
             print(pdb_id, 'is an antibody')
-    
+
 
 print('Antibody PDB IDs: ', pdb_ids)
 

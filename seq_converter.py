@@ -3,8 +3,8 @@ set of functions to convert between different formats of seq, ID so that other i
 '''
 # TODO  
     # accounting for 3-letter AA codes for modified AA (i.e. non-standard 3-letter codes) 
-    # IG
-from bidict import bidict
+    # IgBlast
+    
 from Bio.Seq import Seq
 from Bio.SeqUtils import seq1 
 
