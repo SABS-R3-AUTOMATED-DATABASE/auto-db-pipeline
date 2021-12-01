@@ -25,11 +25,11 @@ def nt_to_aa(seq):
     aa_1_seq = nt_seq.translate()
     # NOTE modify, use IGBLAST rather than translate method - need right ORF 
     # TODO install and setup igblast, need other files e.g. human seq database 
-    #igblast_out_file_tmp = ".".join(igblast_output_file.split(".")[:-1]) + "-tmp.txt"
-    #    subprocess.run(["igblastn", "-germline_db_V", vdb, "-germline_db_D", ddb, "-germline_db_J", jdb, "-organism", organism,
-    #                    "-show_translation", "-num_alignments_D", "1", "-num_alignments_V", "1", "-ig_seqtype", "Ig", 
-    #                    "-num_clonotype", "0", "-num_alignments_J", "1", "-outfmt", "19", "-auxiliary_data", aux_data,
-    #                    "-query", fasta_name, "-out", igblast_out_file_tmp, "-num_threads", "{}".format(self.ncpu)], check = True) 
+    '''igblast_out_file_tmp = ".".join(igblast_output_file.split(".")[:-1]) + "-tmp.txt"
+    subprocess.run(["igblastn", "-germline_db_V", vdb, "-germline_db_D", ddb, "-germline_db_J", jdb, "-organism", organism,
+                        "-show_translation", "-num_alignments_D", "1", "-num_alignments_V", "1", "-ig_seqtype", "Ig", 
+                        "-num_clonotype", "0", "-num_alignments_J", "1", "-outfmt", "19", "-auxiliary_data", aux_data,
+                        "-query", fasta_name, "-out", igblast_out_file_tmp, "-num_threads", "{}".format(self.ncpu)], check = True) '''
 
 
     return aa_1_seq
