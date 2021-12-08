@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>ABDB.AbPDB.AntibodyStructure</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="ABDB-module.html">Package&nbsp;ABDB</a> ::
+        <a href="ABDB.AbPDB-module.html">Package&nbsp;AbPDB</a> ::
+        Module&nbsp;AntibodyStructure
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="ABDB.AbPDB.AntibodyStructure-module.html">Module ABDB.AbPDB.AntibodyStructure</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Created on 7 Feb 2013</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">@author: dunbar</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">@change: Fv nomenclature changed to Fab 020513</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package ABDB=ABDB-module.html"><a title="ABDB" class="py-name" href="#" onclick="return doclink('link-0', 'ABDB', 'link-0');">ABDB</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package ABDB.AbPDB=ABDB.AbPDB-module.html"><a title="ABDB.AbPDB" class="py-name" href="#" onclick="return doclink('link-1', 'AbPDB', 'link-1');">AbPDB</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module ABDB.AbPDB.Entity=ABDB.AbPDB.Entity-module.html,Class ABDB.AbPDB.Entity.Entity=ABDB.AbPDB.Entity.Entity-class.html"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-2', 'Entity', 'link-2');">Entity</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-3', 'Entity', 'link-2');">Entity</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="ABDB" class="py-name" href="#" onclick="return doclink('link-4', 'ABDB', 'link-0');">ABDB</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="ABDB.AbPDB" class="py-name" href="#" onclick="return doclink('link-5', 'AbPDB', 'link-1');">AbPDB</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module ABDB.AbPDB.Fab=ABDB.AbPDB.Fab-module.html,Class ABDB.AbPDB.Fab.Fab=ABDB.AbPDB.Fab.Fab-class.html"><a title="ABDB.AbPDB.Fab
+ABDB.AbPDB.Fab.Fab" class="py-name" href="#" onclick="return doclink('link-6', 'Fab', 'link-6');">Fab</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name"><a title="ABDB.AbPDB.Fab
+ABDB.AbPDB.Fab.Fab" class="py-name" href="#" onclick="return doclink('link-7', 'Fab', 'link-6');">Fab</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure"></a><div id="AntibodyStructure-def"><a name="L14"></a><tt class="py-lineno"> 14</tt> <a class="py-toggle" href="#" id="AntibodyStructure-toggle" onclick="return toggle('AntibodyStructure');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html">AntibodyStructure</a><tt class="py-op">(</tt><tt class="py-base-class">Entity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="AntibodyStructure-expanded"><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    The AntibodyStructure class contains a collection of models</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">     </tt>
+<a name="AntibodyStructure.__init__"></a><div id="AntibodyStructure.__init__-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="AntibodyStructure.__init__-toggle" onclick="return toggle('AntibodyStructure.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.__init__-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">level</tt><tt class="py-op">=</tt><tt class="py-string">"AS"</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt id="link-8" class="py-name"><a title="ABDB.AbPDB.Entity
+ABDB.AbPDB.Entity.Entity" class="py-name" href="#" onclick="return doclink('link-8', 'Entity', 'link-2');">Entity</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method ABDB.ABDB_updater.IMGT.IMGT.__init__()=ABDB.ABDB_updater.IMGT.IMGT-class.html#__init__,Method ABDB.ABDB_updater.Identify.Identify_AB.__init__()=ABDB.ABDB_updater.Identify.Identify_AB-class.html#__init__,Method ABDB.ABDB_updater.PDB.Download.__init__()=ABDB.ABDB_updater.PDB.Download-class.html#__init__,Method ABDB.ABDB_updater.PDB.Read.__init__()=ABDB.ABDB_updater.PDB.Read-class.html#__init__,Method ABDB.ABDB_updater.Populate.Populator.__init__()=ABDB.ABDB_updater.Populate.Populator-class.html#__init__,Method ABDB.AB_Utils.region_definitions.Accept.__init__()=ABDB.AB_Utils.region_definitions.Accept-class.html#__init__,Method ABDB.ABangle.abangle.__init__()=ABDB.ABangle.abangle-class.html#__init__,Method ABDB.ABangle.canonicals.Decision.__init__()=ABDB.ABangle.canonicals.Decision-class.html#__init__,Method ABDB.ABangle.predict.Profile.__init__()=ABDB.ABangle.predict.Profile-class.html#__init__,Method ABDB.ABangle.predict.Profile_set.__init__()=ABDB.ABangle.predict.Profile_set-class.html#__init__,Method ABDB.ABangle.predict.Template.__init__()=ABDB.ABangle.predict.Template-class.html#__init__,Method ABDB.ABangle.predictor.CDR.__init__()=ABDB.ABangle.predictor.CDR-class.html#__init__,Method ABDB.ABangle.predictor.Profile.__init__()=ABDB.ABangle.predictor.Profile-class.html#__init__,Method ABDB.ABangle.predictor.Residue.__init__()=ABDB.ABangle.predictor.Residue-class.html#__init__,Method ABDB.ABangle.visualise.__init__()=ABDB.ABangle.visualise-class.html#__init__,Method ABDB.AbPDB.ABchain.ABchain.__init__()=ABDB.AbPDB.ABchain.ABchain-class.html#__init__,Method ABDB.AbPDB.AGchain.AGchain.__init__()=ABDB.AbPDB.AGchain.AGchain-class.html#__init__,Method ABDB.AbPDB.AntibodyParser'.AntibodyParser.__init__()=ABDB.AbPDB.AntibodyParser%27.AntibodyParser-class.html#__init__,Method ABDB.AbPDB.AntibodyParser'.error_stream.__init__()=ABDB.AbPDB.AntibodyParser%27.error_stream-class.html#__init__,Method ABDB.AbPDB.AntibodyStructure.AntibodyStructure.__init__()=ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#__init__,Method ABDB.AbPDB.Chain.Chain.__init__()=ABDB.AbPDB.Chain.Chain-class.html#__init__,Method ABDB.AbPDB.Fab.Fab.__init__()=ABDB.AbPDB.Fab.Fab-class.html#__init__,Method ABDB.AbPDB.Fragment.Fragment.__init__()=ABDB.AbPDB.Fragment.Fragment-class.html#__init__,Method ABDB.AbPDB.Holder.Holder.__init__()=ABDB.AbPDB.Holder.Holder-class.html#__init__,Method ABDB.AbPDB.Model.Model.__init__()=ABDB.AbPDB.Model.Model-class.html#__init__,Method ABDB.AbPDB.Residue.Residue.__init__()=ABDB.AbPDB.Residue.Residue-class.html#__init__,Method ABDB.AbPDB.Scfv.Scfv.__init__()=ABDB.AbPDB.Scfv.Scfv-class.html#__init__,Method ABDB.AbPDB.Visualise.Pymol.Cmd.__init__()=ABDB.AbPDB.Visualise.Pymol.Cmd-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.Profile.__init__()=ABDB.Annotate.arnaci_depreciated.Profile-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.chothia.__init__()=ABDB.Annotate.arnaci_depreciated.chothia-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.position.__init__()=ABDB.Annotate.arnaci_depreciated.position-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.residue.__init__()=ABDB.Annotate.arnaci_depreciated.residue-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.segment.__init__()=ABDB.Annotate.arnaci_depreciated.segment-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.sequence.__init__()=ABDB.Annotate.arnaci_depreciated.sequence-class.html#__init__,Method ABDB.Annotate.arnaci_depreciated.tcr_imgt.__init__()=ABDB.Annotate.arnaci_depreciated.tcr_imgt-class.html#__init__,Method ABDB.Database_interface.Antigen_details.__init__()=ABDB.Database_interface.Antigen_details-class.html#__init__,Method ABDB.Database_interface.Database.__init__()=ABDB.Database_interface.Database-class.html#__init__,Method ABDB.Database_interface.Fab_details.__init__()=ABDB.Database_interface.Fab_details-class.html#__init__,Method ABDB.Database_interface.PDB_details.__init__()=ABDB.Database_interface.PDB_details-class.html#__init__,Method ABDB.command_line.Cmd.__init__()=ABDB.command_line.Cmd-class.html#__init__,Method ABDB.command_line.Selector.__init__()=ABDB.command_line.Selector-class.html#__init__,Method ABDB.command_line.Workspace.__init__()=ABDB.command_line.Workspace-class.html#__init__,Method ABDB.command_line.debug_Cmd.__init__()=ABDB.command_line.debug_Cmd-class.html#__init__"><a title="ABDB.ABDB_updater.IMGT.IMGT.__init__
+ABDB.ABDB_updater.Identify.Identify_AB.__init__
+ABDB.ABDB_updater.PDB.Download.__init__
+ABDB.ABDB_updater.PDB.Read.__init__
+ABDB.ABDB_updater.Populate.Populator.__init__
+ABDB.AB_Utils.region_definitions.Accept.__init__
+ABDB.ABangle.abangle.__init__
+ABDB.ABangle.canonicals.Decision.__init__
+ABDB.ABangle.predict.Profile.__init__
+ABDB.ABangle.predict.Profile_set.__init__
+ABDB.ABangle.predict.Template.__init__
+ABDB.ABangle.predictor.CDR.__init__
+ABDB.ABangle.predictor.Profile.__init__
+ABDB.ABangle.predictor.Residue.__init__
+ABDB.ABangle.visualise.__init__
+ABDB.AbPDB.ABchain.ABchain.__init__
+ABDB.AbPDB.AGchain.AGchain.__init__
+ABDB.AbPDB.AntibodyParser'.AntibodyParser.__init__
+ABDB.AbPDB.AntibodyParser'.error_stream.__init__
+ABDB.AbPDB.AntibodyStructure.AntibodyStructure.__init__
+ABDB.AbPDB.Chain.Chain.__init__
+ABDB.AbPDB.Fab.Fab.__init__
+ABDB.AbPDB.Fragment.Fragment.__init__
+ABDB.AbPDB.Holder.Holder.__init__
+ABDB.AbPDB.Model.Model.__init__
+ABDB.AbPDB.Residue.Residue.__init__
+ABDB.AbPDB.Scfv.Scfv.__init__
+ABDB.AbPDB.Visualise.Pymol.Cmd.__init__
+ABDB.Annotate.arnaci_depreciated.Profile.__init__
+ABDB.Annotate.arnaci_depreciated.chothia.__init__
+ABDB.Annotate.arnaci_depreciated.position.__init__
+ABDB.Annotate.arnaci_depreciated.residue.__init__
+ABDB.Annotate.arnaci_depreciated.segment.__init__
+ABDB.Annotate.arnaci_depreciated.sequence.__init__
+ABDB.Annotate.arnaci_depreciated.tcr_imgt.__init__
+ABDB.Database_interface.Antigen_details.__init__
+ABDB.Database_interface.Database.__init__
+ABDB.Database_interface.Fab_details.__init__
+ABDB.Database_interface.PDB_details.__init__
+ABDB.command_line.Cmd.__init__
+ABDB.command_line.Selector.__init__
+ABDB.command_line.Workspace.__init__
+ABDB.command_line.debug_Cmd.__init__" class="py-name" href="#" onclick="return doclink('link-9', '__init__', 'link-9');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-name">header</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-comment"># Special methods</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure.__repr__"></a><div id="AntibodyStructure.__repr__-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="AntibodyStructure.__repr__-toggle" onclick="return toggle('AntibodyStructure.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.__repr__-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;Structure id=%s&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method ABDB.ABangle.visualise.get_id()=ABDB.ABangle.visualise-class.html#get_id,Method ABDB.Annotate.arnaci_depreciated.position.get_id()=ABDB.Annotate.arnaci_depreciated.position-class.html#get_id"><a title="ABDB.ABangle.visualise.get_id
+ABDB.Annotate.arnaci_depreciated.position.get_id" class="py-name" href="#" onclick="return doclink('link-10', 'get_id', 'link-10');">get_id</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-comment"># Private methods</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure._sort"></a><div id="AntibodyStructure._sort-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="AntibodyStructure._sort-toggle" onclick="return toggle('AntibodyStructure._sort');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#_sort">_sort</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">m1</tt><tt class="py-op">,</tt> <tt class="py-param">m2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure._sort-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure._sort-expanded"><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-docstring">"""Sort models.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        This sorting function sorts the Model instances in the Structure instance.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        The sorting is done based on the model id, which is a simple int that </tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        reflects the order of the models in the PDB file.</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        Arguments:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        o m1, m2 - Model instances</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">cmp</tt><tt class="py-op">(</tt><tt class="py-name">m1</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="ABDB.ABangle.visualise.get_id
+ABDB.Annotate.arnaci_depreciated.position.get_id" class="py-name" href="#" onclick="return doclink('link-11', 'get_id', 'link-10');">get_id</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">m2</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="ABDB.ABangle.visualise.get_id
+ABDB.Annotate.arnaci_depreciated.position.get_id" class="py-name" href="#" onclick="return doclink('link-12', 'get_id', 'link-10');">get_id</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure._set_numbering_scheme"></a><div id="AntibodyStructure._set_numbering_scheme-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="AntibodyStructure._set_numbering_scheme-toggle" onclick="return toggle('AntibodyStructure._set_numbering_scheme');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#_set_numbering_scheme">_set_numbering_scheme</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">scheme</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure._set_numbering_scheme-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure._set_numbering_scheme-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        Set the numbering scheme used. </tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numbering_scheme</tt> <tt class="py-op">=</tt> <tt class="py-name">scheme</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-comment"># Public </tt> </tt>
+<a name="AntibodyStructure.set_header"></a><div id="AntibodyStructure.set_header-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="AntibodyStructure.set_header-toggle" onclick="return toggle('AntibodyStructure.set_header');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#set_header">set_header</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">header</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.set_header-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.set_header-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        Set the header as the parsed header dictionary from biopython</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">header</tt><tt class="py-op">=</tt><tt class="py-name">header</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure.get_header"></a><div id="AntibodyStructure.get_header-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_header-toggle" onclick="return toggle('AntibodyStructure.get_header');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_header">get_header</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_header-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_header-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">header</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure.get_models"></a><div id="AntibodyStructure.get_models-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_models-toggle" onclick="return toggle('AntibodyStructure.get_models');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_models">get_models</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_models-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_models-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">m</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-name">m</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">     </tt>
+<a name="AntibodyStructure.get_holders"></a><div id="AntibodyStructure.get_holders-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_holders-toggle" onclick="return toggle('AntibodyStructure.get_holders');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_holders">get_holders</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_holders-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_holders-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">m</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_models()=ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_models"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_models" class="py-name" href="#" onclick="return doclink('link-13', 'get_models', 'link-13');">get_models</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">h</tt> <tt class="py-keyword">in</tt> <tt class="py-name">m</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">h</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure.get_fabs"></a><div id="AntibodyStructure.get_fabs-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_fabs-toggle" onclick="return toggle('AntibodyStructure.get_fabs');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_fabs">get_fabs</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_fabs-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_fabs-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        Get the antigen binding fragments in the structure.</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        This includes Fvs where there are no constant domains.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">h</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_holders()=ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_holders"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_holders" class="py-name" href="#" onclick="return doclink('link-14', 'get_holders', 'link-14');">get_holders</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">h</tt><tt class="py-op">,</tt><tt id="link-15" class="py-name"><a title="ABDB.AbPDB.Fab
+ABDB.AbPDB.Fab.Fab" class="py-name" href="#" onclick="return doclink('link-15', 'Fab', 'link-6');">Fab</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">h</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                     </tt>
+<a name="AntibodyStructure.get_antigens"></a><div id="AntibodyStructure.get_antigens-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_antigens-toggle" onclick="return toggle('AntibodyStructure.get_antigens');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_antigens">get_antigens</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_antigens-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_antigens-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        This gets the 'antigen' chains in the structure. </tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        These are just non-antibody chains.</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        Use get_antigen method on a fab (fv) or ABchain object to get a true bound antigen.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">h</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_holders" class="py-name" href="#" onclick="return doclink('link-16', 'get_holders', 'link-14');">get_holders</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">h</tt><tt class="py-op">.</tt><tt class="py-name">id</tt> <tt class="py-op">==</tt> <tt class="py-string">"Antigen"</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt id="link-17" class="py-name" targets="Variable ABDB.AB_Utils.AB_Utils.c=ABDB.AB_Utils.AB_Utils-module.html#c,Variable ABDB.AB_Utils.c=ABDB.AB_Utils-module.html#c"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-17', 'c', 'link-17');">c</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">h</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                    <tt class="py-keyword">yield</tt> <tt id="link-18" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-18', 'c', 'link-17');">c</a></tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure.get_abchains"></a><div id="AntibodyStructure.get_abchains-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_abchains-toggle" onclick="return toggle('AntibodyStructure.get_abchains');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_abchains">get_abchains</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_abchains-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_abchains-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        This gets the antibody chains that are not paired in an fab (fv)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">h</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_holders" class="py-name" href="#" onclick="return doclink('link-19', 'get_holders', 'link-14');">get_holders</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">h</tt><tt class="py-op">.</tt><tt class="py-name">id</tt> <tt class="py-op">==</tt> <tt class="py-string">"OtherAB"</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt id="link-20" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-20', 'c', 'link-17');">c</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">h</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                    <tt class="py-keyword">yield</tt> <tt id="link-21" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-21', 'c', 'link-17');">c</a></tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">     </tt>
+<a name="AntibodyStructure.get_chains"></a><div id="AntibodyStructure.get_chains-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_chains-toggle" onclick="return toggle('AntibodyStructure.get_chains');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_chains">get_chains</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_chains-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_chains-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">h</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_holders" class="py-name" href="#" onclick="return doclink('link-22', 'get_holders', 'link-14');">get_holders</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt id="link-23" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-23', 'c', 'link-17');">c</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">h</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt id="link-24" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-24', 'c', 'link-17');">c</a></tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="AntibodyStructure.get_residues"></a><div id="AntibodyStructure.get_residues-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_residues-toggle" onclick="return toggle('AntibodyStructure.get_residues');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_residues">get_residues</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_residues-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_residues-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-25" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-25', 'c', 'link-17');">c</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_chains()=ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_chains,Method ABDB.AbPDB.Fab.Fab.get_chains()=ABDB.AbPDB.Fab.Fab-class.html#get_chains,Method ABDB.Database_interface.Antigen_details.get_chains()=ABDB.Database_interface.Antigen_details-class.html#get_chains"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_chains
+ABDB.AbPDB.Fab.Fab.get_chains
+ABDB.Database_interface.Antigen_details.get_chains" class="py-name" href="#" onclick="return doclink('link-26', 'get_chains', 'link-26');">get_chains</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">r</tt> <tt class="py-keyword">in</tt> <tt id="link-27" class="py-name"><a title="ABDB.AB_Utils.AB_Utils.c
+ABDB.AB_Utils.c" class="py-name" href="#" onclick="return doclink('link-27', 'c', 'link-17');">c</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">r</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">     </tt>
+<a name="AntibodyStructure.get_atoms"></a><div id="AntibodyStructure.get_atoms-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="AntibodyStructure.get_atoms-toggle" onclick="return toggle('AntibodyStructure.get_atoms');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_atoms">get_atoms</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AntibodyStructure.get_atoms-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="AntibodyStructure.get_atoms-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">r</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_residues()=ABDB.AbPDB.AntibodyStructure.AntibodyStructure-class.html#get_residues,Method ABDB.AbPDB.Fab.Fab.get_residues()=ABDB.AbPDB.Fab.Fab-class.html#get_residues,Method ABDB.AbPDB.Fragment.Fragment.get_residues()=ABDB.AbPDB.Fragment.Fragment-class.html#get_residues"><a title="ABDB.AbPDB.AntibodyStructure.AntibodyStructure.get_residues
+ABDB.AbPDB.Fab.Fab.get_residues
+ABDB.AbPDB.Fragment.Fragment.get_residues" class="py-name" href="#" onclick="return doclink('link-28', 'get_residues', 'link-28');">get_residues</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">a</tt> <tt class="py-keyword">in</tt> <tt class="py-name">r</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">a</tt> </tt>
+</div></div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  3 12:03:46 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

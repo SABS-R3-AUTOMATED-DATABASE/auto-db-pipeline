@@ -1,0 +1,1251 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>ABDB.Annotate.annotate'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="ABDB-module.html">Package&nbsp;ABDB</a> ::
+        <a href="ABDB.Annotate-module.html">Package&nbsp;Annotate</a> ::
+        Module&nbsp;annotate'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module annotate'</h1><p class="nomargin-top"><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html">source&nbsp;code</a></span></p>
+<p>Created on 6 Feb 2013</p>
+
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        dunbar
+      </p>
+      <strong>Change Log:</strong>
+      <ul class="nomargin-top">
+        <li>
+        Added the new version of anarci. This overwrites the old anarci 
+    function which is available as anarci_old.
+        </li>
+        <li>
+        anarci must be intalled separately now as it will be distributed as a 
+    separate package.
+        </li>
+      </ul>
+</div><!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#abnum" class="summary-sig-name">abnum</a>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">scheme</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span><br />
+      Use abnum to number the sequence and test whether the chain is an antibody chain.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#abnum">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#align_numbering" class="summary-sig-name">align_numbering</a>(<span class="summary-sig-arg">numbering</span>,
+        <span class="summary-sig-arg">sequence_list</span>,
+        <span class="summary-sig-arg">alignment_dict</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span><br />
+      Align the sequence that has been numbered to the sequence you input.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#align_numbering">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="align_to_consensus"></a><span class="summary-sig-name">align_to_consensus</span>(<span class="summary-sig-arg">sequence</span>,
+        <span class="summary-sig-arg">chain</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Align a sequence to a non-redundant set of antibody sequences using 
+      muscle</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#align_to_consensus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#anarci" class="summary-sig-name">anarci</a>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">scheme</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span><br />
+      Use the ANARCI program to number the sequence.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#anarci">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#annotate" class="summary-sig-name">annotate</a>(<span class="summary-sig-arg">chain</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">user</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">scheme</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span><br />
+      Annotate the sequence of a chain object from ABDB.AbPDB</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#annotate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#easy_alignment" class="summary-sig-name">easy_alignment</a>(<span class="summary-sig-arg">seq1</span>,
+        <span class="summary-sig-arg">seq2</span>)</span><br />
+      Function to align two sequences by checking if one is in the other.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#easy_alignment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#extract_sequence" class="summary-sig-name">extract_sequence</a>(<span class="summary-sig-arg">chain</span>,
+        <span class="summary-sig-arg">selection</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">return_warnings</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">ignore_hets</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Get the amino acid sequence of the chain.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#extract_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#get_alignment_dict" class="summary-sig-name">get_alignment_dict</a>(<span class="summary-sig-arg">ali1</span>,
+        <span class="summary-sig-arg">ali2</span>)</span><br />
+      Get a dictionary which tells you the index in sequence 2 that should align with the index in sequence 1 (key)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#get_alignment_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#imgt_number" class="summary-sig-name">imgt_number</a>(<span class="summary-sig-arg">seq</span>)</span><br />
+      Use the imgt domain gap-align to number as sequence.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#imgt_number">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="interpret"></a><span class="summary-sig-name">interpret</span>(<span class="summary-sig-arg">x</span>)</span><br />
+      Function to interpret an annotation in the form H100A into the form (
+      100, 'A' )</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#interpret">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#muscle" class="summary-sig-name">muscle</a>(<span class="summary-sig-arg">sequences</span>,
+        <span class="summary-sig-arg">gapopen</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">gapextend</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Use muscle to align sequences.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#muscle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#muscle_number" class="summary-sig-name">muscle_number</a>(<span class="summary-sig-arg">seq</span>)</span><br />
+      Use muscle to align a sequence to a non-redundant set of known sequences.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#muscle_number">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#online" class="summary-sig-name">online</a>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">scheme</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span><br />
+      Use public abnum server to number the sequence and test whether the chain is an antibody chain.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#online">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#pairwise_muscle" class="summary-sig-name">pairwise_muscle</a>(<span class="summary-sig-arg">seq1</span>,
+        <span class="summary-sig-arg">seq2</span>,
+        <span class="summary-sig-arg">exact</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Interface with pairwise muscle between two sequences that should be identical.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#pairwise_muscle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.Annotate.annotate%27-module.html#user" class="summary-sig-name">user</a>(<span class="summary-sig-arg">sequence_list</span>,
+        <span class="summary-sig-arg">force</span>)</span><br />
+      Use the annotation found in the pdb file chain id and res id fields.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#user">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="validate_sequence"></a><span class="summary-sig-name">validate_sequence</span>(<span class="summary-sig-arg">seq</span>)</span><br />
+      Check whether a sequence is a protein sequence or if someone has 
+      submitted something nasty.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#validate_sequence">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="write_pir"></a><span class="summary-sig-name">write_pir</span>(<span class="summary-sig-arg">seq</span>,
+        <span class="summary-sig-arg">filename</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Create a .pir file This is the format used as input for abnum</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#write_pir">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.annotate%27-module.html#H_nr" class="summary-name">H_nr</a> = <code title="{'12e8_P': 'EVQLQQSGAEVVRSGASVKLSCTASGFNIKDYYIHWVKQRPEKGLEWIGWIDPEIGDT\
+EYVPKFQGKATMTADTSSNTAYLQLSSLTSEDTAVYYCNAGHDYDRGRFPYWGQGTLVTVSA',
+ '1a2y_B': 'QVQLQESGPGLVAPSQSLSITCTVSGFSLTGYGVNWVRQPPGKGLEWLGMIWGDGNTD\
+YNSALKSRLSISKDNSKSQVFLKMNSLHTDDTARYYCARERDYRLDYWGQGTTLTVSS',
+ '1c5d_B': 'EVKLLESGPGLVQPSQTLSLTCTVSGFPLTTNGVSWVRQPPGKGLEWIAAISSGGSPY\
+YNSALKSRLSINRDTSKSQVFLKMNSLQTEDTAIYFCTREDGWNYFDYWGPGTMVTVSS',
+ '1d5i_H': 'QVQLQQSGAELMKPGASVKISCKATGYTFSSYWIEWVKQRPGHGLEWIGEILPGSGST\
+NYNEKFKGKATFTADTSSNTAYMQLSSLTSEDSAVYYCARGHSYYFYDGDYWGQGTSVTVSS',
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">12e8_P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVQLQQSGAEVVRSGASVKLSCTASGFNIKDYYIHWVKQRPEK</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.annotate%27-module.html#L_nr" class="summary-name">L_nr</a> = <code title="{'12e8_M': 'DIVMTQSQKFMSTSVGDRVSITCKASQNVGTAVAWYQQKPGQSPKLMIYSASNRYTGV\
+PDRFTGSGSGTDFTLTISNMQSEDLADYFCQQYSSYPLTFGAGTKLELKRA',
+ '1a2y_A': 'DIVLTQSPASLSASVGETVTITCRASGNIHNYLAWYQQKQGKSPQLLVYYTTTLADGV\
+PSRFSGSGSGTQYSLKINSLQPEDFGSYYCQHFWSTPRTFGGGTKLEIK',
+ '1c5d_A': 'DIQMTQSPPSLSASLGDKVTITCQASQDINKYIAWYQQKPGKAPRQLIRYTSILVLGT\
+PSRFSGSGSGRDFSFSISNVASEDIASYYCLQYGNLYTFGAGTKLEIKRA',
+ '1d5i_L': 'DIKMTQSPSSMYASLGERVTITCKASQDINSYLSWFQQKPGKSPKTLIYRANRLVDGV\
+PSRFSGSGSGQDYSLTISSLEYEDMGIYYCLQYDEFPYTFGSGTKLEIKRTV',
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">12e8_M</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIVMTQSQKFMSTSVGDRVSITCKASQNVGTAVAWYQQKPGQS</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'ABDB.Annotate'"><code class="variable-quote">'</code><code class="variable-string">ABDB.Annotate</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="aa1"></a><span class="summary-name">aa1</span> = <code title="'ACDEFGHIKLMNPQRSTVWY'"><code class="variable-quote">'</code><code class="variable-string">ACDEFGHIKLMNPQRSTVWY</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.annotate%27-module.html#aa3" class="summary-name">aa3</a> = <code title="['ALA',
+ 'CYS',
+ 'ASP',
+ 'GLU',
+ 'PHE',
+ 'GLY',
+ 'HIS',
+ 'ILE',
+..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">ALA</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CYS</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ASP</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">GLU</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">PHE</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">GLY</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">HIS</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ILE</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="abysis"></a><span class="summary-name">abysis</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="allow_online"></a><span class="summary-name">allow_online</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="anarci_available"></a><span class="summary-name">anarci_available</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.annotate%27-module.html#ann_H" class="summary-name">ann_H</a> = <code title="[((1, ' '), 'E'),
+ ((2, ' '), 'V'),
+ ((3, ' '), 'Q'),
+ ((4, ' '), 'L'),
+ ((5, ' '), 'Q'),
+ ((6, ' '), 'E'),
+ ((7, ' '), 'S'),
+ ((8, ' '), 'G'),
+..."><code class="variable-group">[</code><code class="variable-group">(</code><code class="variable-group">(</code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-group">(</code>2<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">V</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-group">(</code>3<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-group">(</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.annotate%27-module.html#ann_L" class="summary-name">ann_L</a> = <code title="[((1, ' '), 'D'),
+ ((2, ' '), 'I'),
+ ((3, ' '), 'Q'),
+ ((4, ' '), 'M'),
+ ((5, ' '), 'T'),
+ ((6, ' '), 'Q'),
+ ((7, ' '), 'R'),
+ ((8, ' '), 'P'),
+..."><code class="variable-group">[</code><code class="variable-group">(</code><code class="variable-group">(</code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">D</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-group">(</code>2<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">I</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-group">(</code>3<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-group">(</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="muscle_path"></a><span class="summary-name">muscle_path</span> = <code title="'/homes/dunbar/bin/muscle'"><code class="variable-quote">'</code><code class="variable-string">/homes/dunbar/bin/muscle</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="numbering_software"></a><span class="summary-name">numbering_software</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="numbering_software_path"></a><span class="summary-name">numbering_software_path</span> = <code title="''"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.Annotate.annotate%27-module.html#to_one_letter_code" class="summary-name">to_one_letter_code</a> = <code title="{'ALA': 'A',
+ 'ARG': 'R',
+ 'ASN': 'N',
+ 'ASP': 'D',
+ 'CYS': 'C',
+ 'GLN': 'Q',
+ 'GLU': 'E',
+ 'GLY': 'G',
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">ALA</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">A</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ARG</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">R</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ASN</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">N</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ASP</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="abnum"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">abnum</span>(<span class="sig-arg">seq</span>,
+        <span class="sig-arg">scheme</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#abnum">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Use abnum to number the sequence and test whether the chain is an antibody chain.
+
+This function requires that abnum installed locally and the ABDB setup script have been ran to configure.
+
+Abnum is currently available as a part of Abysis, a licence for which can be obtained from bionf.org.
+
+Alternatively use the online function to perform the same task over the web.
+
+@param seq: An amino acid sequence that you wish to number.
+@type seq: C{str} 
+
+@return: numbering, chain type
+
+o chain type is either &quot;H&quot;, &quot;L&quot; or False
+
+o numbering is a list of position - residue type tuples / or False if it fails 
+    o each position is a tuple of the residue id and insertion code:
+        - e.g. position 100A --&gt; (100, &quot;A&quot;)
+        - e.g. position 44   --&gt; (44, &quot; &quot;)
+o e.g. numbering for a sequence  &quot;EVQL...VTVS&quot;: 
+    [((1, ' '), 'E'), ((2, ' '), 'V'), ((3, ' '), 'Q'), ((4, ' '), 'L'),
+    ...,
+    ((109, ' '), 'V'), ((110, ' '), 'T'), ((111, ' '), 'V'), ((112, ' '), 'S') ]
+
+Only the numbered variable region will be returned.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="align_numbering"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">align_numbering</span>(<span class="sig-arg">numbering</span>,
+        <span class="sig-arg">sequence_list</span>,
+        <span class="sig-arg">alignment_dict</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#align_numbering">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Align the sequence that has been numbered to the sequence you input. 
+  The numbered sequence should be &quot;in&quot; the input sequence. If 
+  not, supply an alignment dictionary.(align sequences and use 
+  get_alignment_dict(ali1,ali2))</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="anarci"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">anarci</span>(<span class="sig-arg">seq</span>,
+        <span class="sig-arg">scheme</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#anarci">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Use the ANARCI program to number the sequence.</p>
+  <p>The anarci submodule has more functionality. Here we restrict the 
+  program to number only those sequences that are from an antibody.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>seq</code></strong> (<code>str</code>) - An amino acid sequence that you wish to number.</li>
+        <li><strong class="pname"><code>scheme</code></strong> (<code>str</code>) - The scheme that should be applied. Choose either c, k, a, imgt 
+          for chothia, kabat, martin or imgt respectively.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>numbering, chain type</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="annotate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">annotate</span>(<span class="sig-arg">chain</span>,
+        <span class="sig-arg">method</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">user</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">scheme</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#annotate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Annotate the sequence of a chain object from ABDB.AbPDB</p>
+  <p>Take the sequence and annotate it with chothia numbering using one of 
+  three methods: user   - extract the annotation from the pdb abnum  - use 
+  a local copy of abnum to annotate sequence online - use the webserver 
+  version of abnum to annotate a sequence. anarci - use the anarci python 
+  module to annotate a sequence</p>
+  <p>force is a flag used in conjunction with the user method to force the 
+  function to return the annotation. e.g. if you have chains H, L and A, 
+  you want to force the annotator to return the annotation for H and L but 
+  not for A (the antigen)</p>
+  <p>returns a dictionary which has the residue ids as key and the 
+  annotation as value or is False, and chain type which is H L or 
+  False.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="easy_alignment"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">easy_alignment</span>(<span class="sig-arg">seq1</span>,
+        <span class="sig-arg">seq2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#easy_alignment">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Function to align two sequences by checking if one is in the other. 
+  This function will conserve gaps.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="extract_sequence"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">extract_sequence</span>(<span class="sig-arg">chain</span>,
+        <span class="sig-arg">selection</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">return_warnings</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">ignore_hets</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#extract_sequence">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the amino acid sequence of the chain.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>selection</code></strong> - a selection object to select certain residues</li>
+        <li><strong class="pname"><code>return_warnings</code></strong> - Flag to return a list of warnings or not</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The sequence in a resid:aa tuple list and the sequence as a 
+          string.</dd>
+  </dl>
+<div class="fields">      <p><strong>Change Log:</strong>
+        Residues containing HETATOMs are skipped --&gt;  Residues containing 
+    HETATOMs are checked as an amino acid.
+    <p>Residues containing HETATOMs are checked  to be amino acids and the 
+    single letter returned.</p>
+    <p>This works provided the residues in the chain are in the correct 
+    order.</p>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_alignment_dict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_alignment_dict</span>(<span class="sig-arg">ali1</span>,
+        <span class="sig-arg">ali2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#get_alignment_dict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Get a dictionary which tells you the index in sequence 2 that should align with the index in sequence 1 (key)
+
+ali1:  ----bcde-f---        seq1: bcdef
+ali2:  ---abcd--f---        seq2: abcdf
+
+alignment_dict={
+    0:1,
+    1:2,
+    2:3,
+    4:4
+    }
+
+If the index is aligned with a gap do not include in the dictionary.
+e.g  1 in alignment_dict  --&gt; True
+e.g  3 in alignment_dict  --&gt; False
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="imgt_number"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">imgt_number</span>(<span class="sig-arg">seq</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#imgt_number">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Use the imgt domain gap-align to number as sequence. This uses the 
+  imgt webserver and will be disabled if the &quot;allow_online&quot; setup
+  variable is set to False</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>seq</code></strong> (<code>str</code>) - An amino acid sequence that you wish to number.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>numbering, chain type
+          <p>Note that the numbered sequence is going to be IMGT numbered 
+          over the variable region only.</p></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="muscle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">muscle</span>(<span class="sig-arg">sequences</span>,
+        <span class="sig-arg">gapopen</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">gapextend</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#muscle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Use muscle to align sequences.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>sequences</code></strong> - dictionary of sequences.</li>
+        <li><strong class="pname"><code>gapopen</code></strong> - The penalty for opening a gap.</li>
+        <li><strong class="pname"><code>gapextend</code></strong> - The penalty for extending a gap</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>A dictionary of aligned sequences.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="muscle_number"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">muscle_number</span>(<span class="sig-arg">seq</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#muscle_number">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Use muscle to align a sequence to a non-redundant set of known sequences. Test whether it meets similarity criteria and apply numbering.
+Use this function only if online or abnum do not work and you are certain that chain is an antibody (it will &quot;successfully&quot; apply antibody numbering to TCRs). 
+
+@param seq: An amino acid sequence that you wish to number.
+@type seq: C{str} 
+
+@return: numbering, chain type
+
+o chain type is either &quot;H&quot;, &quot;L&quot; or False if it fails
+
+o numbering is a list of position - residue type tuples / or False if it fails
+    o each position is a tuple of the residue id and insertion code:
+        - e.g. position 100A --&gt; (100, &quot;A&quot;)
+        - e.g. position 44   --&gt; (44, &quot; &quot;)
+o e.g. numbering for a sequence  &quot;EVQL...VTVS&quot;: 
+    [((1, ' '), 'E'), ((2, ' '), 'V'), ((3, ' '), 'Q'), ((4, ' '), 'L'),
+    ...,
+    ((109, ' '), 'V'), ((110, ' '), 'T'), ((111, ' '), 'V'), ((112, ' '), 'S') ]
+
+Only the numbered variable region will be returned.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="online"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">online</span>(<span class="sig-arg">seq</span>,
+        <span class="sig-arg">scheme</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#online">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Use public abnum server to number the sequence and test whether the chain is an antibody chain.
+
+This function will send sequence data externally if it has been allowed to in the configuration setup.
+
+If online numbering is not allowed then an exception will be raised 
+
+@param seq: An amino acid sequence that you wish to number.
+@type seq: C{str} 
+
+@return: numbering, chain type
+
+o chain type is either &quot;H&quot;, &quot;L&quot; or False
+
+o numbering is a list of position - residue type tuples / or False if it fails
+    o each position is a tuple of the residue id and insertion code:
+        - e.g. position 100A --&gt; (100, &quot;A&quot;)
+        - e.g. position 44   --&gt; (44, &quot; &quot;)
+o e.g. numbering for a sequence  &quot;EVQL...VTVS&quot;: 
+    [((1, ' '), 'E'), ((2, ' '), 'V'), ((3, ' '), 'Q'), ((4, ' '), 'L'),
+    ...,
+    ((109, ' '), 'V'), ((110, ' '), 'T'), ((111, ' '), 'V'), ((112, ' '), 'S') ]
+
+Only the numbered variable region will be returned.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="pairwise_muscle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pairwise_muscle</span>(<span class="sig-arg">seq1</span>,
+        <span class="sig-arg">seq2</span>,
+        <span class="sig-arg">exact</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#pairwise_muscle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Interface with pairwise muscle between two sequences that should be identical.
+
+Try an easy alignment first by checking that one is in the other.
+
+Then if this fails (gaps) use muscle to align the sequences - this should work for seqres and structure sequences with missing atoms.
+
+Use muscle to align.
+
+if exact is True
+The gap open penalty is slightly larger than gap extend to break degeneracy between:
+
+1)garbleabcdefg----
+  -a-----bcdefg----
+ 
+and
+ 
+2)garbleabcdefg----
+  ------abcdefg----
+But they are penalties will still make mismatch very unlikely.
+else
+default muscle
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="user"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">user</span>(<span class="sig-arg">sequence_list</span>,
+        <span class="sig-arg">force</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.Annotate.annotate%27-pysrc.html#user">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Use the annotation found in the pdb file chain id and res id fields. 
+  Only if force is True</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="H_nr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">H_nr</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">12e8_P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVQLQQSGAEVVRSGASVKLSCTASGFNIKDYYIHWVKQRPEKGLEWIGWIDPEIGDT</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">EYVPKFQGKATMTADTSSNTAYLQLSSLTSEDTAVYYCNAGHDYDRGRFPYWGQGTLVTVSA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1a2y_B</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">QVQLQESGPGLVAPSQSLSITCTVSGFSLTGYGVNWVRQPPGKGLEWLGMIWGDGNTD</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">YNSALKSRLSISKDNSKSQVFLKMNSLHTDDTARYYCARERDYRLDYWGQGTTLTVSS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1c5d_B</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVKLLESGPGLVQPSQTLSLTCTVSGFPLTTNGVSWVRQPPGKGLEWIAAISSGGSPY</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">YNSALKSRLSINRDTSKSQVFLKMNSLQTEDTAIYFCTREDGWNYFDYWGPGTMVTVSS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1d5i_H</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">QVQLQQSGAELMKPGASVKISCKATGYTFSSYWIEWVKQRPGHGLEWIGEILPGSGST</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">NYNEKFKGKATFTADTSSNTAYMQLSSLTSEDSAVYYCARGHSYYFYDGDYWGQGTSVTVSS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="L_nr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">L_nr</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">12e8_M</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIVMTQSQKFMSTSVGDRVSITCKASQNVGTAVAWYQQKPGQSPKLMIYSASNRYTGV</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">PDRFTGSGSGTDFTLTISNMQSEDLADYFCQQYSSYPLTFGAGTKLELKRA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1a2y_A</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIVLTQSPASLSASVGETVTITCRASGNIHNYLAWYQQKQGKSPQLLVYYTTTLADGV</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">PSRFSGSGSGTQYSLKINSLQPEDFGSYYCQHFWSTPRTFGGGTKLEIK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1c5d_A</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIQMTQSPPSLSASLGDKVTITCQASQDINKYIAWYQQKPGKAPRQLIRYTSILVLGT</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">PSRFSGSGSGRDFSFSISNVASEDIASYYCLQYGNLYTFGAGTKLEIKRA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1d5i_L</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIKMTQSPSSMYASLGERVTITCKASQDINSYLSWFQQKPGKSPKTLIYRANRLVDGV</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">PSRFSGSGSGQDYSLTISSLEYEDMGIYYCLQYDEFPYTFGSGTKLEIKRTV</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="aa3"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">aa3</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">ALA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CYS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ASP</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">GLU</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">PHE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">GLY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">HIS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ILE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ann_H"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ann_H</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-group">(</code><code class="variable-group">(</code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>2<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">V</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>3<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>4<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">L</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>5<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>6<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>7<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">S</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>8<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">G</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ann_L"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ann_L</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-group">(</code><code class="variable-group">(</code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">D</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>2<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">I</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>3<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>4<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">M</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>5<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">T</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>6<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>7<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">R</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-group">(</code>8<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string"> </code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">P</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="to_one_letter_code"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">to_one_letter_code</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">ALA</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">A</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ARG</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">R</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ASN</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">N</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ASP</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">D</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CYS</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">C</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">GLN</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">Q</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">GLU</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">GLY</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">G</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  3 12:03:45 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

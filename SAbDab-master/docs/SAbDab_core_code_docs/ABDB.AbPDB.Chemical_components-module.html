@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>ABDB.AbPDB.Chemical_components</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="ABDB-module.html">Package&nbsp;ABDB</a> ::
+        <a href="ABDB.AbPDB-module.html">Package&nbsp;AbPDB</a> ::
+        Module&nbsp;Chemical_components
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module Chemical_components</h1><p class="nomargin-top"><span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+
+Created on 4 Apr 2013
+
+@author: dunbar
+
+Analyse the chemical component dictionary
+http://www.wwpdb.org/ccd.html
+
+These are the types of chemical components in the pdb: ( grep &quot;_chem_comp.type&quot; components.cif | cut -c 50-120 | sort | uniq )
+
+We will bin them into:
+
+peptide:
+    &quot;D-beta-peptide, C-gamma linking&quot; 
+    &quot;D-gamma-peptide, C-delta linking&quot; 
+    &quot;D-peptide linking&quot; 
+    &quot;D-PEPTIDE LINKING&quot; 
+    &quot;D-peptide NH3 amino terminus&quot; 
+    &quot;D-PEPTIDE NH3 AMINO TERMINUS&quot; 
+    &quot;L-beta-peptide, C-gamma linking&quot; 
+    &quot;L-gamma-peptide, C-delta linking&quot; 
+    &quot;L-peptide COOH carboxy terminus&quot; 
+    &quot;L-PEPTIDE COOH CARBOXY TERMINUS&quot; 
+    &quot;L-peptide linking&quot; 
+    &quot;L-PEPTIDE LINKING&quot; 
+    &quot;L-peptide NH3 amino terminus&quot; 
+    peptide-like 
+    PEPTIDE-LIKE 
+    &quot;peptide linking&quot; 
+    &quot;PEPTIDE LINKING&quot; 
+
+nucleic-acid:
+    &quot;DNA linking&quot; 
+    &quot;DNA LINKING&quot; 
+    &quot;DNA OH 3 prime terminus&quot; 
+    &quot;DNA OH 3 PRIME TERMINUS&quot; 
+    &quot;L-DNA LINKING&quot;
+    &quot;L-RNA LINKING&quot;
+    &quot;RNA linking&quot; 
+    &quot;RNA LINKING&quot; 
+    &quot;RNA OH 3 prime terminus&quot; 
+
+saccharide:
+    D-saccharide 
+    D-SACCHARIDE 
+    &quot;D-saccharide 1,4 and 1,4 linking&quot; 
+    &quot;D-SACCHARIDE 1,4 AND 1,4 LINKING&quot; 
+    L-saccharide 
+    L-SACCHARIDE 
+    &quot;L-SACCHARIDE 1,4 AND 1,4 LINKING&quot;
+    saccharide 
+    SACCHARIDE
+
+non-polymer:
+    non-polymer 
+    NON-POLYMER 
+
+This has been done in resname_to_type
+
+
+Common buffers/molecules in the PDB which are unlikely to be hapten antigens 
+
+Method 1:
+    This list was taken from the supplementary material (Table 2) of:
+    Visualizing ligand molecules in twilight electron density. C. X. Weichenberger, E. Pozharski and B. Rupp. Acta Cryst. (2013). F69, 195-200.
+    
+    Acknowledgement -  Anthony's JC 03/04/13
+
+Method 2:
+
+    The list of chemical component code to pdb code was taken from:
+    http://ligand-expo.rcsb.org/ld-download.html
+    Saved as: ./Antibody/AbPDB/dat/Resources/cc-to-pdb.tdd.txt
+    
+    We look at the number of structures with each code.
+    Distribution of number of pdb codes with the chemical component found at:
+    ./Antibody/AbPDB/dat/Resources/Frequency_of_cc_in_pdb.pdf
+    
+    We use the cut-off of 15. (and manually examine those which are over but under 50 and have mainly known Antibodies - just in case it's a pet hapten antigen)
+    
+    This is a harsh cut off! This is fine for analysing antibodies (as you are unlikely to have more than 15 bound to the same ag). However, change the cutoff for other purposes (suggest at least 200 for &quot;common&quot;)
+    
+    There is still a problem if there is a rarely used code or a newly introduced code for buffer.
+    
+    fix 120613 will chemical component dict api - runs to online database if cannot find it - obviously requires web access. 
+    
+    Acknowledgement - JP for suggesting the method.
+    The following have been removed from the list as they are either common sugar or peptides
+        BGC saccharide  
+        NAG saccharide
+        XYP saccharide
+        XYS saccharide
+        MAL saccharide
+        MAN saccharide
+        GLA saccharide
+        GLC saccharide
+        A2G saccharide
+        LMT saccharide
+        PE1 peptide
+        F6P saccharide
+        DPN peptide
+        GAL saccharide
+        BOG saccharide
+        NGA saccharide
+        FUC saccharide
+        BMA saccharide
+        SUC saccharide
+        FUL saccharide
+        NDG saccharide
+
+I have updated method 1 list with method 2 list
+
+It is left as a dictionary of dictionaries if we decide to add annotations
+    
+    
+Functions provided are:
+
+is_aa 
+is_common_buffer
+is_carbohydrate
+is_nucleic_acid
+is_polymer
+get_type
+get_chemical_name
+
+each take either a three letter code or a residue object as argument
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>bool</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.AbPDB.Chemical_components-module.html#is_common_buffer" class="summary-sig-name">is_common_buffer</a>(<span class="summary-sig-arg">residue</span>)</span><br />
+      Is the residue a common buffer? If it occurs in the <a 
+      href="ABDB.AbPDB.Chemical_components-module.html#common_buffers" 
+      class="link">common buffers</a> list it is considered a common 
+      buffer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_common_buffer">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_aa"></a><span class="summary-sig-name">is_aa</span>(<span class="summary-sig-arg">residue</span>,
+        <span class="summary-sig-arg">standard</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_aa">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_carbohydrate"></a><span class="summary-sig-name">is_carbohydrate</span>(<span class="summary-sig-arg">residue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_carbohydrate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_nucleic_acid"></a><span class="summary-sig-name">is_nucleic_acid</span>(<span class="summary-sig-arg">residue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_nucleic_acid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_polymer"></a><span class="summary-sig-name">is_polymer</span>(<span class="summary-sig-arg">residue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_polymer">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_res_type"></a><span class="summary-sig-name">get_res_type</span>(<span class="summary-sig-arg">residue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#get_res_type">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_chemical_name"></a><span class="summary-sig-name">get_chemical_name</span>(<span class="summary-sig-arg">residue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#get_chemical_name">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_name_type"></a><span class="summary-sig-name">get_name_type</span>(<span class="summary-sig-arg">residue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#get_name_type">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_from_expo"></a><span class="summary-sig-name">get_from_expo</span>(<span class="summary-sig-arg">residue</span>)</span><br />
+      The PDB has a habit of updating ...therefore, if we don't have the 
+      three letter code try to get it from ligand expo database online.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#get_from_expo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="ABDB.AbPDB.Chemical_components-module.html#is_complete" class="summary-sig-name">is_complete</a>(<span class="summary-sig-arg">residue</span>,
+        <span class="summary-sig-arg">quiet</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Check the whether a residue has all the heavy atoms we would expect 
+      for the residue type.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_complete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="expourl"></a><span class="summary-name">expourl</span> = <code title="'http://ligand-expo.rcsb.org/reports/%s/%s/%s.cif'"><code class="variable-quote">'</code><code class="variable-string">http://ligand-expo.rcsb.org/reports/%s/%s/%s.cif</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="chem_comp_id"></a><span class="summary-name">chem_comp_id</span> = <code title="re.compile(r'_chem_comp\.id +([A-Za-z0-9]+)')">re.compile(r'_chem_comp\.id <code class="re-op">+</code><code class="re-group">(</code><code class="re-group">[</code>A<code class="re-op">-</code>Za<code class="re-op">-</code>z0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="chem_comp_name"></a><span class="summary-name">chem_comp_name</span> = <code title="re.compile(r'_chem_comp\.name +(.+)')">re.compile(r'_chem_comp\.name <code class="re-op">+</code><code class="re-group">(</code>.<code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="chem_comp_type"></a><span class="summary-name">chem_comp_type</span> = <code title="re.compile(r'_chem_comp\.type +(.+)')">re.compile(r'_chem_comp\.type <code class="re-op">+</code><code class="re-group">(</code>.<code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.AbPDB.Chemical_components-module.html#common_buffers" class="summary-name">common_buffers</a> = <code title="{'0QE': {},
+ '12P': {},
+ '13P': {},
+ '144': {},
+ '15P': {},
+ '1PE': {},
+ '1PG': {},
+ '2PE': {},
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">0QE</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">12P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">13P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">144</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.AbPDB.Chemical_components-module.html#resname_to_name_and_type" class="summary-name">resname_to_name_and_type</a> = <code title="{'000': ('METHYL HYDROGEN CARBONATE', 'non-polymer'),
+ '001': ('1-[2,2-DIFLUORO-2-(3,4,5-TRIMETHOXY-PHENYL)-ACETYL]-PIPERIDI\
+NE-2-CARBOXYLIC ACID 4-PHENYL-1-(3-PYRIDIN-3-YL-PROPYL)-BUTYL ESTER',
+         'non-polymer'),
+ '002': ('N-[(2R)-2-BENZYL-4-(HYDROXYAMINO)-4-OXOBUTANOYL]-L-ISOLEUCYL\
+-L-LEUCINE',
+         'non-polymer'),
+ '003': ('5-METHYL-7-(2-METHYLPROPYL)-2-(NAPHTHALEN-1-YLMETHYL)-3-PYRI\
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">000</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">METHYL HYDROGEN CARBONATE</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="ABDB.AbPDB.Chemical_components-module.html#resname2standard" class="summary-name">resname2standard</a> = <code title="{'02K': ('ALA', ['O', 'CD', 'CG', 'CE', 'CB', 'CH', 'N', 'C', 'CA']),
+ '02L': ('ASN',
+         ['CA',
+          'C',
+          'N',
+          'CB',
+          'CG',
+          'OD1',
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">02K</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">ALA</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">O</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CD</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CG</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CE</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CB</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'ABDB.AbPDB'"><code class="variable-quote">'</code><code class="variable-string">ABDB.AbPDB</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="is_common_buffer"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">is_common_buffer</span>(<span class="sig-arg">residue</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_common_buffer">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Is the residue a common buffer? If it occurs in the <a 
+  href="ABDB.AbPDB.Chemical_components-module.html#common_buffers" 
+  class="link">common buffers</a> list it is considered a common 
+  buffer.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>residue</code></strong> - A AbPDB residue object or residues identifier e.g. PO4</li>
+    </ul></dd>
+    <dt>Returns: <code>bool</code></dt>
+        <dd>Flag if the residue is a common buffer.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="is_complete"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">is_complete</span>(<span class="sig-arg">residue</span>,
+        <span class="sig-arg">quiet</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="ABDB.AbPDB.Chemical_components-pysrc.html#is_complete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check the whether a residue has all the heavy atoms we would expect 
+  for the residue type. Works on the residue object in biopython pdb. 
+  Returns a flag (True or False) and a list of missing atom names 
+  missing</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="common_buffers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">common_buffers</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">0QE</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">12P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">13P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">144</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">15P</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1PE</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">1PG</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">2PE</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-group">}</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="resname_to_name_and_type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">resname_to_name_and_type</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">000</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">METHYL HYDROGEN CARBONATE</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">non-polymer</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">001</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">1-[2,2-DIFLUORO-2-(3,4,5-TRIMETHOXY-PHENYL)-ACETYL]-PIPERIDI</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">NE-2-CARBOXYLIC ACID 4-PHENYL-1-(3-PYRIDIN-3-YL-PROPYL)-BUTYL ESTER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+         <code class="variable-quote">'</code><code class="variable-string">non-polymer</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">002</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">N-[(2R)-2-BENZYL-4-(HYDROXYAMINO)-4-OXOBUTANOYL]-L-ISOLEUCYL</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">-L-LEUCINE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+         <code class="variable-quote">'</code><code class="variable-string">non-polymer</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">003</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">5-METHYL-7-(2-METHYLPROPYL)-2-(NAPHTHALEN-1-YLMETHYL)-3-PYRI</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="resname2standard"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">resname2standard</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">02K</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">ALA</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">O</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CD</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CG</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CE</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CB</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CH</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">N</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">C</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">CA</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">02L</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">ASN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+         <code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">CA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">C</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">N</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">CB</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">CG</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">OD1</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="ABDB-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  3 12:03:45 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
