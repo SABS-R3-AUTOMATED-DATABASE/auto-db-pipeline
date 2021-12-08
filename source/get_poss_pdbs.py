@@ -1,3 +1,12 @@
+"""
+This file contains the code to retrieve potential/possible PDB IDs from a url (e.g. the url of a paper) 
+and return those potential PDB IDs as a list. The final (fifth) function get_pdbs utilizes
+the first four functions. Please read the docstrings in the functions for more information. 
+
+Note that there will likely be false positives (potential PDB IDs that are not actual PDBs).
+"""
+
+
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -96,7 +105,7 @@ def filter_pdb(string_list):
 
 def standardize(pdb_list):
     """
-    Takes a list of PDB IDs and does the following:
+    Takes a list of possible PDB IDs and does the following:
     1. Converts them to upper case.
     2. Removes duplicates.
     3. Sorts in alphabetical-numerical order.
@@ -120,9 +129,9 @@ def standardize(pdb_list):
 
 
 
-def get_pdbs(url):
+def get_poss_pdbs(url):
     """
-    Gets the PDBs from the url of a paper.
+    Gets the possible PDBs from the url of a paper.
     
     Returns a list.
     """

@@ -1,11 +1,11 @@
-import pdb_code
+import get_poss_pdbs as gp
 
 urls = ["https://www.sciencedirect.com/science/article/pii/S2211124721012869",
         "https://www.biorxiv.org/content/10.1101/2020.08.09.242867v1.full",
         "https://www.biorxiv.org/content/10.1101/2021.04.07.438849v2.full"]
 
 
-print(pdb_code.get_pdbs(urls[1]))
+print(gp.pdb_code.get_pdbs(urls[1]))
 
 
 
