@@ -55,6 +55,7 @@ class Keywords:
         self.titles = []
         self.abstracts = []
         self.titles_and_abstracts = []
+        count = 1
 
         for link in self.links:
             try:
@@ -82,6 +83,9 @@ class Keywords:
             #script continues running incase there is an error when accessing an individual website
             except Exception:
                 pass
+
+            print('papers scraped:', count)
+            count+=1
 
     @property
     def number_of_titles(self):
@@ -117,7 +121,7 @@ class Keywords:
         If .json files already exist this method can be used to load the data
         '''
         titles_file = open('data/titles.json')
-        self.abstracts = json.load(titles_file)
+        self.titles = json.load(titles_file)
         titles_file.close()
 
         abstracts_file = open('data/abstracts.json')
@@ -160,7 +164,8 @@ class Keywords:
         self.joined_abstracts = []
         self.counts_abstract = dict()
         self.ignore_words = ['a','the','of', 'and', 'the', 'to', '-', 'by', 'in', 'on', 'as', 'that', 'these', 
-                'with', 'from','is', 'we', 'for', 'are','or','be','an', 'can', 'two', 'this', 'have','were']
+                'with', 'from','is', 'we', 'for', 'are','or','be','an', 'can', 'two', 'this', 'have','were','was',
+                'which','at','here']
 
         for abstract in self.abstracts:
             split_abstract = abstract.split()
@@ -175,7 +180,7 @@ class Keywords:
             else:
                 self.counts_abstract[word] = 1
 
-    def plot_word_counts(self, part='title'):
+    def plot_word_counts(self, no_words_on_plot, part='title'):
         '''
         plot word counts of titles or abstracts. Specify part='title' or part='abstract'
         '''
@@ -188,12 +193,11 @@ class Keywords:
         word = []
         word_count = []
 
-        #plot 40 most frequent words
-        for key, value in sorted_counts[-40:]:
+        for key, value in sorted_counts[-no_words_on_plot:]:
             word.append(key)
             word_count.append(value)
 
-        plt.bar(range(len(word_count)), word_count, align='center')
+        plt.bar(range(len(word_count)), word_count,align='center',color='tab:blue')
         plt.xticks(range(len(word)), word, rotation=90)
         plt.ylabel('word count')
         plt.xlabel('word')
@@ -209,10 +213,15 @@ class Keywords:
 if __name__ == '__main__':
     CoV = Keywords('./data/CoV-AbDab_181021.csv')
     CoV.extract_links()
-    CoV.get_titles_and_abstracts()
-    CoV.save_to_json()
+
+    #run if titles and abstracts are not downloaded (data/*.json)
+    #CoV.get_titles_and_abstracts()
+    #CoV.save_to_json()
+
+    #run if titles and abstracts are downloaded (data/*.json)
+    CoV.load_from_json()
     CoV.get_word_counts_title()
     CoV.get_word_counts_abstract()
-    CoV.plot_word_counts(part='title')
-    CoV.plot_word_counts(part='abstract')
+    CoV.plot_word_counts(30, part='title')
+    CoV.plot_word_counts(30,part='abstract')
 
