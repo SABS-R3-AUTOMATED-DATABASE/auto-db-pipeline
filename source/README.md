@@ -53,5 +53,8 @@ Storing the PDB IDs as a dictionary allows for O(1) lookup. I tested this and I 
 
 Next I want to see if I can see if the authors that wrote the paper for the url in question are the ones that actually uploaded a given PDB ID they had in their paper. 
 
-Unfortunately the first
+Unfortunately, most of the actual PDBs were gobble, so we need to work on that, see the Jupyter notebook for ideas. 
+
+We then need to load the sequence of the PDBs and check that they are in SAbDab. 
+
 
