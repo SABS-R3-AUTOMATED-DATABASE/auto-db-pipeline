@@ -140,7 +140,7 @@ class Keywords:
         self.counts_title = dict()
         # list of words that we do not want to count
         self.ignore_words = ['a', 'the', 'of', 'and', 'the', 'to', '-', 'by', 'in', 'on', 'as', 'that', 'these',
-                            'with', 'from','is', 'we', 'for', 'are', 'or', 'be', 'an', 'can', 'two', 'this', 'have', 'were']
+                             'with', 'from', 'is', 'we', 'for', 'are', 'or', 'be', 'an', 'can', 'two', 'this', 'have', 'were']
 
         # add words in all titles to a single list
         for title in self.titles:
@@ -164,8 +164,8 @@ class Keywords:
         self.joined_abstracts = []
         self.counts_abstract = dict()
         self.ignore_words = ['a', 'the', 'of', 'and', 'the', 'to', '-', 'by', 'in', 'on', 'as', 'that', 'these',
-                            'with', 'from', 'is', 'we', 'for', 'are','or','be','an', 'can', 'two', 'this', 'have',
-                            'were','was', 'which', 'at', 'here']
+                             'with', 'from', 'is', 'we', 'for', 'are', 'or', 'be', 'an', 'can', 'two', 'this', 'have',
+                             'were', 'was', 'which', 'at', 'here']
 
         for abstract in self.abstracts:
             split_abstract = abstract.split()
@@ -224,4 +224,3 @@ if __name__ == '__main__':
     CoV.get_word_counts_abstract()
     CoV.plot_word_counts(30, part='title')
     CoV.plot_word_counts(30, part='abstract')
-    
