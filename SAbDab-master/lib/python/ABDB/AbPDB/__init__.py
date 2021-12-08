@@ -1,1 +1,0 @@
-from .AntibodyParser import AntibodyParser
