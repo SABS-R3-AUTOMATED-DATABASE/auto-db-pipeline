@@ -47,29 +47,33 @@ def dump_papers(papers, filepath: str) -> None:
         for paper in papers:
             f.write(str(paper) + "\n")
 
-covid = ['SARS-CoV-2','COVID-19','coronavirus','SARS-CoV','MERS-CoV','SARS']
-antibody = ['antibody','antibodies','nanobody']
-neut = ['neutralizing','neutralize','neutralization','bind','binding','inhibit']
-structure = ['heavy chain', 'light chain','rbd' , 'complementarity determining region','VH','VL','gene','epitope','receptor-binding domain','Fc','Fab','rbd','MAb','spike protein']
-papers = get_and_dump_pubmed_papers( [covid,antibody,neut,structure])
 
-dump_papers(papers, 'paperscraper/results_new.json1')
-list_of_titles = []
-list_of_doi = []
-for _ in papers:
-    list_of_titles.append(_["title"])
-    if _["doi"] != None:
-        doi = _["doi"].split("\n")[0]
-        if doi not in list_of_doi:
-            list_of_doi.append(doi)
+if __name__ == '__main__':
+    covid = ['SARS-CoV-2','COVID-19','coronavirus','SARS-CoV','MERS-CoV','SARS']
+    antibody = ['antibody','antibodies','nanobody']
+    neut = ['neutralizing','neutralize','neutralization','bind','binding','inhibit']
+    structure = ['heavy chain', 'light chain','rbd' , 'complementarity determining region','VH','VL','gene','epitope','receptor-binding domain','Fc','Fab','rbd','MAb','spike protein']
+    papers = get_and_dump_pubmed_papers( [covid,antibody,neut,structure])
+    dump_papers(papers, 'paperscraper/results.json1')
+    list_of_titles = []
+    list_of_doi = []
+    for _ in papers:
+        list_of_titles.append(_["title"])
+        if _["doi"] != None:
+            doi = _["doi"].split("\n")[0]
+            if doi not in list_of_doi:
+                list_of_doi.append(doi)
 
-with open('paperscraper/dois_new.txt', "w") as f:
-        for doi in list_of_doi:
-            f.write('https://doi.org/'+str(doi) + "\n")
+    with open('paperscraper/dois.txt', "w") as f:
+            for doi in list_of_doi:
+                f.write('https://doi.org/'+str(doi) + "\n")
 
-with open('paperscraper/search_results_new.txt', "w") as f:
-        for t in list_of_titles:
-            t = t.replace('[','')
-            t = t.replace(']','')
-            f.write(str(t) + "\n")
+    with open('paperscraper/search_results.txt', "w") as f:
+            for t in list_of_titles:
+                t = t.replace('[','')
+                t = t.replace(']','')
+                f.write(str(t) + "\n")
+
+
+
 
