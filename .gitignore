@@ -4,3 +4,4 @@ old_keyword_files/
 keywords/__pycache__
 keywords/.pytest_cache
 keywords/tests/__pycache__
+.vscode
