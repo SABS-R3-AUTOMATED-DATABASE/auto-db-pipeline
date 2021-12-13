@@ -38,7 +38,7 @@ class Keywords:
 
             # get link from 'source' column, most sources are formatted identically
             try:
-                source_list = re.split('\(|\)', source)
+                source_list = re.split(r'\(|\)', source)
                 link = str(source_list[1])
                 if link not in self.links:
                     self.links.append(link)
@@ -68,7 +68,7 @@ class Keywords:
                 # look for first 'title' tag, for almost all websites this is the title of the paper
                 title = soup.find('title').text
                 # remove the journal title from the paper title
-                title_no_journal = re.split('\||\n', title)[0]
+                title_no_journal = re.split(r'\||\n', title)[0]
                 self.titles.append(title_no_journal)
 
                 # find all instances of 'abstract' or 'summary' in text
