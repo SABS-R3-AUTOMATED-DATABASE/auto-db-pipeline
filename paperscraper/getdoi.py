@@ -61,8 +61,6 @@ if __name__ == '__main__':
                  'complementarity determining region', 'epitope', 'Fc', 'Fab',
                  'receptor-binding domain', 'rbd', 'MAb', 'spike protein']
     papers = get_and_dump_pubmed_papers([covid, antibody, neut, structure])
-    for paper in papers:
-        print(type(paper))
     dump_papers(papers, 'paperscraper/results.jsonl')
     list_of_titles = []
     list_of_doi = []
