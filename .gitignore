@@ -5,3 +5,7 @@ keywords/__pycache__
 keywords/.pytest_cache
 keywords/tests/__pycache__
 .vscode
+paperscraper/.ipynb_checkpoints/
+paperscraper/check_coverage.ipynb
+paperscraper/testfile.ipynb
+
