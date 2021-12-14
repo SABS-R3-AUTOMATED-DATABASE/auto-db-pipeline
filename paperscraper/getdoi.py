@@ -3,7 +3,7 @@ from paperscraper.pubmed import get_query_from_keywords_and_date
 from paperscraper.pubmed import get_pubmed_papers
 
 
-def get_and_dump_pubmed_papers(
+def search_pubmed_papers(
     keywords: List[Union[str, List[str]]],
     fields: List = ["title", "authors", "date", "abstract", "journal", "doi"],
     start_date: str = "None",
@@ -54,17 +54,27 @@ def dump_papers(papers, filepath: str) -> None:
 if __name__ == '__main__':
     covid = ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV',
              'SARS']
-    antibody = ['antibody', 'antibodies', 'nanobody']
-    neut = ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
-            'inhibit']
-    structure = ['heavy chain', 'light chain', 'rbd', 'VH', 'VL', 'gene',
-                 'complementarity determining region', 'epitope', 'Fc', 'Fab',
-                 'receptor-binding domain', 'rbd', 'MAb', 'spike protein']
-    papers = get_and_dump_pubmed_papers([covid, antibody, neut, structure])
+    antibody = ['antibody', 'antibodies', 'nanobody', 'MAb', 'immunoglobulin',
+                'nanobodies']
+    interaction = ['neutralizing', 'neutralize', 'neutralization', 'bind',
+                   'binding', 'inhibit', 'targeting']
+    extra = ['heavy chain',  'complementarity determining region',
+             'gene', 'epitope', 'receptor-binding domain', 'rbd',
+             'spike protein', 'VHH']   
+    papers = search_pubmed_papers([covid, antibody, interaction, extra])
+    papers_pt = search_pubmed_papers([covid, antibody, interaction, extra,
+                                     ['AND preprint[pt]']])
     dump_papers(papers, 'paperscraper/results.jsonl')
+    dump_papers(papers_pt, 'paperscraper/results_pt.jsonl')
     list_of_titles = []
     list_of_doi = []
     for _ in papers:
+        list_of_titles.append(_["title"])
+        if _["doi"] is not None:
+            doi = _["doi"].split("\n")[0]
+            if doi not in list_of_doi:
+                list_of_doi.append(doi)
+    for _ in papers_pt:
         list_of_titles.append(_["title"])
         if _["doi"] is not None:
             doi = _["doi"].split("\n")[0]
