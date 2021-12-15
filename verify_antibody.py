@@ -1,4 +1,3 @@
-# NOTE update to deal with PDBConstruction warnings
 
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
@@ -6,6 +5,10 @@ from ABDB import database
 import subprocess
 import os
 import shutil
+
+import warnings
+from Bio import BiopythonWarning
+warnings.simplefilter('ignore', BiopythonWarning)
 
 
 def verify_antibody(verified_pdb_ids):
@@ -36,9 +39,10 @@ def verify_antibody(verified_pdb_ids):
 
         # if not found in SAbDab, try ANARCI
         elif sabdab_verify is None:
-            print(pdb_id, 'is possibly not an antibody. Checking with ANARCI...')
+            print(pdb_id, 'may not be an antibody. Checking with ANARCI...')
             # retrieve file for PDB ID from server
-            pdb_file = pdbl.retrieve_pdb_file(pdb_id, file_format='pdb', overwrite=True, pdir='temp_pdb')
+            pdb_file = pdbl.retrieve_pdb_file(pdb_id, file_format='pdb',
+                                              overwrite=True, pdir='temp_pdb')
 
             # get sequence from PDB file using SeqIO
             # NOTE hide stdout warnings PDB? messy output
@@ -62,7 +66,7 @@ def verify_antibody(verified_pdb_ids):
             # read anarci output file
             anarci_output = open('anarci_output.txt', 'r')
             check_antibody = anarci_output.readlines()
-            # check if any lines start with L or H (indicates light and heavy chains of antibody)
+            # check if any lines start with L or H (light and heavy chains)
             count = 0
             for line in check_antibody:
                 if line.startswith('H') is True or line.startswith('L') is True:
@@ -84,7 +88,7 @@ def verify_antibody(verified_pdb_ids):
             os.remove('anarci_input.fasta')
             os.remove('anarci_output.txt')
             shutil.rmtree('temp_pdb')
-            # obsolete folder may or may not be present depending on PDB structure, ignore error if doesn't exist
+            # obsolete folder exists depending on PDB structure, ignore error if doesn't exist
             shutil.rmtree('obsolete', ignore_errors=True)
 
     print('Verified antibodies: ', verified_antibodies)
