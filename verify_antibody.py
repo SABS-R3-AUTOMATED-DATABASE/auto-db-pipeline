@@ -1,11 +1,11 @@
-# NOTE recycled code PDB_to_seq.py
-# NOTE delete temp files made
+# NOTE update to deal with PDBConstruction warnings
 
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
 from ABDB import database
 import subprocess
 import os
+import shutil
 
 
 def verify_antibody(verified_pdb_ids):
@@ -17,8 +17,9 @@ def verify_antibody(verified_pdb_ids):
 
         if verified, can be added to the database'''
 
-    # set up empty list to hold filtered antibodies
+    # set up empty list to hold filtered proteins
     verified_antibodies = []
+    failed_verification = []
 
     # create PDB list object from PDB server
     pdbl = PDBList()
@@ -37,10 +38,10 @@ def verify_antibody(verified_pdb_ids):
         elif sabdab_verify is None:
             print(pdb_id, 'is possibly not an antibody. Checking with ANARCI...')
             # retrieve file for PDB ID from server
-            pdb_file = pdbl.retrieve_pdb_file(pdb_id, file_format='pdb', overwrite=True)
+            pdb_file = pdbl.retrieve_pdb_file(pdb_id, file_format='pdb', overwrite=True, pdir='temp_pdb')
 
             # get sequence from PDB file using SeqIO
-            # NOTE hide warnings PDB?
+            # NOTE hide stdout warnings PDB? messy output
             record_ids = []
             record_seqs = []
             for record in SeqIO.parse(pdb_file, 'pdb-atom'):
@@ -61,7 +62,7 @@ def verify_antibody(verified_pdb_ids):
             # read anarci output file
             anarci_output = open('anarci_output.txt', 'r')
             check_antibody = anarci_output.readlines()
-            # check if any lines start with L or H (light or heavy labelling)
+            # check if any lines start with L or H (indicates light and heavy chains of antibody)
             count = 0
             for line in check_antibody:
                 if line.startswith('H') is True or line.startswith('L') is True:
@@ -70,24 +71,29 @@ def verify_antibody(verified_pdb_ids):
             if count == 0:
                 print('count = ', count)
                 print(pdb_id, 'is not an antibody')
+                failed_verification.append(pdb_id)
             # if L or H lines present, antibody confirmed
             elif count > 0:
                 print('count = ', count)
                 print(pdb_id, 'is an antibody')
                 verified_antibodies.append(pdb_id)
 
-            # close temp files and remove before next iteration (assuming function carried out for list of PDB IDs)
+            # close temp files/pdb dirs and remove before next iteration
             anarci_input.close()
             anarci_output.close()
             os.remove('anarci_input.fasta')
             os.remove('anarci_output.txt')
+            shutil.rmtree('temp_pdb')
+            # obsolete folder may or may not be present depending on PDB structure, ignore error if doesn't exist
+            shutil.rmtree('obsolete', ignore_errors=True)
 
-    print(verified_antibodies)
+    print('Verified antibodies: ', verified_antibodies)
+    print('Failed verification: ', failed_verification)
 
     return verified_antibodies
 
 
-# list of scraped verified PDB IDs
-verified_pdb_ids = ['1dmy', '7e3k', '7e3c']
+# list of scraped verified PDB IDs (test - CovAbDab structures with 4 random PDB structures (carbonic anhydrases))
+verified_pdb_ids = ['4f2m', '7e3k', '7e3c', '7k9i', '7e5y', '7l02', '7dk5', '7dd2', '1dmy', '1jd0', '1azm', '3znc']
 # run function with test list
 verify_antibody(verified_pdb_ids)

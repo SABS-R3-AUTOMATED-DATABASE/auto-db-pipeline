@@ -14,7 +14,7 @@ def pdb_to_seq(pdb_id):
     # get sequence from PDB file using SeqIO
     record_id = []
     record_seq = []
-    for record in SeqIO.parse(pdb_file, 'pdb-atom'): 
+    for record in SeqIO.parse(pdb_file, 'pdb-atom'):
         record_id.append(str(record.id))
         record_seq.append(str(record.seq))
     seq_dict = dict(zip(record_id, record_seq))
