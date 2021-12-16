@@ -125,6 +125,10 @@ def pubmed_papers_and_pt(
         with open('pubmed_dois.txt', "w") as f:
             for doi in list_of_doi:
                 f.write('https://doi.org/'+str(doi) + "\n")
+        with open('pubmed_dois_v2.txt', "w") as f:
+            for doi in list_of_doi:
+                f.write('https://www.ncbi.nlm.nih.gov/pmc/articles/doi/'
+                        + str(doi) + "\n")
     if jsonl is True:
         with open('pubmed_results.jsonl', "w") as f:
             for paper in output:
