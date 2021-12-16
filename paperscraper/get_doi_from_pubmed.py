@@ -122,7 +122,7 @@ def pubmed_papers_and_pt(
                 t = t.replace('[', '')
                 t = t.replace(']', '')
                 f.write(str(t) + "\n")
-        with open('dois.txt', "w") as f:
+        with open('pubmed_dois.txt', "w") as f:
             for doi in list_of_doi:
                 f.write('https://doi.org/'+str(doi) + "\n")
     if jsonl is True:

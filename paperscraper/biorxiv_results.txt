@@ -1,0 +1,1083 @@
+Trypsin treatment unlocks barrier for zoonotic coronaviruses infection
+Potent binding of 2019 novel coronavirus spike protein by a SARS coronavirus-specific human monoclonal antibody
+Potent neutralization of 2019 novel coronavirus by recombinant ACE2-Ig
+Potent neutralization of 2019 novel coronavirus by recombinant ACE2-Ig
+Cryo-EM Structure of the 2019-nCoV Spike in the Prefusion Conformation
+Isolation and Characterization of 2019-nCoV-like Coronavirus from Malayan Pangolins
+Structure, function and antigenicity of the SARS-CoV-2 spike glycoprotein
+Crystal structure of the 2019-nCoV spike receptor-binding domain bound with the ACE2 receptor
+SARS-CoV-2 and SARS-CoV Spike-RBD Structure and Receptor Binding Comparison and Potential Implications on Neutralizing Antibody and Vaccine Development
+Potential T-cell and B-cell Epitopes of 2019-nCoV
+Potential T-cell and B-cell Epitopes of 2019-nCoV
+Vulnerabilities in coronavirus glycan shields despite extensive glycosylation
+Functional pangenome analysis provides insights into the origin, function and pathways to therapy of SARS-CoV-2 coronavirus
+Functional pangenome analysis suggests inhibition of the protein E as a readily available therapy for COVID-2019.
+Spike protein binding prediction with neutralizing antibodies of SARS-CoV-2
+Monoclonal antibodies for the S2 subunit of spike of SARS-CoV cross-react with the newly-emerged SARS-CoV-2
+A human monoclonal 1 antibody blocking SARS-CoV-2 infection
+Differential Antibody Recognition by Novel SARS-CoV-2 and SARS-CoV Spike Protein Receptor Binding Domains: Mechanistic Insights
+Differential Antibody Recognition by Novel SARS-CoV-2 and SARS-CoV Spike Protein Receptor Binding Domains: Mechanistic Insights and Implications for the Design of Diagnostics and Therapeutics
+A highly conserved cryptic epitope in the receptor-binding domains of SARS-CoV-2 and SARS-CoV
+SARS-CoV-2 invades host cells via a novel route: CD147-spike protein
+A Cryptic Site of Vulnerability on the Receptor Binding Domain of the SARS-CoV-2 Spike Glycoprotein
+Cross-reactive antibody response between SARS-CoV-2 and SARS-CoV infections
+Potential Neutralizing Antibodies Discovered for Novel Corona Virus Using Machine Learning
+Potent human neutralizing antibodies elicited by SARS-CoV-2 infection
+Potent human neutralizing antibodies elicited by SARS-CoV-2 infection
+Structural Basis for Potent Neutralization of Betacoronaviruses by Single-domain Camelid Antibodies
+SARS-CoV-2 proteome microarray for mapping COVID-19 antibody interactions at amino acid resolution
+SARS-CoV-2 proteome microarray for mapping COVID-19 antibody interactions at amino acid resolution
+SARS-CoV-2 proteome microarray for mapping COVID-19 antibody interactions at amino acid resolution
+Fully human single-domain antibodies against SARS-CoV-2
+Potent neutralizing antibodies in the sera of convalescent COVID-19 patients are directed against conserved linear epitopes on the SARS-CoV-2 spike protein
+SARS-CoV-2 neutralizing serum antibodies in cats: a serological investigation
+Structural and functional analysis of a potent sarbecovirus neutralizing antibody
+Structural and functional analysis of a potent sarbecovirus neutralizing antibody
+Structural and functional analysis of a potent sarbecovirus neutralizing antibody
+Immunoglobulin fragment F(ab')2 against RBD potently neutralizes SARS-CoV-2 in vitro
+3D Models of glycosylated SARS-CoV-2 spike protein suggest challenges and opportunities for vaccine development
+Analysis of the SARS-CoV-2 spike protein glycan shield: implications for immune recognition
+Robust neutralization assay based on SARS-CoV-2 S-bearing vesicular stomatitis virus (VSV) pseudovirus and ACE2-overexpressed BHK21 cells
+Robust neutralization assay based on SARS-CoV-2 S-bearing vesicular stomatitis virus (VSV) pseudovirus and ACE2-overexpressed BHK21 cells
+Rapid in silico design of antibodies targeting SARS-CoV-2 using machine learning and supercomputing
+On the interactions of the receptor-binding domain of SARS-CoV-1 and SARS-CoV-2 spike proteins with monoclonal antibodies and the receptor ACE2
+De novo design of high-affinity antibody variable regions (scFv) against the SARS-CoV-2 spike protein
+De novo design of high-affinity antibody variable regions (Fv) against the SARS-CoV-2 spike protein
+Structural interactions between pandemic SARS-CoV-2 spike glycoprotein and human Furin protease
+The SARS-CoV-2 receptor-binding domain elicits a potent neutralizing response without antibody-dependent enhancement
+Immuno-informatics Characterization SARS-CoV-2 Spike Glycoprotein for Prioritization of Epitope based Multivalent Peptide Vaccine
+Genome based Evolutionary study of SARS-CoV-2 towards the Prediction of Epitope Based Chimeric Vaccine
+Humanized Single Domain Antibodies Neutralize SARS-CoV-2 by Targeting Spike Receptor Binding Domain
+Synthetic nanobodies targeting the SARS-CoV-2 receptor-binding domain
+Sybodies targeting the SARS-CoV-2 receptor-binding domain
+Protein structure analysis of the interactions between SARS-CoV-2 spike protein and the human ACE2 receptor: from conformational changes to novel neutralizing antibodies.
+Blocking antibodies against SARS-CoV-2 RBD isolated from a phage display antibody library using a competitive biopanning strategy
+Protocol and reagents for pseudotyping lentiviral particles with SARS-CoV-2 Spike protein for neutralization assays
+Cross-reactive neutralization of SARS-CoV-2 by serum antibodies from recovered SARS patients and immunized animals
+Elucidating the differences in the molecular mechanism of receptor binding between 2019-nCoV and the SARS-CoV viruses using computational tools
+Mapping the Immunodominance Landscape of SARS-CoV-2 Spike Protein for the Design of Vaccines against COVID-19
+Mapping the Immunodominance Landscape of SARS-CoV-2 Spike Protein for the Design of Vaccines against COVID-19
+ACE2 Homo-dimerization, Human Genomic variants and Interaction of Host Proteins Explain High Population Specific Differences in Outcomes of COVID19
+ACE2 Homo-dimerization, Human Genomic variants and Interaction of Host Proteins Explain High Population Specific Differences in Outcomes of COVID19
+ACE2 Homo-dimerization, Human Genomic variants and Interaction of Host Proteins Explain High Population Specific Differences in Outcomes of COVID19
+ACE2 Homo-dimerization, Human Genomic variants and Interaction of Host Proteins Explain High Population Specific Differences in Outcomes of COVID19
+Rapid adaptation of SARS-CoV-2 in BALB/c mice: Novel mouse model for vaccine efficacy
+Structural and Functional Implications of Non-synonymous Mutations in the Spike protein of 2,954 SARS-CoV-2 Genomes
+Structural and Functional Implications of Spike Protein Mutational Landscape in SARS-CoV-2
+Mutational landscape and in silico structure models of SARS-CoV-2 Spike Receptor Binding Domain reveal key molecular determinants for virus-host interaction
+Isolating multiple formats of human monoclonal neutralizing antibodies against SARS-CoV-2 by in vitro site-directed antibody screening
+Neutralizing Antibodies Isolated by a site-directed Screening have Potent Protection on SARS-CoV-2 Infection
+Computational methods to develop potential neutralizing antibody Fab region against SARS-CoV-2 as therapeutic and diagnostic tool
+Neutralization of SARS-CoV-2 by destruction of the prefusion Spike
+Development of a COVID-19 vaccine based on the receptor binding domain displayed on virus-like particles
+Development of a COVID-19 vaccine based on the receptor binding domain displayed on virus-like particles
+Development of a vaccine against the newly emerging COVID-19 virus based on the receptor binding domain displayed on virus-like particles
+A potent neutralizing human antibody reveals the N-terminal domain of the Spike protein of SARS-CoV-2 as a site of vulnerability
+Identification of neutralizing human monoclonal antibodies from Italian Covid-19 convalescent patients
+Identification of neutralizing human monoclonal antibodies from Italian Covid-19 convalescent patients
+Clinical performance of SARS-CoV-2 IgG antibody tests and potential protective immunity
+Rapid isolation of potent SARS-CoV-2 neutralizing antibodies and protection in a small animal model
+Rapid isolation of potent SARS-CoV-2 neutralizing antibodies and protection in a small animal model
+Characterization of neutralizing antibodies from a SARS-CoV-2 infected individual
+Potent neutralizing antibodies from COVID-19 patients define multiple targets of vulnerability
+Rapid isolation and profiling of a diverse panel of human monoclonal antibodies targeting the SARS-CoV-2 spike protein
+Antibody repertoire induced by SARS-CoV-2 spike protein immunogens
+CoV3D: A database of high resolution coronavirus protein structures
+CoV3D: A database of high resolution coronavirus protein structures
+CoV3D: A database and resource for high resolution coronavirus protein structures
+A rapid, point of care red blood cell agglutination assay for detecting antibodies against SARS-CoV-2
+Potent neutralization of SARS-CoV-2 in vitro and in an animal model by a human monoclonal antibody
+Rapid selection of a human monoclonal antibody that potently neutralizes SARS-CoV-2 in two animal models
+Convergent Antibody Responses to SARS-CoV-2 Infection in Convalescent Individuals
+Convergent Antibody Responses to SARS-CoV-2 Infection in Convalescent Individuals
+IgA MAb blocks SARS-CoV-2 Spike-ACE2 interaction providing mucosal immunity
+CoV-AbDab: the Coronavirus Antibody Database
+Pre-existing and de novo humoral immunity to SARS-CoV-2 in humans
+Pre-existing and de novo humoral immunity to SARS-CoV-2 in humans
+Broad sarbecovirus neutralizing antibodies define a key site of vulnerability on the SARS-CoV-2 spike protein
+Broad sarbecovirus neutralizing antibodies define a key site of vulnerability on the SARS-CoV-2 spike protein
+A single dose SARS-CoV-2 simulating particle vaccine induces potent neutralizing activities
+Yeast-Expressed SARS-CoV Recombinant Receptor-Binding Domain (RBD219-N1) Formulated with Alum Induces Protective Immunity and Reduces Immune Enhancement
+Yeast-Expressed SARS-CoV Recombinant Receptor-Binding Domain (RBD219-N1) Formulated with Alum Induces Protective Immunity and Reduces Immune Enhancement
+Yeast-Expressed SARS-CoV Recombinant Receptor-Binding Domain (RBD219-N1) Formulated with Aluminum Hydroxide Induces Protective Immunity and Reduces Immune Enhancement
+Longitudinal high-throughput TCR repertoire profiling reveals the dynamics of T cell memory formation after mild COVID-19 infection
+Longitudinal high-throughput TCR repertoire profiling reveals the dynamics of T cell memory formation after mild COVID-19 infection
+Longitudinal high-throughput TCR repertoire profiling reveals the dynamics of T cell memory formation after mild COVID-19 infection
+Afucosylated immunoglobulin G responses are a hallmark of enveloped virus infections and show an exacerbated phenotype in COVID-19
+Neutralizing antibody and soluble ACE2 inhibition of a replication-competent VSV-SARS-CoV-2 and a clinical isolate of SARS-CoV-2.
+Isolation of and Characterization of Neutralizing Antibodies to Covid-19 from a Large Human Naïve scFv Phage Display Library
+High Throughput Designing and Mutational Mapping of RBD-ACE2 Interface Guide Non-Conventional Therapeutic Strategies for COVID-19
+Human IgG cell neutralizing monoclonal antibodies block SARS-CoV-2 infection
+Human IgG cell neutralizing monoclonal antibodies block SARS-CoV-2 infection
+Human IgG neutralizing monoclonal antibodies block SARS-CoV-2 infection
+Tiger team: a panel of human neutralizing mAbs targeting SARS-CoV-2 spike at multiple epitopes
+Tiger team: a panel of human neutralizing mAbs targeting SARS-CoV-2 spike at multiple epitopes
+Clinical And Analytical Performance Of An Automated Serological Test That Identifies S1/S2 Neutralizing IgG In Covid-19 Patients Semiquantitatively.
+Immunization with the receptor-binding domain of SARS-CoV-2 elicits antibodies cross-neutralizing SARS-CoV-2 and SARS-CoV without antibody-dependent enhancement
+Potently neutralizing human antibodies that block SARS-CoV-2 receptor binding and protect animals
+Development and validation of IMMUNO-COV: a high-throughput clinical assay for detecting antibodies that neutralize SARS-CoV-2
+SARS-CoV-2 genomics beyond the consensus sequence: evidence for circulating mixed viral populations
+Shared SARS-CoV-2 diversity suggests localised transmission of minority variants
+Shared SARS-CoV-2 diversity suggests localised transmission of minority variants
+Within-host genomics of SARS-CoV-2
+Single-dose replicating RNA vaccine induces neutralizing antibodies against SARS-CoV-2 in nonhuman primates
+"Monoclonal-type" plastic antibodies for SARS-CoV-2 based on Molecularly Imprinted Polymers
+Structures of human antibodies bound to SARS-CoV-2 spike reveal common epitopes and recurrent features of antibodies
+Expansion of SARS-CoV-2-specific Antibody-secreting Cells and Generation of Neutralizing Antibodies in Hospitalized COVID-19 Patients
+Expansion of SARS-CoV-2-specific Antibody-secreting Cells and Generation of Neutralizing Antibodies in Hospitalized COVID-19 Patients
+Pathogenesis, transmission and response to re-exposure of SARS-CoV-2 in domestic cats
+Structural basis for neutralization of SARS-CoV-2 and SARS-CoV by a potent therapeutic antibody
+Structural basis for neutralization of SARS-CoV-2 and SARS-CoV by a potent therapeutic antibody
+An alpaca nanobody neutralizes SARS-CoV-2 by blocking receptor interaction
+An alpaca nanobody neutralizes SARS-CoV-2 by blocking receptor interaction
+Optimized pseudotyping conditions for the SARS-COV2 Spike glycoprotein
+Naturally occurring SARS-CoV-2 gene deletions close to the spike S1/S2 cleavage site in the viral quasispecies of COVID19 patients
+Naturally occurring SARS-CoV-2 gene deletions close to the spike S1/S2 cleavage site in the viral quasispecies of COVID19 patients
+Neuropilin-1 is a host factor for SARS-CoV-2 infection
+A novel in-cell ELISA assay allows rapid and automated quantification of SARS-CoV-2 to analyse neutralizing antibodies and antiviral compounds
+SARS-CoV-2 neutralizing human recombinant antibodies selected from pre-pandemic healthy donors binding at RBD-ACE2 interface
+SARS-CoV-2 neutralizing human recombinant antibodies selected from pre-pandemic healthy donors binding at RBD-ACE2 interface
+Synthetic Antibodies neutralize SARS-CoV-2 infection of mammalian cells
+Synthetic antibodies neutralize SARS-CoV-2 infection of mammalian cells
+Cross-neutralization antibodies against SARS-CoV-2 and RBD mutations from convalescent patient antibody libraries
+Broad and strong memory CD4+ and CD8+ T cells induced by SARS-CoV-2 in UK convalescent COVID-19 patients.
+Cross-sectional evaluation of humoral responses against SARS-CoV-2 Spike
+Cross-sectional evaluation of humoral responses against SARS-CoV-2 Spike
+Cross-sectional evaluation of humoral responses against SARS-CoV-2 Spike
+Relationship between Anti-Spike Protein Antibody Titers and SARS-CoV-2 In Vitro Virus Neutralization in Convalescent Plasma
+Measuring SARS-CoV-2 neutralizing antibody activity using pseudotyped and chimeric viruses
+Structural basis of a public antibody response to SARS-CoV-2
+Insight into vaccine development for Alpha-coronaviruses based on structural and immunological analyses of spike proteins
+Fast isolation of sub-nanomolar affinity alpaca nanobody against the Spike RBD of SARS-CoV-2 by combining bacterial display and a simple single-step density gradient selection
+Potent neutralization of clinical isolates of SARS-CoV-2 D614 and G614 variants by a monomeric, sub-nanomolar affinity Nanobody.
+Potent synthetic nanobodies against SARS-CoV-2 and molecular basis for neutralization
+A potent synthetic nanobody targets RBD and protects mice from SARS-CoV-2 infection
+The Distal Polybasic Cleavage Sites of SARS-CoV-2 Spike Protein Enhance Spike Protein-ACE2 Binding
+Shielding and Beyond: The Roles of Glycans in SARS-CoV-2 Spike Protein
+Beyond Shielding: The Roles of Glycans in SARS-CoV-2 Spike Protein
+SARS-CoV-2 mRNA Vaccine Development Enabled by Prototype Pathogen Preparedness
+Structural basis for potent neutralization of SARS-CoV-2 and role of antibody affinity maturation
+Longitudinal isolation of potent near-germline SARS-CoV-2-neutralizing antibodies from COVID-19 patients
+Validation and performance of a quantitative IgG assay for the screening of SARS-CoV-2 antibodies
+Validation and performance of a quantitative IgG assay for the screening of SARS-CoV-2 antibodies
+Structural basis for the neutralization of SARS-CoV-2 by an antibody from a convalescent patient
+SARS-CoV-2 Neutralizing Antibody Responses Are More Robust in Patients with Severe Disease
+A novel biparatopic antibody-ACE2 fusion that blocks SARS-CoV-2 infection: implications for therapy
+Interfacial Water Molecules Make RBD of SPIKE Protein and Human ACE2 to Stick Together
+Deep mutational scanning of SARS-CoV-2 receptor binding domain reveals constraints on folding and ACE2 binding
+High-Accuracy Multiplexed SARS-CoV-2 Antibody Assay with Avidity and Saliva Capability on a Nano-Plasmonic Platform
+Potent Neutralizing Monoclonal Antibodies Directed to Multiple Epitopes on the SARS-CoV-2 Spike
+Potent Neutralizing Antibodies Directed to Multiple Epitopes on SARS-CoV-2 Spike
+Cryo-EM structure of the SARS-CoV-2 3a ion channel in lipid nanodiscs
+Cryo-EM structure of the SARS-CoV-2 3a ion channel in lipid nanodiscs
+Cryo-EM structure of the SARS-CoV-2 3a ion channel in lipid nanodiscs
+A single dose of recombinant VSV-{triangleup}G-spike vaccine provides protection against SARS-CoV-2 challenge
+Disruption of Adaptive Immunity Enhances Disease in SARS-CoV-2 Infected Syrian Hamsters
+Private Antibody Repertoires Are Public
+SARS-CoV-2 assays to detect functional antibody responses that block ACE2 recognition in vaccinated animals and infected patients
+SARS-CoV-2 growth, furin-cleavage-site adaptation and neutralization using serum from acutely infected, hospitalized COVID-19 patients
+SARS-CoV-2 growth, furin-cleavage-site adaptation and neutralization using serum from acutely infected, hospitalized COVID-19 patients
+Endemic human coronaviruses induce distinct antibody repertoires in adults and children
+Distinct antibody repertoires against endemic human coronaviruses in children and adults
+Companion vaccine Bioinformatic design tool reveals limited functional genomic variability of SARS-Cov-2 Spike Receptor Binding Domain
+Design of a Companion Bioinformatic Tool to detect the emergence and geographical distribution of SARS-CoV-2 Spike protein genetic variants
+Selection, biophysical and structural analysis of synthetic nanobodies that effectively neutralize SARS-CoV-2
+A nanoluciferase SARS-CoV-2 for rapid neutralization testing and screening of anti-infective drugs for COVID-19
+Green tea and Spirulina extracts inhibit SARS, MERS, and SARS-2 spike pseudotyped virus entry in vitro
+Glycans on the SARS-CoV-2 Spike Control the Receptor Binding Domain Conformation
+Glycans on the SARS-CoV-2 Spike Control the Receptor Binding Domain Conformation
+Virus-Receptor Interactions of Glycosylated SARS-CoV-2 Spike and Human ACE2 Receptor
+Virus-Receptor Interactions of Glycosylated SARS-CoV-2 Spike and Human ACE2 Receptor
+Modified Vaccinia Ankara Based SARS-CoV-2 Vaccine Expressing Full-Length Spike Induces Strong Neutralizing Antibody Response
+Critical Sequence Hot-spots for Binding of nCOV-2019 to ACE2 as Evaluated by Molecular Simulations
+Stereotypic Neutralizing VH Clonotypes Against SARS-CoV-2 RBD in COVID-19 Patients and the Healthy Population
+Stereotypic Neutralizing VH Clonotypes Against SARS-CoV-2 RBD in COVID-19 Patients and the Healthy Population
+A Targeted Vaccine against COVID-19: S1-Fc Vaccine Targeting the Antigen-Presenting Cell Compartment Elicits Protection against SARS-CoV-2 Infection
+A glycan cluster on the SARS-CoV-2 spike ectodomain is recognized by Fab-dimerized glycan-reactive antibodies
+Using iCn3D and the World Wide Web for structure-based collaborative research: Analyzing molecular interactions at the root of COVID-19
+Using iCn3D and the World Wide Web for structure-based collaborative research: Analyzing molecular interactions at the root of COVID-19
+Association between neutralizing antibodies to SARS-CoV-2 and commercial serological assays
+Development of a Synthetic Poxvirus-Based SARS-CoV-2 Vaccine
+Map of SARS-CoV-2 spike epitopes not shielded by glycans.
+A pH-dependent switch mediates conformational masking of SARS-CoV-2 spike
+Cryo-EM Structures Delineate a pH-Dependent Switch that Mediates Endosomal Positioning of SARS-CoV-2 Spike Receptor-Binding Domains
+SARS-CoV-2 Spike protein variant D614G increases infectivity and retains sensitivity to antibodies that target the receptor binding domain
+Structural and Functional Analysis of the D614G SARS-CoV-2 Spike Protein Variant
+A rapidly adaptable biomaterial vaccine for SARS-CoV-2
+Dual nature of human ACE2 glycosylation in binding to SARS-CoV-2 spike
+Replication-competent vesicular stomatitis virus vaccine vector protects against SARS-CoV-2-mediated pathogenesis
+Structures of potent and convergent neutralizing antibodies bound to the SARS-CoV-2 spike unveil a unique epitope responsible for exceptional potency
+Human B cell clonal expansion and convergent antibody responses to SARS-CoV-2
+Decline of humoral responses against SARS-CoV-2 Spike in convalescent individuals
+A simple protein-based SARS-CoV-2 surrogate neutralization assay
+A simple protein-based surrogate neutralization assay for SARS-CoV-2
+A Highly Immunogenic Measles Virus-based Th1-biased COVID-19 Vaccine
+The antibody response to the glycan α-Gal correlates with COVID-19 disease symptoms
+Bivalent binding of a fully human IgG to the SARS-CoV-2 spike proteins reveals mechanisms of potent neutralization
+Longitudinal analysis of the humoral response to SARS-CoV-2 spike RBD in convalescent plasma donors
+De novo design of modular and tunable allosteric biosensors
+S protein-reactive IgG and memory B cell production after human SARS-CoV-2 infection includes broad reactivity to the S2 subunit
+Evaluation of a novel multiplexed assay for determining IgG levels and functional activity to SARS-CoV-2.
+Intranasal Immunization with a Lentiviral Vector Coding for SARS-CoV-2 Spike Protein Confers Vigorous Protection in Pre-Clinical Animal Models
+Intranasal Vaccination with a Lentiviral Vector Strongly Protects against SARS-CoV-2 in Mouse and Golden Hamster Preclinical Models
+Escape from neutralizing antibodies by SARS-CoV-2 spike protein variants
+Virus-free and live-cell visualizing SARS-CoV-2 cell entry for studies of neutralizing antibodies and compound inhibitors
+SARS-CoV-2-induced humoral immunity through B cell epitope analysis and neutralizing activity in COVID-19 infected individuals in Japan
+Rapid in vitro assays for screening neutralizing antibodies and antivirals against SARS-CoV-2
+Single-dose intranasal vaccination elicits systemic and mucosal immunity against SARS-CoV-2
+The answer lies in the energy: how simple atomistic molecular dynamics simulations may hold the key to epitope prediction on the fully glycosylated SARS-CoV-2 spike protein
+High Affinity Nanobodies Block SARS-CoV-2 Spike Receptor Binding Domain Interaction with Human Angiotensin Converting Enzyme
+High Affinity Nanobodies Block SARS-CoV-2 Spike Receptor Binding Domain Interaction with Human Angiotensin Converting Enzyme
+High Affinity Nanobodies Block SARS-CoV-2 Spike Receptor Binding Domain Interaction with Human Angiotensin Converting Enzyme
+High neutralizing potency of swine glyco-humanized polyclonal antibodies against SARS-CoV-2
+High neutralizing potency of swine glyco-humanized polyclonal antibodies against SARS-CoV-2
+High neutralizing potency of swine glyco-humanized polyclonal antibodies against SARS-CoV-2
+CoVaccine HT™ adjuvant potentiates robust immune responses to recombinant SARS-CoV-2 Spike S1 immunisation
+The SARS-CoV-2 Spike Variant D614G Favors an Open Conformational State
+Newcastle disease virus (NDV) expressing the spike protein of SARS-CoV-2 as vaccine candidate
+Newcastle disease virus (NDV) expressing the spike protein of SARS-CoV-2 as vaccine candidate
+Epitope-resolved profiling of the SARS-CoV-2 antibody response identifies cross-reactivity with an endemic human CoV
+An antibody-dependent enhancement (ADE) activity eliminated neutralizing antibody with potent prophylactic and therapeutic efficacy against SARS-CoV-2 in rhesus monkeys
+An alternative binding mode of IGHV3-53 antibodies to the SARS-CoV-2 receptor binding domain
+Antibodies that potently inhibit or enhance SARS-CoV-2 spike protein-ACE2 interaction isolated from synthetic single-chain antibody libraries
+Intradermal-delivered DNA vaccine provides anamnestic protection in a rhesus macaque SARS-CoV-2 challenge model
+A Next Generation Bivalent Human Ad5 COVID-19 Vaccine Delivering Both Spike and Nucleocapsid Antigens Elicits Th1 Dominant CD4+, CD8+ T-cell and Neutralizing Antibody Responses
+Cross-reactivity of SARS-CoV structural protein antibodies against SARS-CoV-2
+Study on β-Chitosan against the binding of SARS-CoV-2S-RBD/ACE2
+Study on β-Chitosan against the binding of SARS-CoV-2S-RBD/ACE2
+Effect of β-chitosan on the binding interaction between SARS-CoV-2 S-RBD and ACE2
+SARS-CoV-2 protein subunit vaccination elicits potent neutralizing antibody responses
+Engineered ACE2 receptor traps potently neutralize SARS-CoV-2
+Engineered ACE2 receptor traps potently neutralize SARS-CoV-2
+Engineered ACE2 receptor traps potently neutralize SARS-CoV-2
+Purification of recombinant SARS-CoV-2 spike, its receptor binding domain, and CR3022 mAb for serological assay
+REGN-COV2 antibody cocktail prevents and treats SARS-CoV-2 infection in rhesus macaques and hamsters
+Cross-neutralization of a SARS-CoV-2 antibody to a functionally conserved site is mediated by avidity
+De novo design of picomolar SARS-CoV-2 miniprotein inhibitors
+Binding Ligands that Straddle an Important Contact Site on the RBD of the Covid-19 Spike Protein
+A valid protective immune response elicited in rhesus macaques by an inactivated vaccine is capable of defending against SARS-CoV-2 infection
+Structural analysis of full-length SARS-CoV-2 spike protein from an advanced vaccine candidate
+Peptide Antidotes to SARS-CoV-2 (COVID-19)
+Peptide Antidotes to SARS-CoV-2 (COVID-19)
+Ig-VAE: Generative Modeling of Immunoglobulin Proteins by Direct 3D Coordinate Generation
+A potent neutralizing nanobody against SARS-CoV-2 with inhaled delivery potential
+A potent neutralizing nanobody against SARS-CoV-2 with inhaled delivery potential
+Comparative analyses of SARS-CoV-2 binding (IgG, IgM, IgA) and neutralizing antibodies from human serum samples
+An ultra-high affinity synthetic nanobody blocks SARS-CoV-2 infection by locking Spike into an inactive conformation
+An ultra-potent synthetic nanobody neutralizes SARS-CoV-2 by locking Spike into an inactive conformation
+Development of CpG-adjuvanted stable prefusion SARS-CoV-2 spike antigen as a subunit vaccine against COVID-19
+A 3.4-A cryo-EM structure of the human coronavirus spike trimer computationally derived from vitrified NL63 virus particles
+Rapid endothelialitis and vascular inflammation characterise SARS-CoV-2 infection in a human lung-on-chip model
+Rapid endothelial infection, endothelialitis and vascular damage characterise SARS-CoV-2 infection in a human lung-on-chip model
+Elicitation of potent neutralizing antibody responses by designed protein nanoparticle vaccines for SARS-CoV-2
+Efficacy of Targeting SARS-CoV-2 by CAR-NK Cells
+Attenuated influenza virions expressing the SARS- CoV-2 receptor-binding domain induce neutralizing antibodies in mice
+Attenuated influenza virions expressing the SARS- CoV-2 receptor-binding domain induce neutralizing antibodies in mice
+The SARS-CoV-2 Spike harbours a lipid binding pocket which modulates stability of the prefusion trimer
+SARS-CoV-2 manipulates the SR-B1-mediated HDL uptake pathway for its entry
+Designed Variants of Recombinant ACE2-Fc that Decouple Anti-SARS-CoV-2 Activities from Unwanted Cardiovascular Effects
+Designed Variants of Recombinant ACE2-Fc that Decouple Anti-SARS-CoV-2 Activities from Unwanted Cardiovascular Effects
+Tissue-resident memory CD8 T-cell responses elicited by a single injection of a multi-target COVID-19 vaccine
+Design of a highly thermotolerant, immunogenic SARS-CoV-2 spike fragment
+Design of a highly thermotolerant, immunogenic SARS-CoV-2 spike fragment
+A SARS-CoV-2 neutralizing antibody protects from lung pathology in a COVID-19 hamster model
+High titers of multiple antibody isotypes against the SARS-CoV-2 spike receptor-binding domain and nucleoprotein associate with better neutralization.
+Potent neutralizing equine antibodies raised against recombinant SARS-CoV-2 spike protein for COVID-19 passive immunization therapy
+A Lymph Node Targeted Amphiphile Vaccine Induces Potent Cellular and Humoral Immunity to SARS-CoV-2
+IFITM proteins promote SARS-CoV-2 infection in human lung cells
+IFITM proteins promote SARS-CoV-2 infection and are targets for virus inhibition
+Development of a high-throughput homogeneous AlphaLISA drug screening assay for the detection of SARS-CoV-2 Nucleocapsid
+A rapid and efficient screening system for neutralizing antibodies and its application for the discovery of potent neutralizing antibodies to SARS-CoV-2 S-RBD
+A rapid and efficient screening system for neutralizing antibodies and its application for the discovery of potent neutralizing antibodies to SARS-CoV-2 S-RBD
+Characterization of cells susceptible to SARS-COV-2 and methods for detection of neutralizing antibody by focus forming assay
+COVID-19 and Cholinergic Anti-inflammatory Pathway: In silico Identification of an Interaction between alpha7 Nicotinic Acetylcholine Receptor and the Cryptic Epitopes of SARS-CoV and SARS-CoV-2 Spike Glycoproteins
+Limited window for donation of convalescent plasma with high live-virus neutralizing antibodies for COVID-19 immunotherapy
+Recombinant SARS-CoV-2 RBD molecule with a T helper epitope as a built in adjuvant induces strong neutralization antibody response
+Recombinant SARS-CoV-2 RBD molecule with a T helper epitope as a built in adjuvant induces strong neutralization antibody response
+The receptor binding domain of SARS-CoV-2 spike is the key target of neutralizing antibody in human polyclonal sera.
+Evaluation of SARS-CoV-2 neutralizing antibodies using a vesicular stomatitis virus possessing SARS-CoV-2 spike protein
+Pathogenicity, immunogenicity, and protective ability of an attenuated SARS-CoV-2 variant with a deletion at the S1/S2 junction of the spike protein
+Versatile, Multivalent Nanobody Cocktails for Highly Efficient SARS-CoV-2 Neutralization
+Versatile, Multivalent Nanobody Cocktails Efficiently Neutralize SARS-CoV-2
+Versatile, Multivalent Nanobody Cocktails Efficiently Neutralize SARS-CoV-2
+The influence of major S protein mutations of SARS-CoV-2 on the potential B cell epitopes
+Multi-species ELISA for the detection of antibodies against SARS-CoV-2 in animals
+Furin Cleavage Site Is Key to SARS-CoV-2 Pathogenesis
+The immunodominant and neutralization linear epitopes for SARS-CoV-2
+Immune response to vaccine candidates based on different types of nanoscaffolded RBD domain of the SARS-CoV-2 spike protein
+A single immunization with spike-functionalized ferritin vaccines elicits neutralizing antibody responses against SARS-CoV-2 in mice
+Plasmablast-derived antibody response to acute SARS-CoV-2 infection in humans
+Plasmablast-derived antibody response to acute SARS-CoV-2 infection in humans
+Establishment of murine hybridoma cells producing antibodies against spike protein of SARS-CoV-2
+Structural classification of neutralizing antibodies against the SARS-CoV-2 spike receptor-binding domain suggests vaccine and therapeutic strategies
+A COVID-19 vaccine candidate using SpyCatcher multimerization of the SARS-CoV-2 spike protein receptor-binding domain induces potent neutralising antibody responses
+Characterization of neutralizing versus binding antibodies and memory B cells in COVID-19 recovered individuals from India
+Prime-boost protein subunit vaccines against SARS-CoV-2 are highly immunogenic in mice and macaques
+Spike mutation D614G alters SARS-CoV-2 fitness and neutralization susceptibility
+Development of SARS-CoV-2 Nucleocapsid Specific Monoclonal Antibodies
+Boosting the analysis of protein interfaces with Multiple Interface String Alignment: illustration on the spikes of coronaviruses
+Monoclonal Antibodies Capable of Binding SARS-CoV-2 Spike Protein Receptor Binding Motif Specifically Prevent GM-CSF Induction.
+Enhanced SARS-CoV-2 Neutralization by Secretory IgA in vitro
+Evaluation of Safety and Immunogenicity of an Adjuvanted, TH-1 Skewed, Whole Virion Inactivated SARS-CoV-2 Vaccine - BBV152
+Evaluation of Safety and Immunogenicity of an Adjuvanted, TH-1 Skewed, Whole Virion Inactivated SARS-CoV-2 Vaccine - BBV152
+Complete mapping of mutations to the SARS-CoV-2 spike receptor-binding domain that escape antibody recognition
+Complete mapping of mutations to the SARS-CoV-2 spike receptor-binding domain that escape antibody recognition
+Real-time conformational dynamics of SARS-CoV-2 spikes on virus particles
+Real-time conformational dynamics of SARS-CoV-2 spikes on virus particles
+A key linear epitope for a potent neutralizing antibody to SARS-CoV-2 S-RBD
+A COVID-19 antibody curbs SARS-CoV-2 nucleocapsid protein-induced complement hyper-activation
+Single-cell RNA sequencing of Tocilizumab-treated peripheral blood mononuclear cells as an in vitro model of inflammation
+Single-cell RNA sequencing of Tocilizumab-treated peripheral blood mononuclear cells as an in vitro model of inflammation
+SARS-CoV-2 infection severity is linked to superior humoral immunity against the spike
+Self-assembling nanoparticles presenting receptor binding domain and stabilized spike as next-generation COVID-19 vaccines
+Single-component, self-assembling, protein nanoparticles presenting the receptor binding domain and stabilized spike as SARS-CoV-2 vaccine candidates
+High affinity modified ACE2 receptors prevent SARS-CoV-2 infection
+High affinity modified ACE2 receptors protect from SARS-CoV-2 infection in hamsters
+The flexibility of ACE2 in the context of SARS-CoV-2 infection
+Characterisation of protease activity during SARS-CoV-2 infection identifies novel viral cleavage sites and cellular targets for drug repurposing
+Characterisation of protease activity during SARS-CoV-2 infection identifies novel viral cleavage sites and cellular targets for drug repurposing
+Characterisation of protease activity during SARS-CoV-2 infection identifies novel viral cleavage sites and cellular targets with therapeutic potential
+Efficient production of Moloney murine leukemia virus-like particles pseudotyped with the severe acute respiratory syndrome coronavirus-2 (SARS-CoV-2) spike protein
+Distinct SARS-CoV-2 Antibody Reactivity Patterns in Coronavirus Convalescent Plasma Revealed by a Coronavirus Antigen Microarray
+Distinct SARS-CoV-2 Antibody Reactivity Patterns in Coronavirus Convalescent Plasma Revealed by a Coronavirus Antigen Microarray
+A soluble ACE2 microbody protein fused to a single immunoglobulin Fc domain is a potent inhibitor of SARS-CoV-2 infection in cell culture
+Structural and Functional Comparison of SARS-CoV-2-Spike Receptor Binding Domain Produced in Pichia pastoris and Mammalian Cells
+Introduction of two prolines and removal of the polybasic cleavage site leads to optimal efficacy of a recombinant spike based SARS-CoV-2 vaccine in the mouse model
+An immunodominance hierarchy exists in CD8+ T cell responses to HLA-A*02:01-restricted epitopes identified from the non-structural polyprotein 1a of SARS-CoV-2.
+Critical Interactions Between the SARS-CoV-2 Spike Glycoprotein and the Human ACE2 Receptor
+Critical Interactions Between the SARS-CoV-2 Spike Glycoprotein and the Human ACE2 Receptor
+Critical Interactions Between the SARS-CoV-2 Spike Glycoprotein and the Human ACE2 Receptor
+A natural mutation between SARS-CoV-2 and SARS-CoV determines neutralization by a cross-reactive antibody
+AI-guided discovery of the invariant host response to viral pandemics
+AI-guided discovery of the invariant host response to viral pandemics
+AI-guided discovery of the invariant host response to viral pandemics
+NeutrobodyPlex - Nanobodies to monitor a SARS-CoV-2 neutralizing immune response
+NeutrobodyPlex - Nanobodies to monitor a SARS-CoV-2 neutralizing immune response
+NeutrobodyPlex - Nanobodies to monitor a SARS-CoV-2 neutralizing immune response
+NeutrobodyPlex - Nanobodies to monitor a SARS-CoV-2 neutralizing immune response
+A proof of concept for neutralizing antibody-guided vaccine design against SARS-CoV-2
+A high-affinity RBD-targeting nanobody improves fusion partner's potency against SARS-CoV-2
+A potent SARS-CoV-2 neutralizing human monoclonal antibody that reduces viral burden and disease severity in Syrian hamsters
+A potent SARS-CoV-2 neutralizing human monoclonal antibody that reduces viral burden and disease severity in Syrian hamsters
+A Tethered Ligand Assay to Probe the SARS-CoV-2 ACE2 Interaction under Constant Force
+Exploring dynamics and network analysis of spike glycoprotein of SARS-COV-2
+Prime-boost vaccination of mice and Rhesus macaques with two novel adenovirus vectored COVID-19 vaccine candidates
+SARS-CoV-2 D614G Variant Exhibits Enhanced Replication ex vivo and Earlier Transmission in vivo
+Design, expression, purification and characterization of a YFP-tagged 2019-nCoV spike receptor-binding domain construct
+A human monoclonal antibody targeting a conserved pocket in the SARS-CoV-2 receptor-binding domain core
+A human monoclonal antibody targeting a conserved pocket in the SARS-CoV-2 receptor-binding domain core
+BANCOVID, the first D614G variant mRNA-based vaccine candidate against SARS-CoV-2 elicits neutralizing antibody and balanced cellular immune response
+LY-CoV555, a rapidly isolated potent neutralizing antibody, provides protection in a non-human primate model of SARS-CoV-2 infection
+LY-CoV555, a rapidly isolated potent neutralizing antibody, provides protection in a non-human primate model of SARS-CoV-2 infection
+LY-CoV555, a rapidly isolated potent neutralizing antibody, provides protection in a non-human primate model of SARS-CoV-2 infection
+Safe and effective two-in-one replicon-and-VLP minispike vaccine for COVID-19
+Autoproteolytic Products of the SARS-CoV-2 Nucleocapsid Protein are Primed for Antibody Evasion and Virus Proliferation
+Proteoforms of the SARS-CoV-2 nucleocapsid protein are primed to proliferate the virus and attenuate the antibody response
+Multi-Clonal Live SARS-CoV-2 In Vitro Neutralization by Antibodies Isolated from Severe COVID-19 Convalescent Donors
+Extremely potent human monoclonal antibodies from convalescent Covid-19 patients
+Production of ORF8 protein from SARS-CoV-2 using an inducible virus-mediated expression-system in suspension-cultured tobacco BY-2 cells
+Production of ORF8 protein from SARS-CoV-2 using an inducible virus-mediated expression system in suspension-cultured tobacco BY-2 cells
+CD8+ T cell responses in convalescent COVID-19 individuals target epitopes from the entireSARS-CoV-2 proteome and show kinetics of early differentiation
+SARS-CoV-2 Elicits Robust Adaptive Immune Responses Regardless of Disease Severity
+SARS-CoV-2 Elicits Robust Adaptive Immune Responses Regardless of Disease Severity
+Single-dose intranasal administration of AdCOVID elicits systemic and mucosal immunity against SARS-CoV-2 in mice
+The landscape of antibody binding to SARS-CoV-2
+The landscape of antibody binding in SARS-CoV-2 infection
+Structural basis for bivalent binding and inhibition of SARS-CoV-2 infection by human potent neutralizing antibodies
+Pilot production of SARS-CoV-2 related proteins in plants: a proof of concept for rapid repurposing of indoors farms into biomanufacturing facilities
+Rapid Development of Neutralizing and Diagnostic SARS-COV-2 Mouse Monoclonal Antibodies
+Therapeutic activity of an inhaled potent SARS-CoV-2 neutralizing human monoclonal antibody in hamsters
+Evidence of antigenic imprinting in sequential Sarbecovirus immunization
+Quantitative Assays Reveal Cell Fusion at Minimal Levels of SARS-CoV-2 Spike Protein and Fusion-from-Without
+Design of SARS-CoV-2 RBD mRNA Vaccine Using Novel Ionizable Lipids
+Ongoing Adaptive Evolution and Globalization of Sars-Cov-2
+Ongoing Global and Regional Adaptive Evolution of SARS-CoV-2
+Ongoing Global and Regional Adaptive Evolution of SARS-CoV-2
+Peptide vaccine candidate mimics the heterogeneity of natural SARS-CoV-2 immunity in convalescent humans and induces broad T cell responses in mice models
+Antibody Response to a Nucleocapsid Epitope as a Marker for COVID-19 Disease Severity
+Predicting COVID-19 Severity with a Specific Nucleocapsid Antibody plus Disease Risk Factor Score
+Predicting COVID-19 Severity with a Specific Nucleocapsid Antibody plus Disease Risk Factor Score
+Structure, Dynamics, Receptor Binding, and Antibody Binding of Fully-glycosylated Full-length SARS-CoV-2 Spike Protein in a Viral Membrane
+Development and pre-clinical characterization of two therapeutic equine formulations towards SARS-CoV-2 proteins for the potential treatment of COVID-19
+Isolation of cross-reactive monoclonal antibodies against divergent human coronaviruses that delineate a conserved and vulnerable site on the spike protein
+High-throughput detection of antibodies targeting the SARS-CoV-2 Spike in longitudinal convalescent plasma samples
+Preclinical study of DNA vaccines targeting SARS-CoV-2
+Immunogenicity of a new gorilla adenovirus vaccine candidate for COVID-19
+Small-Molecule In Vitro Inhibitors of the Coronavirus Spike - ACE2 Protein-Protein Interaction as Blockers of Viral Attachment and Entry for SARS-CoV-2
+mRNA based SARS-CoV-2 vaccine candidate CVnCoV induces high levels of virus neutralizing antibodies and mediates protection in rodents
+mRNA based SARS-CoV-2 vaccine candidate CVnCoV induces high levels of virus neutralizing antibodies and mediates protection in rodents
+Sterilizing Immunity against SARS-CoV-2 Infection in Mice by a Single-Shot and Modified Imidazoquinoline TLR7/8 Agonist-Adjuvanted Recombinant Spike Protein Vaccine
+Transferrin receptor is another receptor for SARS-CoV-2 entry
+The Fc-mediated effector functions of a potent SARS-CoV-2 neutralizing antibody, SC31, isolated from an early convalescent COVID-19 patient, are essential for the optimal therapeutic efficacy of the antibody
+Induced pulmonary comorbidities render CD-1 mice sensitive to SARS-CoV-2
+Induced pulmonary comorbidities render CD-1 mice sensitive to SARS-CoV-2
+Mice with Induced Pulmonary Comorbidities Display Severe Lung Inflammation and Mortality following Exposure to SARS-CoV-2
+Protective Effects of STI-2020 Antibody Delivered Post-Infection by the Intranasal or Intravenous Route in a Syrian Golden Hamster COVID-19 Model
+Epitope profiling reveals binding signatures of SARS-CoV-2 immune response and cross-reactivity with endemic HCoVs
+A cell-free antibody engineering platform rapidly generates SARS-CoV-2 neutralizing antibodies
+PRAK-03202: A triple antigen VLP vaccine candidate against SARS CoV-2
+Tetravalent SARS-CoV-2 Neutralizing Antibodies Show Enhanced Potency and Resistance to Escape Mutations
+Tetravalent SARS-CoV-2 Neutralizing Antibodies Show Enhanced Potency and Resistance to Escape Mutations
+Rapid development of SARS-CoV-2 receptor binding domain-conjugated nanoparticle vaccine candidate
+The ACE2-binding interface of SARS-CoV-2 Spike inherently deflects immune recognition
+Early immune response in mice immunized with a semi-split inactivated vaccine against SARS-CoV-2 containing S protein-free particles and subunit S protein
+Evolution of Antibody Immunity to SARS-CoV-2
+Evolution of Antibody Immunity to SARS-CoV-2
+SARS-CoV-2 RBD219-N1C1: A Yeast-Expressed SARS-CoV-2 Recombinant Receptor-Binding Domain Candidate Vaccine Stimulates Virus Neutralizing Antibodies and T-cell Immunity in Mice
+SARS-CoV-2 RBD219-N1C1: A Yeast-Expressed SARS-CoV-2 Recombinant Receptor-Binding Domain Candidate Vaccine Stimulates Virus Neutralizing Antibodies and T-cell Immunity in Mice
+The N-terminal domain of spike glycoprotein mediates SARS-CoV-2 infection by associating with L-SIGN and DC-SIGN
+Potent SARS-CoV-2 neutralizing antibodies selected from a human antibody library constructed decades ago
+Two-component spike nanoparticle vaccine protects macaques from SARS-CoV-2 infection
+Landscape analysis of escape variants identifies SARS-CoV-2 spike mutations that attenuate monoclonal and serum antibody neutralization
+Landscape analysis of escape variants identifies SARS-CoV-2 spike mutations that attenuate monoclonal and serum antibody neutralization
+Protective efficacy of a SARS-CoV-2 DNA Vaccine in wild-type and immunosuppressed Syrian hamsters
+Highly potent bispecific sybodies neutralize SARS-CoV-2
+Biparatopic sybody constructs neutralize SARS-CoV-2 variants of concern and mitigate emergence of drug resistance
+Rapid generation of potent antibodies by autonomous hypermutation in yeast
+ACE2-Targeting Monoclonal Antibody As A "Pan" Coronavirus Blocker In Vitro and In A Mouse Model
+ACE2-Targeting Monoclonal Antibody as Potent and Broad-Spectrum Coronavirus Blocker
+Molecular basis for a germline-biased neutralizing antibody response to SARS-CoV-2
+A Whole Virion Vaccine for COVID-19 Produced Via a Novel Inactivation Method:  Results from Animal Challenge Model Studies
+High resolution profiling of pathways of escape for SARS-CoV-2 spike-binding antibodies
+Trimeric SARS-CoV-2 Spike proteins produced from CHO-cells in bioreactors are high-quality antigens
+Intranasal Administration of ACIS KEPTIDE™ Prevents SARS-CoV2-Induced Acute Toxicity in K18-hACE2 Humanized Mouse Model of COVID-19: A Mechanistic Insight for the Prophylactic Role of KEPTIDE™ in COVID-19
+Mosaic RBD nanoparticles elicit neutralizing antibodies against SARS-CoV-2 and zoonotic coronaviruses
+Neutralization of SARS-CoV-2 and zoonotic coronavirus threats by mosaic nanoparticle vaccination
+Mosaic nanoparticles elicit cross-reactive immune responses to zoonotic coronaviruses in mice
+Maturation and persistence of the anti-SARS-CoV-2 memory B cell response.
+An Engineered Antibody with Broad Protective Efficacy in Murine Models of SARS and COVID-19
+The Development of a Novel Nanobody Therapeutic for SARS-CoV-2
+Generation and Characterization of recombinant SARS-CoV-2 expressing reporter genes
+Natural deletions in the SARS-CoV-2 spike glycoprotein drive antibody escape
+Recurrent deletions in the SARS-CoV-2 spike glycoprotein drive antibody escape
+Transmission and protection against re-infection in the ferret model with the SARS-CoV-2 USA-WA1/2020 reference isolate
+N439K variant in spike protein may alter the infection efficiency and antigenicity of SARS-CoV-2 based on molecular dynamics simulation
+A monoclonal antibody against staphylococcal enterotoxin B superantigen inhibits SARS-CoV-2 entry in vitro
+Double Lock of a Potent Human Monoclonal Antibody against SARS-CoV-2
+Effect of RBD mutation (Y453F) in spike glycoprotein of SARS-CoV-2 on neutralizing antibody affinity
+Recombinant Fc-fusion vaccine of RBD induced protection against SARS-CoV-2 in non-human primate and mice
+A Novel SARS-CoV-2 Multitope Protein/Peptide Vaccine Candidate is Highly Immunogenic and Prevents Lung Infection in an Adeno Associated Virus Human Angiotensin-Converting Enzyme 2 (AAV hACE2) Mouse Model
+A Novel SARS-CoV-2 Multitope Protein/Peptide Vaccine Candidate is Highly Immunogenic and Prevents Lung Infection in an AAV hACE2 Mouse Model and non-human primates
+Prospective mapping of viral mutations that escape antibodies used to treat COVID-19
+Designed proteins assemble antibodies into modular nanocages
+Shared B cell memory to coronaviruses and other pathogens varies in human age groups and tissues
+MTX-COVAB, a human-derived antibody with potent neutralizing activity against SARS-CoV-2 infection in vitro and in a hamster model of COVID-19
+A single intranasal or intramuscular immunization with chimpanzee adenovirus vectored SARS-CoV-2 vaccine protects against pneumonia in hamsters.
+A SARS-CoV-2 neutralizing antibody selected from COVID-19 patients by phage display is binding to the ACE2-RBD interface and is tolerant to known RBD mutations
+A SARS-CoV-2 neutralizing antibody selected from COVID-19 patients by phage display is binding to the ACE2-RBD interface and is tolerant to most known recently emerging RBD mutations
+Circulating ACE2-expressing Exosomes Block SARS-CoV-2 Virus Infection as an Innate Antiviral Mechanism
+Comparative analysis of antigen-specific anti-SARS-CoV-2 antibody isotypes in COVID-19 patients
+Elevated SARS-CoV-2 Antibodies Distinguish Severe Disease in Early COVID-19 Infection
+Distant Residues Modulate the Conformational Opening in SARS-CoV-2 Spike Protein
+Distant Residues Modulate Conformational Opening in SARS-CoV-2 Spike Protein
+Distant Residues Modulate Conformational Opening in SARS-CoV-2 Spike Protein
+Distant Residues Modulate Conformational Opening in SARS-CoV-2 Spike Protein
+Distant Residues Modulate Conformational Opening in SARS-CoV-2 Spike Protein
+Engineered receptor binding domain immunogens elicit pan-coronavirus neutralizing antibodies
+Engineered receptor binding domain immunogens elicit pan-sarbecovirus neutralizing antibodies
+Comprehensive analysis of T cell immunodominance and immunoprevalence of SARS-CoV-2 epitopes in COVID-19 cases
+Conformational diversity of CDR region during affinity maturation determines the affinity and stability of Sars-Cov-1 VHH-72 nanobody
+Single dose immunization with a COVID-19 DNA vaccine encoding a chimeric homodimeric protein targeting receptor binding domain (RBD) to antigen-presenting cells induces rapid, strong and long-lasting neutralizing IgG, Th1 dominated CD4+ T cells and strong CD8+ T cell responses in mice
+Cross-neutralization of SARS-CoV-2 by HIV-1 specific broadly neutralizing antibodies and polyclonal plasma
+BNT162b vaccines are immunogenic and protect non-human primates against SARS-CoV-2
+The Potential for SARS-CoV-2 to Evade Both Natural and Vaccine-induced Immunity
+Identification of four linear B-cell epitopes on the SARS-CoV-2 spike protein able to elicit neutralizing antibodies
+Potent SARS-CoV-2 binding and neutralization through maturation of iconic SARS-CoV-1 antibodies
+Molecular diversity analysis of the spike glycoprotein (S) gene from Hong Kong - China
+A human coronavirus evolves antigenically to escape antibody immunity
+An infectivity-enhancing site on the SARS-CoV-2 spike protein is targeted by COVID-19 patient antibodies
+Sterilizing immunity against SARS-CoV-2 in hamsters conferred by a novel recombinant subunit vaccine
+Cross-reactive coronavirus antibodies with diverse epitope specificities and extra-neutralization functions
+A recombinant protein SARS-CoV-2 candidate vaccine elicits high-titer neutralizing antibodies in macaques.
+Fatty Acid Synthase inhibition prevents palmitoylation of SARS-CoV2 SpikeProtein and improves survival of mice infected with murine hepatitis virus.
+In vitro measurements of protein-protein interactions show that antibody affinity governs the inhibition of SARS-CoV-2 spike/ACE2 binding in convalescent serum
+Prevalent, protective, and convergent IgG recognition of SARS-CoV-2 non-RBD spike epitopes in COVID-19 convalescent plasma
+Binding strength and hydrogen bond numbers between Covid-19 RBD and HVR of antibody
+Development of a novel hybrid alphavirus-SARS-CoV-2 particle for rapid in vitro screening and quantification of neutralization antibodies, antiviral drugs, and viral mutations
+Development of a novel hybrid alphavirus-SARS-CoV-2 particle for rapid in vitro screening and quantification of neutralization antibodies, viral variants, and antiviral drugs
+The SARS-CoV-2 S1 spike protein mutation N501Y alters the protein interactions with both hACE2 and human derived antibody: A Free energy of perturbation study
+The N501Y and K417N mutations in the spike protein of SARS-CoV-2 alter the interactions with both hACE2 and human derived antibody: A Free energy of perturbation study
+Single point mutations can potentially enhance infectivity of SARS-CoV-2 revealed by in silico affinity maturation and SPR assay
+Establishment of a well-characterized SARS-CoV-2 lentiviral pseudovirus neutralization assay using 293T cells with stable expression of ACE2 and TMPRSS2
+SARS-CoV-2 escape in vitro from a highly neutralizing COVID-19 convalescent plasma
+MHC-II constrains the natural neutralizing antibody response to the SARS-CoV-2 spike RBM in humans
+Structural basis for broad coronavirus neutralization
+Structural basis for broad coronavirus neutralization
+Landscapes and dynamic diversifications of B-cell receptor repertoires in COVID-19 patients
+Lentiviral vector-based SARS-CoV-2 pseudovirus enables analysis of neutralizing activity in COVID-19 convalescent plasma
+An Ultrasensitive Biosensor for Quantifying the Interaction of SARS-CoV-2 and Its Receptor ACE2 in Cells and in vitro
+Pharmacophore-based peptide biologics neutralize SARS-CoV-2 S1 and deter S1-ACE2 interaction in vitro
+Engineering, production and characterization of Spike and Nucleocapsid structural proteins of SARS-CoV-2 in Nicotiana benthamiana as vaccine candidates against COVID-19
+Process Development and Scale-up Optimization of the SARS-CoV-2 Receptor Binding Domain-Based Vaccine Candidate, RBD219-N1C1
+Lipid nanoparticle encapsulated nucleoside-modified mRNA vaccines elicit polyfunctional HIV-1 antibodies comparable to proteins in nonhuman primates
+MVA Vector Vaccines Inhibit SARS CoV-2 Replication in Upper and Lower Respiratory Tracts of Transgenic Mice and Prevent Lethal Disease
+The functions of SARS-CoV-2 neutralizing and infection-enhancing antibodies in vitro and in mice and nonhuman primates
+The functions of SARS-CoV-2 neutralizing and infection-enhancing antibodies in vitro and in mice and nonhuman primates
+Paired heavy and light chain signatures contribute to potent SARS-CoV-2 neutralization in public antibody responses
+Glycan reactive anti-HIV-1 antibodies bind the SARS-CoV-2 spike protein but do not block viral entry
+Comprehensive mapping of mutations to the SARS-CoV-2 receptor-binding domain that affect recognition by polyclonal human serum antibodies
+Immunogenicity of an AAV-based, room-temperature stable, single dose COVID-19 vaccine in mice and non-human primates
+Immunogenicity of an AAV-based, room-temperature stable, single dose COVID-19 vaccine in mice and non-human primates
+Immunogenicity of an AAV-based, room-temperature stable, single dose COVID-19 vaccine in mice and non-human primates
+Molecular Mechanism of the N501Y Mutation for Enhanced Binding between SARS-CoV-2's Spike Protein and Human ACE2 Receptor
+Protein scaffold-based multimerization of soluble ACE2 efficiently blocks SARS-CoV-2 infection in vitro
+SARS-CoV-2 RBD in vitro evolution follows contagious mutation spread, yet generates an able infection inhibitor
+SARS-CoV-2 RBD in vitro evolution follows contagious mutation spread, yet generates an able infection inhibitor
+SARS-CoV-2 RBD in vitro evolution follows contagious mutation spread, yet generates an able infection inhibitor
+Self-organized stem cell-derived human lung buds with proximo-distal patterning and novel targets of SARS-CoV-2
+Protection against reinfection with D614- or G614-SARS-CoV-2 isolates in hamsters
+Neuropilin-1 Assists SARS-CoV-2 Infection by Stimulating the Separation of Spike Protein Domains S1 and S2
+Neuropilin-1 Assists SARS-CoV-2 Infection by Stimulating the Separation of Spike Protein Domains S1 and S2
+Vimentin binds to SARS-CoV-2 spike protein and antibodies targeting extracellular vimentin block in vitro uptake of SARS-CoV-2 virus-like particles
+Extracellular vimentin as a target against SARS- CoV-2 host cell invasion
+Neutralizing antibodies targeting the SARS-CoV-2 receptor binding domain isolated from a naïve human antibody library
+Potent SARS-CoV-2 Neutralizing Antibodies Directed Against Spike N-Terminal Domain Target a Single Supersite
+Modular basis for potent SARS-CoV-2 neutralization by a prevalent VH1-2-derived antibody class
+Immunogenicity and efficacy of the COVID-19 candidate vector vaccine MVA SARS 2 S in preclinical vaccination
+Impact of South African 501.V2 Variant on SARS-CoV-2 Spike Infectivity and Neutralization: A Structure-based Computational Assessment
+Cryo-EM Structure of the N501Y SARS-CoV-2 Spike Protein in Complex with a Potent Neutralizing Antibody
+Cryo-EM Structures of the N501Y SARS-CoV-2 Spike Protein in Complex with ACE2 and Two Potent Neutralizing Antibodies
+Molecular dynamic simulation reveals E484K mutation enhances spike RBD-ACE2 affinity and the combination of E484K, K417N and N501Y mutations (501Y.V2 variant) induces conformational change greater than N501Y mutant alone, potentially resulting in an escape mutant
+Rigid monoclonal antibodies improve detection of SARS-CoV-2 nucleocapsid protein
+Targeting conserved viral virulence determinants by single domain antibodies to block SARS-CoV2 infectivity
+N-terminal domain antigenic mapping reveals a site of vulnerability for SARS-CoV-2
+A highly thermotolerant, trimeric SARS-CoV-2 receptor binding domain derivative elicits high titers of neutralizing antibodies
+Immunogenicity and protective efficacy of a highly thermotolerant, trimeric SARS-CoV-2 receptor binding domain derivative
+Immunogenicity and protective efficacy of a highly thermotolerant, trimeric SARS-CoV-2 receptor binding domain derivative
+Anti-CoVid19 plasmid DNA vaccine induces a potent immune response in rodents by Pyro-drive Jet Injector intradermal inoculation
+SARS-CoV-2 spike protein arrested in the closed state induces potent neutralizing responses
+CAR-NK Cells Effectively Target the D614 and G614 SARS-CoV-2-infected Cells
+SARS-CoV-2 501Y.V2 escapes neutralization by South African COVID-19 donor plasma
+SARS-CoV-2 501Y.V2 escapes neutralization by South African COVID-19 donor plasma
+Neutralization of SARS-CoV-2 lineage B.1.1.7 pseudovirus by BNT162b2 vaccine-elicited human sera
+mRNA vaccine-elicited antibodies to SARS-CoV-2 and circulating variants
+mRNA vaccine-elicited antibodies to SARS-CoV-2 and circulating variants
+Rapid protection from COVID-19 in nonhuman primates vaccinated intramuscularly but not intranasally with a single dose of a recombinant vaccine
+Native-like SARS-CoV-2 spike glycoprotein expressed by ChAdOx1 nCoV-19/AZD1222 vaccine
+Inactivated rabies virus vectored SARS-CoV-2 vaccine prevents disease in a Syrian hamster model.
+Coevolutionary Analysis and Perturbation-Based Network Modeling of the SARS-CoV-2 Spike Protein Complexes with Antibodies: Binding-Induced Control of Dynamics, Allosteric Interactions and Signaling
+Neutralizing and protective human monoclonal antibodies recognizing the N-terminaldomain of the SARS-CoV-2 spike protein
+GRP78 binds SARS-CoV-2 Spike protein and ACE2 and GRP78 depleting antibody blocks viral entry and infection in vitro
+Low adenovirus vaccine doses administered to skin using microneedle patches induce better functional antibody immunogenicity as compared to systemic injection.
+Low adenovirus vaccine doses administered to skin using microneedle patches induce better functional antibody immunogenicity as compared to systemic injection.
+Bispecific antibody prevents SARS-CoV-2 escape and protects mice from disease
+Bispecific antibody neutralizes circulating SARS-CoV-2 variants, prevents escape and protects mice from disease
+mRNA-1273 vaccine induces neutralizing antibodies against spike mutants from global SARS-CoV-2 variants
+Longitudinal analysis of humoral immunity against SARS-CoV-2 Spike in convalescent individuals up to 8 months post-symptom onset
+SARS-CoV-2 receptor binding mutations and antibody mediated immunity.
+Immunogenic Potential of DNA Vaccine candidate, ZyCoV-D against SARS-CoV-2 in Animal Models
+Increased Resistance of SARS-CoV-2 Variants B.1.351 and B.1.1.7 to Antibody Neutralization
+Increased Resistance of SARS-CoV-2 Variants B.1.351 and B.1.1.7 to Antibody Neutralization
+Antibody Resistance of SARS-CoV-2 Variants B.1.351 and B.1.1.7
+Sequence signatures of two IGHV3-53/3-66 public clonotypes to SARS-CoV-2 receptor binding domain
+E484K as an innovative phylogenetic event for viral evolution: Genomic analysis of the E484K spike mutation in SARS-CoV-2 lineages from Brazil
+E484K as an innovative phylogenetic event for viral evolution: Genomic analysis of the E484K spike mutation in SARS-CoV-2 lineages from Brazil
+Synthetic nanobody-SARS-CoV-2 receptor-binding domain structures identify distinct epitopes
+SARS-CoV-2 variant B.1.1.7 is susceptible to neutralizing antibodies elicited by ancestral Spike vaccines
+SARS-CoV-2 variant B.1.1.7 is susceptible to neutralizing antibodies elicited by ancestral Spike vaccines
+Unbiased interrogation of memory B cells from convalescent COVID-19 patients reveals a broad antiviral humoral response targeting SARS-CoV-2 antigens beyond the spike protein
+Modeling mutational effects on biochemical phenotypes using convolutional neural networks: application to SARS-CoV-2
+Modeling mutational effects on biochemical phenotypes using convolutional neural networks: application to SARS-CoV-2
+Modeling mutational effects on biochemical phenotypes using convolutional neural networks: application to SARS-CoV-2
+Coronavirus associated molecular mimicry common to SARS-CoV-2 peptide
+Coronavirus-associated molecular mimicry through homology to a SARS-CoV-2 peptide could be leading to susceptibility in patients with HLA-A*02:01 and HLA-A*24:02 serotypes
+Coronavirus-associated molecular mimicry through homology to a SARS-CoV-2 peptide could be leading to susceptibility in patients with HLA-A*02:01 and HLA-A*24:02 serotypes
+Genetic and structural basis for recognition of SARS-CoV-2 spike protein by a two-antibody cocktail
+Genetic and structural basis for recognition of SARS-CoV-2 spike protein by a two-antibody cocktail
+Development of spike receptor-binding domain nanoparticle as a vaccine candidate against SARS-CoV-2 infection in ferrets
+Characterization of Critical Determinants of ACE2-RBD Interaction
+A single dose of replication-competent VSV-vectored vaccine expressing SARS-CoV-2 S1 protects against virus replication in a hamster model of severe COVID-19
+Recombinant production of a functional SARS-CoV-2 spike receptor binding domain in the green algae Chlamydomonas reinhardtii
+Identification of a conserved neutralizing epitope present on spike proteins from highly pathogenic coronaviruses
+Identification of a conserved neutralizing epitope present on spike proteins from all highly pathogenic coronaviruses
+Nanotraps for the containment and clearance of SARS-CoV-2
+Enhanced immunogenicity of a synthetic DNA vaccine expressing consensus SARS-CoV-2 Spike protein using needle-free immunization
+Therapeutic antibodies, targeting the SARS-CoV-2 spike N-terminal domain, protect lethally infected K18-hACE2 mice
+The basis of a more contagious 501Y.V1 variant of SARS-COV-2
+Bacterial expression and purification of functional recombinant SARS-CoV-2 spike receptor binding domain
+Potent in vitro Neutralization of SARS-CoV-2 by Hetero-bivalent Alpaca Nanobodies Targeting the Spike Receptor-Binding Domain
+Assessment of immunogenicity and protective efficacy of ZyCoV-D DNA vaccine candidates in Rhesus macaques against SARS-CoV-2 infection
+Potential global impact of the N501Y mutation on MHC-II presentation and immune escape
+Impact of the B.1.1.7 variant on neutralizing monoclonal antibodies recognizing diverse epitopes on SARS-CoV-2 Spike
+Multi-specific DARPin(R) therapeutics demonstrate very high potency against mutated SARS-CoV-2 variants in vitro
+Multispecific DARPin(R) therapeutics demonstrate very high potency against SARS-CoV-2 variants in vitro
+Large-scale analysis of SARS-CoV-2 spike-glycoprotein mutants demonstrates the need for continuous screening of virus isolates
+Large-scale analysis of SARS-CoV-2 spike-glycoprotein mutants demonstrates the need for continuous screening of virus isolates
+Serological Profile Of Specific Antibodies Against Dominant Antigens Of SARS-CoV-2 In Chilean COVID-19 Patients.
+Neutralization of viruses with European, South African, and United States SARS-CoV-2 variant spike proteins by convalescent sera and BNT162b2 mRNA vaccine-elicited antibodies
+A human antibody with blocking activity to RBD proteins of multiple SARS-CoV-2 variants including B.1.351 showed potent prophylactic and therapeutic efficacy against SARS-CoV-2 in rhesus macaques
+A human antibody with blocking activity to RBD proteins of multiple SARS-CoV-2 variants including B.1.351 showed potent prophylactic and therapeutic efficacy against SARS-CoV-2 in rhesus macaques
+Human immunoglobulin from transchromosomic bovines hyperimmunized with SARS-CoV-2 spike antigen efficiently neutralizes viral variants.
+Insights on SARS-CoV-2's Mutations for Evading Human Antibodies: Sacrifice and Survival
+Recombinant chimpanzee adenovirus AdC7 expressing dimeric tandem-repeat RBD of SARS-CoV-2 spike protein protects mice against COVID-19
+A potent bispecific nanobody protects hACE2 mice against SARS-CoV-2 infection via intranasal administration
+SARS-CoV-2 RBD-Tetanus toxoid conjugate vaccine induces a strong neutralizing immunity in preclinical studies
+SARS-CoV-2 RBD-Tetanus toxoid conjugate vaccine induces a strong neutralizing immunity in preclinical studies
+A novel antibody against the furin cleavage site of SARS-CoV-2 spike protein: effects on proteolytic cleavage and ACE2 binding
+Naive human B cells can neutralize SARS-CoV-2 through recognition of its receptor binding domain
+Naive human B cells engage the receptor binding domain of SARS-CoV-2, variants of concern, and related sarbecoviruses
+Adjuvanting a subunit SARS-CoV-2 nanoparticle vaccine to induce protective immunity in non-human primates
+Sensitivity of infectious SARS-CoV-2 B.1.1.7 and B.1.351 variants to neutralizing antibodies
+Single-cell sequencing of plasma cells from COVID-19 patients reveals highly expanded clonal lineages produce specific and neutralizing antibodies to SARS-CoV-2
+A chicken IgY can efficiently inhibit the entry and replication of SARS-CoV-2 by targeting the ACE2 binding domain in vitro
+A chicken IgY can efficiently inhibit the entry and replication of SARS-CoV-2 by targeting the ACE2 binding domain in vitro
+A chicken IgY can efficiently inhibit the entry and replication of SARS-CoV-2 by targeting the ACE2 binding domain in vitro
+Characterization of humoral and SARS-CoV-2 specific T cell responses in people living with HIV
+Live attenuated SARS-CoV-2 vaccine candidate: Protective immunity without serious lung lesions in Syrian hamsters
+Single-Domain SARS-CoV-2 S1 and RBD Antibodies Isolated from Immunized Llama Effectively Bind Targets of the Wuhan, UK, and South African Strains in vitro
+E484K mutation in SARS-CoV-2 RBD enhances binding affinity with hACE2 but reduces interactions with neutralizing antibodies and nanobodies: Binding free energy calculation studies
+Disassembly of HIV envelope glycoprotein trimer immunogens is driven by antibodies elicited via immunization
+SARS-CoV-2 vaccination induces neutralizing antibodies against pandemic and pre-emergent SARS-related coronaviruses in monkeys
+Structural and functional ramifications of antigenic drift in recent SARS-CoV-2 variants
+Potent neutralization antibodies induced by a recombinant trimeric Spike protein vaccine candidate containing PIKA adjuvant for COVID-19
+A Combination Adjuvant for the Induction of Potent Antiviral Immune Responses for a Recombinant SARS-CoV-2 Protein Vaccine
+A Combination Adjuvant for the Induction of Potent Antiviral Immune Responses for a Recombinant SARS-CoV-2 Protein Vaccine
+Homologous and heterologous serological response to the N-terminal domain of SARS-CoV-2
+Rotavirus as an Expression Platform of the SARS-CoV-2 Spike Protein
+ESC - a comprehensive resource for SARS-CoV-2 immune escape variants
+ESC - a comprehensive resource for SARS-CoV-2 immune escape variants
+Decreased neutralization of SARS-CoV-2 global variants by therapeutic anti-spike protein monoclonal antibodies
+Structural Basis for Accommodation of Emerging B.1.351 and B.1.1.7 Variants by Two Potent SARS-CoV-2 Neutralizing Antibodies
+Comparative Perturbation-Based Modeling of the SARS-CoV-2 Spike Protein Binding with Host Receptor and Neutralizing Antibodies : Structurally Adaptable Allosteric Communication Hotspots Define Spike Sites Targeted by Global Circulating Mutations
+Reduced binding and neutralization of infection- and vaccine-induced antibodies to the B.1.351 (South African) SARS-CoV-2 variant
+Complete map of SARS-CoV-2 RBD mutations that escape the monoclonal antibody LY-CoV555 and its cocktail with LY-CoV016
+High-Throughput, Single-Copy Sequencing Reveals SARS-CoV-2 Spike Variants Coincident with Mounting Humoral Immunity during Acute COVID-19
+Acquisition of the L452R mutation in the ACE2-binding interface of Spike protein triggers recent massive expansion of SARS-Cov-2 variants
+Acquisition of the L452R mutation in the ACE2-binding interface of Spike protein triggers recent massive expansion of SARS-Cov-2 variants
+Structural and functional characterization of SARS-CoV-2 RBD domains produced in mammalian cells
+A missense variant effect prediction and annotation resource for SARS-CoV-2
+Antibodies with potent and broad neutralizing activity against antigenically diverse and highly transmissible SARS-CoV-2 variants
+Antibodies with potent and broad neutralizing activity against antigenically diverse and highly transmissible SARS-CoV-2 variants
+Mice immunized with the vaccine candidate HexaPro spike produce neutralizing antibodies against SARS-CoV-2
+Increased Resistance of SARS-CoV-2 Variant P.1 to Antibody Neutralization
+Increased Resistance of SARS-CoV-2 Variant P.1 to Antibody Neutralization
+Fragment-based computational design of antibodies targeting structured epitopes
+Altered Sub-Genomic RNA Expression in SARS-CoV-2 B.1.1.7 Infections
+Altered Subgenomic RNA Expression in SARS-CoV-2 B.1.1.7 Infections
+Recombinant protein subunit SARS-CoV-2 vaccines formulated with CoVaccine HT adjuvant induce broad, Th1 biased, humoral and cellular immune responses in mice
+Dissecting CD8+ T cell pathology of severe SARS-CoV-2 infection by single-cell epitope mapping
+Engineered SARS-CoV-2 receptor binding domain improves immunogenicity in mice and elicits protective immunity in hamsters
+SARS-CoV-2 variant with higher affinity to ACE2 shows reduced sera neutralization susceptibility
+Multimeric nanobodies from camelid engineered mice and llamas potently neutralize SARS-CoV-2 variants
+Neutralization heterogeneity of United Kingdom and South-African SARS CoV-2 variants in BNT162b2-vaccinated or convalescent COVID-19 healthcare workers
+SARS-CoV-2 501Y.V2 (B.1.351) elicits cross-reactive neutralizing antibodies
+SARS-CoV-2 501Y.V2 (B.1.351) elicits cross-reactive neutralizing antibodies
+Development of potency, breadth and resilience to viral escape mutations in SARS-CoV-2 neutralizing antibodies
+Drug development of an affinity enhanced, broadly neutralizing heavy chain only antibody that restricts SARS-CoV-2 in hamsters
+Drug development of an affinity enhanced, broadly neutralizing heavy chain-only antibody that restricts SARS-CoV-2 in rodents
+Structural Analysis of Spike Protein Mutations in an Emergent SARS-CoV-2 Variant from the Philippines
+Structural Analysis of Spike Protein Mutations in the SARS-CoV-2 P.3 Variant
+Spike mutations in SARS-CoV-2 variants confer resistance to antibody neutralization
+SARS-CoV-2 variants resist antibody neutralization and broaden host ACE2 usage
+A recombinant ACE2 Triple Decoy that traps and neutralizes SARS-CoV-2 shows enhanced affinity for highly transmissible SARS-CoV-2 variants
+Longitudinal single-cell epitope and RNA-sequencing reveals the immunological impact of type 1 interferon autoantibodies in critical COVID-19
+Potent neutralizing nanobodies resist convergent circulating variants of SARS-CoV-2 by targeting novel and conserved epitopes
+Development of Equine Immunoglobulin Fragment F(ab')2 with High Neutralizing Capability against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+The dual function monoclonal antibodies VIR-7831 and VIR-7832 demonstrate potent in vitro and in vivo activity against SARS-CoV-2
+Memory B cell repertoire for recognition of evolving SARS-CoV-2 spike
+A tandem-repeat dimeric RBD protein-based COVID-19 vaccine ZF2001 protects mice and nonhuman primates
+Antibody responses to SARS-CoV-2 mRNA vaccines are detectable in saliva
+Effect of natural mutations of SARS-CoV-2 on spike structure, conformation and antigenicity
+Effect of natural mutations of SARS-CoV-2 on spike structure, conformation and antigenicity
+Chimeric spike mRNA vaccines protect against sarbecovirus challenge in mice
+Chimeric spike mRNA vaccines protect against Sarbecovirus challenge in mice
+An Innovative antibody-based Plug-and-Play strategy for SARS-CoV-2
+New SARS-CoV-2 lineages could evade CD8+ T-cells response
+New SARS-CoV-2 lineages could evade CD8+ T-cells response
+One-shot identification of SARS-CoV-2 S RBD escape mutants using yeast screening
+BNT162b2 mRNA COVID-19 vaccine induces antibodies of broader cross-reactivity than natural infection but recognition of mutant viruses is up to 10-fold reduced
+Effects of Mutations in the Receptor-Binding Domain of SARS-CoV-2 Spike on its Binding Affinity to ACE2 and Neutralizing Antibodies Revealed by Computational Analysis
+Antibody evasion by the Brazilian P.1 strain of SARS-CoV-2
+Antibody evasion by the Brazilian P.1 strain of SARS-CoV-2
+Elicitation of broadly protective sarbecovirus immunity by receptor-binding domain nanoparticle vaccines
+Circular RNA Vaccines against SARS-CoV-2 and Emerging Variants
+Rationally designed immunogens enable immune focusing to the SARS-CoV-2 receptor binding motif
+Rationally designed immunogens enable immune focusing to the SARS-CoV-2 receptor binding motif
+SARS-CoV-2 Spike receptor-binding domain with a G485R mutation in complex with human ACE2
+Longitudinal characterization of humoral and cellular immunity in hospitalized COVID-19 patients reveal immune persistence up to 9 months after infection
+Epigallocatechin Gallate from Green Tea Effectively Blocks Infection of SARS-CoV-2 and New Variants by Inhibiting Spike Binding to ACE2 Receptor
+A single BNT162b2 mRNA dose elicits antibodies with Fc-mediated effector functions and boost pre-existing humoral and T cell responses
+Mutational escape from the polyclonal antibody response to SARS-CoV-2 infection is largely shaped by a single class of antibodies
+Reduced neutralization of SARS-CoV-2 variants by convalescent plasma and hyperimmune intravenous immunoglobulins for treatment of COVID-19
+A bispecific monomeric nanobody induces SARS-COV-2 spike trimer dimers
+A bispecific monomeric nanobody induces spike trimer dimers and neutralizes SARS-CoV-2 in vivo
+Structural and energetic profiling of SARS-CoV-2 antibody recognition and the impact of circulating variants
+CVnCoV protects human ACE2 transgenic mice from ancestral B BavPat1 and emerging B.1.351 SARS-CoV-2
+Structural modeling of the SARS-CoV-2 Spike/human ACE2 complex interface can identify high-affinity variants associated with increased transmissibility
+Neutralization of European, South African, and United States SARS-CoV-2 mutants by a human antibody and antibody domains
+Application of an integrated computational antibody engineering platform to design SARS-CoV-2 neutralizers
+Clonal dissection of immunodominance and cross-reactivity of the CD4+ T cell response to SARS-CoV-2
+B.1.526 SARS-CoV-2 variants identified in New York City are neutralized by vaccine-elicited and therapeutic monoclonal antibodies
+Isolation and Characterization of Cross-Neutralizing Coronavirus Antibodies from COVID-19+ Subjects
+A public vaccine-induced human antibody protects against SARS-CoV-2 and emerging variants
+Efficacy of a Broadly Neutralizing SARS-CoV-2 Ferritin Nanoparticle Vaccine in Nonhuman Primates
+Aberrant glycosylation of anti-SARS-CoV-2 IgG is a pro-thrombotic stimulus for platelets
+Mechanism of a COVID-19 nanoparticle vaccine candidate that elicits a broadly neutralizing antibody response to SARS-CoV-2 variants
+Mechanism of a COVID-19 nanoparticle vaccine candidate that elicits a broadly neutralizing antibody response to SARS-CoV-2 variants
+Mechanism of a COVID-19 nanoparticle vaccine candidate that elicits a broadly neutralizing antibody response to SARS-CoV-2 variants
+Mechanism of a COVID-19 nanoparticle vaccine candidate that elicits a broadly neutralizing antibody response to SARS-CoV-2 variants
+A lipid nanoparticle RBD-hFc mRNA vaccine protects hACE2 transgenic mice against lethal SARS-CoV-2 infection
+A recombinant receptor-binding domain in trimeric form generates completely protective immunity against SARS-CoV-2 infection in nonhuman primates
+A recombinant receptor-binding domain in trimeric form generates completely protective immunity against SARS-CoV-2 infection in nonhuman primates
+Rapid characterization of spike variants via mammalian cell surface display
+Rapid characterization of spike variants via mammalian cell surface display
+A protective broadly cross-reactive human antibody defines a conserved site of vulnerability on beta-coronavirus spikes
+SARS-CoV-2 immune evasion by variant B.1.427/B.1.429
+The neutralization potency of anti-SARS-CoV-2 therapeutic human monoclonal antibodies is retained against novel viral variants
+The neutralization potency of anti-SARS-CoV-2 therapeutic human monoclonal antibodies is retained against novel viral variants
+The neutralization potency of anti-SARS-CoV-2 therapeutic human monoclonal antibodies is retained against novel viral variants
+Hydrogel-based slow release of a receptor-binding domain subunit vaccine elicits neutralizing antibody responses against SARS-CoV-2
+Hydrogel-based slow release of a receptor-binding domain subunit vaccine elicits neutralizing antibody responses against SARS-CoV-2
+Hydrogel-based slow release of a receptor-binding domain subunit vaccine elicits neutralizing antibody responses against SARS-CoV-2
+Ultrapotent bispecific antibodies neutralize emerging SARS-CoV-2 variants
+Analysis of glycosylation and disulfide bonding of wild-type SARS-CoV-2 spike glycoprotein
+One dose of COVID-19 nanoparticle vaccine REVC-128 provides protection against SARS-CoV-2 challenge at two weeks post immunization
+Membrane lectins enhance SARS-CoV-2 infection and influence the neutralizing activity of different classes of antibodies
+Sex differences in lung imaging and SARS-CoV-2 antibody responses in a COVID-19 golden Syrian hamster model
+Bioinformatics analysis of SARS-CoV-2 RBD mutant variants and insights into antibody and ACE2 receptor binding
+Bioinformatics analysis of SARS-CoV-2 RBD mutant variants and insights into antibody and ACE2 receptor binding
+COVID-19 mRNA vaccines drive differential Fc-functional profiles in pregnant, lactating, and non-pregnant women
+Twelve-month specific IgG response to SARS-CoV-2 receptor-binding domain among COVID-19 convalescent plasma donors in Wuhan
+Twelve-month specific IgG response to SARS-CoV-2 receptor-binding domain among COVID-19 convalescent plasma donors in Wuhan
+Driving potent neutralization of a SARS-CoV-2 Variant of Concern with a heterotypic boost
+Driving potent neutralization of a SARS-CoV-2 Variant of Concern with a heterotypic boost
+XAV-19, a novel swine glyco-humanized polyclonal antibody against SARS-CoV-2 spike, efficiently neutralizes B.1.1.7 British and B.1.351 South-African variants.
+XAV-19, a swine glyco-humanized polyclonal antibody against SARS-CoV-2 Spike receptor-binding domain, targets multiple epitopes and broadly neutralizes variants.
+The Up state of the SARS-COV-2 Spike homotrimer favors an increased virulence for new variants
+Murine monoclonal antibodies against RBD of SARS-CoV-2 neutralize authentic wild type SARS-CoV-2 as well as B.1.1.7 and B.1.351 viruses and protect in vivo in a mouse model in a neutralization dependent manner
+Antibodies to the SARS-CoV-2 receptor-binding domain that maximize breadth and resistance to viral escape
+Synthetic repertoires derived from convalescent COVID-19 patients enable discovery of SARS-CoV-2 neutralizing antibodies and a novel quaternary binding modality
+Synthetic repertoires derived from convalescent COVID-19 patients enable discovery of SARS-CoV-2 neutralizing antibodies and a novel quaternary binding modality
+Structural basis for broad sarbecovirus neutralization by a human monoclonal antibody
+Polymersomes decorated with SARS-CoV-2 spike protein receptor binding domain elicit robust humoral and cellular immunity
+Nasal delivery of single-domain antibodies improve symptoms of SARS-CoV-2 infection in an animal model
+Intranasal gene therapy to prevent infection by SARS-CoV-2 variants
+Intranasal gene therapy to prevent infection by SARS-CoV-2 variants
+Theoretical causes of the Brazilian P.1 and P.2 lineages of the SARS-CoV-2 virus through molecular dynamics
+Theoretical causes of the Brazilian P.1 and P.2 lineages of the SARS-CoV-2 virus through molecular dynamics
+Nanobody Repertoires for Exposing Vulnerabilities of SARS-CoV-2
+Efficacy and breadth of adjuvanted SARS-CoV-2 receptor-binding domain nanoparticle vaccine in macaques
+Atypical N-glycosylation of SARS-CoV-2 impairs the efficient binding of Spike-RBM to the human-host receptor hACE2
+CoVac501, a self-adjuvanting peptide vaccine conjugated with TLR7 agonists, against SARS-CoV-2 induces protective immunity
+Quantatitive Analysis of Conserved Sites on the SARS-CoV-2 Receptor-Binding Domain to Promote Development of Universal SARS-Like Coronavirus Vaccines
+Revealing the threat of emerging SARS-CoV-2 mutations to antibody therapies
+Prediction and evolution of the molecular fitness of SARS-CoV-2 variants: Introducing SpikePro
+Epitope profiling of coronavirus-binding antibodies using computational structural modelling
+Epitope classification and RBD binding properties of neutralizing antibodies against SARS-CoV-2 variants of concern
+Variant SARS-CoV-2 mRNA vaccines confer broad neutralization as primary or booster series in mice
+Variant SARS-CoV-2 mRNA vaccines confer broad neutralization as primary or booster series in mice
+Cryptic SARS-CoV2-spike-with-sugar interactions revealed by 'universal' saturation transfer analysis
+Cryptic pathogen-sugar interactions revealed by universal saturation transfer analysis
+The SARS-CoV-2 mRNA-1273 vaccine elicits more RBD-focused neutralization, but with broader antibody binding within the RBD
+Dynamic Profiling of  Binding and Allosteric Propensities  of the SARS-CoV-2 Spike Protein with Different Classes of Antibodies:  Mutational and Perturbation-Based Scanning Reveal Allosteric Duality of Functionally Adaptable Hotspots
+An mRNA SARS-CoV-2 vaccine employing a novel delivery vehicle with a TLR-9 agonist induces neutralizing antibodies and T cell memory
+An mRNA SARS-CoV-2 vaccine employing Charge-Altering Releasable Transporters with a TLR-9 agonist induces neutralizing antibodies and T cell memory
+A pair of non-competing neutralizing human monoclonal antibodies protecting from disease in a SARS-CoV-2 infection model
+SARS-CoV-2 spike protein expressing epithelial cells promotes senescence associated secretory phenotype in endothelial cells and increased inflammatory response
+Antibody Cocktail Exhibits Broad Neutralization against SARS-CoV-2 and SARS-CoV-2 variants
+SARS-CoV-2 receptor binding domain fusion protein efficiently neutralizes virus infection
+Emergence of a recurrent insertion in the N-terminal domain of the SARS-CoV-2 spike glycoprotein
+Emergence of a recurrent insertion in the N-terminal domain of the SARS-CoV-2 spike glycoprotein
+Emergence of a recurrent insertion in the N-terminal domain of the SARS-CoV-2 spike glycoprotein
+Molecular relationships between SARS-CoV-2 Spike protein and LIFR, a pneumonia protective IL-6 family cytokine
+Ultrapotent SARS-CoV-2 neutralizing antibodies with protective efficacy against newly emerged mutational variants
+Comparison of Mucosal and Intramuscular Immunization against SARS-CoV-2 with Replication-Defective and Replicating Single-cycle Adenovirus Vaccines
+Comparative Analysis of Emerging B.1.1.7+E484K SARS-CoV-2 isolates from Pennsylvania
+Human Taste Cells Express ACE2: A Portal for SARS-CoV-2 Infection
+Amino acids 484 and 494 of SARS-CoV-2 spike are hotspots of immune evasion affecting antibody but not ACE2 binding
+Amino acids 484 and 494 of SARS-CoV-2 spike are hotspots of immune evasion affecting antibody but not ACE2 binding
+Convergent evolution of SARS-CoV-2 spike mutations, L452R, E484Q and P681R, in the second wave of COVID-19 in Maharashtra, India
+Convergent evolution of SARS-CoV-2 spike mutations, L452R, E484Q and P681R, in the second wave of COVID-19 in Maharashtra, India
+Binding mechanism of neutralizing Nanobodies targeting SARS-CoV-2 Spike Glycoprotein
+A synthetic peptide CTL vaccine targeting nucleocapsid confers protection from SARS-CoV-2 challenge in rhesus macaques
+Broad cross-reactivity across sarbecoviruses exhibited by a subset of COVID-19 donor-derived neutralizing antibodies
+Predicted structural mimicry of spike receptor-binding motifs from highly pathogenic human coronaviruses
+Production of a Highly Immunogenic Antigen from SARS-CoV-2 by Covalent Coupling of the Receptor Binding Domain of Spike Protein to a Multimeric Carrier
+A potently neutralizing anti-SARS-CoV-2 antibody inhibits variants of concern by binding a highly conserved epitope
+Insertions in SARS-CoV-2 genome caused by template switch and duplications give rise to new variants of potential concern
+Insertions in SARS-CoV-2 genome caused by template switch and duplications give rise to new variants that merit monitoring
+Relative Mutant N501Y SARS-CoV-2 Spike Protein RBD Inhibition of Anti-Spike Protein IgG and ACE-2 Binding to Spike Protein Species
+Nucleocapsid vaccine elicits spike-independent SARS-CoV-2 protective immunity
+Thermostable designed ankyrin repeat proteins (DARPins) as building blocks for innovative drugs
+A broadly neutralizing antibody protects against SARS-CoV, pre-emergent bat CoVs, and SARS-CoV-2 variants in mice
+Therapeutic effect of CT-P59 against SARS-CoV-2 South African variant
+Massively Multiplexed Affinity Characterization of Therapeutic Antibodies Against SARS-CoV-2 Variants
+Nucleic acid delivery of immune-focused SARS-CoV-2 nanoparticles drive rapid and potent immunogenicity capable of single-dose protection
+An enveloped virus-like particle vaccine expressing a stabilized prefusion form of the SARS-CoV-2 spike protein elicits potent immunity after a single dose.
+Possible link between higher transmissibility of B.1.617 and B.1.1.7 variants of SARS-CoV-2 and increased structural stability of its spike protein and hACE2 affinity
+Influenza viral particles harboring the SARS-CoV-2 spike RBD as a combination respiratory disease vaccine
+Allosteric Cross-Talk Among SARS-CoV-2 Spike's Receptor-Binding Domain Mutations Triggers an Effective Hijacking of Human Cell Receptor
+LY-CoV1404 potently neutralizes SARS-CoV-2 variants
+LY-CoV1404 potently neutralizes SARS-CoV-2 variants
+LY-CoV1404 potently neutralizes SARS-CoV-2 variants
+LY-CoV1404 (bebtelovimab) potently neutralizes SARS-CoV-2 variants
+SARS-CoV-2 bearing a mutation at the S1/S2 cleavage site exhibits attenuated virulence and confers protective immunity
+SARS -CoV-2 T-cell immunity to variants of concern following vaccination
+Preliminary Immunogenicity of a Pan-COVID-19 T Cell Vaccine in HLA-A*02:01 Mice
+Preliminary Immunogenicity of a Pan-COVID-19 T Cell Vaccine in HLA-A*02:01 Mice
+Convergent antibody responses to the SARS-CoV-2 spike protein in convalescent and vaccinated individuals
+Highly functional Cellular Immunity in SARS-CoV-2 Non-Seroconvertors is associated with immune protection
+Immunolocalization studies of vimentin and ACE2 on the surface of cells exposed to SARS-CoV-2 Spike proteins
+Immunolocalization studies of vimentin and ACE2 on the surface of cells exposed to SARS-CoV-2 Spike proteins
+Durable antibody responses in staff at two long-term care facilities, during and post SARS-CoV-2 outbreaks
+SARS-CoV-2 variant B.1.617 is resistant to Bamlanivimab and evades antibodies induced by infection and vaccination
+Combination Respiratory Vaccine Containing Recombinant SARS-CoV-2 Spike and QuadrivalentSeasonal Influenza Hemagglutinin Nanoparticles with Matrix-M Adjuvant
+SARS-CoV-2 cell-to-cell infection is resistant to neutralizing antibodies
+SARS CoV-2 variant B.1.617.1 is highly pathogenic in hamsters than B.1 variant
+Structure-based design of a highly stable, covalently-linked SARS-CoV-2 spike trimer with improved structural properties and immunogenicity
+Development of Potent and Effective Synthetic SARS-CoV-2 Neutralizing Nanobodies
+An intranasal vaccine durably protects against SARS-CoV-2 variants in mice
+Vaccination boosts naturally enhanced neutralizing breadth to SARS-CoV-2 one year after infection
+Naturally enhanced neutralizing breadth to SARS-CoV-2 after one year
+SARS-CoV-2 B.1.617 emergence and sensitivity to vaccine-elicited antibodies
+SARS-CoV-2 B.1.617 emergence and sensitivity to vaccine-elicited antibodies
+SARS-CoV-2 B.1.617.2 Delta variant emergence and vaccine breakthrough
+SARS-CoV-2 B.1.617.2 Delta variant emergence, replication and immune evasion
+SARS-CoV-2 B.1.617.2 Delta variant replication, sensitivity to neutralising antibodies and vaccine breakthrough
+Rapid Electronic Diagnostics of Ebola Virus with Synthetic Nanobody-Conjugated Gold Nanoparticles
+Synthetic Nanobody-Functionalized Nanoparticles for Accelerated Development of Rapid, Accessible Detection of Viral Antigens
+A human antibody that broadly neutralizes betacoronaviruses protects against SARS-CoV-2 by blocking the fusion machinery
+Design of the SARS-CoV-2 RBD vaccine antigen improves neutralizing antibody response
+SARS-CoV-2 ferritin nanoparticle vaccines elicit broad SARS coronavirus immunogenicity
+SARS-COV-2 Recombinant Receptor-Binding-Domain (RBD) Induces Neutralising Antibodies Against Variant Strains of SARS-CoV-2 and SARS-CoV-1
+Receptor binding may directly activate the fusion machinery in coronavirus spike glycoproteins
+Impacts on the structure-function relationship of SARS-CoV-2 spike by B.1.1.7 mutations
+Interferon-armed RBD dimer enhances the immunogenicity of RBD for sterilizing immunity against SARS-CoV-2
+Energy Landscape of the SARS-CoV-2 Reveals Extensive Conformational Heterogeneity
+in silico Assessment of Antibody Drug Resistance to Bamlanivimab of SARS-CoV-2 Variant B.1.617
+CD147 antibody specifically and effectively inhibits infection and cytokine storm of SARS-CoV-2 variants
+Potent neutralization of SARS-CoV-2 variants of concern by an antibody with a unique genetic signature and structural mode of spike recognition
+The Spike Proteins of SARS-CoV-2 B.1.617 and B.1.618 Variants Identified in India Provide Partial Resistance to Vaccine-elicited and Therapeutic Monoclonal Antibodies.
+Broad neutralization against SARS-CoV-2 variants induced by a modified B.1.351 protein-based COVID-19 vaccine candidate
+In Silico Molecular-Based Rationale for SARS-CoV-2 Spike Circulating Mutations Able to Escape Bamlanivimab and Etesevimab Monoclonal Antibodies
+Single-dose immunisation with a multimerised SARS-CoV-2 receptor binding domain (RBD) induces an enhanced and protective response in mice
+Single-dose immunisation with a multimerised SARS-CoV-2 receptor binding domain (RBD) induces an enhanced and protective response in mice
+Alum:CpG adjuvant enables SARS-CoV-2 RBD-induced protection in aged mice and synergistic activation of human elder type 1 immunity
+Alum:CpG adjuvant enables SARS-CoV-2 RBD-induced protection in aged mice and synergistic activation of human elder type 1 immunity
+Single-dose AAV-based vaccine induces a high level of neutralizing antibodies and provides long-term protection against SARS-CoV-2 in rhesus macaques
+The Structure of ChAdOx1/AZD-1222 Reveals Interactions with CAR and PF4 with Implications for Vaccine-induced Immune Thrombotic Thrombocytopenia
+The Structure of ChAdOx1/AZD-1222 Reveals Interactions with CAR and PF4 with Implications for Vaccine-induced Immune Thrombotic Thrombocytopenia
+Deamidation drives molecular aging of the SARS-CoV-2 spike receptor-binding motif
+Generation of potent cellular and humoral immunity against SARS-CoV-2 antigens via conjugation to a polymeric glyco-adjuvant
+Evidence for Deleterious Original Antigenic Sin in SARS-CoV-2 Immune Response
+Evidence for Deleterious Antigenic Imprinting in SARS-CoV-2 Immune Response
+Reprogrammed tracrRNAs enable repurposing RNAs as crRNAs and detecting RNAs
+Reprogrammed tracrRNAs enable repurposing RNAs as crRNAs and detecting RNAs
+Impact of Glycosylation on SARS-CoV-2 Infection and Broadly Protective Vaccine Design
+Impact of glycosylation on a broad-spectrum vaccine against SARS-CoV-2
+Evidence of neutralizing antibodies against SARS-CoV-2 in domestic cats living with owners with a history of COVID-19 in Lima, Peru
+Variable Induction of Pro-inflammatory Cytokines by Commercial SARS CoV-2 Spike Protein Reagents: Potential Impacts of LPS on In Vitro Modeling and Pathogenic Mechanisms In Vivo
+Reduced sensitivity of infectious SARS-CoV-2 variant B.1.617.2 to monoclonal antibodies and sera from convalescent and vaccinated individuals
+Combination of a Sindbis-SARS-CoV-2 spike vaccine and αOX40 antibody elicits protective immunity against SARS-CoV-2 induced disease and potentiates long-term SARS-CoV-2-specific humoral and T-cell immunity
+Combination of a Sindbis-SARS-CoV-2 spike vaccine and αOX40 antibody elicits protective immunity against SARS-CoV-2 induced disease and potentiates long-term SARS-CoV-2-specific humoral and T-cell immunity
+Mutational hotspot in the SARS-CoV-2 Spike protein N-terminal domain conferring immune escape potential
+Decomposition of the SARS-CoV-2-ACE2 interface reveals a common trend among emerging viral variants
+Broadening a SARS-CoV-1 neutralizing antibody for potent SARS-CoV-2 neutralization through directed evolution
+Antibody Display of cell surface receptor Tetraspanin12 and SARS-CoV-2 spike protein
+SARS-CoV-2-specific memory B cells can persist in the elderly despite loss of neutralising antibodies
+Functional characterization of SARS-CoV-2 vaccine elicited antibodies in immunologically naive and pre-immune humans
+Accelerated Antibody Discovery Targeting the SARS-CoV-2 Spike Protein for COVID-19 Therapeutic Potential
+SARS-CoV-2 cell-to-cell spread occurs rapidly and is insensitive to antibody neutralization
+SARS-CoV-2 Spreads through Cell-to-Cell Transmission
+Efficient discovery of potently neutralizing SARS-CoV-2 antibodies using LIBRA-seq with ligand blocking
+Efficient discovery of potently neutralizing SARS-CoV-2 antibodies using LIBRA-seq with ligand blocking
+Efficacy of ancestral receptor-binding domain, S1 and trimeric spike protein vaccines against SARS-CoV-2 variants B.1.1.7, B.1.351, and B.1.617.1
+Visualization of SARS-CoV-2 infection dynamic
+Human single-chain antibodies neutralize SARS-CoV-2 variants by engaging an essential epitope of the spike: a new weapon against COVID-19
+Human inhalable antibody fragments neutralizing SARS-CoV-2 variants for COVID-19 therapy
+E156/G and Arg158, Phe-157/del mutation in NTD of spike protein in B.1.167.2 lineage of SARS-CoV-2 leads to immune evasion through antibody escape
+E156G and Arg158, Phe-157/del mutation in NTD of spike protein in B.1.617.2 lineage of SARS-CoV-2 leads to immune evasion through antibody escape
+E156G and Arg158, Phe-157/del mutation in NTD of spike protein in B.1.617.2 lineage of SARS-CoV-2 leads to immune evasion through antibody escape
+Mapping Potential Antigenic Drift Sites (PADS) on SARS-CoV-2 Spike in Continuous Epitope-Paratope Space
+Single domain shark VNAR antibodies neutralize SARS-CoV-2 infection in vitro
+The ChAdOx1 vectored vaccine, AZD2816, induces strong immunogenicity against SARS-CoV-2 B.1.351 and other variants of concern in preclinical studies.
+The ChAdOx1 vectored vaccine, AZD2816, induces strong immunogenicity against SARS-CoV-2 Beta (B.1.351) and other variants of concern in preclinical studies.
+Intranasal administration of a monoclonal neutralizing antibody protects mice against SARS-CoV-2 infection
+Oral subunit SARS-CoV-2 vaccine induces systemic neutralizing IgG, IgA and cellular immune responses and can boost neutralizing antibody responses primed by an injected vaccine
+Second Generation Antibodies Neutralize Emerging SARS-CoV-2 Variants of Concern
+High-affinity, neutralizing antibodies to SARS-CoV-2 can be made in the absence of T follicular helper cells
+B.1.1.7 and B.1.351 SARS-CoV-2 variants display enhanced Spike-mediated fusion
+SARS-CoV-2 Alpha, Beta and Delta variants display enhanced Spike-mediated Syncytia Formation
+A combination of RBD and NTD neutralizing antibodies limits the generation of SARS-CoV-2 spike neutralization-escape mutants
+Control of SARS-CoV-2 infection after Spike DNA or Spike DNA+Proteinco-immunization in rhesus macaques
+COVID-eVax, an electroporated plasmid DNA vaccine candidate encoding the SARS-CoV-2 Receptor Binding Domain, elicits protective immune responses in animal models of COVID-19
+COVID-eVax, an electroporated plasmid DNA vaccine candidate encoding the SARS-CoV-2 Receptor Binding Domain, elicits protective immune responses in animal models of COVID-19
+A SARS-CoV-2 spike ferritin nanoparticle vaccine protects against heterologous challenge with B.1.1.7 and B.1.351 virus variants in Syrian golden hamsters
+Designing a Novel Multi-Epitope Vaccine against SARS-CoV-2; Implication for Viral Binds and Fusion Inhibition through Inducing Neutralizing Antibodies
+A novel bivalent DNA vaccine encoding both spike protein receptor-binding domain and nucleocapsid protein of SARS-CoV-2 to elicit T cell and neutralising antibody responses that cross react with variants
+Structure and computation-guided design of a mutation-integrated trimeric RBD candidate vaccine with broad neutralization against SARS-CoV-2
+Differences in IgG antibody responses following BNT162b2 and mRNA-1273 Vaccines
+Detection of antibodies neutralizing historical and emerging SARS-CoV-2 strains using a thermodynamically coupled de novo biosensor system
+Anti-prothrombin autoantibodies enriched after infection with SARS-CoV-2 and influenced by strength of antibody response against SARS-CoV-2 proteins
+Anti-prothrombin autoantibodies enriched after infection with SARS-CoV-2 and influenced by strength of antibody response against SARS-CoV-2 proteins
+Escherichia coli recombinant expression of SARS-CoV-2 protein fragments.
+E484K and N501Y SARS-CoV 2 Spike Mutants Increase ACE2 Recognition but Reduce Affinity for Neutralizing Antibody
+Engineered chimeric T cell receptor fusion construct (TRuC)-expressing T cells prevent translational shutdown in SARS-CoV-2-infected cells
+A bacterial extracellular vesicle-based intranasal vaccine against SARS-CoV-2
+A bacterial extracellular vesicle-based intranasal vaccine against SARS-CoV-2 protects against disease and elicits neutralizing antibodies to wild-type virus and Delta variant
+A bifluorescent-based assay for the identification of neutralizing antibodies against SARS-CoV-2 variants of concern in vitro and in vivo
+Rapid determination of the wide dynamic range of SARS-CoV-2 Spike T cell responses in whole blood of vaccinated and naturally infected
+Neutralizing antibody 5-7 defines a distinct site of vulnerability in SARS-CoV-2 spike N-terminal domain
+Highly-Neutralizing COVID-19-Convalescent-Plasmas Potently Block SARS-CoV-2 Replication and Pneumonia in Syrian Hamsters.
+Qualification of ELISA and neutralization methodologies to measure SARS-CoV-2 humoral immunity using human clinical samples
+SARS-CoV-2 Lambda Variant Remains Susceptible to Neutralization by mRNA Vaccine-elicited Antibodies and Convalescent Serum
+A cGAMP-containing hydrogel for prolonged SARS-CoV-2 RBD subunit vaccine exposure induces a broad and potent humoral response
+A SARS-CoV-2 nucleocapsid protein TR-FRET assay amenable to high-throughput screening
+Predicted Impact of the Viral Mutational Landscape on the Cytotoxic Response against SARS-CoV-2
+Immunisation of ferrets and mice with recombinant SARS-CoV-2 spike protein formulated with Advax-SM adjuvant protects against COVID-19 infection
+Broadly neutralizing antibodies to SARS-related viruses can be readily induced in rhesus macaques
+Receptor-binding domain recombinant protein RBD219-N1C1 on alum-CpG induces broad protection against SARS-CoV-2 variants of concern
+Structure of a germline-like human antibody defines a neutralizing epitope on the SARS-CoV-2 spike NTD
+Atomistic Simulations and Deep Mutational Scanning of Protein Stability and Binding Interactions in the SARS-CoV-2 Spike Protein Complexes with Nanobodies: Molecular Determinants of Mutational Escape Mechanisms
+Reduced neutralization of SARS-CoV-2 B.1.617 variant by inactivated and RBD-subunit vaccine
+Therapeutic efficacy of CT-P59 against P.1 variant of SARS-CoV-2
+The SARS-CoV-2 spike reversibly samples an open-trimer conformation exposing novel epitopes
+SARS-CoV-2 Spike Protein Mutations and Escape from Antibodies: a Computational Model of Epitope Loss in Variants of Concern
+Pathogenic and transcriptomic differences of emerging SARS-CoV-2 variants in the Syrian golden hamster model
+Immunogenicity and pre-clinical efficacy of an OMV-based SARS-CoV-2 vaccine
+A modular protein subunit vaccine candidate produced in yeast confers protection against SARS-CoV-2 in non-human primates
+Xeno-nucleic Acid (XNA) 2'-Fluoro-Arabino Nucleic Acid (FANA) Aptamers to the Receptor Binding Domain of SARS-CoV-2 S Protein Block ACE2 Binding
+Visualizing Amino Acid Substitutions in a Physicochemical Vector Space
+Visualizing Amino Acid Substitutions in a Physicochemical Vector Space
+Molecular evolution and structural analyses of the spike glycoprotein from Brazilian SARS-CoV-2 genomes: the impact of the fixation of selected mutations
+Mutation-induced Changes in the Receptor-binding Interface of the SARS-CoV-2 Delta Variant B.1.617.2 and Implications for Immune Evasion
+SARS-CoV-2 Spike Pseudoviruses: A Useful tool to study virus entry and address emerging neutralization escape phenotypes
+Key substitutions in the spike protein of SARS-CoV-2 variants can predict resistance to monoclonal antibodies, but other substitutions can modify the effects
+Discovery of nanobodies against SARS-CoV-2 and an uncommon neutralizing mechanism
+Distinct shifts in site-specific glycosylation pattern of SARS-CoV-2 spike proteins associated with arising mutations in the D614G and Alpha variants
+Cornering an Ever-Evolving Coronavirus: TATX-03, a fully human synergistic multi-antibody cocktail targeting the SARS-CoV-2 Spike Protein with in vivo efficacy
+A single oral immunization with a replication-competent adenovirus-vectored vaccine protects mice from influenza respiratory infection
+Multivariate mining of an alpaca immune repertoire identifies potent cross-neutralising SARS-CoV-2 nanobodies
+Mutations in two SARS-CoV-2 variants of concern reflect two distinct strategies of antibody escape
+Immunization with synthetic SARS-CoV-2 S glycoprotein virus-like particles protects Macaques from infection
+Protection of human ACE2 transgenic Syrian hamsters from SARS CoV-2 variants by human polyclonal IgG from hyper-immunized transchromosomic bovines
+SARS-CoV-2 Lambda variant exhibits higher infectivity and immune resistance
+Structural basis for recognition of two HLA-A2-restricted SARS-CoV-2 spike epitopes by public and private T cell receptors
+Spike protein multiorgan tropism suppressed by antibodies targeting SARS-CoV-2
+Structures of SARS-CoV-2 B.1.351 neutralizing antibodies provide insights into cocktail design against concerning variants
+MVsim: a toolset for quantifying and designing multivalent interactions
+Regional Variant Analysis of Spike Glycoprotein Mutations of SARS-CoV-2 and Its Implications in COVID-19 Pandemic Control
+Structural definition of a pan-sarbecovirus neutralizing epitope on the spike S2 subunit.
+Vaccinia virus-based vaccines confer protective immunity against SARS-CoV-2 virus in Syrian hamsters
+Structural Basis and Mode of Action for Two Broadly Neutralizing Antibodies Against SARS-CoV-2 Emerging Variants of Concern
+Two-dimensional multiplexed assay for rapid and deep SARS-CoV-2 serology profiling and for machine learning prediction of neutralization capacity
+Llamanade: an open-source computational pipeline for robust nanobody humanization
+Limited variation between SARS-CoV-2-infected individuals in domain specificity and relative potency of the antibody response against the spike glycoprotein
+Vaccination with B.1.1.7, B.1.351 and P.1 variants protects mice from challenge with wild type SARS-CoV-2
+The Inherent Flexibility of Receptor Binding Domains in SARS-CoV-2 Spike Protein
+The Inherent Flexibility of Receptor Binding Domains in SARS-CoV-2 Spike Protein
+High genetic barrier to escape from human polyclonal SARS-CoV-2 neutralizing antibodies
+Induction of cross-reactive antibody responses against the RBD domain of the spike protein of SARS-CoV-2 by commensal microbiota
+Induction of cross-reactive antibody responses against the RBD domain of the spike protein of SARS-CoV-2 by commensal microbiota
+Fully Human Antibody Immunoglobulin from Transchromosomic Bovines is Potent Against SARS-CoV-2 Variant Pseudoviruses
+Broad neutralizing nanobody against SARS-CoV-2 engineered from pre-designed synthetic library
+Ability of nucleoside-modified mRNA to encode HIV-1 envelope trimer nanoparticles
+A broadly neutralizing biparatopic Nanobody protects mice from lethal challenge with SARS-CoV-2 variants of concern
+Cryo-EM structure determination of small proteins by nanobody-binding scaffolds (Legobodies)
+An ultrapotent neutralizing bispecific antibody with broad spectrum against SARS-CoV-2 variants
+Molecular basis of immune evasion by the delta and kappa SARS-CoV-2 variants
+Molecular basis of immune evasion by the delta and kappa SARS-CoV-2 variants
+Molecular mimicry between Spike and human thrombopoietin may induce thrombocytopenia in COVID-19
+Spike mimicry of thrombopoietin may induce thrombocytopenia in COVID-19
+Hybrid immunity improves B cell frequency, antibody potency and breadth against SARS-CoV-2 and variants of concern
+SARS-CoV-2 spike opening dynamics and energetics reveal the individual roles of glycans and their collective impact
+SARS-CoV-2 Neutralization in Commercial Lots of Plasma-derived Immunoglobulin
+SARS-CoV-2 Neutralization in Commercial Lots of Plasma-derived Immunoglobulin
+Optimization of Non-Coding Regions Improves Protective Efficacy of an mRNA SARS-CoV-2 Vaccine in Nonhuman Primates
+Comparison of Wild Type DNA Sequence of Spike Protein from SARS-CoV-2 with Optimized Sequence on The Induction of Protective Responses Against SARS-Cov-2 Challenge in Mouse Model
+Peptide Scanning of SARS-CoV and SARS-CoV-2 Spike Protein Subunit 1 Reveals Potential Additional Receptor Binding Sites
+Mutations in SARS-CoV-2 Variants Modulate the Microscopic Dynamics of Neutralizing Antibodies
+Molecular basis of a dominant SARS-CoV-2 Spike-derived epitope presented by HLA-A*02:01 recognised by a public TCR
+Membrane fusion and immune evasion by the spike protein of SARS-CoV-2 Delta variant
+Pseudotyped Bat Coronavirus RaTG13 is efficiently neutralised by convalescent sera from SARS-CoV-2 infected Patients
+Protein-based RBD-C-tag COVID-19 Vaccination Candidate Elicits Protection Activity against SARS-COV-2 Variant Infection
+Modeling Coronavirus Spike Protein Dynamics: Implications for Immunogenicity and Immune Escape
+The SARS-CoV-2 Delta variant is poised to acquire complete resistance to wild-type spike vaccines
+mRNA Vaccination Induces Durable Immune Memory to SARS-CoV-2 with Continued Evolution to Variants of Concern
+Directing an mRNA-LNP vaccine toward lymph nodes improves humoral and cellular immunity against SARS-CoV-2
+Yeast-expressed Recombinant SARS-CoV-2 Receptor Binding Domain, RBD203-N1 as a COVID-19 Protein Vaccine Candidate
+Effects of Spike Mutations in SARS-CoV-2 Variants of Concern on Human or Animal ACE2-Mediated Virus Entry and Neutralization
+Single-shot rAAV5-based Vaccine Provides Long-term Protective Immunity against SARS-CoV-2 and Its Variants
+The Lambda variant of SARS-CoV-2 has a better chance than the Delta variant to escape vaccines
+An Intranasal OMV-based vaccine induces high mucosal and systemic protecting immunity against a SARS-CoV-2 infection
+An Intranasal OMV-based vaccine induces high mucosal and systemic protecting immunity against a SARS-CoV-2 infection
+Structural remodeling of SARS-CoV-2 spike protein glycans reveals the regulatory roles in receptor binding affinity
+Structural remodeling of SARS-CoV-2 spike protein glycans reveals the regulatory roles in receptor binding affinity
+Epitopedia: identifying molecular mimicry of known immune epitopes
+The pigtail macaque (Macaca nemestrina) model of COVID-19 reproduces diverse clinical outcomes and reveals new and complex signatures of disease
+Epistasis at the SARS-CoV-2 RBD Interface and the Propitiously Boring Implications for Vaccine Escape
+Altered interaction between RBD and ACE2 receptor contributes towards the increased transmissibility of SARS CoV-2 delta, kappa, beta, and gamma strains with RBD double mutations.
+Subtle immunological differences in mRNA-1273 and BNT162b2 COVID-19 vaccine induced Fc-functional profiles
+Absence of severe COVID-19 in patients with clonal mast cells activation disorders: effective anti-SARS-CoV-2 immune response.
+Nanobody-Functionalized Cellulose for Capturing and Containing SARS-CoV-2
+Structural and Biochemical Rationale for Enhanced Spike Protein Fitness in Delta and Kappa SARS-CoV-2 Variants
+Characterization of SARS-CoV-2 variants B.1.617.1 (Kappa), B.1.617.2 (Delta) and B.1.618 on cell entry, host range, and sensitivity to convalescent plasma and ACE2 decoy receptor
+SARS-CoV-2 infection activates dendritic cells via cytosolic receptors rather than extracellular TLRs
+Network analysis outlines strengths and weaknesses of emerging SARS-CoV-2 Spike variants
+ScanNet: An interpretable geometric deep learning model for structure-based protein binding site prediction
+The vaccinia-based Sementis Copenhagen Vector COVID-19 vaccine induces broad and durable cellular and humoral immune responses
+Increased neutralization of SARS-CoV-2 Delta variant by nanobody (Nb22) and the structural basis
+No substantial pre-existing B cell immunity against SARS-CoV-2 in healthy adults
+An anti-SARS-CoV-2 non-neutralizing antibody with Fc-effector function defines a new NTD epitope and delays neuroinvasion and death in K18-hACE2 mice
+Targeted isolation of panels of diverse human broadly neutralizing antibodies against SARS-like viruses
+A thermostable oral SARS-CoV-2 vaccine induces mucosal and protective immunity
+An adjuvanted SARS-CoV-2 RBD nanoparticle elicits neutralizing antibodies and fully protective immunity in aged mice
+Intranasal administration of a VLP-based vaccine against COVID-19 induces neutralizing antibodies against SARS-CoV-2 and Variants of Concerns
+Therapeutic efficacy of an oral nucleoside analog of remdesivir against SARS-CoV-2 pathogenesis in mice.
+Therapeutic efficacy of an oral nucleoside analog of remdesivir against SARS-CoV-2 pathogenesis in mice.
+Therapeutic efficacy of an oral nucleoside analog of remdesivir against SARS-CoV-2 pathogenesis in mice.
+Structure-activity relationships of B.1.617 and other SARS-CoV-2 spike variants
+Specificity and sensitivity of an RNA targeting type III CRISPR complex coupled with a NucC endonuclease effector
+Rapid Identification of Neutralizing Antibodies against SARS-CoV-2 Variants by mRNA Display
+Synthetic Multiantigen MVA Vaccine COH04S1 Protects Against SARS-CoV-2 in Syrian Hamsters and Non-Human Primates
+Anti-SARS-CoV-2 IgG and IgA antibodies in COVID-19 convalescent plasma do not facilitate antibody-dependent enhance of viral infection.
+Humoral immune responses against seasonal coronaviruses predict efficiency of SARS-CoV-2 spike targeting, FcγR activation, and corresponding COVID-19 disease severity
+Neutralizing antibody-independent immunity to SARS-CoV-2 in hamsters and hACE-2 transgenic mice immunized with a RBD/Nucleocapsid fusion protein
+ZRC3308 monoclonal antibody cocktail shows protective efficacy in Syrian hamsters against SARS-CoV-2 infection
+The nuts and bolts of SARS-CoV-2 Spike Receptor Binding Domain heterologous expression
+SARS-CoV-2 preS dTM vaccine booster candidates increase functional antibody responses and cross-neutralization against SARS-CoV-2 variants of concern in non-human primates
+Identification of HLA-A*24:02-restricted CTL candidate epitopes derived from the non-structural polyprotein 1a of SARS-CoV-2 and analysis of their conservation using the mutation database of SARS-CoV-2 variants
+Personal care formulations demonstrate virucidal efficacy against multiple SARS-CoV-2 variants of concern: implications for hand hygiene
+Broad ultra-potent neutralization of SARS-CoV-2 variants by monoclonal antibodies specific to the tip of RBD
+Viral replication in human macrophages enhances an inflammatory cascade and interferon driven chronic COVID-19 in humanized mice.
+ChAdOx1 nCoV-19 (AZD1222) vaccine elicits monoclonal antibodies with potent cross-neutralizing activity against SARS-CoV-2 viral variants
+Structural insights of a highly potent pan-neutralizing SARS-CoV-2 human monoclonal antibody
+Structural insights of a highly potent pan-neutralizing SARS-CoV-2 human monoclonal antibody
+Use of eVLP-based vaccine candidates to broaden immunity against SARS-CoV-2 variants
+A combination of two human neutralizing antibodies prevents SARS-CoV-2 infection in rhesus macaques
+Protection of Hamsters Challenged with SARS-CoV-2 Variants of Concern by Two Doses of MVC-COV1901 Vaccine Followed by a Single Dose of Beta Variant Version of MVC-COV1901
+Protection of Hamsters Challenged with SARS-CoV-2 Variants of Concern by Two Doses of MVC-COV1901 Vaccine Followed by a Single Dose of Beta Variant Version of MVC-COV1901
+SARS-CoV-2 Beta variant infection elicits potent lineage-specific and cross-reactive antibodies
+Ad26.COV2.S Prevents SARS-CoV-2 Induced Pathways of Inflammation and Thrombosis in Hamsters
+Structure selected RBM immunogens prime polyclonal memory responses that neutralize SARS-CoV-2 variants of concern
+B.1.617.3 SARS CoV-2 spike E156G/Δ157-158 mutations contribute to reduced neutralization sensitivity and increased infectivity
+Immunogenicity of trimetric spike protein associated to Poly(I:C) plus Alum
+Immunogenicity of SARS-CoV-2 trimetric spike protein associated to Poly(I:C) plus Alum
+SARS-CoV-2 hijacks neutralizing dimeric IgA for enhanced nasal infection and injury
+Immunodominant and neutralizing linear B cell epitopes spanning the spike and membrane proteins of Porcine Epidemic Diarrhea Virus
+Comprehensive characterization of the antibody responses to SARS-CoV-2 Spike protein after infection and/or vaccination
+Non-invasive Imaging of Sense of Smell by Tracking the Voltage-Gated Sodium Channel NaV1.7
+A SARS-CoV-2 variant elicits an antibody response with a shifted immunodominance hierarchy
+AUG-3387, a Human-Derived Monoclonal Antibody Neutralizes SARS-CoV-2 Variants and Reduces Viral Load from Therapeutic Treatment of Hamsters In Vivo
+SARS-CoV-2 spike protein induces abnormal inflammatory blood clots neutralized by fibrin immunotherapy
+The R346K Mutation in the Mu Variant of SARS-CoV-2 Alter the Interactions with Monoclonal Antibodies from Class 2: A Free Energy of Perturbation Study
+Antibody-mediated broad sarbecovirus neutralization through ACE2 molecular mimicry
+A monoclonal antibody that neutralizes SARS-CoV-2 variants, SARS-CoV, and other sarbecoviruses
+A Rapid Bead-Based Assay For Screening Of SARS-CoV-2 Neutralising Antibodies
+Opsonization by non-neutralizing antibodies can confer protection to SARS-CoV-2 despite Spike-dependent modulation of phagocytosis
+Boosting of SARS-CoV-2 immunity in nonhuman primates using an oral rhabdoviral vaccine
+Plant-based production of SARS-CoV-2 antigens for use in a subunit vaccine
+Preclinical Efficacy of IMM-BCP-01, a Highly Active Patient-Derived Anti-SARS-CoV-2 Antibody Cocktail
+Preparation of ingestible antibodies to neutralize the binding of SarsCoV2 RBD (receptor binding domain) to human ACE2 Receptor
+Neutralization of Mu and C.1.2 SARS-CoV-2 Variants by Vaccine-elicited Antibodies in Individuals With and Without Previous History of Infection
+An intranasally administrated SARS-CoV-2 beta variant subunit booster vaccine prevents beta variant viral replication in rhesus macaques
+Nasal prevention of SARS-CoV-2 infection by intranasal influenza-based boost vaccination
+The humanized nanobody RBD-1-2G tolerates the spike N501Y mutation to neutralize SARS-CoV-2
+COVID 19 breakthrough infection risk: a simple physical model describing the dependence on antibody concentration
+Nanobodies recognizing conserved hidden clefts of all SARS-CoV-2 spike variants

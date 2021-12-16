@@ -5,5 +5,9 @@ keywords/__pycache__
 keywords/.pytest_cache
 keywords/tests/__pycache__
 paperscraper/.ipynb_checkpoints/
-paperscraper/check_coverage.ipynb
+paperscraper/__pycache__
 paperscraper/testfile.ipynb
+paperscraper/biorxiv.ipynb
+.ipynb_checkpoints/Untitled-checkpoint.ipynb
+paperscraper/check_coverage.ipynb
+
