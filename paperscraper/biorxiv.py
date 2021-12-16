@@ -58,7 +58,10 @@ class XRXivQuery:
                 items are lists themselves, they will be OR separated.
             fields (List[str], optional): fields to be used in the query search
                 Defaults to None, a.k.a. search in all fields excluding date.
-
+            jsonl (Bool, optional): boolean to indicate whether a jsonl file of
+                the results should be produced
+            jsonl (Bool, optional): boolean to indicate whether txt files of
+                the titles and urls should be produced
         Returns:
             List[dict]: a list of papers associated to the query.
         """
@@ -82,15 +85,19 @@ class XRXivQuery:
             hits = hits_per_field[0]
             for single_hits in hits_per_field[1:]:
                 hits |= single_hits
-        output = self.df[hits].to_dict('records')
+        results = self.df[hits].to_dict('records')
+        # This step is to eliminate duplicates in the results which
+        # I don't know why
         list_of_titles = []
         list_of_doi = []
-        for _ in output:
-            list_of_titles.append(_["title"])
+        output = []
+        for _ in results:
             if _["doi"] is not None:
                 doi = _["doi"].split("\n")[0]
                 if doi not in list_of_doi:
                     list_of_doi.append(doi)
+                    list_of_titles.append(_["title"])
+                    output.append(_)
         if jsonl is True:
             with open('biorxiv_results.jsonl', "w") as f:
                 for paper in output:
@@ -103,9 +110,13 @@ class XRXivQuery:
                     f.write(str(t) + "\n")
             with open('biorxiv_dois.txt', "w") as f:
                 for doi in list_of_doi:
-                    f.write('https://doi.org/'+str(doi) + "\n")
+                    f.write('https://www.biorxiv.org/content/'
+                            + str(doi) + '.full' + "\n")
         return output
 
 
+# This biorxiv.jsonl is just a subset of the large json file
+# containing all results, I am still working on the code to
+# download the whole biorxiv database
 querier = XRXivQuery('biorxiv.jsonl')
 biorxiv_results = querier.search_keywords(txt=True, jsonl=True)
