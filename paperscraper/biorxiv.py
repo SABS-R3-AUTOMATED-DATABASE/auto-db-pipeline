@@ -1,14 +1,36 @@
-"""Query dumps from bioRxiv and medRXiv."""
+"""Dump bioRxiv data and query dumps from bioRxiv."""
 import logging
 import sys
 from typing import List, Union
 import pandas as pd
+import json
+import os
+from tqdm import tqdm
+from paperscraper.xrxiv.xrxiv_api import BioRxivApi
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-class XRXivQuery:
+def biorxiv(save_path: str = 'biorxiv.jsonl'):
+    """Fetches all papers from biorxiv until current date, stores them in jsonl
+    format in save_path.
+    Args:
+        save_path (str, optional): Path where the dump is stored.
+            Defaults to biorxiv.jsonl to be used in .
+    """
+    # create API client
+    api = BioRxivApi()
+
+    # dump all papers
+    with open(save_path, "w") as fp:
+        for index, paper in enumerate(tqdm(api.get_papers())):
+            if index > 0:
+                fp.write(os.linesep)
+            fp.write(json.dumps(paper))
+
+
+class bioRxivQuery:
     """Query class."""
 
     def __init__(
@@ -115,8 +137,10 @@ class XRXivQuery:
         return output
 
 
+# This line is to download the new jsonl file containing all
+# papers from biorxiv, it takes 1 hour or so
+# biorxiv()
 # This biorxiv.jsonl is just a subset of the large json file
-# containing all results, I am still working on the code to
-# download the whole biorxiv database
-querier = XRXivQuery('biorxiv.jsonl')
+# containing all results
+querier = bioRxivQuery('biorxiv.jsonl')
 biorxiv_results = querier.search_keywords(txt=True, jsonl=True)
