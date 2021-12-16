@@ -1,3 +1,5 @@
+# NOTE function too long, need to break up into smaller ones (will help with avoiding repeating code for PDB_to_seq script too)
+
 
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
@@ -45,7 +47,6 @@ def verify_antibody(verified_pdb_ids):
                                               overwrite=True, pdir='temp_pdb')
 
             # get sequence from PDB file using SeqIO
-            # NOTE hide stdout warnings PDB? messy output
             record_ids = []
             record_seqs = []
             for record in SeqIO.parse(pdb_file, 'pdb-atom'):
@@ -83,6 +84,7 @@ def verify_antibody(verified_pdb_ids):
                 verified_antibodies.append(pdb_id)
 
             # close temp files/pdb dirs and remove before next iteration
+            # results wrong if this isn't done
             anarci_input.close()
             anarci_output.close()
             os.remove('anarci_input.fasta')
