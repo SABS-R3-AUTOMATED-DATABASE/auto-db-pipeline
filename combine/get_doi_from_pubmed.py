@@ -82,7 +82,7 @@ def pubmed_papers_and_pt(
     *args,
     **kwargs
     ):
-    import pandas as pd
+    import pandas as pd  # NOTE take import statement out of function
     """
     Search for papers and preprints on PubMed
     Returns:
@@ -111,8 +111,10 @@ def pubmed_papers_and_pt(
                                      **kwargs)
     output = papers+papers_pt
 
-    # The below is an important line of code that fixes the earlier 
+    # The below is an important line of code that fixes the earlier
     # problem where the journal field was missing
+    # NOTE more comments needed in section below
+    
     output = [{field: entry.get(field, None) for field in fields} for entry in output]
 
     list_of_titles = []
