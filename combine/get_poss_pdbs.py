@@ -58,7 +58,7 @@ def get_alpha_numeric(string):
     # alpha_numeric = re.split('[^a-zA-Z0-9]+', string)
     
     return alpha_numeric
-    
+
     
 
 def filter_pdb(string_list):

@@ -73,7 +73,7 @@ def pubmed_papers_and_pt(
          'inhibit', 'targeting'],
         ['heavy chain', 'complementarity determining region', 'gene',
          'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']],
-    fields: List = ["title", "authors", "date", "abstract", "journal", "doi"],
+    fields: list = ["title", "authors", "date", "abstract", "journal", "doi"],
     start_date: str = "None",
     end_date: str = "None",
     txt: bool = False,
@@ -81,7 +81,8 @@ def pubmed_papers_and_pt(
     csv: bool = False,
     *args,
     **kwargs
-):
+    ):
+    import pandas as pd
     """
     Search for papers and preprints on PubMed
     Returns:
@@ -109,6 +110,11 @@ def pubmed_papers_and_pt(
                                      fields, start_date, end_date, *args,
                                      **kwargs)
     output = papers+papers_pt
+
+    # The below is an important line of code that fixes the earlier 
+    # problem where the journal field was missing
+    output = [{field: entry.get(field, None) for field in fields} for entry in output]
+
     list_of_titles = []
     list_of_doi = []
     for _ in output:
@@ -131,14 +137,12 @@ def pubmed_papers_and_pt(
             for paper in output:
                 f.write(str(paper) + "\n")
     if csv is True:
-        import pandas as pd
-        for entry in output:
+        data = output.copy()
+        for entry in data: 
             entry["authors"] = '-'.join(entry["authors"])
-        data = [list(entry.values()) for entry in output]
-        data = pd.DataFrame(data, columns=output[0].keys())
+        data = {field: [entry.get(field, None) for entry in data] for field in fields} 
+        data = pd.DataFrame(data, columns=fields)
         data.to_csv("pubmed_results.csv", index=False)
-        for entry in output:
-            entry["authors"] = entry["authors"].split("-")
 
     return output
 
