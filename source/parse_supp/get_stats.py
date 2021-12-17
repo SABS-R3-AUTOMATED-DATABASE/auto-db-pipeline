@@ -30,7 +30,7 @@ def get_stats(filename):
     max_seq_sources = sorted(seq_count, key=seq_count.get, reverse=True)[:20]
     print('Papers with most contributions:')
     for source in max_seq_sources:
-        print('{}:{}'.format(seq_count[source], source))
+        print('{}: {}'.format(seq_count[source], source))
 
     return
 
