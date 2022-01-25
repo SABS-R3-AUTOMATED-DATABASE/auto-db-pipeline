@@ -1,10 +1,11 @@
+import pandas as pd
 from typing import List, Union
 from paperscraper.pubmed import get_query_from_keywords_and_date
 from paperscraper.pubmed import get_pubmed_papers
 
 
 def search_pubmed_papers(
-    keywords: List[Union[str, List[str]]]
+    keywords: list[Union[str, list[str]]]
     = [['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV',
         'SARS'],
         ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb',
@@ -18,7 +19,7 @@ def search_pubmed_papers(
     end_date: str = "None",
     *args,
     **kwargs
-):
+    ):
     """
     Combines get_pubmed_papers and dump_papers.
     For default setting, just import this function and use
@@ -82,7 +83,6 @@ def pubmed_papers_and_pt(
     *args,
     **kwargs
     ):
-    import pandas as pd  # NOTE take import statement out of function
     """
     Search for papers and preprints on PubMed
     Returns:
@@ -111,10 +111,8 @@ def pubmed_papers_and_pt(
                                      **kwargs)
     output = papers+papers_pt
 
-    # The below is an important line of code that fixes the earlier
+    # The below is an important line of code that fixes the earlier 
     # problem where the journal field was missing
-    # NOTE more comments needed in section below
-    
     output = [{field: entry.get(field, None) for field in fields} for entry in output]
 
     list_of_titles = []
@@ -125,7 +123,7 @@ def pubmed_papers_and_pt(
             doi = _["doi"].split("\n")[0]
             if doi not in list_of_doi:
                 list_of_doi.append(doi)
-    if txt is True:
+    if txt:
         with open('pubmed_results.txt', "w") as f:
             for t in list_of_titles:
                 t = t.replace('[', '')
@@ -134,11 +132,11 @@ def pubmed_papers_and_pt(
         with open('dois.txt', "w") as f:
             for doi in list_of_doi:
                 f.write('https://doi.org/'+str(doi) + "\n")
-    if jsonl is True:
+    if jsonl:
         with open('pubmed_results.jsonl', "w") as f:
             for paper in output:
                 f.write(str(paper) + "\n")
-    if csv is True:
+    if csv:
         data = output.copy()
         for entry in data: 
             entry["authors"] = '-'.join(entry["authors"])
@@ -147,6 +145,10 @@ def pubmed_papers_and_pt(
         data.to_csv("pubmed_results.csv", index=False)
 
     return output
+
+
+def load_data_from_csv():
+    pass
 
 
 # if __name__ == '__main__':
