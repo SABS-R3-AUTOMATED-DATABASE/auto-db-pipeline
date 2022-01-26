@@ -6,10 +6,31 @@ from ABDB import database  # import SAbDab database to search from
 import re
 
 
+def get_structure_from_sabdab(seq_input):
+
+    ''' Take sequence as input and return PDB structure from SAbDab '''
+
+    # get similar structures from SAbDAb
+    print('Getting templates...')
+    templates = database.get_template(seq=seq_input, n=1)
+
+    # extract first instance that matches a PDB ID in get_template output as first in list = highest identity %
+    pdb_id = re.search('[a-z0-9]{4}', str(templates))
+
+    # use match object to extract PDB ID as string (pdb_id.group(0))
+    pdb_structure = database.fetch(pdb_id.group(0))
+    print('Best PDB structure based on sequence identity is: ', pdb_structure)
+
+    # get top structure as object from SAbDab
+    print('Getting PDB structure...')
+    pdb_structure.get_structure()
+
+    return
+
+
 def get_structure_from_VH_VL(seq_dict):
 
-    ''' input: search in SAbDab for a certain antibody with sequence/s (VH/VL/both)
-        output: PDB structure from SAbDab or homology model/ABodyBuilder prediction '''
+    ''' Use if input sequence has both VH and VL seqs '''
 
     # validate sequences as AA sequences (i.e. correct input)
     if database._validate_sequence(seq_dict['VH']) is True:
@@ -18,20 +39,8 @@ def get_structure_from_VH_VL(seq_dict):
             # reformat sequences for input to SAbDab search
             seq_input = str(seq_dict['VH'] + '/' + seq_dict['VL'])
 
-            # get similar structures from SAbDAb
-            print('Getting templates...')
-            templates = database.get_template(seq=seq_input, n=1)
-
-            # extract first instance that matches a PDB ID in get_template output as first in list = highest identity %
-            pdb_id = re.search('[a-z0-9]{4}', str(templates))
-
-            # use match object to extract PDB ID as string (pdb_id.group(0))
-            pdb_structure = database.fetch(pdb_id.group(0))
-            print('Best PDB structure based on sequence identity is: ', pdb_structure)
-
-            # get top structure as object from SAbDab
-            print('Getting PDB structure...')
-            pdb_structure.get_structure()
+            # retrieve best structure from sabdab
+            get_structure_from_sabdab(seq_input)
 
     elif database._validate_sequence(seq_dict['VH']) or database._validate_sequence(seq_dict['VL']) is False:
         print('invalid input, not a protein sequence')
@@ -41,6 +50,7 @@ def get_structure_from_VH_VL(seq_dict):
 
 def get_structure_from_1_seq():
 
+    ''' Use if only a single input sequence (e.g. if no annotation in paper extracted from) '''
     # sometimes only one sequence may be extracted from paper (likely to be VH but code generalised to deal with whatever key given)
     # same method for extracting best structure as for when you have both VH and VL
 
@@ -49,20 +59,8 @@ def get_structure_from_1_seq():
         # input sequence to search sabdab is set as only one given in dict using .values() method
         seq_input = seq_dict.values()
 
-        # get similar structures from SAbDAb
-        print('Getting templates...')
-        templates = database.get_template(seq=seq_input, n=1)
-
-        # extract first instance that matches a PDB ID in get_template output as first in list = highest identity %
-        pdb_id = re.search('[a-z0-9]{4}', str(templates))
-
-        # use match object as string for PDB ID (pdb_id.group(0))
-        pdb_structure = database.fetch(pdb_id.group(0))
-        print('Best PDB structure based on sequence identity is: ', pdb_structure)
-
-        # get structure as object from SAbDab
-        print('Getting PDB structure...')
-        pdb_structure.get_structure()
+        # retrieve best structure from sabdab
+        get_structure_from_sabdab(seq_input)
 
     elif database._validate_sequence(seq_dict.values()) is False:
         print('invalid input, not a protein sequence')
