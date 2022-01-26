@@ -13,6 +13,8 @@ from Bio import BiopythonWarning
 warnings.simplefilter('ignore', BiopythonWarning)
 
 
+
+
 def pdb_to_seq(verified_antibodies):
 
     ''' PDB ID from paper used to find corresponding sequences from PDB server
