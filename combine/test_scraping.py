@@ -3,7 +3,7 @@ Unit tests of functions involved in the web-scraping.
 """
 import unittest
 import pdb_checker
-import scrape_support
+import support
 
 
 SKIP_SLOW_TESTS = True
@@ -27,7 +27,7 @@ class TestScraping(unittest.TestCase):
 
         correct_pdb_tuple = ('6VXX', '4IO4', '7LF4', '7THH', '7SJ7', '5ABC', '5abc')
 
-        filtered_pdb_tuple = tuple(scrape_support.filter_pdb_id(sample_paper_text))
+        filtered_pdb_tuple = tuple(support.filter_pdb_id(sample_paper_text))
 
         self.assertTupleEqual(correct_pdb_tuple, filtered_pdb_tuple)
 
@@ -43,7 +43,7 @@ class TestScraping(unittest.TestCase):
                             """
 
         correct_genbank_id_tuple = ('aaa98665.1', 'AAA98665.2', 'AAA98665.25', 'QGA67030.1')
-        filtered_genbank_id_tuple = tuple(scrape_support.filter_genbank_protein_id(sample_paper_text))
+        filtered_genbank_id_tuple = tuple(support.filter_genbank_protein_id(sample_paper_text))
 
         self.assertTupleEqual(correct_genbank_id_tuple, filtered_genbank_id_tuple)
 
@@ -55,11 +55,11 @@ class TestScraping(unittest.TestCase):
 
         sample_paper_texts_true = ["here is a (protein data bank-", "\nPDBID"]
         for sample_paper_text in sample_paper_texts_true:
-            self.assertTrue(scrape_support.pdb_check(sample_paper_text))
+            self.assertTrue(support.pdb_check(sample_paper_text))
 
         sample_paper_texts_true = ["protein data", "hello"]
         for sample_paper_text in sample_paper_texts_true:
-            self.assertFalse(scrape_support.pdb_check(sample_paper_text))
+            self.assertFalse(support.pdb_check(sample_paper_text))
 
 
     @unittest.skipIf(condition=SKIP_SLOW_TESTS, reason="This test has passed and is slow.")

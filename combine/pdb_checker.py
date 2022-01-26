@@ -8,17 +8,6 @@ from Bio.PDB.PDBList import PDBList
 
 TOP_NUM_AUTHORS = 3
 
-@cache
-def get_pdb_hash() -> dict:
-    """
-    Get a hash map of all the existing PDB IDs, such that an existing PDB will 
-    return True when looked up in the hash map. This allows for O(1) lookup. 
-    We cache this because this can take between 15-20 seconds to load all the existing PDBs.
-    """
-    pdbl = PDBList(verbose=False, obsolete_pdb="None")  # negligible time
-    hash_map = {pdb_id: True for pdb_id in pdbl.get_all_entries()}  # takes a while
-    return hash_map
-
 
 class PDBChecker:
     """
@@ -35,7 +24,7 @@ class PDBChecker:
         but this goes away by setting the `obsolte_pdb` parameter to some random string, which I made "None".
         """
         self.pdbl = PDBList(verbose=False, obsolete_pdb="None")
-        self.existing_pdbs = get_pdb_hash()
+        self.existing_pdbs = PDBChecker.get_pdb_hash()
 
     def get_actual(self, possible_pdbs: list, verbose=True) -> list:
         """
@@ -78,3 +67,15 @@ class PDBChecker:
             print("Top Authors scraped from PDB Database:", top_authors)
         return top_authors
     
+
+    @staticmethod
+    @cache
+    def get_pdb_hash() -> dict:
+        """
+        Get a hash map of all the existing PDB IDs, such that an existing PDB will 
+        return True when looked up in the hash map. This allows for O(1) lookup. 
+        We cache this because this can take between 15-20 seconds to load all the existing PDBs.
+        """
+        pdbl = PDBList(verbose=False, obsolete_pdb="None")  # negligible time
+        hash_map = {pdb_id: True for pdb_id in pdbl.get_all_entries()}  # takes a while
+        return hash_map
