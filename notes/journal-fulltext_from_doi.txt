@@ -1,0 +1,10 @@
+Biorxiv and medrxiv, we've solved those already. 
+Journal of virology, Oxford doesn't have institutional access (Cambridge does). 155 papers.
+Viruses: add '/htm' to redirect. 
+Vaccines: also add '/htm' to end of redirect. 
+The Journal of infectious diseases: no problem, except one paper only had pdf form available. 
+Advances in experimental medicine and biology, Springer: only pdf formats available, no full text webpages anywhere.
+Archives of virology, Springer: most papers checked only had pdf formats available, although one had a full version webpage (and immediately redirected to it)
+
+Checked down to and including "Cell host & microbe" using "2022_01_30" data. 
+

@@ -1,15 +1,9 @@
 """
 Module for getting papers from keywords.
-
 Simple implementation:
-
-``
-k2p = Keywords2Papers()
+```k2p = Keywords2Papers()
 pubmed_results = k2p.get_pubmed()
-biorxiv_results = k2p.get_biorxiv()
-``
-
-
+biorxiv_results = k2p.get_biorxiv()```
 """
 from typing import Union
 from datetime import date
@@ -20,6 +14,7 @@ from paperscraper.get_dumps.biorxiv import biorxiv
 from pandas import read_json
 from os.path import isfile
 
+# pylint: disable=dangerous-default-value
 
 KEYWORDS = [
             ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV', 'SARS'],
@@ -62,10 +57,9 @@ class Keywords2Papers:
 
     def get_pubmed(self, selected_date: str = None):
         selected_date = Keywords2Papers.get_default_date(selected_date)
-
         # Check if already exists, if so then load
         if Keywords2Papers.check_exists(FILENAME_PUBMED, selected_date):
-            self.pubmed_results = Keywords2Papers.load_output(FILENAME_PUBMED)
+            self.pubmed_results = Keywords2Papers.load_output(FILENAME_PUBMED, selected_date)
             return self.pubmed_results
 
         self.pubmed_results = Keywords2Papers.fetch_pubmed()
@@ -87,7 +81,7 @@ class Keywords2Papers:
 
         # If biorxiv_all does not exist, fetch (and store) it
         if not biorxiv_all_exists:
-            # Todo: See the issue, we can update it at this point.
+            # See the issue, we can update it at this point.
             Keywords2Papers.fetch_biorxiv_all()
 
         self.biorxiv_results = Keywords2Papers.fetch_biorxiv_local(selected_date)
@@ -111,8 +105,9 @@ class Keywords2Papers:
     def load_output(filename: str = None, selected_date: str = None):
         Keywords2Papers.check_filename(filename)
         selected_date = Keywords2Papers.get_default_date(selected_date)
+        filepath = Keywords2Papers.get_filepath(filename, selected_date)
 
-        df = read_json(path_or_buf=Keywords2Papers.get_filepath(filename),
+        df = read_json(path_or_buf=filepath,
                         lines=True, orient='records')
         output = df.to_dict(orient='records')
         return output
@@ -126,14 +121,12 @@ class Keywords2Papers:
 
     @staticmethod
     def check_filename(filename: str):
-
         if filename not in Keywords2Papers.valid_filenames:
             raise ValueError("Invalid filename. Please selected one of {valid_filenames}")
 
 
     @staticmethod
     def get_filepath(filename: str = None, selected_date: str = None) -> str:
-
         Keywords2Papers.check_filename(filename)
         selected_date = Keywords2Papers.get_default_date(selected_date)
 
@@ -231,8 +224,8 @@ class Keywords2Papers:
             AND/OR files containing relevant information
         """
 
-        papers_output = Keywords2Papers.__query_pubmed(keywords, fields, start_date, end_date)
-        papers_pt_output = Keywords2Papers.__query_pubmed(keywords+['AND preprint[pt]'],
+        papers_output = Keywords2Papers._query_pubmed(keywords, fields, start_date, end_date)
+        papers_pt_output = Keywords2Papers._query_pubmed(keywords+['AND preprint[pt]'],
                                                         fields, start_date, end_date)
         output = papers_output + papers_pt_output
 
@@ -244,7 +237,7 @@ class Keywords2Papers:
 
 
     @staticmethod
-    def __query_pubmed(
+    def _query_pubmed(
         keywords: list[Union[str, list[str]]] = KEYWORDS,
         fields: list = FIELDS,
         start_date: str = START_DATE,
@@ -274,16 +267,3 @@ class Keywords2Papers:
         output = get_pubmed_papers(query, fields)
         output = [{field: entry.get(field, None) for field in fields} for entry in output]
         return output
-
-
-def get_biorxiv_url(doi):
-    return f"https://www.biorxiv.org/content/{doi}.full"
-
-
-def get_pmc_url(doi: str) -> str:
-    return f"https://www.ncbi.nlm.nih.gov/pmc/articles/doi/{doi}"
-
-
-def get_doi_url(doi: str) -> str:
-    return f"https://doi.org/{doi}"
-
