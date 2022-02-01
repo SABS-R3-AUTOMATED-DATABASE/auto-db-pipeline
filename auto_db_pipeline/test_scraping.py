@@ -2,8 +2,7 @@
 Unit tests of functions involved in the web-scraping.
 """
 import unittest
-import pdb_checker
-import support
+import pdbcheck
 
 
 SKIP_SLOW_TESTS = True
