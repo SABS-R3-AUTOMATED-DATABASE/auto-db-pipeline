@@ -5,3 +5,6 @@ keywords/__pycache__
 keywords/.pytest_cache
 keywords/tests/__pycache__
 .vscode
+genbank/old_notebooks
+genbank/__pycache__
+genbank/elink.dtd

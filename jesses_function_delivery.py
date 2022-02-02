@@ -34,6 +34,7 @@ def return_authors(identifier, db='protein'):
 if __name__ == '__main__':
     id = 'NP_001098858.1'
     database = 'nucleotide'
+    database = 'protein'
 
     exists = does_id_exist(id, database)
     print(exists)
