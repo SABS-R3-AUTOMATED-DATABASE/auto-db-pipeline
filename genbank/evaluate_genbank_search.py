@@ -230,6 +230,6 @@ if __name__ == '__main__':
                'OR anti-Sars-Cov-2[All Fields]))'
     genbanksearch = GenbankSearch(keywords)
     protein_entries = genbanksearch(reduce_searches=50)
-    evaluation = EvaluateGenbankSearch('genbank/CoV-AbDab_181021.csv',
+    evaluation = EvaluateGenbankSearch('genbank/data/CoV-AbDab_181021.csv',
                                        protein_entries, keywords)
     evaluation(print_metrics=True, save_metrics=False)

@@ -29,7 +29,7 @@ class TestMineGenbank(unittest.TestCase):
         ]
 
         self.evaluation = evaluate_genbank_search.EvaluateGenbankSearch(
-                          'CoV-AbDab_181021.csv', self.protein_entries,
+                          'data/CoV-AbDab_181021.csv', self.protein_entries,
                           self.keywords)
         self.evaluation(print_metrics=False, save_metrics=False)
 
