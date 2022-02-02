@@ -20,6 +20,10 @@ RefSeq database link is here:
 https://www.ncbi.nlm.nih.gov/refseq/
 
 
+Good sumary on datatypes:
+https://community.gep.wustl.edu/repository/course_materials_WU/annotation/Genbank_Accessions.pdf
+
+
 electron microscopy data, e.g. EMD-7875
 
 
