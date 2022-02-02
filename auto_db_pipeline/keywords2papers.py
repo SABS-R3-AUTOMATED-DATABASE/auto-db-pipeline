@@ -5,6 +5,7 @@ Simple implementation:
 pubmed_results = k2p.get_pubmed()
 biorxiv_results = k2p.get_biorxiv()```
 """
+import re
 from typing import Union
 from datetime import date
 from paperscraper.pubmed import get_query_from_keywords_and_date
@@ -165,25 +166,21 @@ class Keywords2Papers:
         Args:
             fields (list[str], optional): fields to contained in the dump per
             paper.
-                Defaults to ['title', 'doi', 'authors', 'abstract',
-                'date', 'journal'].
+                Defaults to ['title', 'doi', 'authors', 'abstract', 'date', 'journal'].
             keywords (list[str, list[str]]): Items will be AND separated. If
                 items are lists themselves, they will be OR separated.
-
         Parameters:
             fields (list[str], optional): fields to be used in the query search
                 Defaults to None, a.k.a. search in all fields excluding date.
-
         Returns:
             list[dict]: a list of papers associated to the query.
         """
-
         fields = ["title", "abstract"]
         df_all = read_json(path_or_buf = Keywords2Papers.get_filepath(FILENAME_BIORXIV_ALL, selected_date),
-                              lines = True,
-                              orient = 'records')
+                              lines = True, orient = 'records')
         df_all["date"] = [date.strftime("%Y-%m-%d") for date in df_all["date"]]
 
+        # The below is copied almost exactly from: "paperscraper/xrxiv/xrxiv_query.py"
         hits_per_field = []
         for field in fields:
             field_data = df_all[field].str.lower()
@@ -205,6 +202,9 @@ class Keywords2Papers:
                 hits |= single_hits
 
         output = df_all[hits].to_dict('records')
+
+        output = Keywords2Papers.remove_bottom_dois(output)
+        output = Keywords2Papers.convert_biorxiv_authors(output)
 
         return output
 
@@ -232,6 +232,9 @@ class Keywords2Papers:
         # The below is an important line of code that fixes the earlier
         # problem where the journal field was missing
         output = [{field: entry.get(field, None) for field in fields} for entry in output]
+
+        output = Keywords2Papers.remove_bottom_dois(output)
+        output = Keywords2Papers.convert_pubmed_authors(output)
 
         return output
 
@@ -266,4 +269,37 @@ class Keywords2Papers:
                                                 end_date=end_date)
         output = get_pubmed_papers(query, fields)
         output = [{field: entry.get(field, None) for field in fields} for entry in output]
+        return output
+
+
+    @staticmethod
+    def remove_bottom_dois(output):
+        """
+        Get the first doi if there are multiple doi's split by lines.
+        """
+        for entry in output:
+            if entry['doi']:
+                entry['doi'] = entry['doi'].splitlines()[0]
+        return output
+
+
+    @staticmethod
+    def convert_biorxiv_authors(output):
+        """Reformat bioRxiv authors"""
+        for entry in output:
+            if entry['authors']:
+                author_list = entry['authors'].split(';')
+                entry['authors'] = [', '.join(author.replace(' ','').split(',')) for author in author_list]
+        return output
+
+
+    @staticmethod
+    def convert_pubmed_authors(output):
+        """Reformat pubmed authors"""
+        for entry in output:
+            if entry['authors']:
+                author_list = entry['authors']
+                author_list = [re.findall(r'[A-Z]{1}[a-z]*(?:-[A-Z]+[a-z]*)?', author) for author in author_list]
+                entry['authors'] = [author[-1] + ', ' + ''.join(
+                                    [firstname[0]+'.' for firstname in author[:-1]]) for author in author_list if author]
         return output

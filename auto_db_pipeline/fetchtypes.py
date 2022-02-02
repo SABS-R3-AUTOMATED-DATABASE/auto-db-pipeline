@@ -1,47 +1,24 @@
 """
 Attempts to obtain the Doi, pmid, and pmc for a paper.
 """
-import re
 import warnings
+import re
+import requests
 from metapub import PubMedFetcher
+from metapub.exceptions import MetaPubError
 from fetchtext import get_html
+class FetchTypes:
 
+    def __init__(self, doi):
+        self.doi = doi
+        self.pmid, self.pmc = None, None
+        self.found_metapub = None
+        self.invalid_doi = False
 
-    def retrieve_paper(self):
-        """
-        Retrieves the paper full-text dois for webscraping.
-        """
-        if not self.doi:
-            # Cannot proceed of no doi
-            if self.verbose:
-                print("DOI does not exist. Catastrophic failure.", end='\n\n')
-            self.url_doi = None
-            return  # empty return
-
-        self.get_url_doi()
-
-        if self.verbose:
-            print("Trying metapub fetch...")
+    def get_pmid_and_pmc(self, doi):
         self.try_metapub()
-
-        if not getattr(self, "found_metapub"):
-            # We only try the pubmed search `try_pubmed` if metapub at least partly fails.
-            # Therefore we are assuming that if metapub succeeds, it will always
-            # find the PMID and PMC if they exist. We should #test this.
-            if self.verbose:
-                print("Trying pubmed webscrape...")
-            self.try_pubmed()
-
-        if self.pmid:
-            self.get_url_pmid()
-        if self.pmc:
-            self.get_url_pmc()
-
-        if self.verbose:
-            print("DOI:", self.doi)
-            print("PMID:", self.pmid)
-            print("PMC:", self.pmc)
-
+        if self.found_metapub:
+            return
 
     def try_metapub(self):
         """
@@ -49,17 +26,33 @@ from fetchtext import get_html
         """
         try:
             article_fetch = PubMedFetcher().article_by_doi(self.doi)
-            setattr(self, "found_metapub", True)
+            if self.pmc and self.pmid:
+                self.found_metapub = True
             self.pmid = article_fetch.pmid
             self.pmc = article_fetch.pmc
 
-            if self.verbose:
-                if self.pmid and self.pmc:
-                    print("Metapub fetch completely succeeded. PMID and PMC found.", end='\n\n')
-        except Exception:
-            setattr(self, "found_metapub", False)
-            if self.verbose:
-                print("Metapub fetch at least partly failed.", end='\n\n')
+        except MetaPubError:
+            self.found_metapub = False
+
+        except AttributeError:
+            self.invalid_doi = True
+
+
+    def try_pmc_redirect(self):
+        request = requests.get(FetchTypes.get_url_pmc(self.doi))
+        if request.status_code == 404:
+            return
+        pattern = re.compile(r"(PMC\d+)(/)")
+        pattern_search = re.search(pattern, request.url)
+        if pattern_search:
+            self.pmc = pattern_search.group(1)
+
+
+    @staticmethod
+    def get_url_pmc(doi):
+        """Redirects to PMC"""
+        return f"https://www.ncbi.nlm.nih.gov/pmc/articles/doi/{doi}"
+
 
 
     def try_pubmed(self):
