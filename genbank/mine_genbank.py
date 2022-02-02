@@ -1,5 +1,4 @@
 from Bio import Entrez
-from Bio import Entrez
 
 
 class GenbankSearch:

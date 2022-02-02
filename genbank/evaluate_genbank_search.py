@@ -177,7 +177,7 @@ class EvaluateGenbankSearch:
 if __name__ == '__main__':
     keywords = '((Immunoglobulin[All Fields] OR antibody[All Fields] OR antibodies[All Fields] OR nanobody[All Fields] OR nanobodies[All Fields]) AND (COVID-19[All Fields] OR coronavirus[All Fields] OR Sars-Cov[All Fields] OR Mers-Cov[All Fields] OR SARS[All Fields] OR Sars-CoV-2[All Fields]) AND (neutralizing[All Fields] OR neutralize[All Fields] OR neutralisation[All Fields] OR bind[All Fields] OR inhibit[All Fields] OR anti-Sars-Cov-2[All Fields]))'
     genbanksearch = GenbankSearch(keywords)
-    protein_entries = genbanksearch(reduce_searches=True)
+    protein_entries = genbanksearch() # reduce_searches=True)
     evaluation = EvaluateGenbankSearch('genbank/CoV-AbDab_181021.csv',
                                         protein_entries, keywords)
     evaluation(print_metrics=True, save_metrics=False)
