@@ -1,27 +1,4 @@
 
-GenBank Accessions, e.g., MN495018. These are not just GenBank protein IDs without the '.version'.
-Accessions are defined here;
-https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html#:~:text=The%20unique%20identifier%20for%20a%20sequence%20record
-An example is here:
-https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html#AccessionA
-
-GenInfo Identifier
-https://www.ncbi.nlm.nih.gov/genbank/samplerecord/#:~:text=%22GenInfo-,Identifier,-%22%20sequence%20identification%20number%2C%20in%20this%20case%2C%20for%20the%20protein
-And here:
-https://www.ncbi.nlm.nih.gov/genbank/sequenceids/#:~:text=at%20different%20times.-,GI%20numbers,-A%20GI%20number
-
-
-PDB IDs with an underscore and a number at the end.
-
-
-RefSeq IDs begin with two letters followed by an underscore bar and six or more digits
-https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html#:~:text=digits%2C%20for%20example%3A-,NT_123456,-constructed%20genomic%20contigs
-RefSeq database link is here:
-https://www.ncbi.nlm.nih.gov/refseq/
-
-
-Good sumary on datatypes:
-https://community.gep.wustl.edu/repository/course_materials_WU/annotation/Genbank_Accessions.pdf
 
 
 electron microscopy data, e.g. EMD-7875
