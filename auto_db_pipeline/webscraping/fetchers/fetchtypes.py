@@ -6,7 +6,7 @@ import re
 import requests
 from metapub import PubMedFetcher
 from metapub.exceptions import MetaPubError
-from fetchtext import get_html
+from .fetchtext import get_html
 
 class FetchTypes:
     """
@@ -23,8 +23,6 @@ class FetchTypes:
         if not self.doi:
             return
         self.try_metapub()
-        if self.found_metapub:
-            return
         self.try_pmc_redirect()
         self.try_manual_pubmed()
 
@@ -34,8 +32,7 @@ class FetchTypes:
         """
         try:
             article_fetch = PubMedFetcher().article_by_doi(self.doi)
-            if self.pmc and self.pmid:
-                self.found_metapub = True
+            self.found_metapub = True
             self.pmid = article_fetch.pmid
             self.pmc = article_fetch.pmc
 

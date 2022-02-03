@@ -1,7 +1,10 @@
 SAbDab-master/
 old_keyword_files/
-.DS_Store
-__pycache__/
+
+**/.DS_Store
+**/__pycache__/
+**/temp.ipynb
+
 keywords/__pycache__
 keywords/.pytest_cache
 keywords/tests/__pycache__
@@ -10,5 +13,5 @@ paperscraper/.ipynb_checkpoints/
 paperscraper/check_coverage.ipynb
 paperscraper/testfile.ipynb
 data/biorxiv_all*.jsonl
-auto_db_pipeline/temp.ipynb
+
 

@@ -36,7 +36,9 @@ class Paper:
         self.doi()
         self.pmid()
         self.pmc()
+
         self._clear_caches()
+
 
     def _initialize_types(self, doi_string):
         """
@@ -48,6 +50,7 @@ class Paper:
         self.doi.set_doi(doi_string, self.journal)
         self.pmid.set_pmid(self.fetch.pmid)
         self.pmc.set_pmc(self.fetch.pmc)
+
 
     def _clear_caches(self):
         """
