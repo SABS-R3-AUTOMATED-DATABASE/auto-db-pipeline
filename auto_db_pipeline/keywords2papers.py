@@ -64,7 +64,7 @@ class Keywords2Papers:
             return self.pubmed_results
 
         self.pubmed_results = Keywords2Papers.fetch_pubmed()
-        Keywords2Papers.store_output(self.pubmed_results, FILENAME_PUBMED)
+        Keywords2Papers.store_output(self.pubmed_results, FILENAME_PUBMED, selected_date)
         return self.pubmed_results
 
 
@@ -86,7 +86,7 @@ class Keywords2Papers:
             Keywords2Papers.fetch_biorxiv_all()
 
         self.biorxiv_results = Keywords2Papers.fetch_biorxiv_local(selected_date)
-        Keywords2Papers.store_output(self.biorxiv_results, FILENAME_BIORXIV)
+        Keywords2Papers.store_output(self.biorxiv_results, FILENAME_BIORXIV, selected_date)
         return self.biorxiv_results
 
 
@@ -115,9 +115,9 @@ class Keywords2Papers:
 
 
     @staticmethod
-    def store_output(output: list[dict], filename: str):
+    def store_output(output: list[dict], filename: str, selected_date: str):
         Keywords2Papers.check_filename(filename)
-        dump_papers(output, Keywords2Papers.get_filepath(filename))
+        dump_papers(output, Keywords2Papers.get_filepath(filename, selected_date))
 
 
     @staticmethod
