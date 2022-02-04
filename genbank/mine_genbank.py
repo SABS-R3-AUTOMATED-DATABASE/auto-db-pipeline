@@ -38,16 +38,63 @@ class GenbankSearch:
         database
         '''
         if reduce_searches:
-            self.number_of_entries = reduce_searches
+            self.entires_to_retrieve = reduce_searches
+        else:
+            self.entires_to_retrieve = self.number_of_entries
 
         id_handle = Entrez.esearch(db=db, term=self.search_query,
-                                   retmax=self.number_of_entries)
+                                   retmax=self.entires_to_retrieve)
         record = Entrez.read(id_handle)
 
         # Entrez.efetch handles aproximately 25 searches per second
         entires_handle = Entrez.efetch(db=db, id=record['IdList'],
                                        rettype="gb", retmode="xml")
         self.entries = Entrez.read(entires_handle)
+
+    def classify_vh_vl(self):
+        '''
+        funtion that detects if sequence entries are heavy or light chains
+        '''
+        for entry in self.entries:
+            definition = entry['GBSeq_definition'].lower()
+            hc = ['heavy', 'alpha', 'delta', 'epsilon', 'gamma', 'mu']
+            lc = ['light', 'kappa', 'lambda']
+
+            if any(word in definition for word in hc):
+                entry['chain'] = 'heavy_chain'
+            elif any(word in definition for word in lc):
+                entry['chain'] = 'light_chain'
+            else:
+                entry['chain'] = 'unassigned'
+
+    def group_by_author_title(self):
+        '''
+        function that groups genbank entries that have the same author and
+        title into a list
+        '''
+        self.grouped_entries = []
+        grouped_entires = []
+
+        for entry in self.entries:
+            if entry not in grouped_entires:
+                authors = entry['GBSeq_references'][0]['GBReference_authors']
+                title = entry['GBSeq_references'][0]['GBReference_title']
+
+                group = []
+
+                for comparison in self.entries:
+
+                    comparison_info = comparison['GBSeq_references'][0]
+                    comparison_authors = comparison_info['GBReference_authors']
+                    comparison_title = comparison_info['GBReference_title']
+
+                    if (comparison_authors == authors
+                            and comparison_title == title):
+                        group.append(comparison)
+
+                        grouped_entires.append(comparison)
+
+                self.grouped_entries.append(group)
 
     def __call__(self, reduce_searches=False, db='protein'):
         '''
@@ -58,13 +105,12 @@ class GenbankSearch:
         '''
         self.get_number_of_entries(db)
         self.get_entries(reduce_searches, db)
-        return self.entries
+        self.classify_vh_vl()
+        self.group_by_author_title()
 
 # add function to join vl and vh
-# add functions given a code if this is a genbank id.
-# input: id, output Ture/False
-# add function given a genbank id to return authors.
-# input: id, output: list of authors
+# add functions to search entries desctiptions if covid is mentioned
+# add functions to populate a csv
 
 
 if __name__ == '__main__':
@@ -78,4 +124,4 @@ if __name__ == '__main__':
                'OR bind[All Fields] OR inhibit[All Fields] ' +\
                'OR anti-Sars-Cov-2[All Fields]))'
     genbanksearch = GenbankSearch(keywords)
-    protein_entries = genbanksearch()
+    genbanksearch(reduce_searches=50)
