@@ -5,6 +5,8 @@ from .webscraping.fetchers.fetchtypes import FetchTypes
 from .webscraping.fetchers.fetchtext import get_soup, get_text, get_html
 from .webscraping.papertypes import Doi, Pmid, Pmc
 
+# pylint: disable=too-few-public-methods
+
 class Paper:
     """
     Obtain the data on a paper.
@@ -24,35 +26,27 @@ class Paper:
 
         doi_string = paper_data['doi']
 
-        self.doi, self.pmid, self.pmc = Doi(), Pmid(), Pmc()
         self.fetch = FetchTypes(doi_string)
-        self._initialize_types(doi_string)
+
+        self.doi = Doi(doi_string, self.authors, self.journal)
+        self.pmid = Pmid(self.fetch.pmid, doi_string, self.authors)
+        self.pmc = Pmc(self.fetch.pmc, doi_string, self.authors)
 
 
     def __call__(self):
         """
         Run the web-scraping and get the information.
         """
-        self.doi()
-        self.pmid()
-        self.pmc()
-
-        self._clear_caches()
-
-
-    def _initialize_types(self, doi_string):
-        """
-        Initialize the types by running the FetchTypes class and
-        recording its results.
-        """
         self.fetch()
+        self.doi.interface()
+        self.pmid.interface()
+        self.pmc.interface()
 
-        self.doi.set_doi(doi_string, self.journal)
-        self.pmid.set_pmid(self.fetch.pmid)
-        self.pmc.set_pmc(self.fetch.pmc)
+        Paper._clear_caches()
 
 
-    def _clear_caches(self):
+    @staticmethod
+    def _clear_caches():
         """
         Clear the caches.
         """

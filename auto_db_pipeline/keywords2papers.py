@@ -299,7 +299,7 @@ class Keywords2Papers:
         for entry in output:
             if entry['authors']:
                 author_list = entry['authors']
-                author_list = [re.findall(r'[A-Z]{1}[a-z]*(?:-[A-Z]+[a-z]*)?', author) for author in author_list]
+                author_list = [re.findall(r'(?:Mc)?[A-Z]{1}[a-z]*(?:-[A-Z]+[a-z]*)?', author) for author in author_list]
                 entry['authors'] = [author[-1] + ', ' + ''.join(
                                     [firstname[0]+'.' for firstname in author[:-1]]) for author in author_list if author]
         return output
