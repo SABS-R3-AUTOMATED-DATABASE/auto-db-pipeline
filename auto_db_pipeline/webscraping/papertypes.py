@@ -3,67 +3,23 @@ Object representations of the paper types: Doi, pmid, pmc.
 """
 import requests
 from .fetchers.fetchtext import get_text
-from .proteinids.proteinids import exists_mention_of_id_type, get_instances_of_id
-from .proteinids.proteinids import id_checking, id_finding
-from .proteinids.pdbinterface import PdbInterface
+from .proteinids.interface import Interface
 
-class PaperType:
-    """
-    General class for a type of paper text, (e.g. doi, pmid, and pmc).
-    """
-    def __init__(self):
-        self.mention_ids = {id_name: None for id_name in id_checking}
-        self.possible_ids = {id_name: None for id_name in id_finding}
-        self.actual_ids = {id_name: None for id_name in id_finding}
-        self.url = None  # Default url
-
-    def __bool__(self):
-        """Fancy way to check if the instance of this PaperType exists."""
-        return bool(self.url)
-
-    @property
-    def paper_text(self):
-        """Default paper text."""
-        if self.url:
-            return get_text(self.url)
-
-    def __call__(self):
-        self.get_all_id_mention()
-        self.get_all_id_possible()
-        self.get_pdb_id_actual()
-
-    def get_all_id_mention(self):
-        for id_name in id_checking:
-            self._get_mention(id_name)
-
-    def get_all_id_possible(self):
-        for id_name in id_finding:
-            self._get_possible(id_name)
-
-    def get_pdb_id_actual(self):
-        self.actual_ids['pdb_id'] = PdbInterface().get_actual(self.possible_ids['pdb_id'])
-
-    def _get_mention(self, id_name):
-        regex = id_checking[id_name]
-        self.mention_ids[id_name] = exists_mention_of_id_type(self.paper_text, regex)
-
-    def _get_possible(self, id_name):
-        regex = id_finding[id_name]
-        self.possible_ids[id_name] = get_instances_of_id(self.paper_text, regex)
-
-
-class Doi(PaperType):
+class Doi:
     """
     Doi class.
     """
-    def __init__(self):
-        super().__init__()
-        self.doi = None
-
-    def set_doi(self, doi, journal):
+    def __init__(self, doi, authors, journal):
         if not doi:
             return
         self.doi = doi
+        self.journal = journal
+        self.set_url(journal)
+        self.interface = Interface(doi, authors, self.paper_text)
+        self.interface()
+
+    def set_url(self, journal):
+        """Set the url for the Doi class."""
         if "medRxiv" in journal:
             self.url = self.url_medrxiv
         elif "bioRxiv" in journal:
@@ -77,7 +33,6 @@ class Doi(PaperType):
     @property
     def url_biorxiv(self):
         return f"https://www.biorxiv.org/content/{self.doi}.full"
-
 
     @property
     def url_medrxiv(self):
@@ -97,40 +52,54 @@ class Doi(PaperType):
         request = requests.get(url, allow_redirects=True)
         return request.url
 
+    @property
+    def paper_text(self):
+        """Default paper text."""
+        if self.url:
+            return get_text(self.url)
 
-class Pmid(PaperType):
+
+class Pmid:
     """
     Pmid class.
     """
-    def __init__(self):
-        super().__init__()
-        self.pmid = None
-
-    def set_pmid(self, pmid):
+    def __init__(self, pmid, doi, authors):
         if not pmid:
             return
         self.pmid = pmid
         self.url = self.url_pmid
+        self.interface = Interface(doi, authors, self.paper_text, pmid)
+        self.interface()
 
     @property
     def url_pmid(self):
         return f"https://pubmed.ncbi.nlm.nih.gov/{self.pmid}/"
 
+    @property
+    def paper_text(self):
+        """Default paper text."""
+        if self.url:
+            return get_text(self.url)
 
-class Pmc(PaperType):
+
+class Pmc:
     """
     Pmc class.
     """
-    def __init__(self):
-        super().__init__()
-        self.pmc = None
-
-    def set_pmc(self, pmc):
+    def __init__(self, pmc, doi, authors):
         if not pmc:
             return
         self.pmc = pmc
         self.url = self.url_pmc
+        self.interface = Interface(doi, authors, self.paper_text)
+        self.interface()
 
     @property
     def url_pmc(self):
         return f"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC{self.pmc}/"
+
+    @property
+    def paper_text(self):
+        """Default paper text."""
+        if self.url:
+            return get_text(self.url)

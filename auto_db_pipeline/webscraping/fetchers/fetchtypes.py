@@ -19,6 +19,8 @@ class FetchTypes:
         self.found_metapub = None
         self.invalid_doi = False
 
+        self.__call__()
+
     def __call__(self):
         if not self.doi:
             return
