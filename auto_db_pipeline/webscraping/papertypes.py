@@ -68,7 +68,6 @@ class Pmid:
         self.pmid = pmid
         self.url = self.url_pmid
         self.interface = Interface(doi, authors, self.paper_text, pmid)
-        self.interface()
 
     @property
     def url_pmid(self):
@@ -91,7 +90,6 @@ class Pmc:
         self.pmc = pmc
         self.url = self.url_pmc
         self.interface = Interface(doi, authors, self.paper_text)
-        self.interface()
 
     @property
     def url_pmc(self):
