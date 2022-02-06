@@ -3,7 +3,7 @@ Object representations of the paper types: Doi, pmid, pmc.
 """
 import requests
 from .fetchers.fetchtext import get_text
-from .proteinids.interface import Interface
+from .interface import Interface
 
 class Doi:
     """
@@ -16,7 +16,6 @@ class Doi:
         self.journal = journal
         self.set_url(journal)
         self.interface = Interface(doi, authors, self.paper_text)
-        self.interface()
 
     def set_url(self, journal):
         """Set the url for the Doi class."""

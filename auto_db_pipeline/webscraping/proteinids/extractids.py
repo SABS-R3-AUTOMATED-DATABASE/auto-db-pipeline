@@ -80,24 +80,22 @@ def _standardize(filter_id_func):
     return wrapper
 
 @_standardize
-def get_instances_of_id(paper_text: str, regex: str) -> list:
+def get_instances(paper_text: str, regex: str) -> list:
     """
-    Gets all the mentions of an ID in a paper, using a regex
-    string in `id_finding`.
+    Gets all the mentions of an ID in a paper.
     """
     # Not case sensitive
     pattern = re.compile(regex, flags=re.IGNORECASE | re.VERBOSE)
     instances = pattern.findall(paper_text)
     return instances
 
-def exists_mention_of_id_type(paper_text: str, regex: str) -> bool:
+def exists_mention(paper_text: str, regex: str) -> bool:
     """
-    Checks whether an ID type is mentioned in a paper, using a regex
-    string in `id_checking`.
+    Checks whether a description is mentioned in a paper.
     """
     pattern = re.compile(regex, re.IGNORECASE)
-    id_in_paper = bool(pattern.search(paper_text))
-    return id_in_paper
+    in_paper = bool(pattern.search(paper_text))
+    return in_paper
 
 def _standardize_ids(id_list: list) -> list:
     """
