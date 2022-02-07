@@ -12,7 +12,7 @@ from Bio import SeqIO
 from Bio import Entrez
 from .anarci import check_if_antibody
 
-PDB_FILEPATH = "./PDBs/"
+PDB_FILEPATH = "./webscraping/proteinids/PDBs/"
 
 class PdbID:
     """Class representating a PdbID."""
@@ -31,8 +31,7 @@ class PdbID:
         """Get the pdb file.
         This automatically caches if the file already exists in the filepath."""
         pdb_list = PdbID.get_pdb_list()
-        filepath = getcwd() + PDB_FILEPATH
-        return pdb_list.retrieve_pdb_file(self.pdb_id, file_format="pdb", pdir=filepath)
+        return pdb_list.retrieve_pdb_file(self.pdb_id, file_format="pdb", pdir=PDB_FILEPATH)
 
     @property
     def sequence_repr(self):
