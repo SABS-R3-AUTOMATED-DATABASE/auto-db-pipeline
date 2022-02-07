@@ -2,8 +2,8 @@
 Interface with the protein data bank (PDB) and GenBank.
 """
 from functools import cache
-import pypdb
 from urllib.error import HTTPError
+import pypdb
 from Bio.PDB.PDBList import PDBList
 from Bio import Entrez
 
@@ -19,13 +19,12 @@ class PdbID:
         return self.pdb_id in existing_pdbs
 
     @property
-    def citation_info(self):
-        return PdbID.get_citation_info(self.pdb_id)
+    def handle(self):
+        return PdbID.get_handle(self.pdb_id)
 
-    @staticmethod
-    @cache
-    def get_citation_info(pdb_id: str) -> dict:
-        return pypdb.get_info(pdb_id)['citation'][0]
+    @property
+    def citation_info(self) -> dict:
+        return self.handle['citation'][0]
 
     @property
     def doi(self) -> str:
@@ -44,6 +43,12 @@ class PdbID:
         # add seqeuence functionality
         pass
 
+    @staticmethod
+    @cache
+    def get_handle(pdb_id):
+        return pypdb.get_info(pdb_id)
+
+
 
     @staticmethod
     @cache
@@ -55,7 +60,8 @@ class PdbID:
         """
         pdbl = PdbID._get_PDBList()
         # Takes a while to load
-        return set(pdbl.get_all_entries())
+        all_entries = pdbl.get_all_entries()  # list
+        return set(all_entries)
 
     @staticmethod
     def _get_PDBList():
@@ -107,6 +113,8 @@ class GenBankID:
 
     @property
     def sequence(self):
+        # Note that sequences can be either DNA or amino acid sequences
+        # I think dependent on whether it is a nucleotide or protein.
         return self.handle.get('GBSeq_sequence', None)
 
     @staticmethod
@@ -114,6 +122,7 @@ class GenBankID:
     def get_handle(genbank_id):
         """
         Get the Entrez information on the genbank_id.
+        We allow any entry to be a nucleotide or a protein.
         """
         try:
             handle = Entrez.efetch(id=genbank_id, db='protein',
