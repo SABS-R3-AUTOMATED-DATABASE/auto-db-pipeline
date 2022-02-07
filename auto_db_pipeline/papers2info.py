@@ -4,6 +4,7 @@ Get proteininformatics from papers.
 from .webscraping.fetchers.fetchtypes import FetchTypes
 from .webscraping.fetchers.fetchtext import get_soup, get_text, get_html
 from .webscraping.papertypes import Doi, Pmid, Pmc
+from .webscraping.proteinids.idtypes import PdbID, GenBankID
 
 # pylint: disable=too-few-public-methods
 
@@ -50,6 +51,7 @@ class Paper:
         """
         Clear the caches.
         """
-        funcs_to_clear = (get_soup, get_text, get_html)
+        funcs_to_clear = (get_soup, get_text, get_html,
+                            GenBankID.get_handle, PdbID.get_handle)
         for func in funcs_to_clear:
             func.cache_clear()
