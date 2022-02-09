@@ -2,6 +2,18 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import tempfile
+from anarci import number
+
+
+def get_seq_strand(seq, scheme="imgt"):
+    numbering, chain_type = number(seq, scheme=scheme, allow=set( ["H","K","L"]))
+    if numbering:
+        # replace the Kappa annotation with a light annotation 
+        # (will come back as L for a lambda chain already).
+        chain_type.replace("K","L")
+        return chain_type
+    else:
+        return False
 
 
 # TODO: split out into smaller functions when adding more edge cases
@@ -55,6 +67,7 @@ def get_supp_seqs(url):
         # check end of dataframe for columns with long all capital string entries
         # TODO: find more robust way of getting representative sample
         df_tail = df_file.tail()
+        df_sample = df_file.loc[]
 
         mask = []
         for column in df_tail:
