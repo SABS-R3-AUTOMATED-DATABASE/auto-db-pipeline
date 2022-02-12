@@ -169,23 +169,24 @@ class GenBankID:
         # Note that sequences can be either DNA or amino acid sequences
         # I think dependent on whether it is a nucleotide or protein.
         sequence = self.handle.get('GBSeq_sequence', None)
-        return sequence.lower()
+
+        return sequence.upper()
+
 
 
     @property
     def sequence_converted(self):
         """Check if a sequence is DNA (or RNA) and convert it to amino
-        acid if so. Also converts to lower."""
+        acid if so. Also converts to upper."""
         if not self.sequence:
             return
-        dna_rna_set = {'a', 'c', 't', 'g', 'u'}
+        dna_rna_set = {'A', 'C', 'T', 'G', 'U'}
         needs_conversion = set(self.sequence).issubset(dna_rna_set)
         if needs_conversion:
             sequence_rep = Seq(self.sequence).translate()
-            sequence_converted = str(sequence_rep).lower()
-        return sequence_converted
-
-
+            converted = str(sequence_rep).upper()
+            return converted
+        return self.sequence
 
     @staticmethod
     @cache
