@@ -169,7 +169,9 @@ class GenBankID:
         # Note that sequences can be either DNA or amino acid sequences
         # I think dependent on whether it is a nucleotide or protein.
         sequence = self.handle.get('GBSeq_sequence', None)
+
         return sequence.upper()
+
 
 
     @property
@@ -185,8 +187,6 @@ class GenBankID:
             converted = str(sequence_rep).upper()
             return converted
         return self.sequence
-
-
 
     @staticmethod
     @cache
