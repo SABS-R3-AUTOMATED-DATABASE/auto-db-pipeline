@@ -6,6 +6,8 @@ from .extractids import exists_mention
 
 N_AUTHORS_FOR_CLOSE = 3
 N_AUTHORS_FOR_CITATION = 3
+GENBANK_ID_NAMES = ('genbank_protein_id', 'genbank_protein_accession',
+                    'genbank_nucleotide_accession', 'refseq_id', 'geninfo_identifier')
 
 class ID:
     """Representation of a protein ID."""
@@ -16,6 +18,7 @@ class ID:
 
         self.relation_to_paper = {'from': None, 'cited_in': None}
         self.matches = {'doi': None, 'pmid': None, 'authors': None}
+        self.spawned_ids = []
 
 
     def __call__(self, doi, authors, pmid, paper_text):
@@ -24,16 +27,29 @@ class ID:
         self.get_pmids_match(pmid)
         self.get_from_paper()
         self.get_cited_in_paper(paper_text)
+        self.get_spawned_ids()
 
     def __bool__(self):
         """Does the ID exist on its database."""
         return bool(self.id_)
 
     @property
-    def id_(self):
+    def id_type(self):
         if self.id_name == 'pdb_id':
-            return PdbID(self.id_value)
-        return GenBankID(self.id_value)
+            return 'PDB'
+        elif self.id_name in GENBANK_ID_NAMES:
+            return 'GenBank'
+
+    def get_spawned_ids(self):
+        """Get any IDs that 'come out' of the ID. For example, the GenBank protein
+        IDs that may come out of a nucleotide accession."""
+        if self.id_type == 'GenBank':
+            self.spawned_ids = self.id_.get_protein_ids_non_amino()
+
+    @property
+    def id_(self):
+        id_dict = {'PDB': PdbID(self.id_value), 'GenBank': GenBankID(self.id_value)}
+        return id_dict[self.id_type]
 
     @property
     def authors(self):
@@ -46,10 +62,6 @@ class ID:
     @property
     def pmid(self):
         return self.id_.pmid
-
-    @property
-    def sequence(self):
-        return self.id_.sequence
 
     def get_dois_match(self, paper_doi):
         if not self.doi:

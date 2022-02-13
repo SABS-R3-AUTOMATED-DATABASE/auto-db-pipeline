@@ -10,7 +10,9 @@ from Bio.PDB.PDBList import PDBList
 from Bio.Seq import Seq
 from Bio import SeqIO
 from Bio import Entrez
-from .anarci import check_if_antibody
+from .anarci_interface import check_if_antibody, extract_VH_VL
+from anarci import run_anarci
+from anarci import number
 
 PDB_FILEPATH = "./webscraping/proteinids/PDBs/"
 
@@ -49,9 +51,15 @@ class PdbID:
             return True
         return False
 
+    @property
+    def vh_vl_anarci(self) -> dict:
+        """Get the VH and VL sequences. This will only work if it's an antibody."""
+        return extract_VH_VL(self.sequence_repr)
+
     @cache
     def check_anarci_if_antibody(self) -> bool:
-        """Check with ANARCI if the PDB is an antibody."""
+        """Check with ANARCI if the PDB is an antibody. Note the asssumption
+        sated in the function's docstring."""
         return check_if_antibody(self.sequence_repr)
 
     @property
@@ -78,12 +86,6 @@ class PdbID:
     def authors(self) -> list:
         """Get the authors."""
         return self.citation_info['rcsb_authors']
-
-    @property
-    def sequence(self):
-        """Get the sequence."""
-        # add seqeuence functionality
-        return
 
     @staticmethod
     @cache
@@ -120,7 +122,6 @@ class PdbID:
     def get_pdb_list():
         """Get a PDBList object in a controlled way."""
         return PDBList(verbose=False, obsolete_pdb="None")
-
 
 class GenBankID:
     """Class representating a GenBankID."""
@@ -165,28 +166,63 @@ class GenBankID:
 
     @property
     def sequence(self):
-        """Get the sequence."""
+        """Get the sequence. Convert the letters to uppercase."""
         # Note that sequences can be either DNA or amino acid sequences
         # I think dependent on whether it is a nucleotide or protein.
         sequence = self.handle.get('GBSeq_sequence', None)
+        if sequence:
+            return sequence.upper()
 
-        return sequence.upper()
-
-
+    def get_sequence_strand_amino(self):
+        """Get whether it is a heavy or light chain.
+        Default scheme is 'imgt'."""
+        numbering, chain_type = number(self.sequence, scheme='imgt', allow=set(["H","K","L"]))
+        if numbering:
+            # replace the Kappa annotation with a light annotation
+            # (will come back as L for a lambda chain already).
+            chain_type.replace("K","L")
+            return chain_type
 
     @property
-    def sequence_converted(self):
-        """Check if a sequence is DNA (or RNA) and convert it to amino
-        acid if so. Also converts to upper."""
-        if not self.sequence:
-            return
+    def needs_translation(self):
+        """Check if a sequence is in DNA or RNA and thus needs to be
+        translated to amino acids.
+        We do this by checking if the sequence is a subset of DNA or
+        RNA letters."""
         dna_rna_set = {'A', 'C', 'T', 'G', 'U'}
-        needs_conversion = set(self.sequence).issubset(dna_rna_set)
-        if needs_conversion:
-            sequence_rep = Seq(self.sequence).translate()
-            converted = str(sequence_rep).upper()
-            return converted
-        return self.sequence
+        sequence_set = set(self.sequence)
+        return sequence_set.issubset(dna_rna_set)
+
+    def get_protein_ids_non_amino(self):
+        """Get the associated protein IDs if these are needed."""
+        if not self.needs_translation:  # If already in amino acids, escape
+            return
+        feature_table = self.handle.get('GBSeq_feature-table', None)
+        if not feature_table:
+            return
+        cds_filter = list(filter(lambda entry: entry['GBFeature_key'] == 'CDS', feature_table))
+        protein_ids = list()
+        for entry in cds_filter:
+            for qual in entry['GBFeature_quals']:
+                if qual['GBQualifier_name'] == 'protein_id':
+                    protein_ids.append(qual['GBQualifier_value'])
+        protein_ids = list(set(protein_ids))
+        return [(id_value, 'genbank_protein_id') for id_value in protein_ids]
+
+    @property
+    def description(self):
+        """Get the description of the GenBank ID"""
+        return self.handle.get('GBSeq_definition', None)
+
+    def get_if_antibody_amino(self):
+        """Check if the GenBankID is an antibody. Note that this only returns a boolean
+        if the sequence is already amino acids.
+        We do this by checking if a field in the output from run_anarci is empty where if
+        it is empty, it is not an antibody."""
+        # if self.needs_translation:  # If not in amino acids, escape
+        #     return
+        output = run_anarci(self.sequence)
+        return bool(output[1][0])
 
     @staticmethod
     @cache

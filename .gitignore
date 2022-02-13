@@ -3,7 +3,7 @@ old_keyword_files/
 
 **/.DS_Store
 **/__pycache__/
-**/temp.ipynb
+**/temp*.ipynb
 
 
 keywords/.pytest_cache
