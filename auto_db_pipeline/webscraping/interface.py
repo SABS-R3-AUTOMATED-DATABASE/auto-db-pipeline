@@ -60,4 +60,4 @@ class Interface:
         for id_name, regex in id_finding.items():
             possible_id_values = get_instances(self.paper_text, regex)
             possible_ids = [ID(id_value, id_name) for id_value in possible_id_values]
-            self.id_reps[id_name] = filter(bool, possible_ids)
+            self.id_reps[id_name] = list(filter(bool, possible_ids))

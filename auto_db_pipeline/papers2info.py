@@ -1,57 +1,43 @@
-"""
-Get proteininformatics from papers.
-"""
-from .webscraping.fetchers.fetchtypes import FetchTypes
-from .webscraping.fetchers.fetchtext import get_soup, get_text, get_html
-from .webscraping.papertypes import Doi, Pmid, Pmc
-from .webscraping.proteinids.idtypes import PdbID, GenBankID
+from tqdm import tqdm
+from keywords2papers import Keywords2Papers
+from paper import Paper
 
-# pylint: disable=too-few-public-methods
+PUBMED_NAME = 'pubmed'
+BIORXIV_NAME = 'biorxiv'
 
-class Paper:
-    """
-    Obtain the data on a paper.
-    Input: a dictionary of a paper's metadata (`paper_data`)
-    """
+class Collection:
+    """Collection of all the papers from keywords."""
 
-    def __init__(self, paper_data: dict, journal=None):
-        """
-        Initialize and run the class to store the data in the instance of paper.
-        """
-        self.title = paper_data['title']
-        self.authors = paper_data['authors']
-        if journal:
-            self.journal = journal
-        else:
-            self.journal = paper_data['journal']
-
-        doi_string = paper_data['doi']
-
-        self.fetch = FetchTypes(doi_string)
-
-        self.doi = Doi(doi_string, self.authors, self.journal)
-        self.pmid = Pmid(self.fetch.pmid, doi_string, self.authors)
-        self.pmc = Pmc(self.fetch.pmc, doi_string, self.authors)
-
+    def __init__(self, date=None):
+        """Initialize the collection, date is in the form Y_m_d,
+        e.g., 2022_02_13"""
+        self.input_data = {}
+        self.date = Keywords2Papers.get_default_date(date)
+        self.papers = []
 
     def __call__(self):
-        """
-        Run the web-scraping and get the information.
-        """
-        self.fetch()
-        self.doi.interface()
-        self.pmid.interface()
-        self.pmc.interface()
+        self.get_input_data()
+        self.initialize_papers()
+        self.iterate_papers()
 
-        Paper._clear_caches()
+    def get_input_data(self):
+        """Retrieve the paper data from keywords."""
+        k2p = Keywords2Papers(self.date)
+        self.input_data[PUBMED_NAME] = k2p.get_pubmed(self.date)
+        self.input_data[BIORXIV_NAME] = k2p.get_biorxiv(self.date)
 
+    def initialize_papers(self):
+        """Iterate through the data sources, e.g., pubmed, biorxiv.
+        Then, iterate through the data from a particular source."""
+        for source in self.input_data:
+            for paper_data in self.input_data[source]:
+                paper = Paper(paper_data, source)
+                self.papers.append(paper)
 
-    @staticmethod
-    def _clear_caches():
-        """
-        Clear the caches.
-        """
-        funcs_to_clear = (get_soup, get_text, get_html,
-                            GenBankID.get_handle, PdbID.get_handle)
-        for func in funcs_to_clear:
-            func.cache_clear()
+    def iterate_papers(self):
+        for paper in tqdm(self.papers):
+            paper()
+            # try:
+            #     paper()
+            # finally:
+            #     pass

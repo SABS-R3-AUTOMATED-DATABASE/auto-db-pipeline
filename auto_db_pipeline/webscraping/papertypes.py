@@ -10,12 +10,15 @@ class Doi:
     Doi class.
     """
     def __init__(self, doi, authors, journal):
-        if not doi:
-            return
         self.doi = doi
+        if not self:
+            return
         self.journal = journal
         self.set_url(journal)
         self.interface = Interface(doi, authors, self.paper_text)
+
+    def __bool__(self):
+        return bool(self.doi)
 
     def set_url(self, journal):
         """Set the url for the Doi class."""
@@ -57,17 +60,19 @@ class Doi:
         if self.url:
             return get_text(self.url)
 
-
 class Pmid:
     """
     Pmid class.
     """
     def __init__(self, pmid, doi, authors):
-        if not pmid:
-            return
         self.pmid = pmid
+        if not self:
+            return
         self.url = self.url_pmid
         self.interface = Interface(doi, authors, self.paper_text, pmid)
+
+    def __bool__(self):
+        return bool(self.pmid)
 
     @property
     def url_pmid(self):
@@ -79,17 +84,19 @@ class Pmid:
         if self.url:
             return get_text(self.url)
 
-
 class Pmc:
     """
     Pmc class.
     """
     def __init__(self, pmc, doi, authors):
-        if not pmc:
-            return
         self.pmc = pmc
+        if not self:
+            return
         self.url = self.url_pmc
         self.interface = Interface(doi, authors, self.paper_text)
+
+    def __bool__(self):
+        return bool(self.pmc)
 
     @property
     def url_pmc(self):

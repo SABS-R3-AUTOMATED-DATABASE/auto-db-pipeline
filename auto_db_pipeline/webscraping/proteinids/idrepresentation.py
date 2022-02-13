@@ -78,6 +78,8 @@ class ID:
         Use last names for comparison, set comparison so we ignore
         order of authors.
         """
+        if not self.authors:
+            return
         paper_authors = set(ID._get_last_names(paper_authors))
         id_authors = set(ID._get_last_names(self.authors))
         if paper_authors == id_authors:
@@ -105,6 +107,8 @@ class ID:
     def get_cited_in_paper(self, paper_text):
         """Obtain the `cited_in_paper` attribute, which is true only
         if all the top `N_AUTHORS_FOR_CITATION` are mentioned in the paper."""
+        if not self.authors:
+            return
         if self.relation_to_paper['from']:
             self.relation_to_paper['cited_in'] = False
             return

@@ -93,7 +93,6 @@ class PdbID:
         """Retrieve the handle and cache it (takes time)."""
         return pypdb.get_info(pdb_id)
 
-
     @property
     def on_sabdab(self) -> bool:
         """Returns whether the pdb_id is on SABDAB."""
@@ -180,7 +179,7 @@ class GenBankID:
         if numbering:
             # replace the Kappa annotation with a light annotation
             # (will come back as L for a lambda chain already).
-            chain_type.replace("K","L")
+            chain_type.replace("K", "L")
             return chain_type
 
     @property
