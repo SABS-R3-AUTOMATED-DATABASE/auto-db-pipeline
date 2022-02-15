@@ -70,7 +70,7 @@ class IDPaper:
 
     @property
     def doi(self):
-        """Doie of the paper from which the ID was deposited."""
+        """Doi of the paper from which the ID was deposited."""
         return self.id_.doi
 
     @property
