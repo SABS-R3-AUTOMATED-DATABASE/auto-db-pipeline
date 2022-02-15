@@ -6,7 +6,7 @@ import re
 import requests
 from metapub import PubMedFetcher
 from metapub.exceptions import MetaPubError
-from .fetchtext import get_html
+from fetch_text import get_html
 
 class FetchTypes:
     """
