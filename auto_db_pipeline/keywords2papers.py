@@ -57,6 +57,7 @@ class Keywords2Papers:
 
 
     def get_pubmed(self, selected_date: str = None):
+        """Get the pubmed data."""
         selected_date = Keywords2Papers.get_default_date(selected_date)
         # Check if already exists, if so then load
         if Keywords2Papers.check_exists(FILENAME_PUBMED, selected_date):
@@ -69,6 +70,7 @@ class Keywords2Papers:
 
 
     def get_biorxiv(self, selected_date: str = None):
+        """Get the biorxiv data."""
         selected_date = Keywords2Papers.get_default_date(selected_date)
 
         # Get whether they exist
@@ -92,7 +94,6 @@ class Keywords2Papers:
 
     @staticmethod
     def check_exists(filename: str = None, selected_date: str = None) -> bool:
-
         """
         If the results from today exist, load them instead of re-running the paperscraper.
         """
@@ -104,12 +105,11 @@ class Keywords2Papers:
 
     @staticmethod
     def load_output(filename: str = None, selected_date: str = None):
+        """Load a specific file based on its name and date."""
         Keywords2Papers.check_filename(filename)
         selected_date = Keywords2Papers.get_default_date(selected_date)
         filepath = Keywords2Papers.get_filepath(filename, selected_date)
-
-        df = read_json(path_or_buf=filepath,
-                        lines=True, orient='records')
+        df = read_json(path_or_buf=filepath, lines=True, orient='records')
         output = df.to_dict(orient='records')
         return output
 
@@ -136,17 +136,13 @@ class Keywords2Papers:
 
     @staticmethod
     def get_todays_date():
-        """
-        Get today's date in year_month_day format.
-        """
+        """Get today's date in year_month_day format."""
         return date.today().strftime(DATEFORMAT)
 
 
     @staticmethod
     def get_default_date(selected_date: str = None) -> str:
-        """
-        Makes selected_date default to today if none given.
-        """
+        """Makes selected_date default to today if none given."""
         if selected_date:
             return selected_date
         else:
@@ -299,7 +295,7 @@ class Keywords2Papers:
         for entry in output:
             if entry['authors']:
                 author_list = entry['authors']
-                author_list = [re.findall(r'[A-Z]{1}[a-z]*(?:-[A-Z]+[a-z]*)?', author) for author in author_list]
+                author_list = [re.findall(r'(?:Mc)?[A-Z]{1}[a-z]*(?:-[A-Z]+[a-z]*)?', author) for author in author_list]
                 entry['authors'] = [author[-1] + ', ' + ''.join(
                                     [firstname[0]+'.' for firstname in author[:-1]]) for author in author_list if author]
         return output
