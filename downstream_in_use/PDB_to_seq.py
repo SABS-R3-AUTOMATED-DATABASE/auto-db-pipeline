@@ -13,6 +13,7 @@ warnings.simplefilter('ignore', BiopythonWarning)
 
 from verify_antibody_refactored import parse_pdb_file
 from verify_antibody_refactored import create_anarci_input
+from verify_antibody_refactored import run_anarci
 
 def pdb_to_seq(verified_antibodies):
 
@@ -36,13 +37,7 @@ def pdb_to_seq(verified_antibodies):
         anarci_input = create_anarci_input(seq_dict)
 
         # run ANARCI with FASTA file
-        print('Running ANARCI...')
-        anarci_cmd = 'ANARCI -i anarci_input.fasta --outfile anarci_output.txt'
-        subprocess.call(anarci_cmd, shell=True)
-
-        # read anarci output file
-        print('Reading ANARCI output...')
-        anarci_output = open('anarci_output.txt', 'r')
+        check_antibody, anarci_output = run_anarci()
 
         # extract VH and VL sequences
         extract_VH_VL(pdb_id=pdb_id, anarci_output=anarci_output)
