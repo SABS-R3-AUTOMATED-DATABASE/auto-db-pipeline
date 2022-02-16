@@ -1,5 +1,4 @@
-# NOTE function too long, need to break up into smaller ones (will help with avoiding repeating code for PDB_to_seq script too)
-# NOTE break up anarci parsing/checking for L/H annotation
+# NOTE add docstrings 
 
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
@@ -13,7 +12,7 @@ from Bio import BiopythonWarning
 warnings.simplefilter('ignore', BiopythonWarning)
 
 
-def verify_antibody(verified_pdb_ids):
+def verify_antibody_pdb(verified_pdb_ids):
 
     '''verify that a PDB ID is from an antibody
 
@@ -52,13 +51,9 @@ def verify_antibody(verified_pdb_ids):
             # write dict to FASTA file to input to ANARCI (call create_anarci_input)
             anarci_input = create_anarci_input(seq_dict)
 
-            # run ANARCI with FASTA file
-            anarci_cmd = 'ANARCI -i anarci_input.fasta --outfile anarci_output.txt'
-            subprocess.call(anarci_cmd, shell=True)
+            # run ANARCI
+            check_antibody, anarci_output = run_anarci()
 
-            # read anarci output file and check if L or H annotation
-            anarci_output = open('anarci_output.txt', 'r')
-            check_antibody = anarci_output.readlines()
             # check if any lines start with L or H (light and heavy chains)
             count = 0
             for line in check_antibody:
@@ -91,9 +86,50 @@ def verify_antibody(verified_pdb_ids):
     return verified_antibodies
 
 
+def verify_antibody_other(VH_seq, VL_seq):
+
+    '''verify that a pair of VH and VL seqs from GenBank or paper is from an antibody'''
+
+    # get sequence from PDB file using SeqIO (call create_seq_dict)
+    seq_dict = create_seq_dict(VH_seq, VL_seq)
+
+    # write dict to FASTA file to input to ANARCI (call create_anarci_input)
+    anarci_input = create_anarci_input(seq_dict)
+
+    # run ANARCI
+    check_antibody, anarci_output = run_anarci()
+
+    # check if any lines start with L or H (light and heavy chains)
+    count = 0
+    for line in check_antibody:
+        if line.startswith('H') is True or line.startswith('L') is True:
+            count += 1
+    # if no L or H lines, not an antibody as ANARCI numbering failed
+    if count == 0:
+        print('count = ', count)
+        print('Sequences given FAILED verification')
+
+    # if L or H lines present, antibody confirmed
+    elif count > 0:
+        print('count = ', count)
+        print('Sequences given PASSED verification')
+
+    # close temp files/pdb dirs and remove before next iteration
+    # results wrong if this isn't done
+    anarci_input.close()
+    anarci_output.close()
+    os.remove('anarci_input.fasta')
+    os.remove('anarci_output.txt')
+
+    return
+
+
 def parse_pdb_file(pdb_file):
 
-    ''' retrieve each chain sequence from PDB file by parsing with SeqIO (biopython)'''
+    '''retrieve each chain sequence from PDB file by parsing with SeqIO (biopython)
+
+        creates dictionary of sequences with chain name as key and seq as value'''
+
     record_ids = []
     record_seqs = []
     for record in SeqIO.parse(pdb_file, 'pdb-atom'):
@@ -101,6 +137,17 @@ def parse_pdb_file(pdb_file):
         record_seq = str(record.seq).replace('X', '')
         record_seqs.append(record_seq)
     seq_dict = dict(zip(record_ids, record_seqs))
+
+    return seq_dict
+
+
+def create_seq_dict(VH_seq, VL_seq):
+
+    '''create seq dictionary for input to anarci if sequences extracted from genbank or direct from papers
+
+        dict has keys VH and VL and values are corresponding seqs'''
+
+    seq_dict = {"VH_seq": VH_seq, "VL_seq": VL_seq}
 
     return seq_dict
 
@@ -114,7 +161,21 @@ def create_anarci_input(seq_dict):
     return anarci_input
 
 
+def run_anarci():
+
+    # run ANARCI with FASTA file
+    anarci_cmd = 'ANARCI -i anarci_input.fasta --outfile anarci_output.txt'
+    subprocess.call(anarci_cmd, shell=True)
+
+    # read anarci output file and check if L or H annotation
+    anarci_output = open('anarci_output.txt', 'r')
+    check_antibody = anarci_output.readlines()
+
+    return check_antibody, anarci_output
+
+
+
 # list of scraped verified PDB IDs (test - CovAbDab structures with 4 random PDB structures (carbonic anhydrases))
 verified_pdb_ids = ['4f2m', '7e3k', '7e3c', '7k9i', '7e5y', '7l02', '7dk5', '7dd2', '1dmy', '1jd0', '1azm', '3znc']
 # run function with test list
-verify_antibody(verified_pdb_ids)
+verify_antibody_pdb(verified_pdb_ids)
