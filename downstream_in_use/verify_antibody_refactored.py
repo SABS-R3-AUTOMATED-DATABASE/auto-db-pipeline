@@ -108,11 +108,13 @@ def verify_antibody_other(VH_seq, VL_seq):
     if count == 0:
         print('count = ', count)
         print('Sequences given FAILED verification')
+        verification = False
 
     # if L or H lines present, antibody confirmed
     elif count > 0:
         print('count = ', count)
         print('Sequences given PASSED verification')
+        verification = True
 
     # close temp files/pdb dirs and remove before next iteration
     # results wrong if this isn't done
@@ -121,7 +123,7 @@ def verify_antibody_other(VH_seq, VL_seq):
     os.remove('anarci_input.fasta')
     os.remove('anarci_output.txt')
 
-    return
+    return verification # if True = passed, if False = failed
 
 
 def parse_pdb_file(pdb_file):
