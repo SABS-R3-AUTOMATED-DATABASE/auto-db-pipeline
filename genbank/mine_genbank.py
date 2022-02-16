@@ -1,4 +1,6 @@
+from itertools import chain
 from Bio import Entrez
+from anarci import number
 
 
 class GenbankSearch:
@@ -64,7 +66,24 @@ class GenbankSearch:
         '''function that checks if entries are antibodies by running their sequences
         through ANARCI
         '''
-        pass
+        # temporary list to store entries that are antibodies
+        filtered_entries = []
+        for entry in self.entries:
+            # get sequence
+            seq = entry['GBSeq_sequence']
+            # returns false if not antibody sequence
+            numbering, chain_type = number(seq)
+
+            if chain_type:
+                # temporarily store antibody entries
+                filtered_entries.append(entry)
+
+                # alternative way to label entries as heavy or light chains
+                # chain_type = chain_type.replace('K', 'L')
+                # entry['chain'] = chain_type
+
+        # permanently overwirte
+        self.entries = filtered_entries
 
     def classify_vh_vl(self):
         '''
@@ -297,3 +316,4 @@ if __name__ == '__main__':
                'OR anti-Sars-Cov-2[All Fields]))'
     genbanksearch = GenbankSearch(keywords)
     genbanksearch(reduce_searches=100)
+    print(genbanksearch.entries[0]['GBSeq_sequence'])
