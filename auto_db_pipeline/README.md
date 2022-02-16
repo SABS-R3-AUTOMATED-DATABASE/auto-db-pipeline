@@ -1,6 +1,5 @@
-## Input / Output
+## Pipeline explanation
 
-We start with keywords, and use [keywords2papers.py](keywords2papers.py) to get to papers, and then use [papers2info.py](papers2info.py) to get to protein informatics.
 
 ---
 ## Protein ID formatting

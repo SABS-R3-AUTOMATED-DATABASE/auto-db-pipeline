@@ -1,5 +1,7 @@
 """
-Representation of any protein ID in relation to its paper webpage.
+Representation of a protein ID (of either GenBank or PDB type)
+in relation to its paper webpage.
+Called by types_interface.py
 """
 from ..protein_scrape.pdb_scrape import PdbID
 from ..protein_scrape.genbank_scrape import GenBankID

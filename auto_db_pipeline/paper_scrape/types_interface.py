@@ -1,4 +1,6 @@
 """
+Interface between the paper types and ID types.
+Called by paper_types.py
 Interface across a list of the ID types.
 """
 from extract_ids import exists_mention, id_checking

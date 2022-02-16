@@ -1,5 +1,6 @@
 """
-Get proteininformatics from papers.
+Representation of a ppaper.
+Called by papers2ids.py
 """
 from .fetchers.fetch_types import FetchTypes
 from .fetchers.fetch_text import get_soup, get_text, get_html
@@ -34,14 +35,13 @@ class Paper:
         representation.update(self._repr_paper_types)
         return representation
 
-    @property
-    def _repr_paper_types(self):
-        """Get the representation of the paper types, attach
-        paper types that do not exist."""
-        repr_ = {}
-        for type_name, paper_type in self.paper_types.items():
-            repr_[type_name] = repr(paper_type)
-        return {'paper_types': repr_}
+    def __enter__(self):
+        """Enter the context manager and return the paper object."""
+        return self
+
+    def __exit__(self):
+        """Exit the context manager and clear the caches."""
+        Paper._clear_caches()
 
     def __bool__(self):
         """If the doi does not exist, we can't get anything
@@ -53,17 +53,26 @@ class Paper:
         if not self:
             return
         self.fetch_paper_types()
-        self.interface()
-        Paper._clear_caches()
+        self.paper_type_interface()
+
+    @property
+    def _repr_paper_types(self):
+        """Get the representation of the paper types, attach
+        paper types that do not exist."""
+        repr_ = {}
+        for type_name, paper_type in self.paper_types.items():
+            repr_[type_name] = repr(paper_type)
+        return {'paper_types': repr_}
 
     def fetch_paper_types(self):
-        """Fetch the pmid and pmc identifiers. Initialize """
+        """Fetch the pmid and pmc identifiers using the FetchTypes class.
+        Then initialize the paper type objects."""
         fetch = FetchTypes(self.doi)
         self.paper_types['doi'] = Doi(self.doi, self.authors, self.journal)
         self.paper_types['pmid'] = Pmid(fetch.pmid, self.doi, self.authors)
         self.paper_types['pmc'] = Pmc(fetch.pmc, self.doi, self.authors)
 
-    def interface(self):
+    def paper_type_interface(self):
         for paper_type in self.paper_types.values():
             if paper_type:
                 paper_type.interface()

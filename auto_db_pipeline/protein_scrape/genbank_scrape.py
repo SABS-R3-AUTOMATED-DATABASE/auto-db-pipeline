@@ -79,7 +79,7 @@ class GenBankID:
         return sequence_set.issubset(dna_rna_set)
 
     def get_protein_ids_non_amino(self):
-        """Get the associated protein IDs if these are needed."""
+        """Get the associated protein IDs (spawns) if these are needed."""
         if not self.needs_translation:  # If already in amino acids, escape
             return
         feature_table = self.handle.get('GBSeq_feature-table', None)

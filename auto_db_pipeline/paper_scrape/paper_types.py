@@ -1,7 +1,8 @@
 """
-Object representations of the paper types: Doi, pmid, pmc.
+Representations of the paper types: Doi, pmid, pmc.
+Called by paper.py
 
-Note that we can optioanlly choose to include the paper text
+Note that we can optionally choose to include the paper text
 in the representations.
 """
 import requests
@@ -24,9 +25,10 @@ class Doi:
 
     def __repr__(self):
         """Representation of the doi paper type for retrieval."""
+        representation = {'doi': self.doi}
         if not self:
-            return None
-        representation = {'doi': self.doi, 'interface': repr(self.interface)}
+            return representation
+        representation.update(repr(self.interface))
         return representation
 
     def set_url(self, journal):
@@ -84,10 +86,10 @@ class Pmid:
 
     def __repr__(self):
         """Representation of the pmid paper type for retrieval."""
+        representation = {'pmid': self.pmid}
         if not self:
             return None
-        representation = {'pmid': self.pmid, 'interface': repr(self.interface)}
-        return representation
+        return representation.update(repr(self.interface))
 
     @property
     def url_pmid(self):
@@ -114,10 +116,10 @@ class Pmc:
 
     def __repr__(self):
         """Representation of the pmc paper type for retrieval."""
+        representation = {'pmc': self.pmc}
         if not self:
             return None
-        representation = {'pmc': self.pmc, 'interface': repr(self.interface)}
-        return representation
+        return representation.update(repr(self.interface))
 
     @property
     def url_pmc(self):
