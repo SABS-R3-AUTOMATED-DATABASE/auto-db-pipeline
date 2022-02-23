@@ -1,4 +1,3 @@
-from itertools import chain
 from Bio import Entrez
 from anarci import number
 
@@ -297,6 +296,7 @@ class GenbankSearch:
         '''
         self.get_number_of_entries(db)
         self.get_entries(reduce_searches, db)
+        self.filter_AB_entries()
         self.classify_vh_vl()
         self.find_antigen()
         self.find_fragment_id()
