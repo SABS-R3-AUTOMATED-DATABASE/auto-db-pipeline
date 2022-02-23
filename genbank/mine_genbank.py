@@ -1,5 +1,6 @@
 from Bio import Entrez
-from anarci import number
+from anarci import run_anarci
+# import json
 
 
 class GenbankSearch:
@@ -13,16 +14,15 @@ class GenbankSearch:
 
     Methods:
     -------
-
     get_number_of_entries(self, keywords)
     get_entries(self, reduce_searches=False, db='protein')
+    remove_junk(self)
     filter_AB_entries(self)
     classify_vh_vl(self)
     find_antigen(self)
     find_fragment_id(self)
     group_by_author_title(self)
     pair_vh_vl(self)
-
     __call__(self, db='protein')
     '''
     def __init__(self, all_keywords):
@@ -61,6 +61,40 @@ class GenbankSearch:
                                        rettype="gb", retmode="xml")
         self.entries = Entrez.read(entries_handle)
 
+    def remove_junk(self):
+        '''function that removes unwanted information from protein
+        entries. Reduced storage used by the script.'''
+        # list to temporarily save entries without junk
+        entries_no_junk = []
+        # keys to keep in protein entry
+        to_keep_entry = ['GBSeq_locus', 'GBSeq_moltype', 'GBSeq_update-date',
+                         'GBSeq_create-date', 'GBSeq_definition',
+                         'GBSeq_accession-version', 'GBSeq_source',
+                         'GBSeq_sequence']
+        # keys to keep in entires['GBSeq_references'][0] (first reference)
+        to_keep_ref = ['GBReference_authors', 'GBReference_title',
+                       'GBReference_journal']
+
+        # retain specified information
+        for entry in self.entries:
+            # select keys in entry
+            entry_no_junk = {key: entry[key] for key in to_keep_entry}
+
+            # select keys in first reference
+            reference_1 = entry['GBSeq_references'][0]
+            ref_no_junk = {key: reference_1[key] for key in to_keep_ref}
+            entry_no_junk['GBSeq_references'] = [ref_no_junk]
+            try:
+                entry_no_junk['GBSeq_references'][0]['GBReference_xref'] = \
+                    reference_1['GBReference_xref']
+            except KeyError:
+                pass
+
+            entries_no_junk.append(entry_no_junk)
+
+        # permanently overwrite self.entries
+        self.entries = entries_no_junk
+
     def filter_AB_entries(self):
         '''function that checks if entries are antibodies by running their sequences
         through ANARCI
@@ -71,15 +105,11 @@ class GenbankSearch:
             # get sequence
             seq = entry['GBSeq_sequence']
             # returns false if not antibody sequence
-            numbering, chain_type = number(seq)
+            result = run_anarci([['sequences', seq]])[2][0]
 
-            if chain_type:
+            if result:
                 # temporarily store antibody entries
                 filtered_entries.append(entry)
-
-                # alternative way to label entries as heavy or light chains
-                # chain_type = chain_type.replace('K', 'L')
-                # entry['chain'] = chain_type
 
         # permanently overwirte
         self.entries = filtered_entries
@@ -102,6 +132,14 @@ class GenbankSearch:
                 entry['chain'] = 'light_chain'
             else:
                 entry['chain'] = 'unassigned'
+
+            # alternative way to label entries as heavy or light chains
+            # seq = entry['GBSeq_sequence']
+            # chain_type = run_anarci([['sequences', seq]])[2]
+            #                          [0][0]['chain_type']
+            # single label 'L' for light chain
+            # chain_type = chain_type.replace('K', 'L')
+            # entry['chain'] = chain_type
 
     def find_antigen(self):
         '''
@@ -296,6 +334,7 @@ class GenbankSearch:
         '''
         self.get_number_of_entries(db)
         self.get_entries(reduce_searches, db)
+        self.remove_junk()
         self.filter_AB_entries()
         self.classify_vh_vl()
         self.find_antigen()
@@ -316,4 +355,3 @@ if __name__ == '__main__':
                'OR anti-Sars-Cov-2[All Fields]))'
     genbanksearch = GenbankSearch(keywords)
     genbanksearch(reduce_searches=100)
-    print(genbanksearch.entries[0]['GBSeq_sequence'])

@@ -64,6 +64,26 @@ class TestMineGenbank(unittest.TestCase):
         self.assertEqual(self.genbank.entries[0]['GBSeq_sequence'],
                          self.sequence)
 
+    def test_remove_junk(self):
+        self.genbank.remove_junk()
+        # remove junk retains nine key-value pairs
+        self.assertEqual(len(self.genbank.entries[0]), 9)
+
+    def test_filter_AB_entries(self):
+        self.genbank.entries = self.entries_gb
+        self.genbank.filter_AB_entries()
+        # filter keeps 4 entries: '7WDF_F', '7WDF_E', '7WD7_f', '7WD7_e'
+
+        # check if 4 entries were retatined
+        self.assertEqual(len(self.genbank.entries), 4)
+
+        # check if the correct entires are retained
+        ids = []
+        correct_ids = ['7WDF_F', '7WDF_E', '7WD7_f', '7WD7_e']
+        for entry in self.genbank.entries:
+            ids.append(entry['GBSeq_locus'])
+        self.assertEqual(ids, correct_ids)
+
     def test_classify_vh_vl(self):
         # overwrite entires with example entries
         self.genbank.entries = self.entries_list
