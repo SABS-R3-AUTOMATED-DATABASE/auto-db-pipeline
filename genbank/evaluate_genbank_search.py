@@ -1,4 +1,5 @@
-from mine_genbank import GenbankSearch
+from keywords2ids import GenbankSearch
+from ids2protein import ProteinRetrieval
 import pandas as pd
 import numpy as np
 from Bio.Seq import Seq
@@ -229,8 +230,13 @@ if __name__ == '__main__':
                'OR bind[All Fields] OR inhibit[All Fields] ' +\
                'OR anti-Sars-Cov-2[All Fields]))'
     genbanksearch = GenbankSearch(keywords)
-    genbanksearch.get_number_of_entries()
-    genbanksearch.get_entries(reduce_searches=50)
+    genbanksearch(reduce_searches=50,
+                  out_file_path='genbank/data/ids_search_eval.json')
+    genbankret = ProteinRetrieval(
+        ids_file_path='genbank/data/ids_search_eval.json')
+    genbankret.get_entries()
+    genbankret.remove_junk()
+
     evaluation = EvaluateGenbankSearch('genbank/data/CoV-AbDab_181021.csv',
-                                       genbanksearch.entries, keywords)
+                                       genbankret.entries, keywords)
     evaluation(print_metrics=True, save_metrics=False)

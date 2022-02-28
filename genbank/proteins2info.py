@@ -1,103 +1,52 @@
-from Bio import Entrez
+import json
 from anarci import run_anarci
-# import json
 
 
-class GenbankSearch:
+class InfoRetrieval:
     '''
-    class that searches Genbank with specified keywords and returns the
-    database entries
+    Class that retrieves extracts information from Genbank protein hanldes.
+
+    This class is the third part of the pipeline to mine the Genbank database.
+    The class takes a .json file containing genbank protein handles as an
+    input. The protein entries are filtered for antibody sequences and
+    classified as either a light or heavy chain. The antigen the antibody binds
+    and a unique identifier are determined. The antibodies are grouped by
+    publication and matching light and heavy chains paired. The pairings as
+    well as sequences for which pairing was not successful are saved in
+    'AB_paired.json' and 'AB_unpaired.json' respectively.
 
     Parameters:
     ----------
-    all_keywords: keywords to search data base
+    proteins_file_path: path to the json file with a genbank protein handles
+                        default: "genbank/data/protein_handles.json"
 
     Methods:
     -------
-    get_number_of_entries(self, keywords)
-    get_entries(self, reduce_searches=False, db='protein')
-    remove_junk(self)
     filter_AB_entries(self)
     classify_vh_vl(self)
     find_antigen(self)
     find_fragment_id(self)
-    group_by_author_title(self)
+    group_by_publication(self)
     pair_vh_vl(self)
+    save_as_json(self, pairing_method=False,
+                 paired_out_file_path='genbank/data/AB_paried.json',
+                 unpaired_out_file_path='genbank/data/AB_unpaired.json')
     __call__(self, db='protein')
+
+    Outputs:
+    -------
+    AB_paired.json: json file containg paired heavy and light chains
+    AB_unpaired.json: json file containg unpaired heavy and light chains
     '''
-    def __init__(self, all_keywords):
+    def __init__(self, proteins_file_path='genbank/data/protein_handles.json'):
 
-        self.search_query = all_keywords
-        Entrez.email = "fabian.spoendlin@exeter.ox.ac.uk"
-
-    def get_number_of_entries(self, db='protein'):
-        '''
-        find number of entries in the database for the given keywords
-        '''
-        handle = Entrez.esearch(db=db, term=self.search_query, retmax='2')
-        record = Entrez.read(handle)
-        self.number_of_entries = int(record['Count'])
-        # print('number of entries:', self.number_of_entries)
-
-    def get_entries(self, reduce_searches=False, db='protein'):
-        '''
-        download all entries in the database for the given keywords
-        default searches the protein database, possible to change the searched
-        database
-        if argument reduce_seraches (int) is passed only the first <int>
-        entries are downloaded
-        '''
-        if reduce_searches:
-            self.entries_to_retrieve = reduce_searches
-        else:
-            self.entries_to_retrieve = self.number_of_entries
-
-        id_handle = Entrez.esearch(db=db, term=self.search_query,
-                                   retmax=self.entries_to_retrieve)
-        record = Entrez.read(id_handle)
-
-        # Entrez.efetch handles aproximately 25 searches per second
-        entries_handle = Entrez.efetch(db=db, id=record['IdList'],
-                                       rettype="gb", retmode="xml")
-        self.entries = Entrez.read(entries_handle)
-
-    def remove_junk(self):
-        '''function that removes unwanted information from protein
-        entries. Reduced storage used by the script.'''
-        # list to temporarily save entries without junk
-        entries_no_junk = []
-        # keys to keep in protein entry
-        to_keep_entry = ['GBSeq_locus', 'GBSeq_moltype', 'GBSeq_update-date',
-                         'GBSeq_create-date', 'GBSeq_definition',
-                         'GBSeq_accession-version', 'GBSeq_source',
-                         'GBSeq_sequence']
-        # keys to keep in entires['GBSeq_references'][0] (first reference)
-        to_keep_ref = ['GBReference_authors', 'GBReference_title',
-                       'GBReference_journal']
-
-        # retain specified information
-        for entry in self.entries:
-            # select keys in entry
-            entry_no_junk = {key: entry[key] for key in to_keep_entry}
-
-            # select keys in first reference
-            reference_1 = entry['GBSeq_references'][0]
-            ref_no_junk = {key: reference_1[key] for key in to_keep_ref}
-            entry_no_junk['GBSeq_references'] = [ref_no_junk]
-            try:
-                entry_no_junk['GBSeq_references'][0]['GBReference_xref'] = \
-                    reference_1['GBReference_xref']
-            except KeyError:
-                pass
-
-            entries_no_junk.append(entry_no_junk)
-
-        # permanently overwrite self.entries
-        self.entries = entries_no_junk
+        with open(proteins_file_path, 'r') as infile:
+            self.entries = json.load(infile)
 
     def filter_AB_entries(self):
-        '''function that checks if entries are antibodies by running their sequences
-        through ANARCI
+        '''
+        check if a protein sequence originates from a antibody and remove all
+        others
         '''
         # temporary list to store entries that are antibodies
         filtered_entries = []
@@ -116,9 +65,8 @@ class GenbankSearch:
 
     def classify_vh_vl(self):
         '''
-        funtion that detects if entries are heavy or light chains,
-        searches definitions of genbank entry for keywords linked
-        to heavy or light chains then labels them accordingly
+        Detects if entries are heavy or light chains. Searches genbank entry
+        definitions for keywords and labels them as heavy or light chains.
         '''
         for entry in self.entries:
             definition = entry['GBSeq_definition'].lower()
@@ -127,25 +75,32 @@ class GenbankSearch:
             lc = ['light', 'kappa', 'lambda', 'vl']
 
             if any(word in definition for word in hc):
-                entry['chain'] = 'heavy_chain'
+                entry['chain'] = 'H'
             elif any(word in definition for word in lc):
-                entry['chain'] = 'light_chain'
+                entry['chain'] = 'L'
             else:
                 entry['chain'] = 'unassigned'
 
-            # alternative way to label entries as heavy or light chains
-            # seq = entry['GBSeq_sequence']
-            # chain_type = run_anarci([['sequences', seq]])[2]
-            #                          [0][0]['chain_type']
+    def classify_vh_vl_anarci(self):
+        '''
+        Detects if entries are heavy or light chains. Alternative way to label
+        the classify_vh_vl function. Uses anarci to label chains. This method
+        is used when the object is called with kwarg:
+        "pairing_method='anarici".
+        '''
+        for entry in self.entries:
+            seq = entry['GBSeq_sequence']
+            anarci_results = run_anarci([['sequences', seq]])
+            chain_type = anarci_results[2][0][0]['chain_type']
+
             # single label 'L' for light chain
-            # chain_type = chain_type.replace('K', 'L')
-            # entry['chain'] = chain_type
+            chain_type = chain_type.replace('K', 'L')
+            entry['chain'] = chain_type
 
     def find_antigen(self):
         '''
-        function that finds the antigen which an antibody binds to,
-        searches defintions of the genbank entries for certain
-        keywords and labels them accordingly
+        Finds the antigen the antibody binds to. Searches defintions of
+        genbank entries for keywords and labels them accordingly.
         '''
         for entry in self.entries:
             definition = entry['GBSeq_definition'].lower()
@@ -184,15 +139,16 @@ class GenbankSearch:
 
     def find_fragment_id(self):
         '''
-        finds the ID of the antibody fragment the entries belongs to
-
-        to find id, entry deinitions are searched for words containing
-        both letters and number and do not belong to one of the exceptions
+        Labels antibody entries with a unique identifier taken from genbank.
+        Entry deinitions are searched for words alpha-numeric expressions which
+        do not belong to one of the exceptions.
         '''
         for entry in self.entries:
             definition = entry['GBSeq_definition'].lower()
             # remove interfering characters from definitions
             definition = definition.replace(',', '')
+            definition = definition.replace('[', '')
+            definition = definition.replace(']', '')
             def_words = definition.split(' ')
             exceptions = ['sars-cov-2', 'sars-cov-1', 'covid-19', 'sars-cov',
                           'mers-cov', 'anti-sars-cov', 'anti-sars-cov-2',
@@ -207,11 +163,11 @@ class GenbankSearch:
                         entry['fragment_id'] = frag_id.upper()
                         break
 
-    def group_by_author_title(self):
+    def group_by_publication(self):
         '''
-        function that groups genbank entries by their publicaiton,
-        entries with the same authors and title are defined to be
-        from the same publication
+        Groups genbank entries by their publicaiton (same author and title).
+
+        output self.grouped_entires: protein entires grouped by publication
         '''
         self.grouped_entries = []
         grouped_entries = []
@@ -239,7 +195,7 @@ class GenbankSearch:
 
     def pair_vh_vl(self):
         '''
-        pair corresponding heavy and light chains
+        pair matching heavy and light chains
 
         the heavy and light chains are paired with two differnt approches:
             1. if a group of entries only contains one heavy and light chain
@@ -249,11 +205,11 @@ class GenbankSearch:
                first occurence of the HC is paired with the first occurance
                of the LC)
 
-        Pairings are arranged in a dict with keys "heavy_chain" and
-        "light chain" all pairings are saved as a list in seld.paired_entries
-        Unpaired entries of each group are saved in a list, all lists
-        corresponding to the groups are saved as a list in
-        self.unpaired_entroes
+        output self.paired_entries: List of dicts of paired entries. Each
+                                    dict has key "heavy_chain" and "light_
+                                    chain" and corresponds to a parining.
+        output self.unpaired_entries: List of lists. Unpaired entries are
+                                      arranged in sublists by publication.
         '''
         self.paired_entries = []
         self.unpaired_entries = []
@@ -264,9 +220,9 @@ class GenbankSearch:
             unassigned = []
 
             for entry in group:
-                if entry['chain'] == 'heavy_chain':
+                if entry['chain'] == 'H':
                     heavy_chains.append(entry)
-                elif entry['chain'] == 'light_chain':
+                elif entry['chain'] == 'L':
                     light_chains.append(entry)
                 else:
                     unassigned.append(entry)
@@ -277,7 +233,8 @@ class GenbankSearch:
                 dic = {'heavy_chain': heavy_chains[0],
                        'light_chain': light_chains[0]}
                 self.paired_entries.append(dic)
-                self.unpaired_entries.append(unassigned)
+                if unassigned:
+                    self.unpaired_entries.append(unassigned)
 
             # if a hc has the same fragment id as a lc they are paired
             else:
@@ -326,32 +283,56 @@ class GenbankSearch:
                 # all unpaired hc, lc and sequences of which a chain could
                 # not be determined are added to the unpaired entries
                 unpaired = unpaired_hc + light_chains + unassigned
-                self.unpaired_entries.append(unpaired)
+                if unpaired:
+                    self.unpaired_entries.append(unpaired)
 
-    def __call__(self, reduce_searches=False, db='protein'):
+    def save_to_json(self, paired_out_file_path='genbank/data/AB_paired.json',
+                     unpaired_out_file_path='genbank/data/AB_unpaired.json'):
         '''
-        runs all functions in order of the pipeline
+        saves paired and unpaired entries in json files
+
+        param paired_out_file_path: path of output json for paired entries,
+                                    default: "genbank/data/AB_paired.json"
+        param unpaired_out_file_path: path of output json for unpaired entries,
+                                      default: "genbank/data/AB_unpaired.json"
+        output '.../AB_paired.json': json file containg paired entries
+        output '.../AB_unpaired.json': json file containg unpaired entries
         '''
-        self.get_number_of_entries(db)
-        self.get_entries(reduce_searches, db)
-        self.remove_junk()
+        with open(paired_out_file_path, 'w') as outfile_1:
+            json.dump(self.paired_entries, outfile_1)
+
+        with open(unpaired_out_file_path, 'w') as outfile_2:
+            json.dump(self.unpaired_entries, outfile_2)
+
+    def __call__(self, pairing_method=False,
+                 paired_out_file_path='genbank/data/AB_paired.json',
+                 unpaired_out_file_path='genbank/data/AB_unpaired.json'):
+        '''
+        runs functions in correct order
+
+        param pairing_method: method by which heavy and light chains are
+                              paired, the default uses the classify_vh_vl
+                              function, if pairing_method='anarci'
+                              classify_vh_vl_anarci is used.
+        param paired_out_file_path: path of output json for paired entries,
+                                    default: "genbank/data/AB_paired.json"
+        param unpaired_out_file_path: path of output json for unpaired entries,
+                                      default: "genbank/data/AB_unpaired.json"
+        '''
         self.filter_AB_entries()
-        self.classify_vh_vl()
+        if pairing_method == 'anarci':
+            self.classify_vh_vl_anarci()
+        else:
+            self.classify_vh_vl()
         self.find_antigen()
         self.find_fragment_id()
-        self.group_by_author_title()
+        self.group_by_publication()
         self.pair_vh_vl()
+        self.save_to_json(paired_out_file_path=paired_out_file_path,
+                          unpaired_out_file_path=unpaired_out_file_path)
 
 
 if __name__ == '__main__':
-    keywords = '((Immunoglobulin[All Fields] OR antibody[All Fields] ' +\
-               'OR antibodies[All Fields] OR nanobody[All Fields] ' +\
-               'OR nanobodies[All Fields]) AND (COVID-19[All Fields] ' +\
-               'OR coronavirus[All Fields] OR Sars-Cov[All Fields] ' +\
-               'OR Mers-Cov[All Fields] OR SARS[All Fields] ' +\
-               'OR Sars-CoV-2[All Fields]) AND (neutralizing[All Fields] ' +\
-               'OR neutralize[All Fields] OR neutralisation[All Fields] ' +\
-               'OR bind[All Fields] OR inhibit[All Fields] ' +\
-               'OR anti-Sars-Cov-2[All Fields]))'
-    genbanksearch = GenbankSearch(keywords)
-    genbanksearch(reduce_searches=100)
+    genbank = InfoRetrieval()
+    genbank()
+    # genbank(pairing_method='anarci')
