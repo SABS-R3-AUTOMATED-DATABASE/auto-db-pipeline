@@ -46,7 +46,7 @@ class GenbankSearch:
         record = Entrez.read(handle)
         self.number_of_entries = int(record['Count'])
 
-        # print('number of entries found:', self.number_of_entries)
+        print('number of entries found:', self.number_of_entries)
 
     def get_ids(self, reduce_searches=False, db='protein'):
         '''

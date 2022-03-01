@@ -13,7 +13,8 @@ class InfoRetrieval:
     and a unique identifier are determined. The antibodies are grouped by
     publication and matching light and heavy chains paired. The pairings as
     well as sequences for which pairing was not successful are saved in
-    'AB_paired.json' and 'AB_unpaired.json' respectively.
+    'AB_paired.json' and 'AB_unpaired.json' respectively. These files are
+    used by the info2csv.py in the next part of the pipeline.
 
     Parameters:
     ----------
@@ -71,7 +72,7 @@ class InfoRetrieval:
         for entry in self.entries:
             definition = entry['GBSeq_definition'].lower()
             hc = ['heavy', 'alpha', 'delta', 'epsilon',
-                  'gamma', 'mu', 'vh', 'vhh']
+                  'gamma', 'vh', 'vhh']  # , 'mu']
             lc = ['light', 'kappa', 'lambda', 'vl']
 
             if any(word in definition for word in hc):
@@ -84,9 +85,7 @@ class InfoRetrieval:
     def classify_vh_vl_anarci(self):
         '''
         Detects if entries are heavy or light chains. Alternative way to label
-        the classify_vh_vl function. Uses anarci to label chains. This method
-        is used when the object is called with kwarg:
-        "pairing_method='anarici".
+        the classify_vh_vl function. Uses anarci to label chains.
         '''
         for entry in self.entries:
             seq = entry['GBSeq_sequence']
@@ -304,7 +303,7 @@ class InfoRetrieval:
         with open(unpaired_out_file_path, 'w') as outfile_2:
             json.dump(self.unpaired_entries, outfile_2)
 
-    def __call__(self, pairing_method=False,
+    def __call__(self, classification_method=False,
                  paired_out_file_path='genbank/data/AB_paired.json',
                  unpaired_out_file_path='genbank/data/AB_unpaired.json'):
         '''
@@ -320,7 +319,7 @@ class InfoRetrieval:
                                       default: "genbank/data/AB_unpaired.json"
         '''
         self.filter_AB_entries()
-        if pairing_method == 'anarci':
+        if classification_method == 'anarci':
             self.classify_vh_vl_anarci()
         else:
             self.classify_vh_vl()
@@ -334,5 +333,6 @@ class InfoRetrieval:
 
 if __name__ == '__main__':
     genbank = InfoRetrieval()
-    genbank()
-    # genbank(pairing_method='anarci')
+    # genbank()  # problems when used expressions appear inside word
+    # e.g. 'mu' in 'immuno'
+    genbank(classification_method='anarci')

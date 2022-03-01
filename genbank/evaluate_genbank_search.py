@@ -1,5 +1,5 @@
-from keywords2ids import GenbankSearch
-from ids2protein import ProteinRetrieval
+from genbank.keywords2ids import GenbankSearch
+from genbank.ids2protein import ProteinRetrieval
 import pandas as pd
 import numpy as np
 from Bio.Seq import Seq
@@ -208,7 +208,8 @@ class EvaluateGenbankSearch:
                 self.percentage_VH_or_VL_found
             ))
 
-    def __call__(self, print_metrics=False, save_metrics=True):
+    def __call__(self, outpath='data/protein_search_stats.csv',
+                 print_metrics=False, save_metrics=True):
         '''
         run the evaluation pipeline
         '''
@@ -216,7 +217,7 @@ class EvaluateGenbankSearch:
         self.search_in_covabdab()
         self.produce_metrics()
         self.print_metrics(print_metrics)
-        self.save_metrics_to_json(save_metrics)
+        self.save_metrics_to_json(save_metrics, outpath)
 
 
 if __name__ == '__main__':

@@ -7,8 +7,8 @@ from Bio import Entrez
 import proteins2info
 
 
-class TestIds2protein(unittest.TestCase):
-    '''class to test ids2protein.py'''
+class TestProteins2info(unittest.TestCase):
+    '''class to test proteins2info.py'''
 
     def __init__(self, *argv, **kwarg):
         super().__init__(*argv, **kwarg)
