@@ -42,9 +42,9 @@ class Patents:
         """
         results = []
         patent_number = []
+        url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26after%3Dfiling%3A20030101%26num%3D100"
         if CN == True:
             url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B%26country%3DCN%26after%3Dfiling%3A20030101%26num%3D100"
-        url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26after%3Dfiling%3A20030101%26num%3D100"
         url = [url_first_part + "&exp="]
         for i in range(1, 10):
             url.append(url_first_part + "%26page%3D" + str(i) + "&exp=")
@@ -61,8 +61,8 @@ class Patents:
 
     def get_patents(self, patents=None):
         """This function taks around 6 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
-        if patents is None and patent_number is None:
-            patents, patent_number = Patents.get_patent_urls()
+        if patents is None:
+            patents = Patents.get_patent_urls()
         df = pd.DataFrame(
             {
                 "URL": [],
@@ -76,63 +76,62 @@ class Patents:
             dtype="str",
         )
         df["URL"] = pd.Series(patents, dtype="str")
-        with open("patents/timelog.txt", "w") as f:
-            for i in range(df.shape[0]):
-                if i % 10 == 0:
-                    f.write(str(i)+'/'+str(df.shape[0])+' ' +str(datetime.now()) + "\n")
-                if i % 100 == 0 and i != 0:
-                    time.sleep(1800)
-                texts = []
-                links = []
-                figs = []
-                claims = []
-                headers = {"User-Agent": Patents.get_random_ua()}
-                page = requests.get(df.loc[i, "URL"], headers=headers)
-                soup = BeautifulSoup(page.content, "html.parser")
-                title = soup.title.text
-                if len(title.split("\n")) > 2:
-                    title = title.split("\n")[1]
-                if len(title.split("\n")) == 2:
-                    title = title.split("\n")[0]
-                    title = re.split(r"- ", title, maxsplit=1)[1]
-                title = title.lower()
-                df.loc[i, "Title"] = title
-                for content in soup.find_all("div", class_="claim-text"):
-                    unwanted = content.find("span", class_="google-src-text")
-                    if unwanted is not None:
-                        unwanted.extract()
-                    claim = content.text
-                    claim = claim.replace("\n", "")
-                    claims.append(claim)
-                df.loc[i, "Claim"] = claims
-                for content in soup.find_all("div", class_="description-paragraph"):
-                    unwanted = content.find("span", class_="google-src-text")
-                    if unwanted is not None:
-                        unwanted.extract()
-                    text = content.text
-                    text = text.replace("\n", "")
-                    texts.append(text)
-                for content in soup.find_all("div", class_="description-line"):
-                    unwanted = content.find("span", class_="google-src-text")
-                    if unwanted is not None:
-                        unwanted.extract()
-                    text = content.text
-                    text = text.replace("\n", "")
-                    texts.append(text)
-                df.loc[i, "Content"] = texts
-                fig_links = soup.find_all("meta", itemprop="full")
-                if len(fig_links) != 0:
-                    for link in fig_links:
-                        links.append(link["content"])
-                df.loc[i, "Fig"] = links
-                for content in soup.find_all("div", class_="patent-image"):
-                    for a in content.find_all("a", href=True):
-                        if a["href"] not in figs:
-                            figs.append(a["href"])
-                df.loc[i, "Fig_in_text"] = figs
-                content = soup.find("div", class_="abstract")
-                if content is not None:
-                    df.loc[i, "Abstract"] = content.text
+        for i in range(df.shape[0]):
+            texts = []
+            links = []
+            figs = []
+            claims = []
+            headers = {"User-Agent": Patents.get_random_ua()}
+            page = requests.get(df.loc[i, "URL"], headers=headers)
+            soup = BeautifulSoup(page.content, "html.parser")
+            title = soup.title.text
+            if len(title.split("\n")) > 2:
+                title = title.split("\n")[1]
+            if len(title.split("\n")) == 2:
+                title = title.split("\n")[0]
+                title = re.split(r"- ", title, maxsplit=1)[1]
+            title = title.lower()
+            df.loc[i, "Title"] = title
+            for content in soup.find_all("div", class_="claim-text"):
+                unwanted = content.find("span", class_="google-src-text")
+                if unwanted is not None:
+                    unwanted.extract()
+                claim = content.text
+                claim = claim.replace("\n", "")
+                claims.append(claim)
+            df.loc[i, "Claim"] = claims
+            for content in soup.find_all("div", class_="description-paragraph"):
+                unwanted = content.find("span", class_="google-src-text")
+                if unwanted is not None:
+                    unwanted.extract()
+                text = content.text
+                text = text.replace("\n", "")
+                texts.append(text)
+            for content in soup.find_all("div", class_="description-line"):
+                unwanted = content.find("span", class_="google-src-text")
+                if unwanted is not None:
+                    unwanted.extract()
+                text = content.text
+                text = text.replace("\n", "")
+                texts.append(text)
+            df.loc[i, "Content"] = texts
+            fig_links = soup.find_all("meta", itemprop="full")
+            if len(fig_links) != 0:
+                for link in fig_links:
+                    links.append(link["content"])
+            df.loc[i, "Fig"] = links
+            for content in soup.find_all("div", class_="patent-image"):
+                for a in content.find_all("a", href=True):
+                    if a["href"] not in figs:
+                        figs.append(a["href"])
+            df.loc[i, "Fig_in_text"] = figs
+            content = soup.find("div", class_="abstract")
+            if content is not None:
+                df.loc[i, "Abstract"] = content.text
+            if (i+1) % 10 == 0:
+                print(str(i+1)+'/'+str(df.shape[0]),datetime.now())
+            if i % 100 == 0 and i != 0:
+                time.sleep(1800)
         self.search_results = df
         return df
 
@@ -140,7 +139,9 @@ class Patents:
         patents = Patents.get_patent_urls(CN=False)
         patents_cn = Patents.get_patent_urls(CN=True)
         patents = list(set(patents) | set(patents_cn))
+        print(len(patents))
         df = Patents.get_patents(self, patents=patents)
+        self.search_results = df
         return df
 
     def save_search_output(self, filepath: str):
@@ -191,7 +192,7 @@ class Patents:
 
 
 test = Patents()
-test.get_patents()
-test.save_search_output("patents/search_results.json")
-test.process_results()
-test.save_final_results("patents/final_results.json")
+test.get_patents_v2()
+#test.save_search_output("patents/search_results.json")
+#test.process_results()
+#test.save_final_results("patents/final_results.json")
