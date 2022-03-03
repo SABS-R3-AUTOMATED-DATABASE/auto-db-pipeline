@@ -23,7 +23,7 @@ def get_CDR_loop_sequences(seq):
     for cdr in CDR_definitions:
         cdr_loops["CDR"+chain+cdr] = "".join([x[1] for x in numb if (x[0][0] in CDR_definitions[cdr]) and x[1] != "-"])
 
-    return cdr_loops
+    return cdr_loops, anarci_out
 
 
 def add_cdrs_unpaired():
@@ -93,4 +93,8 @@ def update_df():
     return updated_df
 
 
-update_df()
+
+
+seq = 'AEQLVESGGGVVQPGRSLRLSCAASGFTFSSYAMHWVRQAPGKGLEWVAVISYDGSNKYYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCARAFRGSYFSGIDPWGQGTLVTVSS'
+cdr_loops, anarci_out = get_CDR_loop_sequences(seq)
+print(anarci_out)
