@@ -54,7 +54,7 @@ def pdb_to_seq(verified_antibodies):
     return
 
 
-def extract_VH_VL(pdb_id, anarci_output):
+def extract_VH_VL(anarci_output):
 
     # extract sequence of residues from those annotated with H or L
     extract_seqs = anarci_output.readlines()
@@ -82,13 +82,9 @@ def extract_VH_VL(pdb_id, anarci_output):
     VH_seq = ''.join([residue for residue in VH_seq_list])
     VL_seq = ''.join([residue for residue in VL_seq_list])
 
-    print('Printing sequences...')
-    print(pdb_id, 'VH: ', VH_seq)
-    print(pdb_id, 'VL: ', VL_seq)
-
     return [VH_seq, VL_seq]
 
 
 # test run function
 verified_antibodies = ['4f2m', '7e3k', '7e3c', '7k9i', '7e5y', '7l02', '7dk5', '7dd2']
-pdb_to_seq(verified_antibodies)
+
