@@ -8,6 +8,7 @@ import numpy as np
 import time
 import pandas as pd
 import re
+from datetime import datetime
 
 
 class Patents:
@@ -33,20 +34,17 @@ class Patents:
         finally:
             return random_ua.rstrip()
 
-    def get_patent_urls():
+    def get_patent_urls(CN=False):
         """
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
+        ((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobody) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) after:filing:20030101
         """
         results = []
         patent_number = []
-        url_first_part = (
-            "https://patents.google.com/xhr/query?url=q%3D(((((SARS-CoV-2%2BOR%2BCOVID-19)"
-            + "%2BOR%2BSARS)%2BAND%2B(((((antibody%2BOR%2Bantibodies)%2BOR%2Bnanobody)%2BOR%2Bimmunoglobu"
-            + "lin)%2BOR%2BMAb)%2BOR%2Bnanobodies))%2BAND%2B(((((neutralizing%2BOR%2Bneutralize)%2BOR%2Bneutralization)%2BOR"
-            + "%2Bbind)%2BOR%2Binhibit)%2BOR%2Btarget))%2BAND%2B(((((heavy-chain%2BOR%2Bcdr)%2BOR%2Bgene)%"
-            + "2BOR%2Brbd)%2BOR%2Bspike-protein)%2BOR%2BVH))%26after%3Dpriority%3A20030101%26num%3D100"
-        )
+        if CN == True:
+            url_first_part = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26after%3Dfiling%3A20030101%26num%3D100"
+        url_first_part = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%26q%3Dantibody%26q%3Dneutralize%2Cbind%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Camino%2Bacid%2Csequence%26after%3Dfiling%3A20030101%26num%3D100"
         url = [url_first_part + "&exp="]
         for i in range(1, 10):
             url.append(url_first_part + "%26page%3D" + str(i) + "&exp=")
@@ -61,9 +59,10 @@ class Patents:
                 patent_number.append(str(num))
         return results, patent_number
 
-    def get_patents(self):
+    def get_patents(self, patents=None, patent_number=None):
         """This function taks around 6 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
-        patents, patent_number = Patents.get_patent_urls()
+        if patents is None and patent_number is None:
+            patents, patent_number = Patents.get_patent_urls()
         df = pd.DataFrame(
             {
                 "Patent number": [],
@@ -73,13 +72,14 @@ class Patents:
                 "Claim": [],
                 "Fig": [],
                 "Fig_in_text": [],
+                "Abstract": [],
             },
             dtype="str",
         )
         df["Patent number"] = pd.Series(patent_number, dtype="str")
         df["URL"] = pd.Series(patents, dtype="str")
-        for i in range(100):
-            print(i)
+        for i in range(df.shape[0]):
+            print(i, datetime.now())
             if i % 100 == 0 and i != 0:
                 time.sleep(1800)
             texts = []
@@ -130,7 +130,18 @@ class Patents:
                     if a["href"] not in figs:
                         figs.append(a["href"])
             df.loc[i, "Fig_in_text"] = figs
+            content = soup.find("div", class_="abstract")
+            if content is not None:
+                df.loc[i, "Abstract"] = content.text
         self.search_results = df
+        return df
+
+    def get_patents_v2(self):
+        df1 = Patents.get_patents(self)
+        time.sleep(1800)
+        patents, patent_number = Patents.get_patent_urls(CN=True)   
+        df2 = Patents.get_patents(self, patents=patents, patent_number=patent_number)
+        self.search_results = pd.concat([df1, df2], axis=0)
 
     def save_search_output(self, filepath: str):
         self.search_results.to_json(filepath)
@@ -166,12 +177,10 @@ class Patents:
                         notes.append(_)
                         item = re.findall("seq id no:*\.*\s*\d+", _.lower())
                         seqid = list(set(seqid) | set(item))
-
             df.at[i, "Note"] = notes
             df.at[i, "Seq"] = seqid
         df = df[df["Note"] != pd.Series([[]] * df.shape[0])]
         df = df.reset_index(drop=True)
-
         self.filtered_results = df
 
     def save_final_results(self, filepath: str):
@@ -182,7 +191,7 @@ class Patents:
 
 
 test = Patents()
-test.get_patents()
+test.get_patents_v2()
 test.save_search_output("patents/search_results.json")
 test.process_results()
 test.save_final_results("patents/final_results.json")
