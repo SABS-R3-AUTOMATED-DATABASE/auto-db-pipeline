@@ -38,13 +38,13 @@ class Patents:
         """
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
-        ((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobody) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) after:filing:20030101
+        (((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobod) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
         """
         results = []
         patent_number = []
         if CN == True:
             url_first_part = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26after%3Dfiling%3A20030101%26num%3D100"
-        url_first_part = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%26q%3Dantibody%26q%3Dneutralize%2Cbind%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Camino%2Bacid%2Csequence%26after%3Dfiling%3A20030101%26num%3D100"
+        url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26after%3Dfiling%3A20030101%26num%3D100"
         url = [url_first_part + "&exp="]
         for i in range(1, 10):
             url.append(url_first_part + "%26page%3D" + str(i) + "&exp=")
@@ -191,7 +191,7 @@ class Patents:
 
 
 test = Patents()
-test.get_patents_v2()
+test.get_patents()
 test.save_search_output("patents/search_results.json")
 test.process_results()
 test.save_final_results("patents/final_results.json")
