@@ -40,8 +40,8 @@ class IGBLASTprocess:
     def __init__(self, ncpu=15):
 
         self.ncpu = ncpu
-        self.germlines = 'auto-db-pipeline/downstream_in_use/germlines'  # NOTE file path will need changing for final version 
-        self.tmpfile = 'auto-db-pipeline/igblast_output.csv'  # create temp output file, will be deleted 
+        self.germlines = 'auto-db-pipeline/downstream_in_use/germlines'  # NOTE file path will need changing for final version
+        self.tmpfile = 'auto-db-pipeline/igblast_output.csv'  # create temp output file, will be deleted
 
     def __call__(self, fasta_name, organism):
 
@@ -53,13 +53,13 @@ class IGBLASTprocess:
         subprocess.run(["igblastn", "-germline_db_V", vdb, "-germline_db_D", ddb, "-germline_db_J", jdb, "-organism", organism,
                         "-show_translation", "-num_alignments_D", "1", "-num_alignments_V", "1", "-ig_seqtype", "Ig",
                         "-num_clonotype", "0", "-num_alignments_J", "1", "-outfmt", "19", "-auxiliary_data", "optional_file/{}_gl.aux".format(organism),
-                        "-query", fasta_name, "-out", self.tmpfile, "-num_threads", "{}".format(self.ncpu)], check=True)   
+                        "-query", fasta_name, "-out", self.tmpfile, "-num_threads", "{}".format(self.ncpu)], check=True)
 
         # csv output read into dataframe with only relevant columns
         igblast_df = pd.read_csv(self.tmpfile, sep="\t", usecols=['locus', 'productive', 'v_call', 'j_call', 'sequence_alignment_aa', 'cdr3_aa'])
 
         os.remove(self.tmpfile)  # remove temp IgBLAST output once created CSV
-        #os.remove(fasta_name)  # remove fasta once processed sequences with IgBLAST
+        os.remove(fasta_name)  # remove fasta once processed sequences with IgBLAST
 
         print("Igblastn finished. Took:", time.time()-start_time)
 
@@ -82,4 +82,3 @@ igblast_input = create_igblast_input(nseq_dict)
 igblastprocess = IGBLASTprocess()
 igblastprocess(fasta_name='igblast_input.fasta', organism='human')
 get_vdj_of_species(organism='human', germline_path='germlines')
-
