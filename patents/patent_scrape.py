@@ -26,7 +26,7 @@ class Patents:
             if len(lines) > 0:
                 prng = np.random.RandomState()
                 index = prng.permutation(len(lines) - 1)
-                idx = np.asarray(index, dtype=np.integer)[0]
+                idx = np.asarray(index, dtype=np.int64)[0]
                 random_ua = lines[int(idx)]
         except Exception as ex:
             print("Exception in random_ua")
@@ -59,10 +59,12 @@ class Patents:
                 patent_number.append(str(num))
         return results
 
-    def get_patents(self, patents=None):
+    def get_patents(self, CN = False):
         """This function taks around 6 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
-        if patents is None:
-            patents = Patents.get_patent_urls()
+        patents = Patents.get_patent_urls()
+        if CN is True:
+            patents_cn = Patents.get_patent_urls(CN=True)
+            patents = list(set(patents) | set(patents_cn))
         df = pd.DataFrame(
             {
                 "URL": [],
@@ -135,15 +137,6 @@ class Patents:
         self.search_results = df
         return df
 
-    def get_patents_v2(self):
-        patents = Patents.get_patent_urls(CN=False)
-        patents_cn = Patents.get_patent_urls(CN=True)
-        patents = list(set(patents) | set(patents_cn))
-        print(len(patents))
-        df = Patents.get_patents(self, patents=patents)
-        self.search_results = df
-        return df
-
     def save_search_output(self, filepath: str):
         self.search_results.to_json(filepath)
 
@@ -192,7 +185,7 @@ class Patents:
 
 
 test = Patents()
-test.get_patents_v2()
-#test.save_search_output("patents/search_results.json")
-#test.process_results()
-#test.save_final_results("patents/final_results.json")
+test.get_patents(CN = True)
+test.save_search_output("patents/search_results.json")
+test.process_results()
+test.save_final_results("patents/final_results.json")
