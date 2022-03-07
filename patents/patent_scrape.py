@@ -74,6 +74,7 @@ class Patents:
                 "Fig": [],
                 "Fig_in_text": [],
                 "Abstract": [],
+                "Table": []
             },
             dtype="str",
         )
@@ -83,6 +84,7 @@ class Patents:
             links = []
             figs = []
             claims = []
+            tables = []
             headers = {"User-Agent": Patents.get_random_ua()}
             page = requests.get(df.loc[i, "URL"], headers=headers)
             soup = BeautifulSoup(page.content, "html.parser")
@@ -117,6 +119,14 @@ class Patents:
                 text = text.replace("\n", "")
                 texts.append(text)
             df.loc[i, "Content"] = texts
+            for content in soup.find_all("td", class_="description-td"):
+                unwanted = content.find("span", class_="google-src-text")
+                if unwanted is not None:
+                    unwanted.extract()
+                table = content.text
+                table = table.replace("\n", "")
+                tables.append(table)
+            df.loc[i, "Table"] = tables
             fig_links = soup.find_all("meta", itemprop="full")
             if len(fig_links) != 0:
                 for link in fig_links:
