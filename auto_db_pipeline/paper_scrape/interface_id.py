@@ -3,9 +3,9 @@ Representation of a protein ID (of either GenBank or PDB type)
 in relation to its paper webpage.
 Called by types_interface.py
 """
-from ..protein_scrape.pdb_scrape import PdbID
-from ..protein_scrape.genbank_scrape import GenBankID
-from extract_ids import exists_mention
+from protein_scrape.pdb_scrape import PdbID
+from protein_scrape.genbank_scrape import GenBankID
+from .extract_ids import exists_mention
 
 N_AUTHORS_FOR_CLOSE = 3
 N_AUTHORS_FOR_CITATION = 3
@@ -28,6 +28,7 @@ class IDPaper:
         That is, the arguments to this function come from the paper.
         We then check whether this information (e.g. doi, pmid, etc.)
         matches the information of the ID."""
+        print('calling ID')
         self.get_dois_match(paper_doi=doi)
         self.get_authors_match(paper_authors=authors)
         self.get_pmids_match(paper_pmid=pmid)
@@ -40,7 +41,12 @@ class IDPaper:
         return bool(self.id_)
 
     def __repr__(self):
-        """Representation of the IDPaper for retrieval."""
+        """Representation."""
+        return str(self.output)
+
+    @property
+    def output(self):
+        """Output of the IDPaper for retrieval."""
         attrs = ('id_value', 'matches', 'relation_to_paper', 'authors', 'doi', 'pmid')
         representation = {attr: getattr(self, attr) for attr in attrs}
         return representation

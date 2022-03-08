@@ -1,15 +1,12 @@
 """
-Representation of a ppaper.
+Representation of a paper.
 Called by papers2ids.py
 """
 from .fetchers.fetch_types import FetchTypes
 from .fetchers.fetch_text import get_soup, get_text, get_html
 from .paper_types import Doi, Pmid, Pmc
-from ..protein_scrape.pdb_scrape import PdbID
-from ..protein_scrape.genbank_scrape import GenBankID
 
 BIORXIV_NAME = 'biorxiv'
-
 class Paper:
     """
     Obtain the data on a paper.
@@ -28,19 +25,32 @@ class Paper:
         self.paper_types = {}
 
     def __repr__(self):
-        to_keep = ('title', 'journal', 'authors', 'date', 'source')
-        representation = {attr: self.__dict__[attr] for attr in to_keep}
+        """Representation."""
+        return str(self.output)
+
+    @property
+    def output(self):
+        """Get the output of the paper, for retrieval."""
+        attrs = ('title', 'journal', 'authors', 'date', 'source')
+        representation = {attr: getattr(self, attr) for attr in attrs}
         if not self.paper_types:
             return representation
-        representation.update(self._repr_paper_types)
+        representation.update(self._output_paper_types)
         return representation
 
     def __enter__(self):
         """Enter the context manager and return the paper object."""
         return self
 
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_value, traceback):
         """Exit the context manager and clear the caches."""
+        if exc_type:
+            print(self.__dict__)
+            print(exc_type)
+            print(exc_value)
+            print(traceback)
+            print("\n")
+
         Paper._clear_caches()
 
     def __bool__(self):
@@ -50,19 +60,20 @@ class Paper:
 
     def __call__(self):
         """Run the web-scraping and get the information."""
+        print('calling paper')
         if not self:
             return
         self.fetch_paper_types()
         self.paper_type_interface()
 
     @property
-    def _repr_paper_types(self):
-        """Get the representation of the paper types, attach
+    def _output_paper_types(self):
+        """Get the output of the paper types, attach
         paper types that do not exist."""
-        repr_ = {}
+        output_ = {}
         for type_name, paper_type in self.paper_types.items():
-            repr_[type_name] = repr(paper_type)
-        return {'paper_types': repr_}
+            output_[type_name] = paper_type.output
+        return {'paper_types': output_}
 
     def fetch_paper_types(self):
         """Fetch the pmid and pmc identifiers using the FetchTypes class.
@@ -88,7 +99,6 @@ class Paper:
     @staticmethod
     def _clear_caches():
         """Clear the caches."""
-        funcs_to_clear = (get_soup, get_text, get_html,
-                            GenBankID.get_handle, PdbID.get_handle)
+        funcs_to_clear = (get_soup, get_text, get_html)
         for func in funcs_to_clear:
             func.cache_clear()

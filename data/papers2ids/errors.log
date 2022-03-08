@@ -1,0 +1,356 @@
+{'title': 'Predicting spike protein NTD mutations of SARS-CoV-2 causing immune evasion by molecular dynamics simulations.', 'journal': 'Physical chemistry chemical physics : PCCP', 'authors': ['Zhou, L.', 'Wu, L.', 'Peng, C.', 'Yang, Y.', 'Shi, Y.', 'Gong, L.', 'Xu, Z.', 'Zhu, W.'], 'doi': '10.1039/d1cp05059a', 'date': '2022-01-25', 'source': 'pubmed', 'paper_types': {}}
+('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/util/retry.py", line 532, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 82, in _call_paper
+    paper()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 66, in __call__
+    self.fetch_paper_types()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 82, in fetch_paper_types
+    self.paper_types['doi'] = Doi(self.doi, self.authors, self.journal)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 21, in __init__
+    self.interface = Interface(doi, authors, self.paper_text)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 78, in paper_text
+    return get_text(self.url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 38, in get_text
+    soup = get_soup(url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 20, in get_soup
+    request = requests.get(url, allow_redirects=True)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in send
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in <listcomp>
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 237, in resolve_redirects
+    resp = self.send(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Stack (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/run_papers2ids.py", line 5, in <module>
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 42, in __call__
+    self.get_papers()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 64, in get_papers
+    self._call_paper(paper_data, source)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 91, in _call_paper
+    logger.error(exception, stack_info=True, exc_info=True)
+
+
+
+{'title': 'RBD conjugate vaccine with a built-in TLR1/2 agonist is highly immunogenic against SARS-CoV-2 and variants of concern.', 'journal': 'Chemical communications (Cambridge, England)', 'authors': ['Zhou, S.', 'Zhang, R.', 'Zhang, H.', 'Liu, Y.', 'Wen, Y.', 'Wang, J.', 'Li, Y.', 'You, Z.', 'Yin, X.', 'Qiu, H.', 'Gong, R.', 'Yang, G.', 'Guo, J.'], 'doi': '10.1039/d1cc06520c', 'date': '2022-01-19', 'source': 'pubmed', 'paper_types': {}}
+('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/util/retry.py", line 532, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 82, in _call_paper
+    paper()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 66, in __call__
+    self.fetch_paper_types()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 82, in fetch_paper_types
+    self.paper_types['doi'] = Doi(self.doi, self.authors, self.journal)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 21, in __init__
+    self.interface = Interface(doi, authors, self.paper_text)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 78, in paper_text
+    return get_text(self.url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 38, in get_text
+    soup = get_soup(url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 20, in get_soup
+    request = requests.get(url, allow_redirects=True)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in send
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in <listcomp>
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 237, in resolve_redirects
+    resp = self.send(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Stack (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/run_papers2ids.py", line 5, in <module>
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 42, in __call__
+    self.get_papers()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 64, in get_papers
+    self._call_paper(paper_data, source)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 91, in _call_paper
+    logger.error(exception, stack_info=True, exc_info=True)
+
+
+
+{'title': 'Construction of bifunctional electrochemical biosensors for the sensitive detection of the SARS-CoV-2 N-gene based on porphyrin porous organic polymers.', 'journal': 'Dalton transactions (Cambridge, England : 2003)', 'authors': ['Cui, J.', 'Kan, L.', 'Cheng, F.', 'Liu, J.', 'He, L.', 'Xue, Y.', 'Fang, S.', 'Zhang, Z.'], 'doi': '10.1039/d1dt03869a', 'date': '2022-01-19', 'source': 'pubmed', 'paper_types': {}}
+('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/util/retry.py", line 532, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 82, in _call_paper
+    paper()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 66, in __call__
+    self.fetch_paper_types()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 82, in fetch_paper_types
+    self.paper_types['doi'] = Doi(self.doi, self.authors, self.journal)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 21, in __init__
+    self.interface = Interface(doi, authors, self.paper_text)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 78, in paper_text
+    return get_text(self.url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 38, in get_text
+    soup = get_soup(url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 20, in get_soup
+    request = requests.get(url, allow_redirects=True)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in send
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in <listcomp>
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 237, in resolve_redirects
+    resp = self.send(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Stack (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/run_papers2ids.py", line 5, in <module>
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 42, in __call__
+    self.get_papers()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 64, in get_papers
+    self._call_paper(paper_data, source)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 91, in _call_paper
+    logger.error(exception, stack_info=True, exc_info=True)
+
+
+
+{'title': 'An overview of methods for the structural and functional mapping of epitopes recognized by anti-SARS-CoV-2 antibodies.', 'journal': 'RSC chemical biology', 'authors': ['Francino-Urdaniz, I.M.', 'Whitehead, T.A.'], 'doi': '10.1039/d1cb00169h', 'date': '2022-01-04', 'source': 'pubmed', 'paper_types': {}}
+('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/util/retry.py", line 532, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 1345, in getresponse
+    response.begin()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/http/client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 82, in _call_paper
+    paper()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 66, in __call__
+    self.fetch_paper_types()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper.py", line 82, in fetch_paper_types
+    self.paper_types['doi'] = Doi(self.doi, self.authors, self.journal)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 21, in __init__
+    self.interface = Interface(doi, authors, self.paper_text)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/paper_types.py", line 78, in paper_text
+    return get_text(self.url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 38, in get_text
+    soup = get_soup(url)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/paper_scrape/fetchers/fetch_text.py", line 20, in get_soup
+    request = requests.get(url, allow_redirects=True)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in send
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 677, in <listcomp>
+    history = [resp for resp in gen]
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 237, in resolve_redirects
+    resp = self.send(
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/Caskroom/miniconda/base/lib/python3.9/site-packages/requests/adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Stack (most recent call last):
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/run_papers2ids.py", line 5, in <module>
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 42, in __call__
+    self.get_papers()
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 64, in get_papers
+    self._call_paper(paper_data, source)
+  File "/Users/jessemurray/Desktop/Main/ADB/auto-db-pipeline/auto_db_pipeline/papers2ids.py", line 91, in _call_paper
+    logger.error(exception, stack_info=True, exc_info=True)
+
+
+

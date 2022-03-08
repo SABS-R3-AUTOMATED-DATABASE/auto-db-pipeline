@@ -61,6 +61,8 @@ class GenBankID:
     def get_sequence_strand_amino(self):
         """Get whether it is a heavy or light chain.
         Default scheme is 'imgt'."""
+        if self.sequence_is_nucleotides:
+            return
         numbering, chain_type = number(self.sequence, scheme='imgt', allow=set(["H","K","L"]))
         if numbering:
             # replace the Kappa annotation with a light annotation
@@ -69,8 +71,9 @@ class GenBankID:
             return chain_type
 
     @property
-    def needs_translation(self):
-        """Check if a sequence is in DNA or RNA and thus needs to be
+    def sequence_is_nucleotides(self):
+        """Returns True if sequence is nucleotides (DNA or RNA).
+        Check if a sequence is in DNA or RNA and thus needs to be
         translated to amino acids.
         We do this by checking if the sequence is a subset of DNA or
         RNA letters."""
@@ -80,7 +83,7 @@ class GenBankID:
 
     def get_protein_ids_non_amino(self):
         """Get the associated protein IDs (spawns) if these are needed."""
-        if not self.needs_translation:  # If already in amino acids, escape
+        if not self.sequence_is_nucleotides:  # If already in amino acids, escape
             return
         feature_table = self.handle.get('GBSeq_feature-table', None)
         if not feature_table:
@@ -104,8 +107,8 @@ class GenBankID:
         if the sequence is already amino acids.
         We do this by checking if a field in the output from run_anarci is empty where if
         it is empty, it is not an antibody."""
-        # if self.needs_translation:  # If not in amino acids, escape
-        #     return
+        if self.sequence_is_nucleotides:  # If not in amino acids, escape
+            return
         output = run_anarci(self.sequence)
         return bool(output[1][0])
 
