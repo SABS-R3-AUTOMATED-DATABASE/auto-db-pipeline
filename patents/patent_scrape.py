@@ -1,7 +1,3 @@
-"""
-Search for Patents in google patent advanced search
-"""
-
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
@@ -270,7 +266,7 @@ class Patents:
                             axis=0,
                         )
                 return outputdf
-            if "heavy and light chain" in elem:
+            elif "heavy and light chain" in elem:
                 outputdf = pd.DataFrame(
                     {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
                     dtype="str",
@@ -300,7 +296,7 @@ class Patents:
                             axis=0,
                         )
                 return outputdf
-            if (
+            elif (
                 ("heavy chain" in elem and "light chain" in elem)
                 or ("hcvr" in elem and "lcvr" in elem)
                 or ("vh" in elem and "vl" in elem)
@@ -462,4 +458,4 @@ test = Patents()
 # test.save_search_output("patents/search_results.json")
 test.load_search_output()
 test.extract_VH_VL()
-test.save_final_results()
+test.save_final_output()
