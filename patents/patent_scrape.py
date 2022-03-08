@@ -1,7 +1,3 @@
-"""
-Search for Patents in google patent advanced search
-"""
-
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
@@ -462,4 +458,4 @@ test = Patents()
 # test.save_search_output("patents/search_results.json")
 test.load_search_output()
 test.extract_VH_VL()
-test.save_final_results()
+test.save_final_output()
