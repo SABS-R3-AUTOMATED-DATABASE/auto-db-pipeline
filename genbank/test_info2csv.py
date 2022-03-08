@@ -13,7 +13,8 @@ class TestInfo2csv(unittest.TestCase):
     def __init__(self, *argv, **kwarg):
         super().__init__(*argv, **kwarg)
 
-        self.paired = [{"heavy_chain": {"GBSeq_create-date": "23-FEB-2022",
+        self.paired = [{"heavy_chain": {"GBSeq_locus": "ABCD_1",
+                                        "GBSeq_create-date": "23-FEB-2022",
                                         "GBSeq_definition": "Chain H",
                                         "GBSeq_source": "Macaca mulatta",
                                         "GBSeq_sequence": "cbacba",
@@ -27,7 +28,8 @@ class TestInfo2csv(unittest.TestCase):
                                         "chain": "H",
                                         "antigen": "SARS-CoV",
                                         "fragment_id": "K398.22"},
-                        "light_chain": {"GBSeq_create-date": "23-FEB-2022",
+                        "light_chain": {"GBSeq_locus": "ABCD_2",
+                                        "GBSeq_create-date": "23-FEB-2022",
                                         "GBSeq_definition": "Chain L",
                                         "GBSeq_accession-version": "7TP4_L",
                                         "GBSeq_source": "Macaca mulatta",
@@ -43,7 +45,8 @@ class TestInfo2csv(unittest.TestCase):
                                         "antigen": "SARS-CoV",
                                         "fragment_id": "K398.22"}}]
 
-        self.unpaired = [[{"GBSeq_create-date": "23-FEB-2022",
+        self.unpaired = [[{"GBSeq_locus": "ABCD_3",
+                           "GBSeq_create-date": "23-FEB-2022",
                            "GBSeq_definition": "Chain H",
                            "GBSeq_source": "Macaca mulatta",
                            "GBSeq_sequence": "cbacba",
@@ -58,8 +61,25 @@ class TestInfo2csv(unittest.TestCase):
                            "antigen": "SARS-CoV",
                            "fragment_id": "K398.22"}]]
 
+        self.nanobod = [{"GBSeq_locus": "ABCD_4",
+                         "GBSeq_create-date": "23-FEB-2022",
+                         "GBSeq_definition": "Chain H, nanobody",
+                         "GBSeq_source": "Macaca mulatta",
+                         "GBSeq_sequence": "cbacba",
+                         "GBSeq_references":
+                             [{"GBReference_authors":
+                                 ["He,W.", "Name, A."],
+                               "GBReference_title":
+                                 "Neutralizing antibodies",
+                               "GBReference_journal":
+                                 "Unpublished"}],
+                         "chain": "H",
+                         "antigen": "SARS-CoV",
+                         "fragment_id": "nb22"}]
+
         # initialise with above examples for paired and unpaires seqs
-        json.load = Mock(side_effect=[self.paired, self.unpaired])
+        json.load = Mock(side_effect=[self.paired, self.unpaired,
+                                      self.nanobod])
         self.genbank = info2csv.PopulateDatabase()
 
     def test_create_df(self):
@@ -77,13 +97,13 @@ class TestInfo2csv(unittest.TestCase):
 
     def test_prepare_paired_row(self):
         row_dict = self.genbank.prepare_paired_row(self.paired[0])
-        self.assertEqual(row_dict['Name'], 'K398.22')
+        self.assertEqual(row_dict['Name_VH'], 'K398.22')
         self.assertEqual(row_dict['Origin'], 'Macaca mulatta')
         self.assertEqual(row_dict['Binds_to'], 'SARS-CoV')
 
     def test_prepare_unpaired_row(self):
-        row_dict = self.genbank.prepare_unpaired_row(self.unpaired[0][0])
-        self.assertEqual(row_dict['Name'], 'K398.22')
+        row_dict = self.genbank.prepare_unpaired_nano_row(self.unpaired[0][0])
+        self.assertEqual(row_dict['Name_VH'], 'K398.22')
         self.assertEqual(row_dict['Origin'], 'Macaca mulatta')
         self.assertEqual(row_dict['Binds_to'], 'SARS-CoV')
 
@@ -91,10 +111,11 @@ class TestInfo2csv(unittest.TestCase):
         self.genbank.populate_db_paired()
         # test type dataframe
         self.assertIsInstance(self.genbank.df_p, DataFrame)
-        # test dataframe has 1 entry
-        self.assertEqual(len(self.genbank.df_p), 1)
-        # test that entry is correct
+        # test dataframe has 2 entries
+        self.assertEqual(len(self.genbank.df_p), 2)
+        # test that entries is correct
         self.assertEqual(self.genbank.df_p.iloc[0, 0], 'K398.22')
+        self.assertEqual(self.genbank.df_p.iloc[1, 0], 'nb22')
 
     def test_populate_db_unparied(self):
         self.genbank.populate_db_unpaired()
@@ -113,9 +134,9 @@ class TestInfo2csv(unittest.TestCase):
 
         # test type dataframe
         self.assertIsInstance(self.genbank.df_p, DataFrame)
-        # test dataframe has 1 entry, second one removed
-        self.assertEqual(len(self.genbank.df_p), 1)
-        # test that entry is correct
+        # test dataframe has 2 entries, third one removed
+        self.assertEqual(len(self.genbank.df_p), 2)
+        # test that first entry is correct
         self.assertEqual(self.genbank.df_p.iloc[0, 0], 'K398.22')
 
     def test_save_to_csv(self):

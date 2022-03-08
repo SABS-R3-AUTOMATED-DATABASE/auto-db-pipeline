@@ -47,6 +47,10 @@ class TestProteins2info(unittest.TestCase):
                                        rettype="gb", retmode="xml")
         self.entries_gb = Entrez.read(entires_handle)
 
+        self.entries_nb = [{'GBSeq_definition': 'sybody'},
+                           {'GBSeq_definition': 'antibody'},
+                           {'GBSeq_definition': 'nanobody'}]
+
     def test_filter_AB_entries(self):
         # overwrite with test entries
         self.genbank.entries = self.entries_gb
@@ -103,6 +107,27 @@ class TestProteins2info(unittest.TestCase):
         self.assertEqual(entries[4]['fragment_id'], 'ABD123')
         with self.assertRaises(KeyError):
             entries[2]['fragment_id']
+
+    def test_find_nanobodies(self):
+        # use self.entries_nb to test nanobody functions
+        self.genbank.entries = self.entries_nb
+        self.genbank.find_nanobodies()
+
+        # test correct classification
+        entries = self.genbank.entries
+        self.assertEqual(entries[0]['antibody_type'], 'nanobody')
+        self.assertEqual(entries[1]['antibody_type'], 'antibody')
+        self.assertEqual(entries[2]['antibody_type'], 'nanobody')
+
+    def test_seperate_nanobodies(self):
+        # use self.entries_nb to test nanobody functions
+        self.genbank.entries = self.entries_nb
+        self.genbank.find_nanobodies()
+        self.genbank.seperate_nanobodies()
+
+        # test correct classification
+        self.assertEqual(len(self.genbank.entries), 1)
+        self.assertEqual(len(self.genbank.nanobodies), 2)
 
     def test_group_by_publication(self):
         self.genbank.classify_vh_vl()
@@ -164,16 +189,17 @@ class TestProteins2info(unittest.TestCase):
                     entry['light_chain']['GBSeq_locus'] == '7WD7_e')
 
     def test_save_to_json(self):
-        # create onjects for paired and unpaired entires
+        # create onjects for paired, unpaired and nanobody entires
         self.genbank.paired_entries = []
         self.genbank.unpaired_entries = []
+        self.genbank.nanobodies = []
 
         json.dump = MagicMock()
         m = mock_open(read_data='version= 1.0.0')
         with patch('builtins.open', m):
             self.genbank.save_to_json()
-        self.assertEqual(m.call_count, 2)
-        self.assertEqual(json.dump.call_count, 2)
+        self.assertEqual(m.call_count, 3)
+        self.assertEqual(json.dump.call_count, 3)
 
 
 if __name__ == '__main__':
