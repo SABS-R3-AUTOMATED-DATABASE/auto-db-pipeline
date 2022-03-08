@@ -5,6 +5,8 @@ import time
 import pandas as pd
 import re
 from datetime import datetime
+from Bio.SeqUtils import seq1
+from Bio.Seq import Seq
 
 
 class Patents:
@@ -143,6 +145,17 @@ class Patents:
         self.search_results = df
         return df
 
+    def translate_seq(VR : str):
+        if VR.upper()== VR:
+            return VR
+        elif VR.lower() == VR:
+            VR = re.sub('\s+','',VR)
+            VR = Seq(VR)
+            VR = str(VR.translate()).split('*')[0]
+            return str(VR)
+        else:
+            return seq1(VR.replace(' ',''))
+
     def extract_seq_from_id(content: list, id):
         splited_text = "".join(content).split("<210>")
         seq = ""
@@ -162,11 +175,15 @@ class Patents:
                         seq = re.sub("\d+", "", elem)
                         seq = re.sub("\s+(?!\s)", " ", seq)
                         origin = origins[seqs.index(elem)]
-        return seq, origin
+                        seq = Patents.translate_seq(seq)
+        if len(seq) < 40:
+            return "", ""
+        else:
+            return seq, origin
 
     def CN113817052A(Content: list, URL: str):
         outputdf = pd.DataFrame(
-            {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
+            {"URL": [], "HCVR": [], "LCVR": [], "HCDescription": [], "LCDescription": []},
             dtype="str",
         )
         items = [
@@ -186,8 +203,8 @@ class Patents:
                     "URL": [URL],
                     "HCVR": [hcseq],
                     "LCVR": [lcseq],
-                    "HCOrigin": [hco],
-                    "LCOrigin": [lco],
+                    "HCDescription": [hco],
+                    "LCDescription": [lco],
                 },
                 dtype="str",
             )
@@ -196,7 +213,7 @@ class Patents:
 
     def CN111978395A(Content: list, URL: str):
         outputdf = pd.DataFrame(
-            {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
+            {"URL": [], "HCVR": [], "LCVR": [], "HCDescription": [], "LCDescription": []},
             dtype="str",
         )
         items = [
@@ -226,8 +243,8 @@ class Patents:
                     "URL": [URL],
                     "HCVR": [hcseq],
                     "LCVR": [lcseq],
-                    "HCOrigin": [hco],
-                    "LCOrigin": [lco],
+                    "HCDescription": [hco],
+                    "LCDescription": [lco],
                 },
                 dtype="str",
             )
@@ -235,10 +252,10 @@ class Patents:
         return outputdf
 
     def extract_seq_from_string(elem: str, Content: list, URL: str):
-        if "cdr" not in elem and "fc" not in elem:
+        if "cdr" not in elem and "fc" not in elem and len(elem) < 700:
             if "light and heavy chain" in elem:
                 outputdf = pd.DataFrame(
-                    {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
+                    {"URL": [], "HCVR": [], "LCVR": [], "HCDescription": [], "LCDescription": []},
                     dtype="str",
                 )
                 items = re.findall(
@@ -257,8 +274,8 @@ class Patents:
                                         "URL": [URL],
                                         "HCVR": [hcseq],
                                         "LCVR": [lcseq],
-                                        "HCOrigin": [hco],
-                                        "LCOrigin": [lco],
+                                        "HCDescription": [hco],
+                                        "LCDescription": [lco],
                                     },
                                     dtype="str",
                                 ),
@@ -266,9 +283,9 @@ class Patents:
                             axis=0,
                         )
                 return outputdf
-            if "heavy and light chain" in elem:
+            elif "heavy and light chain" in elem:
                 outputdf = pd.DataFrame(
-                    {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
+                    {"URL": [], "HCVR": [], "LCVR": [], "HCDescription": [], "LCDescription": []},
                     dtype="str",
                 )
                 items = re.findall(
@@ -287,8 +304,8 @@ class Patents:
                                         "URL": [URL],
                                         "HCVR": [hcseq],
                                         "LCVR": [lcseq],
-                                        "HCOrigin": [hco],
-                                        "LCOrigin": [lco],
+                                        "HCDescription": [hco],
+                                        "LCDescription": [lco],
                                     },
                                     dtype="str",
                                 ),
@@ -296,7 +313,7 @@ class Patents:
                             axis=0,
                         )
                 return outputdf
-            if (
+            elif (
                 ("heavy chain" in elem and "light chain" in elem)
                 or ("hcvr" in elem and "lcvr" in elem)
                 or ("vh" in elem and "vl" in elem)
@@ -321,14 +338,14 @@ class Patents:
                                 "URL": [URL],
                                 "HCVR": [hcseq],
                                 "LCVR": [lcseq],
-                                "HCOrigin": [hco],
-                                "LCOrigin": [lco],
+                                "HCDescription": [hco],
+                                "LCDescription": [lco],
                             },
                             dtype="str",
                         )
             elif "nanobody" in elem or "single domain antibody" in elem:
                 outputdf = pd.DataFrame(
-                    {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
+                    {"URL": [], "HCVR": [], "LCVR": [], "HCDescription": [], "LCDescription": []},
                     dtype="str",
                 )
                 item = re.findall("(?<=seq id no:)\d+", elem)
@@ -350,8 +367,8 @@ class Patents:
                                         "URL": [URL],
                                         "HCVR": [hcseq],
                                         "LCVR": [""],
-                                        "HCOrigin": [hco],
-                                        "LCOrigin": [""],
+                                        "HCDescription": [hco],
+                                        "LCDescription": [""],
                                     },
                                     dtype="str",
                                 ),
@@ -371,7 +388,7 @@ class Patents:
         ]
         df = df.reset_index(drop=True)
         outputdf = pd.DataFrame(
-            {"URL": [], "HCVR": [], "LCVR": [], "HCOrigin": [], "LCOrigin": []},
+            {"URL": [], "HCVR": [], "LCVR": [], "HCDescription": [], "LCDescription": []},
             dtype="str",
         )
         for i in range(df.shape[0]):
@@ -390,10 +407,13 @@ class Patents:
             else:
                 for _ in df.loc[i, "Claim"]:
                     if "seq id no" in _.lower():
-                        edited = re.sub(
-                            "seq id nos*:*\.*\s*(?=\d+)", "seq id no:", _.lower()
-                        )
-                        edited = re.split("\. | \d+\)", edited)
+                        edited = re.sub("seq id nos*:*\.*\s*(?=\d+)","seq id no:", _.lower())
+                        edited1 = re.split("\. ",edited)
+                        edited2 = re.split("\d+\)",edited)
+                        edited3 = re.split("(x|ix|iv|v?i{0,3})\)",edited)
+                        edited4 = re.split("\;",edited)
+                        edited5 = re.split("\:",edited)
+                        edited = list(set(edited) | set(edited1) | set(edited2) | set(edited3) | set(edited4) | set(edited5))
                         for elem in edited:
                             seqdf = Patents.extract_seq_from_string(
                                 elem=elem,
