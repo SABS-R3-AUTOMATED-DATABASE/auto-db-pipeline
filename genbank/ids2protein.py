@@ -20,8 +20,10 @@ class ProteinRetrieval:
 
     Methods:
     -------
+    def chunks(lst, n)
     get_entries(self, db='protein')
     remove_junk(self)
+    remove_duplicate_ids(self)
     save_to_json(self, out_file_path='genbank/data/protein_handles.json')
     __call__(self, db='protein', out_file_path='genbank/data/id_list.json')
 
@@ -35,6 +37,15 @@ class ProteinRetrieval:
         with open(ids_file_path, 'r') as infile:
             self.ids = json.load(infile)
 
+    def chunks(self, lst, n):
+        '''
+        Helper function for get_entries. Entrez.efetch can only download upto
+        10'000 entires at a time. This generator produces chunks of 10'000
+        entires.
+        '''
+        for i in range(0, len(lst), n):
+            yield lst[i:i + n]
+
     def get_entries(self, db='protein'):
         '''
         downlowad protein entries from genbank for given id list
@@ -43,10 +54,22 @@ class ProteinRetrieval:
                   default: "protein"
         output self.entries: entries found in db
         '''
-        # Entrez.efetch handles aproximately 25 searches per second
-        entries_handle = Entrez.efetch(db=db, id=self.ids, rettype="gb",
-                                       retmode="xml")
-        self.entries = Entrez.read(entries_handle)
+        # Create empty list to store the protein handles
+        self.entries = []
+
+        # Entrez.efetch can only get 10'000 entires at a time use the generator
+        # function to produce chunks of 10'000 ids
+        id_chunks = self.chunks(self.ids, 10000)
+
+        # loop through chunks and append to list
+        for id_chunk in id_chunks:
+            # Entrez.efetch handles aproximately 25 searches per second
+            entries_handle = Entrez.efetch(db=db, id=id_chunk, rettype="gb",
+                                           retmode="xml")
+            self.entries += Entrez.read(entries_handle)
+
+        print('number of protein handles retrieved:', len(self.entries))
+        print('----------')
 
     def remove_junk(self):
         '''
@@ -84,6 +107,27 @@ class ProteinRetrieval:
         # permanently overwrite self.entries
         self.entries = entries_no_junk
 
+# no duplicates at this step must be produced later
+#    def remove_duplicate_ids(self):
+#        '''
+#        Remove entries with the same genbank "locus" that were downloaded.
+#
+#        Several of the downloaded genbank ids have the same "locus" thus
+#        belong to the same genbank entry despite different ids.
+#        '''
+#        seen_locus = []
+#        unique_entries = []
+#        for entry in self.entries:
+#            locus = entry['GBSeq_locus']
+#
+#            if locus not in seen_locus:
+#                seen_locus.append(locus)
+#                unique_entries.append(entry)
+#
+#        self.entries = unique_entries
+#
+#        print('Number of unique proteins:', len(self.entries))
+
     def save_to_json(self, out_file_path='genbank/data/protein_handles.json'):
         '''
         saves the retrieved ids to a json file
@@ -108,6 +152,7 @@ class ProteinRetrieval:
         '''
         self.get_entries(db=db)
         self.remove_junk()
+        # self.remove_duplicate_ids()
         self.save_to_json(out_file_path)
 
 

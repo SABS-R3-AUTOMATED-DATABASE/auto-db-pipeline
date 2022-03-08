@@ -46,7 +46,8 @@ class GenbankSearch:
         record = Entrez.read(handle)
         self.number_of_entries = int(record['Count'])
 
-        # print('number of entries found:', self.number_of_entries)
+        print('number of entries found:', self.number_of_entries)
+        print('----------')
 
     def get_ids(self, reduce_searches=False, db='protein'):
         '''
@@ -68,6 +69,7 @@ class GenbankSearch:
                                    retmax=self.entries_to_retrieve)
         record = Entrez.read(id_handle)
         self.ids = record['IdList']
+        print('number of IDs retrieved:', len(self.ids))
 
     def save_to_json(self, out_file_path='genbank/data/id_list.json'):
         '''
