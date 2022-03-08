@@ -36,7 +36,7 @@ FILENAME_PUBMED = "pubmed_results"
 FILENAME_BIORXIV = "biorxiv_results"
 FILENAME_BIORXIV_ALL = "biorxiv_all"
 
-DATAPATH = "../data/"
+DATAPATH = "../data/keywords2papers/"
 DATATYPE = ".jsonl"
 
 DATEFORMAT = "%Y_%m_%d"
@@ -56,68 +56,74 @@ class Keywords2Papers:
         self.biorxiv_results, self.pubmed_results = None, None
 
 
-    def get_pubmed(self, selected_date: str = None):
+    def get_pubmed(self):
         """Get the pubmed data."""
-        selected_date = Keywords2Papers.get_default_date(selected_date)
+        print('getting pubmed')
         # Check if already exists, if so then load
-        if Keywords2Papers.check_exists(FILENAME_PUBMED, selected_date):
-            self.pubmed_results = Keywords2Papers.load_output(FILENAME_PUBMED, selected_date)
+        if self.check_exists(FILENAME_PUBMED):
+            self.pubmed_results = self.load_output(FILENAME_PUBMED)
             return self.pubmed_results
 
         self.pubmed_results = Keywords2Papers.fetch_pubmed()
-        Keywords2Papers.store_output(self.pubmed_results, FILENAME_PUBMED, selected_date)
+        self.store_output(self.pubmed_results, FILENAME_PUBMED)
         return self.pubmed_results
 
 
-    def get_biorxiv(self, selected_date: str = None):
-        """Get the biorxiv data."""
-        selected_date = Keywords2Papers.get_default_date(selected_date)
-
+    def get_biorxiv(self):
+        """Get the biorxiv data.
+        See the issue, we can update it at this point."""
+        print('getting biorxiv')
         # Get whether they exist
-        biorxiv_all_exists = Keywords2Papers.check_exists(FILENAME_BIORXIV_ALL, selected_date)
-        biorxiv_exists = Keywords2Papers.check_exists(FILENAME_BIORXIV, selected_date)
+        biorxiv_all_exists = self.check_exists(FILENAME_BIORXIV_ALL)
+        biorxiv_exists = self.check_exists(FILENAME_BIORXIV)
 
-        # If both exist, just load the latter
-        if biorxiv_all_exists and biorxiv_exists:
-            self.biorxiv_results = Keywords2Papers.load_output(FILENAME_BIORXIV, selected_date)
+        # If the results exist, load it
+        if biorxiv_exists:
+            self.biorxiv_results = self.load_output(FILENAME_BIORXIV)
             return self.biorxiv_results
 
         # If biorxiv_all does not exist, fetch (and store) it
         if not biorxiv_all_exists:
-            # See the issue, we can update it at this point.
-            Keywords2Papers.fetch_biorxiv_all()
+            self.fetch_biorxiv_all()
 
-        self.biorxiv_results = Keywords2Papers.fetch_biorxiv_local(selected_date)
-        Keywords2Papers.store_output(self.biorxiv_results, FILENAME_BIORXIV, selected_date)
+        self.biorxiv_results = self.fetch_biorxiv_local()
+        self.store_output(self.biorxiv_results, FILENAME_BIORXIV)
         return self.biorxiv_results
 
 
-    @staticmethod
-    def check_exists(filename: str = None, selected_date: str = None) -> bool:
+    def get_filepath(self, filename: str = None) -> str:
+        Keywords2Papers.check_filename(filename)
+        return f"{DATAPATH}{filename}-{self.selected_date}{DATATYPE}"
+
+
+    def fetch_biorxiv_all(self):
+        print('fetching all biorxiv')
+        biorxiv(save_path=self.get_filepath(FILENAME_BIORXIV_ALL))
+
+
+    def check_exists(self, filename: str = None) -> bool:
         """
         If the results from today exist, load them instead of re-running the paperscraper.
         """
-        selected_date = Keywords2Papers.get_default_date(selected_date)
         Keywords2Papers.check_filename(filename)
-        exists = isfile(Keywords2Papers.get_filepath(filename, selected_date))
+        exists = isfile(self.get_filepath(filename))
+        if exists:
+            print('exists')
         return exists
 
 
-    @staticmethod
-    def load_output(filename: str = None, selected_date: str = None):
+    def load_output(self, filename: str = None):
         """Load a specific file based on its name and date."""
         Keywords2Papers.check_filename(filename)
-        selected_date = Keywords2Papers.get_default_date(selected_date)
-        filepath = Keywords2Papers.get_filepath(filename, selected_date)
-        df = read_json(path_or_buf=filepath, lines=True, orient='records')
+        filepath = self.get_filepath(filename)
+        df = read_json(path_or_buf=filepath, lines=True, orient='records', convert_dates=False)
         output = df.to_dict(orient='records')
         return output
 
 
-    @staticmethod
-    def store_output(output: list[dict], filename: str, selected_date: str):
+    def store_output(self, output: list[dict], filename: str):
         Keywords2Papers.check_filename(filename)
-        dump_papers(output, Keywords2Papers.get_filepath(filename, selected_date))
+        dump_papers(output, self.get_filepath(filename))
 
 
     @staticmethod
@@ -127,36 +133,13 @@ class Keywords2Papers:
 
 
     @staticmethod
-    def get_filepath(filename: str = None, selected_date: str = None) -> str:
-        Keywords2Papers.check_filename(filename)
-        selected_date = Keywords2Papers.get_default_date(selected_date)
-
-        return f"{DATAPATH}{filename}-{selected_date}{DATATYPE}"
-
-
-    @staticmethod
     def get_todays_date():
         """Get today's date in year_month_day format."""
         return date.today().strftime(DATEFORMAT)
 
 
-    @staticmethod
-    def get_default_date(selected_date: str = None) -> str:
-        """Makes selected_date default to today if none given."""
-        if selected_date:
-            return selected_date
-        else:
-            return Keywords2Papers.get_todays_date()
-
-
-    @staticmethod
-    def fetch_biorxiv_all():
-        biorxiv(save_path=Keywords2Papers.get_filepath(FILENAME_BIORXIV_ALL))
-
-
-    @staticmethod
-    def fetch_biorxiv_local(selected_date, keywords: list[Union[str, list[str]]] = KEYWORDS,
-                            ) -> list[dict]:
+    def fetch_biorxiv_local(self, keywords: list[Union[str, list[str]]] = KEYWORDS) -> list[dict]:
+        print('fetching local biorxiv')
         """
         Search for papers in the dump using keywords.
         Args:
@@ -172,7 +155,7 @@ class Keywords2Papers:
             list[dict]: a list of papers associated to the query.
         """
         fields = ["title", "abstract"]
-        df_all = read_json(path_or_buf = Keywords2Papers.get_filepath(FILENAME_BIORXIV_ALL, selected_date),
+        df_all = read_json(path_or_buf = self.get_filepath(FILENAME_BIORXIV_ALL),
                               lines = True, orient = 'records')
         df_all["date"] = [date.strftime("%Y-%m-%d") for date in df_all["date"]]
 
@@ -219,6 +202,7 @@ class Keywords2Papers:
             ["title", "authors", "date", "abstract", "journal", "doi"]
             AND/OR files containing relevant information
         """
+        print('fetching pubmed')
 
         papers_output = Keywords2Papers._query_pubmed(keywords, fields, start_date, end_date)
         papers_pt_output = Keywords2Papers._query_pubmed(keywords+['AND preprint[pt]'],
@@ -299,3 +283,12 @@ class Keywords2Papers:
                 entry['authors'] = [author[-1] + ', ' + ''.join(
                                     [firstname[0]+'.' for firstname in author[:-1]]) for author in author_list if author]
         return output
+
+
+    @staticmethod
+    def get_default_date(selected_date: str = None) -> str:
+        """Makes selected_date default to today if none given."""
+        if selected_date:
+            return selected_date
+        else:
+            return Keywords2Papers.get_todays_date()

@@ -54,7 +54,6 @@ def extract_VH_VL(sequence_repr: dict) -> dict:
         VH_seq_list = []
         VL_seq_list = []
 
-        print('Extracting heavy and light chain sequences...')
         # limit additions to the sequence to 128 characters (expected length of H
         # seq from ANARCI annotation)
         for line in extract_seqs:

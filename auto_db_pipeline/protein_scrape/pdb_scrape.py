@@ -6,7 +6,7 @@ import pypdb
 from ABDB import database
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
-from anarci_interface import check_if_antibody, extract_VH_VL
+from .anarci_interface import check_if_antibody, extract_VH_VL
 
 PDB_FILEPATH = "./protein_scrape/PDBs/"
 
