@@ -297,24 +297,25 @@ class Patents:
                 if len(items) != 0:
                     for item in items:
                         item = re.findall("\d+", item)
-                        hcseq, hco = Patents.extract_seq_from_id(Content, item[1])
-                        lcseq, lco = Patents.extract_seq_from_id(Content, item[0])
-                        outputdf = pd.concat(
-                            [
-                                outputdf,
-                                pd.DataFrame(
-                                    {
-                                        "URL": [URL],
-                                        "HCVR": [hcseq],
-                                        "LCVR": [lcseq],
-                                        "HCDescription": [hco],
-                                        "LCDescription": [lco],
-                                    },
-                                    dtype="str",
-                                ),
-                            ],
-                            axis=0,
-                        )
+                        if len(item) == 2:
+                            hcseq, hco = Patents.extract_seq_from_id(Content, item[1])
+                            lcseq, lco = Patents.extract_seq_from_id(Content, item[0])
+                            outputdf = pd.concat(
+                                [
+                                    outputdf,
+                                    pd.DataFrame(
+                                        {
+                                            "URL": [URL],
+                                            "HCVR": [hcseq],
+                                            "LCVR": [lcseq],
+                                            "HCDescription": [hco],
+                                            "LCDescription": [lco],
+                                        },
+                                        dtype="str",
+                                    ),
+                                ],
+                                axis=0,
+                            )
                 return outputdf
             elif "heavy and light chain" in elem:
                 outputdf = pd.DataFrame(
@@ -333,24 +334,25 @@ class Patents:
                 if len(items) != 0:
                     for item in items:
                         item = re.findall("\d+", item)
-                        hcseq, hco = Patents.extract_seq_from_id(Content, item[0])
-                        lcseq, lco = Patents.extract_seq_from_id(Content, item[1])
-                        outputdf = pd.concat(
-                            [
-                                outputdf,
-                                pd.DataFrame(
-                                    {
-                                        "URL": [URL],
-                                        "HCVR": [hcseq],
-                                        "LCVR": [lcseq],
-                                        "HCDescription": [hco],
-                                        "LCDescription": [lco],
-                                    },
-                                    dtype="str",
-                                ),
-                            ],
-                            axis=0,
-                        )
+                        if len(item) == 2:
+                            hcseq, hco = Patents.extract_seq_from_id(Content, item[0])
+                            lcseq, lco = Patents.extract_seq_from_id(Content, item[1])
+                            outputdf = pd.concat(
+                                [
+                                    outputdf,
+                                    pd.DataFrame(
+                                        {
+                                            "URL": [URL],
+                                            "HCVR": [hcseq],
+                                            "LCVR": [lcseq],
+                                            "HCDescription": [hco],
+                                            "LCDescription": [lco],
+                                        },
+                                        dtype="str",
+                                    ),
+                                ],
+                                axis=0,
+                            )
                 return outputdf
             elif (
                 ("heavy chain" in elem and "light chain" in elem)
@@ -366,7 +368,8 @@ class Patents:
                         return Patents.extract_seq_pairs(elem, Content, URL, item)
                     elif len(set(item_and)) == 1:
                         item = re.findall("\d+", item_and[0])
-                        return Patents.extract_seq_pairs(elem, Content, URL, item)
+                        if len(item) == 2:
+                            return Patents.extract_seq_pairs(elem, Content, URL, item)
             elif "nanobody" in elem or "single domain antibody" in elem:
                 outputdf = pd.DataFrame(
                     {
@@ -446,18 +449,13 @@ class Patents:
                         edited = re.sub(
                             "seq id nos*:*\.*\s*(?=\d+)", "seq id no:", _.lower()
                         )
-                        edited1 = re.split("\. ", edited)
-                        edited2 = re.split("\d+\)", edited)
-                        edited3 = re.split("(x|ix|iv|v?i{0,3})\)", edited)
-                        edited4 = re.split("\;", edited)
-                        edited5 = re.split("\:", edited)
                         edited = list(
                             set(edited)
-                            | set(edited1)
-                            | set(edited2)
-                            | set(edited3)
-                            | set(edited4)
-                            | set(edited5)
+                            | set(re.split("\. ", edited))
+                            | set(re.split("\d+\)", edited))
+                            | set(re.split("(x|ix|iv|v?i{0,3})\)", edited))
+                            | set(re.split("\;", edited))
+                            | set(re.split("\:", edited))
                         )
                         for elem in edited:
                             seqdf = Patents.extract_seq_from_string(
