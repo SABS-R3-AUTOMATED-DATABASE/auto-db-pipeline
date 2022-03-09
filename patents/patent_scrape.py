@@ -58,7 +58,7 @@ class Patents:
         return results
 
     def get_patents(self, CN=False):
-        """This function taks around 6 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
+        """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
         patents = Patents.get_patent_urls()
         if CN is True:
             patents_cn = Patents.get_patent_urls(CN=True)
@@ -141,20 +141,18 @@ class Patents:
             if (i + 1) % 10 == 0:
                 print(str(i + 1) + "/" + str(df.shape[0]), datetime.now())
             if i % 100 == 0 and i != 0:
-                time.sleep(1800)
+                time.sleep(600)
         self.search_results = df
         return df
 
-    def translate_seq(VR: str):
-        if VR.upper() == VR:
-            return VR
-        elif VR.lower() == VR:
-            VR = re.sub("\s+", "", VR)
-            VR = Seq(VR)
-            VR = str(VR.translate()).split("*")[0]
-            return str(VR)
-        else:
-            return seq1(VR.replace(" ", ""))
+    # def translate_seq(VR: str):
+    #     if VR.upper() == VR:
+    #         return VR
+    #     elif VR.lower() == VR:
+    #         VR = re.sub("\s+", "", VR)
+    #         return str(VR)
+    #     else:
+    #         return seq1(VR.replace(" ", ""))
 
     def extract_seq_from_id(content: list, id):
         splited_text = "".join(content).split("<210>")
@@ -175,11 +173,7 @@ class Patents:
                         seq = re.sub("\d+", "", elem)
                         seq = re.sub("\s+(?!\s)", " ", seq)
                         origin = origins[seqs.index(elem)]
-                        seq = Patents.translate_seq(seq)
-        if len(seq) < 40:
-            return "", ""
-        else:
-            return seq, origin
+        return seq, origin
 
     def CN113817052A(Content: list, URL: str):
         outputdf = pd.DataFrame(
@@ -263,6 +257,27 @@ class Patents:
             outputdf = pd.concat([outputdf, dummydf], axis=0)
         return outputdf
 
+    def extract_seq_pairs(elem: str, Content: list, URL: str, item: list):
+        hcindex = max(elem.find("heavy chain"), elem.find("hcvr"), elem.find("vh"))
+        lcindex = max(elem.find("light chain"), elem.find("lcvr"), elem.find("vl"))
+        if hcindex != -1 and lcindex != -1:
+            if hcindex > lcindex:
+                hcseq, hco = Patents.extract_seq_from_id(Content, item[1])
+                lcseq, lco = Patents.extract_seq_from_id(Content, item[0])
+            else:
+                hcseq, hco = Patents.extract_seq_from_id(Content, item[0])
+                lcseq, lco = Patents.extract_seq_from_id(Content, item[1])
+            return pd.DataFrame(
+                {
+                    "URL": [URL],
+                    "HCVR": [hcseq],
+                    "LCVR": [lcseq],
+                    "HCDescription": [hco],
+                    "LCDescription": [lco],
+                },
+                dtype="str",
+            )
+
     def extract_seq_from_string(elem: str, Content: list, URL: str):
         if "cdr" not in elem and "fc" not in elem and len(elem) < 700:
             if "light and heavy chain" in elem:
@@ -342,31 +357,16 @@ class Patents:
                 or ("hcvr" in elem and "lcvr" in elem)
                 or ("vh" in elem and "vl" in elem)
             ):
-                item = re.findall("(?<=seq id no:)\d+", elem)
-                if len(item) == 2 and item[0] != item[1]:
-                    hcindex = max(
-                        elem.find("heavy chain"), elem.find("hcvr"), elem.find("vh")
+                if "nucle" not in elem:
+                    item = re.findall("(?<=seq id no:)\d+", elem)
+                    item_and = re.findall(
+                        "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
                     )
-                    lcindex = max(
-                        elem.find("light chain"), elem.find("lcvr"), elem.find("vl")
-                    )
-                    if hcindex != -1 and lcindex != -1:
-                        if hcindex > lcindex:
-                            hcseq, hco = Patents.extract_seq_from_id(Content, item[1])
-                            lcseq, lco = Patents.extract_seq_from_id(Content, item[0])
-                        else:
-                            hcseq, hco = Patents.extract_seq_from_id(Content, item[0])
-                            lcseq, lco = Patents.extract_seq_from_id(Content, item[1])
-                        return pd.DataFrame(
-                            {
-                                "URL": [URL],
-                                "HCVR": [hcseq],
-                                "LCVR": [lcseq],
-                                "HCDescription": [hco],
-                                "LCDescription": [lco],
-                            },
-                            dtype="str",
-                        )
+                    if len(item) == 2 and item[0] != item[1] and len(item_and) == 0:
+                        return Patents.extract_seq_pairs(elem, Content, URL, item)
+                    elif len(set(item_and)) == 1:
+                        item = re.findall("\d+", item_and[0])
+                        return Patents.extract_seq_pairs(elem, Content, URL, item)
             elif "nanobody" in elem or "single domain antibody" in elem:
                 outputdf = pd.DataFrame(
                     {
@@ -441,7 +441,7 @@ class Patents:
                 )
                 outputdf = pd.concat([outputdf, seqdf], axis=0)
             else:
-                for _ in df.loc[i, "Claim"]:
+                for _ in df.loc[i, "Claim"] + df.loc[i, "Content"]:
                     if "seq id no" in _.lower():
                         edited = re.sub(
                             "seq id nos*:*\.*\s*(?=\d+)", "seq id no:", _.lower()
@@ -481,7 +481,7 @@ class Patents:
         self.search_results = pd.read_json(filepath)
 
     def save_final_output(self, filepath: str = "patents/final_results.csv"):
-        self.output.to_csv(filepath)
+        self.output.to_csv(filepath,index = False)
 
     # def process_results(self):
     #     df = self.search_results
