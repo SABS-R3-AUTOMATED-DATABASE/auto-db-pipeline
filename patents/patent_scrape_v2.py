@@ -173,7 +173,16 @@ class Patents:
                         seq = re.sub("\d+", "", elem)
                         seq = re.sub("\s+(?!\s)", " ", seq)
                         origin = origins[seqs.index(elem)]
-        return seq, origin
+        if seq.upper() == seq and len(seq) > 40:
+            return seq, origin
+
+        elif seq.lower() == seq and len(seq.replace(" ", "")) > 120:
+            return seq, origin
+
+        elif len(seq.replace(" ", "")) > 120:
+            return seq, origin
+        else:
+            return "", ""
 
     def CN113817052A(Content: list, URL: str):
         outputdf = pd.DataFrame(
@@ -207,7 +216,7 @@ class Patents:
                             "URL": [URL],
                             "HCVR": [hcseq],
                             "LCVR": [lcseq],
-                            "HCOrigin": [hco],
+                            "HC_Description": [hco],
                             "LC_Description": [lco],
                             "Source": [""],
                         },
@@ -224,7 +233,7 @@ class Patents:
                 "URL": [],
                 "HCVR": [],
                 "LCVR": [],
-                "HCOrigin": [],
+                "HC_Description": [],
                 "LC_Description": [],
                 "Source": [],
             },
@@ -260,7 +269,7 @@ class Patents:
                             "URL": [URL],
                             "HCVR": [hcseq],
                             "LCVR": [lcseq],
-                            "HCOrigin": [hco],
+                            "HC_Description": [hco],
                             "LC_Description": [lco],
                             "Source": [""],
                         },
@@ -274,7 +283,7 @@ class Patents:
     def extract_ids_from_string(elem: str):
         if "cdr" not in elem and "fc" not in elem and len(elem) < 700:
             output = []
-            if "light and heavy chain" in elem:
+            if "light and heavy chain" in elem and "light chain" not in elem:
                 items = re.findall(
                     "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
                 )
@@ -282,10 +291,9 @@ class Patents:
                     for item in items:
                         item = re.findall("\d+", item)
                         if len(item) == 2:
-                            print([item[1] + "/" + item[0], elem])
                             output.append([item[1] + "/" + item[0], elem])
                 return output
-            if "heavy and light chain" in elem:
+            if "heavy and light chain" in elem and "heavy chain" not in elem:
                 items = re.findall(
                     "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
                 )
@@ -293,7 +301,6 @@ class Patents:
                     for item in items:
                         item = re.findall("\d+", item)
                         if len(item) == 2:
-                            print([item[0] + "/" + item[1], elem])
                             output.append([item[0] + "/" + item[1], elem])
                 return output
             if (
@@ -358,7 +365,7 @@ class Patents:
                 "URL": [],
                 "HCVR": [],
                 "LCVR": [],
-                "HCOrigin": [],
+                "HC_Description": [],
                 "LC_Description": [],
                 "Source": [],
             },
@@ -377,7 +384,7 @@ class Patents:
                                 "URL": [URL],
                                 "HCVR": [hcseq],
                                 "LCVR": [lcseq],
-                                "HCOrigin": [hco],
+                                "HC_Description": [hco],
                                 "LC_Description": [lco],
                                 "Source": ["(" + item[0] + ") " + item[1]],
                             },
@@ -396,7 +403,7 @@ class Patents:
                                 "URL": [URL],
                                 "HCVR": [hcseq],
                                 "LCVR": [""],
-                                "HCOrigin": [hco],
+                                "HC_Description": [hco],
                                 "LC_Description": [""],
                                 "Source": ["(" + item[0] + ") " + item[1]],
                             },
@@ -407,11 +414,11 @@ class Patents:
                 )
         return outputdf
 
-    def extract_VH_VL(self,df = None):
+    def extract_VH_VL(self, df=None):
         if df == None:
             df = self.search_results
         df = df[
-            df.Title.str.contains("sars-cov-2")
+            df.Title.str.contains("sars")
             | df.Title.str.contains("covid")
             | df.Title.str.contains("coronavirus")
         ]
@@ -421,7 +428,7 @@ class Patents:
                 "URL": [],
                 "HCVR": [],
                 "LCVR": [],
-                "HCOrigin": [],
+                "HC_Description": [],
                 "LC_Description": [],
                 "Source": [],
             },
@@ -457,18 +464,14 @@ class Patents:
                         edited = re.sub(
                             "seq id nos*:*\.*\s*(?=\d+)", "seq id no:", _.lower()
                         )
-                        edited1 = re.split("\. ", edited)
-                        edited2 = re.split("\d+\)", edited)
-                        edited3 = re.split("(x|ix|iv|v?i{0,3})\)", edited)
-                        edited4 = re.split("\;", edited)
-                        edited5 = re.split("\:", edited)
                         edited = list(
                             set(edited)
-                            | set(edited1)
-                            | set(edited2)
-                            | set(edited3)
-                            | set(edited4)
-                            | set(edited5)
+                            | set(re.split("\. ", edited))
+                            | set(re.split("\d+\)", edited))
+                            | set(re.split("(x|ix|iv|v?i{0,3})\)", edited))
+                            | set(re.split("\;", edited))
+                            | set(re.split("\:", edited))
+                            | set(re.split("[a-zA-z]\)", edited))
                         )
                         for elem in edited:
                             if elem:
@@ -503,7 +506,7 @@ class Patents:
     def load_search_output(self, filepath: str = "patents/search_results.json"):
         self.search_results = pd.read_json(filepath)
 
-    def save_final_output(self, filepath: str = "patents/final_results.csv"):
+    def save_final_output(self, filepath: str = "patents/patent_results.csv"):
         self.output.to_csv(filepath, index=False)
 
     # def process_results(self):
@@ -547,3 +550,4 @@ test = Patents()
 test.load_search_output()
 test.extract_VH_VL()
 test.save_final_output()
+
