@@ -87,4 +87,3 @@ def extract_VH_VL(anarci_output):
 
 # test run function
 verified_antibodies = ['4f2m', '7e3k', '7e3c', '7k9i', '7e5y', '7l02', '7dk5', '7dd2']
-

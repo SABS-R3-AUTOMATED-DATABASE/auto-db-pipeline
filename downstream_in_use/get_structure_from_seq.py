@@ -1,6 +1,4 @@
 # TODO integrate antibody homology modelling rather than using PDB with highest % identity
-# NOTE need to validate sequences as from antibody? or done already upstream e.g. when scraping?
-# NOTE long function / code itself can be more efficient
 
 from ABDB import database  # import SAbDab database to search from
 import re
