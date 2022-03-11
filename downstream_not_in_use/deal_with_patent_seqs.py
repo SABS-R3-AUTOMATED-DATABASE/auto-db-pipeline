@@ -6,7 +6,6 @@ from retrieve_cdr_germlines import get_CDRs_and_germlines
 
 igblastprocess = IGBLASTprocess()
 
-# NOTE need to check sequence length - some too long/short so not VH/VL, run through anarci to get correct seq or leave blank if too short
 # NOTE already get cdr3, v and j gene if running igblast on nt seqs
 
 def standardise_patent_seqs():
@@ -106,3 +105,4 @@ def standardise_patent_seqs():
 
 
 standardise_patent_seqs()
+

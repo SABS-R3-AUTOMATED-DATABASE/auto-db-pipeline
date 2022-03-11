@@ -17,28 +17,39 @@ def update_df(csv_file):
 
     for col in [df['VH'], df['VL']]:
         for seq in col:
-
-            if col == df['VH']:
+            if col is df['VH']:
+                # if blank row, add empty dict
                 if seq == 'N/A':
-                    row = dict()  # empty dict
+                    row = dict()
                     heavy_chain_data.append(row)
+                # otherwise run function to filter seqs through anarci
                 else:
-                    row = get_CDRs_and_germlines(str(seq))
+                    cdr_and_germlines, sequences = get_CDRs_and_germlines(seq)
+                    row = cdr_and_germlines
                     heavy_chain_data.append(row)
 
-            elif col == df['VL']:
+            elif col is df['VL']:
                 if seq == 'N/A':
                     row = dict()
                     light_chain_data.append(row)
                 else:
-                    row = get_CDRs_and_germlines(str(seq))
+                    cdr_and_germlines, sequences = get_CDRs_and_germlines(seq)
+                    row = cdr_and_germlines
                     light_chain_data.append(row)
 
     heavy_chain_data = pd.DataFrame(heavy_chain_data)
     light_chain_data = pd.DataFrame(light_chain_data)
+    print(heavy_chain_data.shape)
+    print(light_chain_data.shape)
 
     cdr_germlines_df = heavy_chain_data.join(light_chain_data)
+    print(cdr_germlines_df.shape)
 
     updated_df = pd.concat([df.reset_index(drop=True), cdr_germlines_df.reset_index(drop=True)], axis=1)
+    print(updated_df.shape)
 
     return updated_df
+
+
+updated_df = update_df(csv_file='corrected_patent_output.csv')
+updated_df.to_csv('patent_with_cdrs.csv')
