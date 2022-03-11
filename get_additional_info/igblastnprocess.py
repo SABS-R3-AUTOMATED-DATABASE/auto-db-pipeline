@@ -40,7 +40,7 @@ class IGBLASTprocess:
     def __init__(self, ncpu=15):
 
         self.ncpu = ncpu
-        self.germlines = 'auto-db-pipeline/downstream_in_use/germlines'  # NOTE file path will need changing for final version
+        self.germlines = 'auto-db-pipeline/get_additional_info/germlines'  # NOTE file path will need changing for final version
         self.tmpfile = 'auto-db-pipeline/igblast_output.csv'  # create temp output file, will be deleted
 
     def __call__(self, fasta_name, organism):
