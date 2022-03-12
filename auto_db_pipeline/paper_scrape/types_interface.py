@@ -5,7 +5,6 @@ Interface across a list of the ID types.
 """
 from .extract_ids import exists_mention, id_checking
 from .extract_ids import get_instances, id_finding
-from .interface_id import IDPaper
 
 class Interface:
     """
