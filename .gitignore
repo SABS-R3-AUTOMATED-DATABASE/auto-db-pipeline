@@ -8,6 +8,10 @@ old_keyword_files/
 
 keywords/.pytest_cache
 keywords/tests/__pycache__
+.vscode
+genbank/old_notebooks
+genbank/__pycache__
+genbank/elink.dtd
 **/.vscode
 paperscraper/.ipynb_checkpoints/
 paperscraper/check_coverage.ipynb
