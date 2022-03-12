@@ -1,6 +1,24 @@
 ## Pipeline explanation
 
 
+To get the papers from keywords we call `keywords2papers.py`. This gets a dataset of paper metadata. To scrape the IDs from the papers (dois) we call `papers2ids.py`. This gets a dataset of paper metadata and IDs, as well as whether ID descriptions are mentioned (e.g. is 'genbank' mentioned in the paper). By default, `papers2ids.py` calls `keywords2papers.py` if the paper metadata for that date does not already exist.
+
+The file `papers2ids.py` calls `paper.py` which creates a "paper" object. Then, `paper.py` fetches the pubmed IDs (pmid and pmc) using the `fetch_types.py`. Then, `paper.py` calls `paper_types.py`. Then, `paper_types.py` calls `fetch_text.py` and interfaces with the full texts by calling `types_interface.py`. Then, `types_interface.py` uses regular expressions from `extract_ids.py` to retrieve both the possible IDs and the mentions of the ID descriptors.
+
+### IDs Mentions
+
+```
+id_checking = {'genbank': r"(genbank|National Genetic Sequence Data Base)",
+                'pdb': r"(pdb|protein data bank)",
+                'accession': r"(accession)",
+                'protein': r"(protein|antibody|antibodies)",
+                'nucleotide': r"nucleotide",
+                'geninfo': r"(geninfo|gi number)",
+                'refseq': r"(refseq|reference sequence)"
+            }
+
+```
+
 ---
 ## Protein ID formatting
 ### GenBank protein IDs

@@ -91,13 +91,19 @@ class Pmid:
         """Return whether the paper type can be considered to exist."""
         return bool(self.pmid)
 
+    def __repr__(self):
+        """Representation."""
+        return str(self.output)
+
     @property
     def output(self):
         """Output of the pmid paper type for retrieval."""
         representation = {'pmid': self.pmid}
         if not self:
+            print('reached here')
             return None
-        return representation.update(self.interface.output)
+        representation.update(self.interface.output)
+        return representation
 
     @property
     def url_pmid(self):
@@ -123,13 +129,18 @@ class Pmc:
         """Return whether the paper type can be considered to exist."""
         return bool(self.pmc)
 
+    def __repr__(self):
+        """Representation."""
+        return str(self.output)
+
     @property
     def output(self):
         """Output of the pmc paper type for retrieval."""
         representation = {'pmc': self.pmc}
         if not self:
             return None
-        return representation.update(self.interface.output)
+        representation.update(self.interface.output)
+        return representation
 
     @property
     def url_pmc(self):

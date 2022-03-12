@@ -104,7 +104,6 @@ class PdbID:
         in the directory called "obsolete",
         but this goes away by setting the `obsolte_pdb` parameter to
         some random string, which I made "None".
-
         """
         pdbl = PdbID.get_pdb_list()
         # Takes a while to load
