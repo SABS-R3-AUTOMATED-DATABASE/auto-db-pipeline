@@ -100,11 +100,16 @@ def get_supp_seqs(url):
             else:
                 seq_dict['VH'] = list(df_file[column])
 
-        print(len(seq_dict['VL']))
-        print(len(seq_dict['VH']))
-        df_seqs.append(pd.DataFrame.from_dict(seq_dict))
+        out_df = pd.DataFrame.from_dict(seq_dict)
 
-    print(df_seqs)
+        # filter again for any potentially empty rows
+        out_df = out_df[out_df.applymap(lambda x: len(str(x)) > 20).any(axis=1)]
+        out_df['Name'] = 'N/a'
+        out_df['Binds_to'] = 'SARS-CoV-2'
+        out_df['Origin'] = 'Homo sapiens (human)'
+        out_df = out_df[['Name', 'Binds_to', 'Origin', 'VH', 'VL']]
+
+        df_seqs.append(out_df)
 
     return pd.concat(df_seqs)
 
@@ -139,3 +144,4 @@ if __name__ == "__main__":
     print('Number of sequences scraped: {}'.format(len(df_seqs[0])))
     print('Example output:')
     print(df_seqs[0].head(10))
+    print(list(df_seqs[0]))
