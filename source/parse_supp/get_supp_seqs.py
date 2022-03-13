@@ -4,13 +4,15 @@ from bs4 import BeautifulSoup
 import tempfile
 from anarci import number
 
+pd.options.mode.chained_assignment = None 
+
 
 def get_seq_strand(seq, scheme="imgt"):
-    numbering, chain_type = number(seq, scheme=scheme, allow=set( ["H","K","L"]))
+    numbering, chain_type = number(seq, scheme=scheme, allow=set(["H", "K", "L"]))
     if numbering:
         # replace the Kappa annotation with a light annotation 
         # (will come back as L for a lambda chain already).
-        chain_type.replace("K","L")
+        chain_type.replace("K", "L")
         return chain_type
     else:
         return False
@@ -33,8 +35,10 @@ def get_supp_seqs(url):
         if 'Supplement' in link.get_text():
             file_link = link['href']
             # search for csv and xlsx data tables
-            if file_link[-3:] == 'csv' or file_link[:-4] == 'xlsx':
+            if file_link[-3:] == "csv" or file_link[-4:] == "xlsx":
                 supp_links.append(file_link)
+
+    print(supp_links)
 
     # return null if no supplementary csv or xlsx files
     if len(supp_links) == 0:
@@ -47,11 +51,12 @@ def get_supp_seqs(url):
     df_seqs = []
 
     for link in supp_links:
+        print('checking link')
+
+        # TODO: scrape nt and match with aa sequences
         seq_dict = {
-            'heavy_aa': [],
-            'light_aa': [],
-            'heavy_nt': [],
-            'light_nt': [],
+            'VH': [],
+            'VL': [],
         }
 
         # read data file into dataframe
@@ -64,10 +69,9 @@ def get_supp_seqs(url):
                 # TODO: rewrite to account for multilp sheets
                 df_file = pd.read_excel(tmp).dropna(axis=1, how='all')
 
-        # check end of dataframe for columns with long all capital string entries
+        # check end of dataframe for columns with long all capital strings
         # TODO: find more robust way of getting representative sample
         df_tail = df_file.tail()
-        df_sample = df_file.loc[]
 
         mask = []
         for column in df_tail:
@@ -89,39 +93,49 @@ def get_supp_seqs(url):
         # if sequences found, classify into heavy/light aa/nt
         # TODO: find more robust way of parsing column headers
         for column in df_file:
-            if set(df_file[column].iloc[-1]).issubset({'A', 'G', 'C', 'T'}):
-                if 'l' in column or 'L' in column:
-                    seq_dict['light_nt'] = list(df_file[column])
-                else:
-                    seq_dict['heavy_nt'] = list(df_file[column])
+            test_seq = df_file[column].iloc[-1].replace(u'\ufeff', '')
+            strand = get_seq_strand(test_seq)
+            if strand == 'L':
+                seq_dict['VL'] = list(df_file[column])
             else:
-                if 'l' in column or 'L' in column:
-                    seq_dict['light_aa'] = list(df_file[column])
-                else:
-                    seq_dict['heavy_aa'] = list(df_file[column])
+                seq_dict['VH'] = list(df_file[column])
 
+        print(len(seq_dict['VL']))
+        print(len(seq_dict['VH']))
         df_seqs.append(pd.DataFrame.from_dict(seq_dict))
+
+    print(df_seqs)
 
     return pd.concat(df_seqs)
 
 
 if __name__ == "__main__":
+    # url_list = [
+    #     'https://www.nature.com/articles/s41586-021-04060-7',
+    #     'https://www.biorxiv.org/content/10.1101/2020.12.31.424729v1',
+    #     'https://www.nature.com/articles/s41591-020-0998-x',
+    #     'https://www.sciencedirect.com/science/article/pii/S2211124721012869',
+    #     'https://www.nature.com/articles/s41586-021-03696-9',
+    # ]
+
     url_list = [
-        'https://www.nature.com/articles/s41586-021-04060-7',
-        'https://www.biorxiv.org/content/10.1101/2020.12.31.424729v1',
-        'https://www.nature.com/articles/s41591-020-0998-x',
-        'https://www.sciencedirect.com/science/article/pii/S2211124721012869',
-        'https://www.nature.com/articles/s41586-021-03696-9',
+        'https://www.nature.com/articles/s41586-021-04060-7'
     ]
 
     df_seqs = []
     for url in url_list:
         df_supp = get_supp_seqs(url)
+        print('returned')
+
         # store df of sequences if not null
-        if df_supp:
+        if not df_supp.empty:
             df_seqs.append(df_supp)
 
-    all_sequences = pd.concat(df_seqs)
-    print('Number of sequences scraped: {}'.format(len(all_sequences)))
+    # all_sequences = pd.concat(df_seqs)
+    # print('Number of sequences scraped: {}'.format(len(all_sequences)))
+    # print('Example output:')
+    # print(all_sequences.head(10))
+
+    print('Number of sequences scraped: {}'.format(len(df_seqs[0])))
     print('Example output:')
-    print(all_sequences.head(10))
+    print(df_seqs[0].head(10))
