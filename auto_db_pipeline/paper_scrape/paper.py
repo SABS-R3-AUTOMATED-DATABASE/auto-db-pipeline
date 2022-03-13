@@ -12,16 +12,16 @@ class Paper:
     Obtain the data on a paper.
     Input: a dictionary of a paper's metadata (`paper_data`)"""
 
-    def __init__(self, paper_data: dict, source: str):
+    def __init__(self, paper_data: dict):
         """
         Initialize and run the class to store the data in the instance of paper.
         """
         self.title = paper_data['title']
-        self.journal = Paper.set_journal(source, paper_data)
+        self.journal = paper_data['journal']
         self.authors = paper_data['authors']
         self.doi = paper_data['doi']
         self.date = paper_data['date']
-        self.source = source
+        self.source = paper_data['source']
         self.paper_types = {}
 
     def __repr__(self):
@@ -87,14 +87,6 @@ class Paper:
         for paper_type in self.paper_types.values():
             if paper_type:
                 paper_type.interface()
-
-    @staticmethod
-    def set_journal(source, paper_data):
-        """Set the journal, which is bioRxiv when the source is bioRxiv."""
-        if source == BIORXIV_NAME:
-            return 'bioRxiv'
-        else:
-            return paper_data['journal']
 
     @staticmethod
     def _clear_caches():

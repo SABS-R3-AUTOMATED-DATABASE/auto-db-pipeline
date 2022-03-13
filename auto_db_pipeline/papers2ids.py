@@ -5,7 +5,7 @@ Run the keywords2papers webscraping if the data is not already stored.
 import logging
 import json
 from datetime import datetime
-from pandas import read_json
+from pandas import read_json, DataFrame
 from keywords2papers import Keywords2Papers
 from paper_scrape.paper import Paper
 from paper_scrape.extract_ids import id_finding, id_checking
@@ -32,7 +32,7 @@ class Papers:
     def __init__(self, selected_date=None):
         """Initialize the collection, selected_date is in the form Y_m_d,
         e.g., 2022_02_13."""
-        self.input_data = {}
+        self.input_data = []
         self.selected_date = Keywords2Papers.get_default_date(selected_date)
         self.papers = []
         self.errors = []
@@ -52,23 +52,34 @@ class Papers:
     def get_input_data(self):
         """Retrieve the paper data from keywords."""
         k2p = Keywords2Papers(self.selected_date)
-        self.input_data[PUBMED_NAME] = k2p.get_pubmed()
-        self.input_data[BIORXIV_NAME] = k2p.get_biorxiv()
-        self.n_papers = len(self.input_data[PUBMED_NAME]) + len(self.input_data[BIORXIV_NAME])
+        pubmed = k2p.get_pubmed()
+        biorxiv = k2p.get_biorxiv()
+        for paper in pubmed:
+            paper['source'] = PUBMED_NAME
+            self.input_data.append(paper)
+        for paper in biorxiv:
+            paper['source'] = BIORXIV_NAME
+            paper['journal'] = 'bioRxiv : the preprint server for biology'
+            self.input_data.append(paper)
+
+        # Remove duplicates
+        df = DataFrame(self.input_data)
+        df = df.sort_values(by='date', ascending=False).reset_index(drop=True)
+        df = df.drop_duplicates(subset=['doi', 'journal'], keep='first', ignore_index=True)
+        self.input_data = df.to_dict(orient='records')
 
     def get_papers(self):
-        """Iterate through the data sources, e.g., pubmed, biorxiv.
-        Then, iterate through the data from a particular source."""
-        for source in self.input_data:
-            for paper_data in self.input_data[source]:
-                if self.i % self.save_every == 0:  # periodic saving
-                    self.save()
-                if self.i % self.backup_every == 0:  # periodic backups
-                    self.save(backup=True)
+        """Iterate through the data from a particular source."""
+        n_papers = len(self.input_data)
+        for paper_data in self.input_data:
+            if self.i % self.save_every == 0:  # periodic saving
+                self.save()
+            if self.i % self.backup_every == 0:  # periodic backups
+                self.save(backup=True)
 
-                print(self.i, '/',  self.n_papers)
-                self._call_paper(paper_data, source)
-                self.i += 1
+            print(self.i, '/',  n_papers)
+            self._call_paper(paper_data)
+            self.i += 1
         self.save()
         self.save(backup=True)
 
@@ -80,24 +91,26 @@ class Papers:
             backup_path = "backups/"
             backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
 
-        with open(f"{DATAPATH}{backup_path}{FILENAME_PAPERS}-{self.selected_date}{backup_suffix}{DATATYPE}", "w") as f:
+        papers_path = f"{DATAPATH}{backup_path}{FILENAME_PAPERS}-{self.selected_date}{backup_suffix}{DATATYPE}"
+        with open(papers_path, "w", encoding='utf8') as f:
             for paper in self.papers:
                 f.write(json.dumps(paper) + "\n")
 
-        with open(f"{DATAPATH}{backup_path}{FILENAME_ERRORS}-{self.selected_date}{backup_suffix}{DATATYPE}", "w") as f:
+        errors_path = f"{DATAPATH}{backup_path}{FILENAME_ERRORS}-{self.selected_date}{backup_suffix}{DATATYPE}"
+        with open(errors_path, "w", encoding='utf8') as f:
             for error in self.errors:
                 f.write(json.dumps(error) + "\n")
 
 
-    def _call_paper(self, paper_data, source):
+    def _call_paper(self, paper_data):
         """Enter a paper, call the paper, and get its output."""
-        with Paper(paper_data, source) as paper:
+        with Paper(paper_data) as paper:
             try:
                 paper()
                 self.papers.append(paper.output)
 
             except Exception as exception:
-                paper_info = {'source': source, 'paper_data': paper_data}
+                paper_info = {'paper_data': paper_data}
                 self.errors.append(paper_info)
 
                 # Log the error
@@ -114,15 +127,46 @@ class IDsLoader:
     basic_paper_fields = ('title', 'journal', 'authors', 'date', 'source')
 
     def __init__(self, selected_date=None):
+        """
+        The papers attribute is a dictionary indexed by doi.
+        The po"""
         self.selected_date = selected_date
-        self.id_papers = self.get_id_papers()
+        self.id_papers = None
         self.ids_possible = {id_name: {} for id_name in id_finding}
         self.ids_mentions = {}
         self.papers = {}
+        self.df_papers = None
 
     def __call__(self):
         self.get_id_papers()
         self.load_papers()
+        self.get_papers_df()
+        self.save_papers_df()
+
+    def get_papers_df(self):
+        """Create a csv from papers."""
+
+        paper_dataset = []
+        assert set(self.papers.keys()) == set(self.ids_mentions.keys())
+        dois = set(self.papers.keys())
+
+        for doi in dois:
+            # non-unique dois
+            for info in self.papers[doi]:
+                paper_entry = {'doi': doi}
+                paper_entry.update(info)
+                paper_entry.update(self.ids_mentions[doi])
+                paper_dataset.append(paper_entry)
+
+        df = DataFrame(paper_dataset)
+        df = df.sort_values(by='date', ascending=False).reset_index(drop=True)
+        # wrong
+        df.drop_duplicates(subset=['source', 'doi', 'journal'], keep='first', ignore_index=True)
+        self.df_papers = df
+
+    def save_papers_df(self):
+        self.df_papers.to_csv(f"{DATAPATH}papers-{self.selected_date}.csv", index=False)
+
 
     @property
     def id_names(self):
