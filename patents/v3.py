@@ -37,16 +37,30 @@ class Patents:
         """
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
-        (((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobody) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
+        (((SARS-CoV-2) OR (coronavirus) OR (COVID-19) OR (MERS) OR (SARS)) ((antibody) OR (nanobody) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (polyclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
         """
-        results = []
-        patent_number = []
-        url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26after%3Dfiling%3A20030101%26num%3D100"
         if CN == True:
-            url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B%26country%3DCN%26after%3Dfiling%3A20030101%26num%3D100"
-        url = [url_first_part + "&exp="]
-        for i in range(1, 10):
-            url.append(url_first_part + "%26page%3D" + str(i) + "&exp=")
+            url_first_part = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26before%3Dfiling%3A20131231%26after%3Dfiling%3A20030101%26num%3D100"
+            url_first_part2 = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26before%3Dfiling%3A20181231%26after%3Dfiling%3A20140101%26num%3D100"
+            url_first_part3 = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26before%3Dfiling%3A20200630%26after%3Dfiling%3A20190101%26num%3D100"
+            url_first_part4 = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26before%3Dfiling%3A20210630%26after%3Dfiling%3A20200701%26num%3D100"
+            url_first_part5 = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26after%3Dfiling%3A20210701%26num%3D100"
+            list_of_urls = [url_first_part,url_first_part2,url_first_part3,url_first_part4,url_first_part5]
+            url = [i + "&exp=" for i in list_of_urls]
+            for i in range(1, 10):
+                url = url + [item + "%26page%3D" + str(i) + "&exp=" for item in list_of_urls]
+        else:
+            results = []
+            patent_number = []
+            url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26before%3Dfiling%3A20131231%26after%3Dfiling%3A20030101%26num%3D100"
+            url_first_part2 = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26before%3Dfiling%3A20181231%26after%3Dfiling%3A20140101%26num%3D100"
+            url_first_part3 = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26before%3Dfiling%3A20210630%26after%3Dfiling%3A20190101%26num%3D100"
+            url_first_partl = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26after%3Dfiling%3A20210701%26num%3D100"
+            list_of_urls = [url_first_part,url_first_part2,url_first_part3]
+            url = [i + "&exp=" for i in list_of_urls] + [url_first_partl + "&exp="]
+            for i in range(1, 10):
+                url = url + [item + "%26page%3D" + str(i) + "&exp=" for item in list_of_urls]
+            url = url + [url_first_partl+ "%26page%3D" + str(1) + "&exp="]
         for link in url:
             headers = {"User-Agent": Patents.get_random_ua()}
             req = requests.get(link, headers=headers)
@@ -54,8 +68,11 @@ class Patents:
             data = main_data["results"]["cluster"]
             for i in range(len(data[0]["result"])):
                 num = data[0]["result"][i]["patent"]["publication_number"]
-                results.append("https://patents.google.com/patent/" + num + "/en")
+                title = data[0]["result"][i]["patent"]["title"].lower()
+                if 'sars' in title or 'covid' in title or 'coronavirus' in title or 'mers' in title:
+                    results.append("https://patents.google.com/patent/" + num + "/en")
                 patent_number.append(str(num))
+        print(len(results))
         return results
 
     def get_patents(self, CN=False):
@@ -595,9 +612,9 @@ class Patents:
 
 
 test = Patents()
-# test.get_patents(CN = True)
-# test.save_search_output("patents/search_results.json")
-test.load_search_output()
+test.get_patents(CN=True)
+test.save_search_output("patents/search_results_new.json")
+# test.load_search_output()
 test.extract_VH_VL()
-test.save_final_output()
+test.save_final_output("patents/patent_results_new.csv")
 
