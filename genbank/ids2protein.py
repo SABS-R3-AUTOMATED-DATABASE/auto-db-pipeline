@@ -1,5 +1,7 @@
+from urllib.error import HTTPError
 from Bio import Entrez
 import json
+import sys
 
 
 class ProteinRetrieval:
@@ -46,6 +48,16 @@ class ProteinRetrieval:
         for i in range(0, len(lst), n):
             yield lst[i:i + n]
 
+    def progress(self, count, total):
+        bar_len = 60
+        filled_len = int(round(bar_len * count / float(total)))
+
+        percents = round(100.0 * count / float(total), 1)
+        bar = '=' * filled_len + '-' * (bar_len - filled_len)
+
+        sys.stdout.write(f'\r[{bar}] {percents}%, {count}/{total}')
+        sys.stdout.flush()
+
     def get_entries(self, db='protein'):
         '''
         downlowad protein entries from genbank for given id list
@@ -59,16 +71,31 @@ class ProteinRetrieval:
 
         # Entrez.efetch can only get 10'000 entires at a time use the generator
         # function to produce chunks of 10'000 ids
-        id_chunks = self.chunks(self.ids, 10000)
+        # id_chunks = self.chunks(self.ids, 10000)
 
         # loop through chunks and append to list
-        for id_chunk in id_chunks:
-            # Entrez.efetch handles aproximately 25 searches per second
-            entries_handle = Entrez.efetch(db=db, id=id_chunk, rettype="gb",
-                                           retmode="xml")
-            self.entries += Entrez.read(entries_handle)
 
-        print('number of protein handles retrieved:', len(self.entries))
+        # for id_chunk in id_chunks:
+        # entries_handle = Entrez.efetch(db=db, id=id_chunk, rettype="gb",
+        # retmode="xml")
+        # self.entries += Entrez.read(entries_handle, validate=False)
+
+        i = 0
+        for id in self.ids:
+            i += 1
+            # Entrez.efetch handles aproximately 25 searches per second
+            try:
+                entries_handle = Entrez.efetch(db=db, id=id, rettype="gb",
+                                               retmode="xml")
+                self.entries += Entrez.read(entries_handle, validate=False)
+
+            except HTTPError:
+                pass
+
+            if i == 1 or i % 100 == 0 or i == len(self.ids):
+                self.progress(i, len(self.ids))
+
+        print('\n number of protein handles retrieved:', len(self.entries))
         print('----------')
 
     def remove_junk(self):
@@ -90,19 +117,27 @@ class ProteinRetrieval:
         # retain specified information
         for entry in self.entries:
             # select keys in entry
-            entry_no_junk = {key: entry[key] for key in to_keep_entry}
-
-            # select keys in first reference
-            reference_1 = entry['GBSeq_references'][0]
-            ref_no_junk = {key: reference_1[key] for key in to_keep_ref}
-            entry_no_junk['GBSeq_references'] = [ref_no_junk]
             try:
-                entry_no_junk['GBSeq_references'][0]['GBReference_xref'] = \
-                    reference_1['GBReference_xref']
+                entry_no_junk = {key: entry[key] for key in to_keep_entry}
+
+                # select keys in first reference
+
+                reference_1 = entry['GBSeq_references'][0]
+                ref_no_junk = {key: reference_1[key] for key
+                               in to_keep_ref}
+                entry_no_junk['GBSeq_references'] = [ref_no_junk]
+
+                try:
+                    (entry_no_junk['GBSeq_references'][0]
+                                  ['GBReference_xref']) = \
+                        reference_1['GBReference_xref']
+                except KeyError:
+                    pass
+
+                entries_no_junk.append(entry_no_junk)
+
             except KeyError:
                 pass
-
-            entries_no_junk.append(entry_no_junk)
 
         # permanently overwrite self.entries
         self.entries = entries_no_junk
