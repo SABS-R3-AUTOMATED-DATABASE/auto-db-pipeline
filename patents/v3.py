@@ -37,7 +37,7 @@ class Patents:
         """
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
-        (((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobod) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
+        (((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobody) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
         """
         results = []
         patent_number = []
@@ -156,27 +156,14 @@ class Patents:
     #         return seq1(VR.replace(" ", ""))
 
     def get_uspto_text(num):
-        url = 'https://patft.uspto.gov/netahtml/PTO/srchnum.htm'
-        browser = mechanicalsoup.StatefulBrowser(
-        soup_config={'features': 'lxml'},
-        raise_on_404=True,
-        user_agent=Patents.get_random_ua(),
-        )
-        browser.open(url)
-        browser.select_form()
-        browser["TERM1"] = num
-        response = browser.submit_selected()
-        url = re.findall('(?<=URL\=).+(?=\")',str(response.content))
-        browser.close()
-        text = ''
-        if url:
-            print(url[0])
-            url = 'https://patft.uspto.gov' + url[0]
-            headers = requests.utils.default_headers()
-            headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
-            page = requests.get(url, headers = headers)
-            soup = BeautifulSoup(page.content, 'html.parser')
-            text = soup.text.replace('\n',' ')
+        url = 'https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO1&Sect2=HITOFF&d=PALL&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.htm&r=1&f=G&l=50&s1='
+        url = url + num + '.PN.&OS=PN/' + num + '&RS=PN/' + num
+        print(url)
+        headers = requests.utils.default_headers()
+        headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+        page = requests.get(url, headers = headers)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        text = soup.text.replace('\n',' ')
         return text
 
     def extract_seq_from_id_US(content: list, id):
@@ -184,11 +171,17 @@ class Patents:
         splited_text = text.split(id)
         seq = ""
         origin = ""
-        if len(splited_text[-2]) <100 :
+        if len(splited_text) >4 and  len(splited_text[-2]) <100 :
+            print(text)
             text = splited_text[-1]
             seq = re.search(r'([A-Z][a-z]{2}\s*){10,}(?!=[A-Z][a-z]{2})',text)
-            seq = seq.group()
-            origin = splited_text[-2]
+            print(seq)
+            if seq:
+                seq = seq.group()
+                origin = splited_text[-2]
+            else:
+                seq = ""
+                origin = ""
         if seq.upper() == seq and len(seq) > 40:
             return seq, origin
 
