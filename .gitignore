@@ -18,3 +18,4 @@ paperscraper/check_coverage.ipynb
 paperscraper/testfile.ipynb
 data/biorxiv_all*.jsonl
 *.ent
+genbank/data/protein_handles2.json
