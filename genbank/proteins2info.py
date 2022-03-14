@@ -477,6 +477,7 @@ class InfoRetrieval:
         for group in self.unpaired_entries:
             not_pairable_group = []
             for entry in group:
+                print('called with', entry)
                 result = self.get_chains_from_sabdab(entry)
                 if result is not None:
                     entry['pdb_hc'] = result[0]
