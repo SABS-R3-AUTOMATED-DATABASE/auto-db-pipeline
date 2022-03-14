@@ -120,7 +120,7 @@ class PopulateDatabase:
             row_dic['Genbank_protein_id_vh'] = (paired_seq['heavy_chain']
                                                 ['GBSeq_locus'])
             row_dic['Origin'] = paired_seq['heavy_chain']['GBSeq_source']
-            row_dic['VH'] = paired_seq['heavy_chain']['GBSeq_sequence']
+            row_dic['VH'] = paired_seq['heavy_chain']['GBSeq_sequence'].lower()
             row_dic['Reference'] = self.get_ref(paired_seq['heavy_chain'])
             row_dic['Description_VH'] = (paired_seq['heavy_chain']
                                          ['GBSeq_definition'])
@@ -130,7 +130,7 @@ class PopulateDatabase:
         try:
             row_dic['Genbank_protein_id_vl'] = (paired_seq['light_chain']
                                                 ['GBSeq_locus'])
-            row_dic['VL'] = paired_seq['light_chain']['GBSeq_sequence']
+            row_dic['VL'] = paired_seq['light_chain']['GBSeq_sequence'].lower()
             row_dic['Description_VL'] = (paired_seq['light_chain']
                                          ['GBSeq_definition'])
         except KeyError:
@@ -161,7 +161,7 @@ class PopulateDatabase:
         row_dic['Origin'] = unpaired_seq['GBSeq_source']
 
         if chain == 'H':
-            row_dic['VH'] = unpaired_seq['GBSeq_sequence']
+            row_dic['VH'] = unpaired_seq['GBSeq_sequence'].lower()
             row_dic['Genbank_protein_id_vh'] = unpaired_seq['GBSeq_locus']
 
             # 'fragment_id' may not be defined for unpaired sequences
@@ -171,7 +171,7 @@ class PopulateDatabase:
                 pass
 
         elif chain == 'L':
-            row_dic['VL'] = unpaired_seq['GBSeq_sequence']
+            row_dic['VL'] = unpaired_seq['GBSeq_sequence'].lower()
             row_dic['Genbank_protein_id_vl'] = unpaired_seq['GBSeq_locus']
 
             # 'fragment_id' may not be defined for unpaired sequences

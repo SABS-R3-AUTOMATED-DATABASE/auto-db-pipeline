@@ -188,6 +188,47 @@ class TestProteins2info(unittest.TestCase):
                 self.assertTrue(
                     entry['light_chain']['GBSeq_locus'] == '7WD7_e')
 
+    def test_get_chains_from_sabdab(self):
+        entry = {'GBSeq_locus': '7RR0_B',
+                 'GBSeq_sequence': 'qvqlvqsgpevkkpgtsvkvsckasgftfsssavqwvrqa' +
+                                   'rgqrlewigwivvgsgnanyaprfqervtitrdmstntay' +
+                                   'melsslrsedtavyycaapncsrtlcydgfnmwgqgtmvtv',
+                 'chain': 'H'}
+
+        result = self.genbank.get_chains_from_sabdab(entry)
+
+        HC = 'QVQLVQSGPEVKKPGTSVKVSCKASGFTFSSSAVQWVRQARGQRLEWIGWIVVGSGNANYA' +\
+             'PRFQERVTITRDMSTNTAYMELSSLRSEDTAVYYCAAPNCSRTLCYDGFNMWGQGTMVTV'
+        LC = 'EIVLTQSPGSLSLSPGERATLSCRASQSVRSSYLGWYQQKPGQAPRLLIYGASSRATGIPD' +\
+             'RFSGSGSETDFTLTISRLEPEDFAVYYCQQYDSSPWTFGQGTKVEI'
+        self.assertEqual(HC, result[0])
+        self.assertEqual(LC, result[1])
+
+    def test_get_pairable_sequences_from_sabdab(self):
+        self.genbank.get_chains_from_sabdab = MagicMock(return_value=(1, 2))
+        # example of nested list input used by function
+        unpaired_test = [[{'1': 1}, {'1': 1}], [{'1': 1}]]
+        self.genbank.unpaired_entries = unpaired_test
+        self.genbank.get_pairable_sequences_from_sabdab()
+        # with example input Mock should be called 4 times
+        self.assertEqual(self.genbank.get_chains_from_sabdab.call_count, 3)
+
+    def test_pair_vh_vl_pdb(self):
+        pdb_pariables_test = [{'chain': 'H',
+                               'pdb_lc': 'ABC',
+                               'GBSeq_sequence': 'dcba'},
+                              {'chain': 'L',
+                               'pdb_hc': 'CBA',
+                               'GBSeq_sequence': 'abcd'}]
+
+        self.genbank.paired_entries = []
+        self.genbank.pdb_pairables = pdb_pariables_test
+        self.genbank.pair_vh_vl_pdb()
+
+        self.assertEqual(len(self.genbank.paired_entries), 1)
+        test = self.genbank.paired_entries[0]['heavy_chain']['GBSeq_sequence']
+        self.assertEqual(test, 'dcba')
+
     def test_save_to_json(self):
         # create onjects for paired, unpaired and nanobody entires
         self.genbank.paired_entries = []

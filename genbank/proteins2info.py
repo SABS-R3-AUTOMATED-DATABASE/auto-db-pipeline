@@ -2,6 +2,7 @@ import json
 from anarci import run_anarci
 import re
 from ABDB import database as db
+from Bio.Seq import Seq
 
 
 class InfoRetrieval:
@@ -25,6 +26,7 @@ class InfoRetrieval:
 
     Methods:
     -------
+    translate_nucleotides(self)
     filter_AB_entries(self)
     classify_vh_vl(self)
     find_antigen(self)
@@ -60,6 +62,20 @@ class InfoRetrieval:
         self.pattern = re.compile(self.pdb_id_regex,
                                   flags=re.IGNORECASE | re.VERBOSE)
 
+    def translate_nucleotides(self):
+        '''
+        Translates nucelotide sequences to amino acid sequence.
+
+        Nucleotide sequence with key 'GBSeq_sequence' is replaced with
+        amino acid sequence and nucelotide sequence saved with key
+        'GBSeq_sequence_nt'.
+        '''
+        for entry in self.entries:
+            nt_seq = entry['GBSeq_sequence']
+            entry['GBSeq_sequence_nt'] = nt_seq
+            aa_seq = str(Seq(nt_seq).translate())
+            entry['GBSeq_sequence'] = aa_seq
+
     def filter_AB_entries(self):
         '''
         check if a protein sequence originates from a antibody and remove all
@@ -71,7 +87,10 @@ class InfoRetrieval:
             # get sequence
             seq = entry['GBSeq_sequence']
             # returns false if not antibody sequence
-            result = run_anarci([['sequences', seq]])[2][0]
+            try:
+                result = run_anarci([['sequences', seq]])[2][0]
+            except Exception:
+                pass
 
             if result:
                 # temporarily store antibody entries
@@ -458,6 +477,7 @@ class InfoRetrieval:
         for group in self.unpaired_entries:
             not_pairable_group = []
             for entry in group:
+                print('called with', entry)
                 result = self.get_chains_from_sabdab(entry)
                 if result is not None:
                     entry['pdb_hc'] = result[0]
@@ -572,13 +592,14 @@ class InfoRetrieval:
         with open(nanobod_out_file_path, 'w') as outfile_3:
             json.dump(self.nanobodies, outfile_3)
 
-    def __call__(self, classification_method=False,
+    def __call__(self, db='protein', classification_method=False,
                  paired_out_file_path='genbank/data/AB_paired.json',
                  unpaired_out_file_path='genbank/data/AB_unpaired.json',
                  nanobod_out_file_path='genbank/data/nanobody.json'):
         '''
         runs functions in correct order
 
+        param db: database scraped, default: 'protein'
         param pairing_method: method by which heavy and light chains are
                               paired, the default uses the classify_vh_vl
                               function, if pairing_method='anarci'
@@ -593,6 +614,8 @@ class InfoRetrieval:
         output '.../AB_unpaired.json': json file containg unpaired entries
         output '.../nanobody.json': json file containg nanobody entries
         '''
+        if db == 'nucleotide':
+            self.translate_nucleotides()
         self.filter_AB_entries()
         if classification_method == 'anarci':
             self.classify_vh_vl_anarci()

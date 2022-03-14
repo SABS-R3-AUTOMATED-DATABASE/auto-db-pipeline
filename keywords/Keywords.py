@@ -104,7 +104,7 @@ class Keywords:
         '''
         dumps titles and abstracts in a .json file
         '''
-        out_titles = open('data/titles.json', 'w')
+        out_titles = open('keywords/data/titles.json', 'w')
         json.dump(self.titles, out_titles)
         out_titles.close()
 
@@ -120,15 +120,15 @@ class Keywords:
         '''
         If .json files already exist this method can be used to load the data
         '''
-        titles_file = open('data/titles.json')
+        titles_file = open('keywords/data/titles.json')
         self.titles = json.load(titles_file)
         titles_file.close()
 
-        abstracts_file = open('data/abstracts.json')
+        abstracts_file = open('keywords/data/abstracts.json')
         self.abstracts = json.load(abstracts_file)
         abstracts_file.close()
 
-        titleabstracts_file = open('data/titlesabstracts.json')
+        titleabstracts_file = open('keywords/data/titlesabstracts.json')
         self.titles_and_abstracts = json.load(titleabstracts_file)
         titleabstracts_file.close()
 
@@ -211,7 +211,7 @@ class Keywords:
 
 # run code to get plots of word counts
 if __name__ == '__main__':
-    CoV = Keywords('./data/CoV-AbDab_181021.csv')
+    CoV = Keywords('keywords/data/CoV-AbDab_181021.csv')
     CoV.extract_links()
 
     # run if titles and abstracts are not downloaded (data/*.json)
