@@ -151,3 +151,17 @@ class Pmc:
         """Default paper text."""
         if self.url:
             return get_text(self.url)
+
+class PaperType:
+    """General paper type class."""
+
+    def __init__(self, type_id):
+        self.type_id = type_id
+        if not self:
+            return
+
+    def __bool__(self):
+        """Return whether the paper type can be considered to exist."""
+        return bool(self.type_id)
+
+    # Can probably remove doi and pmid from types_interface

@@ -50,9 +50,8 @@ class Keywords2Papers:
     valid_filenames = [FILENAME_PUBMED, FILENAME_BIORXIV, FILENAME_BIORXIV_ALL]
 
     def __init__(self, selected_date: str = None):
-
+        """Get the selected date and initialize the attributes."""
         self.selected_date = Keywords2Papers.get_default_date(selected_date)
-
         self.biorxiv_results, self.pubmed_results = None, None
 
 
@@ -92,18 +91,20 @@ class Keywords2Papers:
 
 
     def get_filepath(self, filename: str = None) -> str:
+        """Get a filepath for a filename."""
         Keywords2Papers.check_filename(filename)
         return f"{DATAPATH}{filename}-{self.selected_date}{DATATYPE}"
 
 
     def fetch_biorxiv_all(self):
+        """Fetch all biorxiv papers using paper_scraper."""
         print('fetching all biorxiv')
         biorxiv(save_path=self.get_filepath(FILENAME_BIORXIV_ALL))
 
 
     def check_exists(self, filename: str = None) -> bool:
-        """
-        If the results from today exist, load them instead of re-running the paperscraper.
+        """If the results from today exist, load them instead of re-running
+        the paperscraper.
         """
         Keywords2Papers.check_filename(filename)
         exists = isfile(self.get_filepath(filename))
@@ -139,7 +140,6 @@ class Keywords2Papers:
 
 
     def fetch_biorxiv_local(self, keywords: list[Union[str, list[str]]] = KEYWORDS) -> list[dict]:
-        print('fetching local biorxiv')
         """
         Search for papers in the dump using keywords.
         Args:
@@ -154,6 +154,7 @@ class Keywords2Papers:
         Returns:
             list[dict]: a list of papers associated to the query.
         """
+        print('fetching local biorxiv')
         fields = ["title", "abstract"]
         df_all = read_json(path_or_buf = self.get_filepath(FILENAME_BIORXIV_ALL),
                               lines = True, orient = 'records')

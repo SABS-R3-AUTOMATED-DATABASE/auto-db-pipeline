@@ -1,6 +1,8 @@
 """
 Attempts to obtain the pmid and pmc for a paper.
 """
+import os
+os.system('export NCBI_API_KEY="447726e72ee80490c9d97644aa34d3e27508"')  # set metapub key
 import warnings
 import re
 import requests
