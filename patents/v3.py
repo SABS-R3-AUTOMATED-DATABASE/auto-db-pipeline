@@ -39,6 +39,7 @@ class Patents:
         The url is obtained by using Fetch/XHR in Chrome developer mode
         (((SARS-CoV-2) OR (coronavirus) OR (COVID-19) OR (MERS) OR (SARS)) ((antibody) OR (nanobody) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (polyclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
         """
+        results = []
         if CN == True:
             url_first_part = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26before%3Dfiling%3A20131231%26after%3Dfiling%3A20030101%26num%3D100"
             url_first_part2 = "https://patents.google.com/xhr/query?url=q%3DSARS-CoV-2%2Ccoronavirus%2CCOVID-19%2CMERS%2CSARS%26q%3Dantibody%2Cnanobody%2Cimmunoglobulin%26q%3Dneutralize%2Cbind%2Ctarget%2Cinhibit%26q%3Dheavy%2Bchain%2CCDR%2CRBD%2Cmonoclonal%2Cpolyclonal%2Camino%2Bacid%2Csequence%26country%3DCN%26before%3Dfiling%3A20181231%26after%3Dfiling%3A20140101%26num%3D100"
@@ -50,8 +51,6 @@ class Patents:
             for i in range(1, 10):
                 url = url + [item + "%26page%3D" + str(i) + "&exp=" for item in list_of_urls]
         else:
-            results = []
-            patent_number = []
             url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26before%3Dfiling%3A20131231%26after%3Dfiling%3A20030101%26num%3D100"
             url_first_part2 = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26before%3Dfiling%3A20181231%26after%3Dfiling%3A20140101%26num%3D100"
             url_first_part3 = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19)%2BOR%2B(MERS)%2BOR%2B(SARS))%2B((antibody)%2BOR%2B(nanobody)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(polyclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26before%3Dfiling%3A20210630%26after%3Dfiling%3A20190101%26num%3D100"
@@ -69,9 +68,8 @@ class Patents:
             for i in range(len(data[0]["result"])):
                 num = data[0]["result"][i]["patent"]["publication_number"]
                 title = data[0]["result"][i]["patent"]["title"].lower()
-                if 'sars' in title or 'covid' in title or 'coronavirus' in title or 'mers' in title:
+                if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
                     results.append("https://patents.google.com/patent/" + num + "/en")
-                patent_number.append(str(num))
         print(len(results))
         return results
 
@@ -175,7 +173,6 @@ class Patents:
     def get_uspto_text(num):
         url = 'https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO1&Sect2=HITOFF&d=PALL&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.htm&r=1&f=G&l=50&s1='
         url = url + num + '.PN.&OS=PN/' + num + '&RS=PN/' + num
-        print(url)
         headers = requests.utils.default_headers()
         headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
         page = requests.get(url, headers = headers)
@@ -184,31 +181,34 @@ class Patents:
         return text
 
     def extract_seq_from_id_US(content: list, id):
-        text = "".join(content).replace("<br>", "")
-        splited_text = text.split(id)
-        seq = ""
-        origin = ""
-        if len(splited_text) >4 and  len(splited_text[-2]) <100 :
-            print(text)
-            text = splited_text[-1]
-            seq = re.search(r'([A-Z][a-z]{2}\s*){10,}(?!=[A-Z][a-z]{2})',text)
-            print(seq)
-            if seq:
-                seq = seq.group()
-                origin = splited_text[-2]
-            else:
-                seq = ""
-                origin = ""
-        if seq.upper() == seq and len(seq) > 40:
-            return seq, origin
-
-        elif seq.lower() == seq and len(seq.replace(" ", "")) > 120:
-            return seq, origin
-
-        elif len(seq.replace(" ", "")) > 120:
-            return seq, origin
+        if int(id) % 5 ==0:
+            return '', ''
         else:
-            return "", ""
+            text = "".join(content).replace("<br>", "")
+            splited_text = text.split(id)
+            seq = ""
+            origin = ""
+            if len(splited_text) >4 and  len(splited_text[-2]) <100 :
+                text = splited_text[-1]
+                text = re.sub('\d+', '',text)
+                text = re.sub('\s{2,}','',text)
+                seq = re.search(r'([A-Z][a-z]{2}\s*){10,}(?!=[A-Z][a-z]{2})',text)
+                if seq:
+                    seq = seq.group()
+                    origin = splited_text[-2]
+                else:
+                    seq = ""
+                    origin = ""
+            if seq.upper() == seq and len(seq) > 40:
+                return seq, origin
+
+            elif seq.lower() == seq and len(seq.replace(" ", "")) > 120:
+                return seq, origin
+
+            elif len(seq.replace(" ", "")) > 120:
+                return seq, origin
+            else:
+                return "", ""
 
     def extract_seq_from_id(content: list, id):
         splited_text = "".join(content).replace("<br>", "").split("<210>")
@@ -482,14 +482,16 @@ class Patents:
             df = self.search_results
         df = df[
             df.Title.str.contains("sars")
-            | df.Title.str.contains("covid")
+            | df.Title.str.contains("cov")
             | df.Title.str.contains("coronavirus")
             | df.Title.str.contains("mers")
         ]
         df = df.reset_index(drop=True)
         for i in range(df.shape[0]):
-            if "US" in df.loc[i,"URL"]:
-                df.loc[i,"Content"] = df.loc[i,"Content"] + [Patents.get_uspto_text(re.findall('(?<=US)\d+',str(df.loc[i,"URL"]))[0])]
+            if re.findall('(?<=US)\d+',str(df.loc[i,"URL"])):
+                text = Patents.get_uspto_text(re.findall('(?<=US)\d+',str(df.loc[i,"URL"]))[0])
+                if text:
+                    df.loc[i,"Content"].append(text)
         outputdf = pd.DataFrame(
             {
                 "URL": [],
@@ -612,9 +614,9 @@ class Patents:
 
 
 test = Patents()
-test.get_patents(CN=True)
-test.save_search_output("patents/search_results_new.json")
-# test.load_search_output()
+# test.get_patents(CN=True)
+# test.save_search_output("patents/search_results_new.json")
+test.load_search_output("patents/search_results_new.json")
 test.extract_VH_VL()
 test.save_final_output("patents/patent_results_new.csv")
 
