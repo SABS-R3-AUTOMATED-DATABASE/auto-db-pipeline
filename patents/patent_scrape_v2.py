@@ -308,7 +308,7 @@ class Patents:
                 or ("hcvr" in elem and "lcvr" in elem)
                 or ("vh" in elem and "vl" in elem)
             ):
-                if "nucle" not in elem and "constant" not in elem:
+                if "nucle" not in elem and "constant" not in elem and " fc " not in elem and " ch " not in elem and " cl " not in elem:
                     item = re.findall("(?<=seq id no:)\d+", elem)
                     item_and = re.findall(
                         "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
@@ -421,6 +421,7 @@ class Patents:
             df.Title.str.contains("sars")
             | df.Title.str.contains("covid")
             | df.Title.str.contains("coronavirus")
+            | df.Title.str.contains("mers")
         ]
         df = df.reset_index(drop=True)
         outputdf = pd.DataFrame(
