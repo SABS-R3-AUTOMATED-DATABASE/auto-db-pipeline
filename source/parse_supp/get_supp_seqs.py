@@ -97,7 +97,7 @@ def get_supp_seqs(url):
             strand = get_seq_strand(test_seq)
             if strand == 'L':
                 seq_dict['VL'] = list(df_file[column])
-            else:
+            elif strand == 'H':
                 seq_dict['VH'] = list(df_file[column])
 
         out_df = pd.DataFrame.from_dict(seq_dict)
@@ -136,12 +136,7 @@ if __name__ == "__main__":
         if not df_supp.empty:
             df_seqs.append(df_supp)
 
-    # all_sequences = pd.concat(df_seqs)
-    # print('Number of sequences scraped: {}'.format(len(all_sequences)))
-    # print('Example output:')
-    # print(all_sequences.head(10))
-
-    print('Number of sequences scraped: {}'.format(len(df_seqs[0])))
+    all_sequences = pd.concat(df_seqs)
+    print('Number of sequences scraped: {}'.format(len(all_sequences)))
     print('Example output:')
-    print(df_seqs[0].head(10))
-    print(list(df_seqs[0]))
+    print(all_sequences.head(10))
