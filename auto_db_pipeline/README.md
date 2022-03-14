@@ -20,6 +20,14 @@ id_checking = {'genbank': r"(genbank|National Genetic Sequence Data Base)",
 ```
 
 ---
+## Easily go from..
+
+1. Protein ID to Associated Publication (api with GenBank and PDB datasets)
+2. Protein ID to Papers it's in (api with publications, runtime (12 hours))
+3. Protein ID to Papers it's cited in (api with both G & P protein datasets and publications)
+
+---
+
 ## Protein ID formatting
 ### GenBank protein IDs
 "Three letters followed by five digits, a period, and a version number."

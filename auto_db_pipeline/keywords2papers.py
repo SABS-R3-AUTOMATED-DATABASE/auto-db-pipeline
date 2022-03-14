@@ -50,9 +50,8 @@ class Keywords2Papers:
     valid_filenames = [FILENAME_PUBMED, FILENAME_BIORXIV, FILENAME_BIORXIV_ALL]
 
     def __init__(self, selected_date: str = None):
-
+        """Get the selected date and initialize the attributes."""
         self.selected_date = Keywords2Papers.get_default_date(selected_date)
-
         self.biorxiv_results, self.pubmed_results = None, None
 
 
