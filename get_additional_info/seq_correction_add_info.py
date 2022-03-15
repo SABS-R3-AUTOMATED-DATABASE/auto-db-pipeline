@@ -17,7 +17,6 @@ def standardise_seqs(csv_file, vh_col_name, vl_col_name):
 
     # convert patent output to dataframe
     df = pd.read_csv(csv_file)
-    print(df.columns)
 
     # go through rows of sequences columns in df and standardise to single letter AA format
     aa_3_characters = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Ile', 'Pro', 'Thr', 'Phe', 'Asn', 'Gly', 'His', 'Leu', 'Arg', 'Trp', 'Ala', 'Val', 'Glu', 'Tyr', 'Met']
@@ -57,7 +56,6 @@ def standardise_seqs(csv_file, vh_col_name, vl_col_name):
     df['VH'] = formatted_vh
     df['VL'] = formatted_vl
     df = df.fillna(value='N/A')
-    print(df.columns)
 
     return df
 
@@ -159,5 +157,5 @@ def correction_and_add_cdrs(df, outfile_name):
     return corrected_seqs_with_cdrs
 
 
-df = standardise_seqs(csv_file='results3letters.csv', vh_col_name='HCVR', vl_col_name='LCVR')
-final_df = correction_and_add_cdrs(df=df, outfile_name='genbank_output.csv')
+df = standardise_seqs(csv_file='pdbs-2022_03_08.csv', vh_col_name='VH', vl_col_name='VL')
+final_df = correction_and_add_cdrs(df=df, outfile_name='pdb_output.csv')
