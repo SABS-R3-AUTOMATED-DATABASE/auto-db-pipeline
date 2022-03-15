@@ -3,76 +3,68 @@ import json
 
 class Combination:
     '''
-    Class that combines genbank ids obtained by keywords search and ids
-    extracted from papres.
+    Class that combines two json files containing lists
+    and eliminates duplicates.
 
-    Takes two json files with genbank id lists as an input and returns a
-    combination. Duplicates of ids obtained from keyword search and paper
-    scraping are eilimanted
 
     Parameters:
     ----------
-    ids_file_path: path to json file with genbank ids
-                   default: "genbank/data/id_list.json"
-    id_papers_file_path: path to json file with genbank ids from papers
-                              default: "genbank/data/id_from_paper_list.json"
+    file1_path: path of first file to combine
+    file2_path: path of second file to combine
 
     Methods:
     -------
     combine_lists(self)
-    save_as_json(self, ids_out_file_path='genbank/data/id_combined_list.json')
+    save_as_json(self, out_file_path)
     __call__(self)
 
     Outputs:
     -------
-    id_combined_list.json: json file containg combined list of ids
+    out_file.json: json file containg combination
     '''
-    def __init__(self, ids_file_path='genbank/data/id_list.json',
-                 id_papers_file_path='genbank/data/id_list_from_papers.json'):
+    def __init__(self, file1_path, file2_path):
 
-        with open(ids_file_path, 'r') as infile1:
-            self.ids = json.load(infile1)
+        with open(file1_path, 'r') as infile1:
+            self.elements1 = json.load(infile1)
 
-        with open(id_papers_file_path, 'r') as infile2:
-            self.ids_papers = json.load(infile2)
+        with open(file2_path, 'r') as infile2:
+            self.elements2 = json.load(infile2)
 
-        print('Number of ids from keyword search:', len(self.ids))
-        print('Number of ids from paper scraping:', len(self.ids_papers))
+        print('Elements in file 1:', len(self.elements1))
+        print('Elements in file 2:', len(self.elements2))
         print('----------')
 
     def combine_lists(self):
         '''
-        Combines the two id lists and removes duplicates.
+        Combines the two lists and removes duplicates.
         '''
         n = 0
-        for id in self.ids_papers:
-            if id not in self.ids:
+        for element in self.elements2:
+            if element not in self.elements1:
                 n += 1
-                self.ids.append(id)
+                self.elements1.append(element)
 
-        print('Number of unique ids from paper scraping:', n)
-        print('Total ids after comination:', len(self.ids))
+        print('Number of unique elements in file 2:', n)
+        print('Total elements after comination:', len(self.elements1))
+        print('----------')
 
-    def save_to_json(self,
-                     ids_out_file_path='genbank/data/id_combined_list.json'):
+    def save_to_json(self, out_file_path):
         '''
-        Saves the combined id list to a json file
+        Saves the combined list to a json file
 
-        param ids_out_file_path: path of output json file
-                                 default: "genbank/data/id_combined_list.json"
+        param out_file_path: path of output json file
         '''
-        with open(ids_out_file_path, 'w') as outfile:
-            json.dump(self.ids, outfile)
+        with open(out_file_path, 'w') as outfile:
+            json.dump(self.elements1, outfile)
 
-    def __call__(self, ids_out_file_path='genbank/data/id_combined_list.json'):
+    def __call__(self, out_file_path):
         '''
         Runs methods in order
 
-        param ids_out_file_path: path of output json file
-                                 default: "genbank/data/id_combined_list.json"
+        param out_file_path: path of output json file
         '''
         self.combine_lists()
-        self.save_to_json(ids_out_file_path=ids_out_file_path)
+        self.save_to_json(out_file_path)
 
 
 if __name__ == '__main__':

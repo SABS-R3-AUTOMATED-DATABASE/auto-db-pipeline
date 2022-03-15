@@ -86,7 +86,8 @@ class InfoRetrieval:
         for entry in self.entries:
             # get sequence
             seq = entry['GBSeq_sequence']
-            # returns false if not antibody sequence
+
+            # some corrupted sequences, if longer than 100k they throw an error
             try:
                 result = run_anarci([['sequences', seq]])[2][0]
             except Exception:
@@ -129,13 +130,16 @@ class InfoRetrieval:
         the classify_vh_vl function. Uses anarci to label chains.
         '''
         for entry in self.entries:
-            seq = entry['GBSeq_sequence']
-            anarci_results = run_anarci([['sequences', seq]])
-            chain_type = anarci_results[2][0][0]['chain_type']
+            try:
+                seq = entry['GBSeq_sequence']
+                anarci_results = run_anarci([['sequences', seq]])
+                chain_type = anarci_results[2][0][0]['chain_type']
 
-            # single label 'L' for light chain
-            chain_type = chain_type.replace('K', 'L')
-            entry['chain'] = chain_type
+                # single label 'L' for light chain
+                chain_type = chain_type.replace('K', 'L')
+                entry['chain'] = chain_type
+            except Exception:
+                entry['chain'] = 'unassigned'
 
     def find_antigen(self):
         '''
@@ -477,7 +481,6 @@ class InfoRetrieval:
         for group in self.unpaired_entries:
             not_pairable_group = []
             for entry in group:
-                print('called with', entry)
                 result = self.get_chains_from_sabdab(entry)
                 if result is not None:
                     entry['pdb_hc'] = result[0]

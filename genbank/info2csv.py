@@ -27,6 +27,7 @@ class PopulateDatabase:
     -------
     create_df(self)
     get_ref(self, chain)
+    get_doi(self, chain)
     prepare_paired_row(self, paired_seq)
     prepare_unpaired_nano_row(self, unpaired_seq)
     populate_db_paired(self)
@@ -62,7 +63,7 @@ class PopulateDatabase:
         '''
         column_names = ['Name_VH', 'Name_VL', 'Genbank_protein_id_vh',
                         'Genbank_protein_id_vl', 'Binds_to', 'Origin',
-                        'VH', 'VL', 'Reference', 'Description_VH',
+                        'VH', 'VL', 'Reference', 'doi', 'Description_VH',
                         'Description_VL', 'Date_added']
         df = pd.DataFrame(columns=column_names)
         return df
@@ -86,6 +87,26 @@ class PopulateDatabase:
 
         reference = f'{first_author} et al.; {title}; {journal}; {year}.'
         return reference
+
+    def get_doi(self, chain):
+        '''
+        Retrieves doi of a chain if present. This can be a heavy or light
+        chain.
+
+        param chain: genbank handle of an individual antibody sequence
+        returns doi: doi of genbank entry, Flase if it does not exist
+        '''
+        try:
+            xrefs = chain['GBSeq_references'][0]['GBReference_xref']
+
+            for xref in xrefs:
+                if xref['GBXref_dbname'] == 'doi':
+                    return xref['GBXref_id']
+
+            return False
+
+        except KeyError:
+            return False
 
     def prepare_paired_row(self, paired_seq):
         '''
@@ -136,6 +157,9 @@ class PopulateDatabase:
         except KeyError:
             pass
 
+        doi = self.get_doi(paired_seq['heavy_chain'])
+        if doi:
+            row_dic['doi'] = doi
         row_dic['Date_added'] = str(date.today())
 
         return row_dic
@@ -182,6 +206,9 @@ class PopulateDatabase:
 
         row_dic['Reference'] = self.get_ref(unpaired_seq)
         row_dic['Description_V'+chain] = unpaired_seq['GBSeq_definition']
+        doi = self.get_doi(unpaired_seq)
+        if doi:
+            row_dic['doi'] = doi
         row_dic['Date_added'] = str(date.today())
 
         return row_dic
