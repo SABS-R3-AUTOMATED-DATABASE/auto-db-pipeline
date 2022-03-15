@@ -8,7 +8,6 @@ from ABDB import database
 from Bio.PDB.PDBList import PDBList
 from Bio import SeqIO
 from anarci import run_anarci
-# from .anarci_interface import check_if_antibody, extract_VH_VL
 
 PDB_FILEPATH = "./protein_scrape/PDBs/"
 
@@ -44,7 +43,7 @@ class PdbID:
         if not self.is_antibody:
             return
 
-        # self._get_handle()
+        self._get_handle()
         if self._on_sabdab:
             self._get_fabs()
         self._get_seq_types()
@@ -79,9 +78,9 @@ class PdbID:
             fabs_outputs = [fab.output for fab in self.fabs]
         out.update({'fabs': fabs_outputs})
 
-        # paper_attrs = ('title', 'journal', 'authors', 'doi', 'pmid')
-        # paper_info = {attr: getattr(self, attr) for attr in paper_attrs}
-        # out.update({'paper': paper_info})
+        paper_attrs = ('title', 'journal', 'authors', 'doi', 'pmid')
+        paper_info = {attr: getattr(self, attr) for attr in paper_attrs}
+        out.update({'paper': paper_info})
         return out
 
 
