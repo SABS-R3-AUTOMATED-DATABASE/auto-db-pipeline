@@ -1,3 +1,4 @@
+
 SAbDab-master/
 old_keyword_files/
 
@@ -20,3 +21,6 @@ paperscraper/testfile.ipynb
 *.ent
 *.cif
 genbank/data/protein_handles2.json
+
+*.csv
+get_additional_info/__pycache__
