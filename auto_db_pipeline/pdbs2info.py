@@ -12,6 +12,7 @@ DATAPATH = "../data/pdbs2info/"
 FILENAME_PDBS = "pdbs"
 FILENAME_ERRORS = "errors"
 DATATYPE = ".jsonl"
+BACKUP_PATH = "backups/"
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -35,12 +36,12 @@ class PdbIDs:
         self.errors = []
         self.loader = PdbsLoader(self.selected_date)
 
-    def __call__(self, save=True):
+    def __call__(self, backup=True):
         """Iterate through the pdbs, go from pdbs 2 ids. Perhaps
         keywords 2 ids if necessary."""
         self.get_pdbs_poss()
         self.get_pdbs()
-        self.loader(save=save)
+        self.loader(backup=backup)
 
     def get_pdbs_poss(self):
         self.loader()
@@ -66,7 +67,7 @@ class PdbIDs:
         backup_path = ""
         backup_suffix = ""
         if backup:
-            backup_path = "backups/"
+            backup_path = BACKUP_PATH
             backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
 
         pdbs_path = f"{DATAPATH}{backup_path}{FILENAME_PDBS}-{self.selected_date}{backup_suffix}{DATATYPE}"
@@ -121,19 +122,50 @@ class PdbsLoader:
         self.n_antibodies = None
         self.input_data = None
         self.output_data = []
+        self.df_papers = []
 
-    def __call__(self, save=True):
+    def __call__(self, save=True, backup=False):
         self.get_input_data()
         self.get_output_data()
+        self.get_df_papers()
         if save:
             self._save_df_output()
+            self._save_df_papers()
+        if backup:
+            self._save_df_output(backup=backup)
+            self._save_df_papers(backup=backup)
 
     def __repr__(self):
         return f"{self.n_antibodies} antibodies of {self.n_pdbs} PDBs"
 
+    def get_df_papers(self):
+        if not self.input_data:
+            self.get_input_data()
+        papers = []
+        for datum in self.input_data:
+            out = {}
+            out['pdb_id'] = datum['pdb_id']
+            out.update(datum['paper'])
+            out['got_paper'] = datum['got_paper']
+            papers.append(out)
+
+        self.df_papers = pd.DataFrame(papers)
+        self.df_papers['got_paper'] = self.df_papers.got_paper.astype('boolean')
+
+    def _save_df_papers(self, backup=False):
+        backup_path = ""
+        backup_suffix = ""
+        if backup:
+            backup_path = BACKUP_PATH
+            backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
+
+        path = f"{DATAPATH}{backup_path}pdb_papers-{self.selected_date}{backup_suffix}.csv"
+        self.df_papers.to_csv(path, index=False)
+
+
     def get_input_data(self):
         path = f"{DATAPATH}{FILENAME_PDBS}-{self.selected_date}{DATATYPE}"
-        df = pd.read_json(path_or_buf = path, lines = True, orient = 'records', convert_dates=False)
+        df = pd.read_json(path_or_buf=path, lines=True, orient='records', convert_dates=False)
         self.n_pdbs = df.shape[0]
         dfa = df.loc[df.antibody]
         self.n_antibodies = dfa.shape[0]

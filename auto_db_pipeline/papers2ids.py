@@ -14,6 +14,7 @@ DATAPATH = "../data/papers2ids/"
 FILENAME_PAPERS = "paper_ids"
 FILENAME_ERRORS = "errors"
 DATATYPE = ".jsonl"
+BACKUP_PATH = "backups/"
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -38,12 +39,12 @@ class Papers:
         self.errors = []
         self.loader = IDsLoader(self.selected_date)
 
-    def __call__(self, save=True):
+    def __call__(self, backup=True):
         """Iterate through the papers, go from papers 2 ids. Perhaps
         keywords 2 ids if necessary."""
         self.get_input_data()
         self.get_papers()
-        self.loader(save=save)
+        self.loader(backup=backup)
 
     def __getitem__(self, i):
         """Index the object by indexing its paper objects."""
@@ -89,7 +90,7 @@ class Papers:
         backup_path = ""
         backup_suffix = ""
         if backup:
-            backup_path = "backups/"
+            backup_path = BACKUP_PATH
             backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
 
         papers_path = f"{DATAPATH}{backup_path}{FILENAME_PAPERS}-{self.selected_date}{backup_suffix}{DATATYPE}"
@@ -135,18 +136,44 @@ class IDsLoader:
         value is itself a dictionary indexed by possible ID and a list of
         dois that have that possible ID."""
         self.selected_date = selected_date
-        self.id_papers = None
+        self.input_data = None
+        # ids_possible is partly saved by the jsons (save_genbank)
         self.ids_possible = {id_name: {} for id_name in id_finding}
-        self.ids_mentions = {}
-        self.papers = {}
+        self.ids_mentions = {}  # This is made redundant by df_papers
+        self.papers = {}  # This is made redundant by df_papers
         self.df_papers = None
 
-    def __call__(self, save=True):
-        self.get_id_papers()
+    def __call__(self, save=True, backup=False):
+        self.get_input_data()
         self.load_papers()
         self.get_df_papers()
         if save:
             self.save_df_papers()
+            self.save_genbank()
+        if backup:
+            self.save_df_papers(backup=backup)
+
+    def save_genbank(self):
+        """Save the GenBank stuff for FS."""
+        protein_types = ('genbank_protein_id', 'genbank_protein_accession', 'refseq_id')
+        nucleotide_types = ('genbank_nucleotide_accession', 'refseq_id')
+
+        protein_output = []
+        for protein_type in protein_types:
+            protein_output += list(self.ids_possible[protein_type].keys())
+
+        nucleotide_output =     []
+        for nucleotide_type in nucleotide_types:
+            nucleotide_output += list(self.ids_possible[nucleotide_type].keys())
+
+        protein_path = f"{DATAPATH}genbank_proteins-{self.selected_date}.json"
+        with open(protein_path, 'w') as f:
+            json.dump(protein_output, f)
+
+        nucleotide_path = f"{DATAPATH}genbank_nucleotides-{self.selected_date}.json"
+        with open(nucleotide_path, 'w') as f:
+            json.dump(nucleotide_output, f)
+
 
     def get_df_papers(self):
         """Create a csv from papers."""
@@ -163,8 +190,15 @@ class IDsLoader:
                 paper_dataset.append(paper_entry)
         self.df_papers = DataFrame(paper_dataset)
 
-    def save_df_papers(self):
-        self.df_papers.to_csv(f"{DATAPATH}papers-{self.selected_date}.csv", index=False)
+    def save_df_papers(self, backup=False):
+        backup_path = ""
+        backup_suffix = ""
+        if backup:
+            backup_path = BACKUP_PATH
+            backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
+
+        path = f"{DATAPATH}{backup_path}papers-{self.selected_date}{backup_suffix}.csv"
+        self.df_papers.to_csv(path, index=False)
 
     @property
     def id_names(self):
@@ -181,13 +215,13 @@ class IDsLoader:
             raise ValueError(f"The ID name needs to be one of the following: {self.id_names}")
         return list(self.ids_possible[id_name].keys())
 
-    def get_id_papers(self):
+    def get_input_data(self):
         path = f"{DATAPATH}{FILENAME_PAPERS}-{self.selected_date}{DATATYPE}"
         df = read_json(path_or_buf = path, lines = True, orient = 'records', convert_dates=False)
-        self.id_papers = df.to_dict(orient='records')
+        self.input_data = df.to_dict(orient='records')
 
     def load_papers(self):
-        for id_paper in self.id_papers:
+        for id_paper in self.input_data:
             self._load_paper(id_paper)
 
     def _get_basic_paper_info(self, id_paper):
