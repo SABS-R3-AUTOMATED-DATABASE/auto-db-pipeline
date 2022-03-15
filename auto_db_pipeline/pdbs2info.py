@@ -1,5 +1,7 @@
+from distutils.command.install_egg_info import safe_version
 import logging
 import json
+from pty import slave_open
 import pandas as pd
 from datetime import datetime
 from protein_scrape.pdb_scrape import PdbID
@@ -20,7 +22,7 @@ logger.addHandler(file_handler)
 class PdbIDs:
     """Collection of all the PDB IDs from paper searching."""
 
-    save_every = 2_000
+    save_every = 500
     backup_every = 10_000
 
     def __init__(self, selected_date=None):
@@ -31,12 +33,14 @@ class PdbIDs:
         self.pdbs_poss = []
         self.pdbs = []
         self.errors = []
+        self.loader = PdbsLoader(self.selected_date)
 
-    def __call__(self):
+    def __call__(self, save=True):
         """Iterate through the pdbs, go from pdbs 2 ids. Perhaps
         keywords 2 ids if necessary."""
         self.get_pdbs_poss()
         self.get_pdbs()
+        self.loader(save=save)
 
     def get_pdbs_poss(self):
         self.loader()
@@ -83,8 +87,8 @@ class PdbIDs:
                 pdb_output = pdb.output
                 if not pdb_output:
                     return
-                # got_paper = {'got_paper': self._got_paper(pdb_output)}
-                # pdb_output.update(got_paper)
+                got_paper = {'got_paper': self._got_paper(pdb_output)}
+                pdb_output.update(got_paper)
 
                 self.pdbs.append(pdb_output)
 
@@ -96,15 +100,15 @@ class PdbIDs:
                 logger.error(exception, stack_info=True, exc_info=True)
                 logger.debug('\n\n')
 
-    # def _got_paper(self, pdb_output):
-    #     pdb_id = pdb_output['pdb_id']
-    #     paper = pdb_output.get('paper')
-    #     if not paper:
-    #         return
-    #     doi = paper.get('doi')
-    #     if not doi:
-    #         return
-    #     return doi in self.pdbs_poss[pdb_id]
+    def _got_paper(self, pdb_output):
+        pdb_id = pdb_output['pdb_id']
+        paper = pdb_output.get('paper')
+        if not paper:
+            return
+        doi = paper.get('doi')
+        if not doi:
+            return
+        return doi in self.pdbs_poss[pdb_id]
 
 
 class PdbsLoader:
@@ -156,7 +160,6 @@ class PdbsLoader:
         cols.append(cols.pop(cols.index('chain_id')))
         cols.append(cols.pop(cols.index('used_sabdab')))
         df = df[cols]
-
         return df
 
     def _save_df_output(self, backup=False):
@@ -176,7 +179,7 @@ class PdbsLoader:
             out['pdb_id'] = datum['pdb_id']
             out['VH'] = fab['VH']
             out['VL'] = fab['VL']
-            out.update(fab['CDR_loops'])
+            # out.update(fab['CDR_loops'])  # GG handles CDR loops
             out['used_sabdab'] = True
             yield out
 
@@ -186,6 +189,8 @@ class PdbsLoader:
             out = {}
             out['pdb_id'] = datum['pdb_id']
             seq_type.replace('K', 'L')
+            if seq_type not in {"L", "H"}:  # skip VA and VB
+                continue
             out['V' + seq_type] = datum['sequence'][chain_id]
             out['chain_id'] = chain_id
             out['used_sabdab'] = False

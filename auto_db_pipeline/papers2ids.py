@@ -38,12 +38,12 @@ class Papers:
         self.errors = []
         self.loader = IDsLoader(self.selected_date)
 
-    def __call__(self):
+    def __call__(self, save=True):
         """Iterate through the papers, go from papers 2 ids. Perhaps
         keywords 2 ids if necessary."""
         self.get_input_data()
         self.get_papers()
-        self.loader()
+        self.loader(save=save)
 
     def __getitem__(self, i):
         """Index the object by indexing its paper objects."""
@@ -131,7 +131,9 @@ class IDsLoader:
     def __init__(self, selected_date=None):
         """
         The papers attribute is a dictionary indexed by doi.
-        The po"""
+        The possible ids is a dictonary indexed by id name, and each
+        value is itself a dictionary indexed by possible ID and a list of
+        dois that have that possible ID."""
         self.selected_date = selected_date
         self.id_papers = None
         self.ids_possible = {id_name: {} for id_name in id_finding}
@@ -139,11 +141,12 @@ class IDsLoader:
         self.papers = {}
         self.df_papers = None
 
-    def __call__(self):
+    def __call__(self, save=True):
         self.get_id_papers()
         self.load_papers()
         self.get_df_papers()
-        self.save_df_papers()
+        if save:
+            self.save_df_papers()
 
     def get_df_papers(self):
         """Create a csv from papers."""
