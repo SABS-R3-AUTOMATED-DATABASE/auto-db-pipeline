@@ -7,6 +7,10 @@ import re
 from datetime import datetime
 from Bio.SeqUtils import seq1
 from Bio.Seq import Seq
+import os
+import ftplib
+import zipfile
+
 
 
 class Patents:
@@ -424,6 +428,7 @@ class Patents:
             | df.Title.str.contains("mers")
         ]
         df = df.reset_index(drop=True)
+        df = Patents.get_wipo_sequences(df)
         outputdf = pd.DataFrame(
             {
                 "URL": [],
@@ -501,6 +506,64 @@ class Patents:
         self.output = outputdf
         return outputdf
 
+    def get_wipo_sequences(df):
+        for i in range(df.shape[0]):
+            if 'WO' in df.loc[i,'URL']:
+                dummy = False
+                for _ in df.loc[i,'Claim']:
+                    if 'seq id no' in _.lower():
+                        dummy = True
+                        break
+                if dummy:
+                    seq_list = Patents.get_seq_listing(df.loc[i,'URL'])
+                    df.loc[i,'Content'] = df.loc[i,'Cotent'] + [seq_list] 
+        return df
+
+    def get_seq_listing(URL):
+        output = ''
+        year = URL[36:40]
+        wonumber = URL[34:36]+URL[38:40]+'/'+URL[40:46]
+        wo_folder = URL[34:36]+URL[38:40]+'_'+URL[40:46]
+        ftp = ftplib.FTP('ftp.wipo.int')
+        ftp.login()
+        path = '/pub/published_pct_sequences/publication/'
+        ftp.cwd(path+year+'/')
+        filelist = [item for item in ftp.nlst() if '.' not in item]
+        breaker = False
+        for file in filelist:
+            ftp.cwd(path+year+'/'+file)
+            ftp.retrbinary("RETR " + 'listing.json', open('patents/data/listing.json' , 'wb').write)
+            listing = pd.read_json('patents/data/listing.json')
+            for i in range(listing.shape[0]):
+                if listing.loc[i,'listing']['wonumber']== wonumber:
+                    breaker = True
+                    break
+            os.remove('patents/data/listing.json')
+            if breaker:
+                folder = file
+                break
+        if breaker:
+            ftp.cwd(path+year+'/'+folder+'/'+wo_folder)
+            filelist = [file for file in ftp.nlst() if file != 'applicant.txt']
+            if not os.path.exists('patents/data/temp'):
+                os.makedirs('patents/data/temp')
+            for file in filelist:
+                ftp.retrbinary("RETR " + file, open('patents/data/temp/'+file , 'wb').write)
+                with zipfile.ZipFile('patents/data/temp/'+file, 'r') as zip_ref:
+                    zip_ref.extractall('patents/data/temp/')
+            ftp.close()
+            filelist = [file for file in os.listdir('patents/data/temp') if '.txt' in file]
+            for file in filelist:
+                with open('patents/data/temp/'+file, 'r') as f:
+                    sl = [line.rstrip('\n') for line in f]
+                    output = output + ' '.join(sl)
+            for item in os.listdir('patents/data/temp'):
+                os.remove('patents/data/temp/'+item)
+            os.rmdir('patents/data/temp')
+            return output
+        else:
+            return ''
+
     def save_search_output(self, filepath: str = "patents/search_results.json"):
         self.search_results.to_json(filepath)
 
@@ -548,7 +611,7 @@ class Patents:
 test = Patents()
 # test.get_patents(CN = True)
 # test.save_search_output("patents/search_results.json")
-test.load_search_output()
+test.load_search_output("patents/search_results_new.json")
 test.extract_VH_VL()
-test.save_final_output()
+test.save_final_output("patents/search_results_new.json")
 
