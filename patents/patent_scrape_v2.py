@@ -11,7 +11,17 @@ import os
 import ftplib
 import zipfile
 
+KEYWORDS = [
+            ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV', 'SARS'],
 
+            ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb', 'nanobodies'],
+
+            ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
+                'inhibit', 'targeting'],
+
+            ['heavy chain', 'complementarity determining region', 'gene',
+                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
+            ]
 
 class Patents:
     def __init__(self) -> None:
@@ -36,29 +46,63 @@ class Patents:
         finally:
             return random_ua.rstrip()
 
-    def get_patent_urls(CN=False):
-        """
-        Get the first 1000 results in google patent search results.
-        The url is obtained by using Fetch/XHR in Chrome developer mode
-        (((SARS-CoV-2) OR (coronavirus) OR (COVID-19)) ((antibody) OR (nanobod) OR (immunoglobulin)) ((neutralize) OR (bind) OR (target) OR (inhibit)) ((heavy chain) OR (CDR) OR (RBD) OR (monoclonal) OR (amino acid) OR (sequence)) (C07K16/10)) after:filing:20030101
-        """
+    def get_patent_urls(CN: bool = False ,keywords = KEYWORDS, start_year :int  = 2003):
         results = []
-        patent_number = []
-        url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B(C07K16%252f10)%26after%3Dfiling%3A20030101%26num%3D100"
+        now = datetime.now()
         if CN == True:
-            url_first_part = "https://patents.google.com/xhr/query?url=q%3D((SARS-CoV-2)%2BOR%2B(coronavirus)%2BOR%2B(COVID-19))%2B((antibody)%2BOR%2B(nanobod)%2BOR%2B(immunoglobulin))%2B((neutralize)%2BOR%2B(bind)%2BOR%2B(target)%2BOR%2B(inhibit))%2B((heavy%2Bchain)%2BOR%2B(CDR)%2BOR%2B(RBD)%2BOR%2B(monoclonal)%2BOR%2B(amino%2Bacid)%2BOR%2B(sequence))%2B%26country%3DCN%26after%3Dfiling%3A20030101%26num%3D100"
-        url = [url_first_part + "&exp="]
-        for i in range(1, 10):
-            url.append(url_first_part + "%26page%3D" + str(i) + "&exp=")
-        for link in url:
+            url_part_1 = 'https://patents.google.com/xhr/query?url=q%3D' + '%2B'.join(['('+'%2BOR%2B'.join(['('+keyword.replace(' ','%2B')+')' for keyword in item])+')' for item in keywords])+ '%26country%3DCN'
+        else:
+            url_part_1 = 'https://patents.google.com/xhr/query?url=q%3D' + '%2B'.join(['('+'%2BOR%2B'.join(['('+keyword.replace(' ','%2B')+')' for keyword in item])+')' for item in keywords])+ '%2B(C07K16%252f10)'
+        for j in range(start_year,int(now.strftime("%Y"))):
+            print(j,datetime.now())
+            url_first_half = url_part_1+ '%26before%3Dfiling%3A' + str(j+1)+'0101%26after%3Dfiling%3A' + str(j) + '0101%26num%3D100'
             headers = {"User-Agent": Patents.get_random_ua()}
-            req = requests.get(link, headers=headers)
+            req = requests.get(url_first_half+ '&exp=', headers=headers)
             main_data = req.json()
+            pages = main_data["results"]["total_num_pages"]
             data = main_data["results"]["cluster"]
+            if data:
+                for i in range(len(data[0]["result"])):
+                    num = data[0]["result"][i]["patent"]["publication_number"]
+                    title = data[0]["result"][i]["patent"]["title"].lower()
+                    if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
+                        results.append("https://patents.google.com/patent/" + num + "/en")
+            for i in range(1,pages):
+                headers = {"User-Agent": Patents.get_random_ua()}
+                req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
+                main_data = req.json()
+                data = main_data["results"]["cluster"]
+                if data:
+                    for i in range(len(data[0]["result"])):
+                        num = data[0]["result"][i]["patent"]["publication_number"]
+                        title = data[0]["result"][i]["patent"]["title"].lower()
+                        if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
+                            results.append("https://patents.google.com/patent/" + num + "/en")
+        url_first_half = url_part_1+ '%26after%3Dfiling%3A' + now.strftime("%Y") + '0101%26num%3D100'
+        headers = {"User-Agent": Patents.get_random_ua()}
+        req = requests.get(url_first_half+ '&exp=', headers=headers)
+        print(url_first_half+ '&exp=')
+        main_data = req.json()
+        pages = main_data["results"]["total_num_pages"]
+        data = main_data["results"]["cluster"]
+        if data:
             for i in range(len(data[0]["result"])):
                 num = data[0]["result"][i]["patent"]["publication_number"]
-                results.append("https://patents.google.com/patent/" + num + "/en")
-                patent_number.append(str(num))
+                title = data[0]["result"][i]["patent"]["title"].lower()
+                if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
+                    results.append("https://patents.google.com/patent/" + num + "/en")
+        for i in range(1,pages):
+                headers = {"User-Agent": Patents.get_random_ua()}
+                req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
+                main_data = req.json()
+                data = main_data["results"]["cluster"]
+                if data:
+                    for i in range(len(data[0]["result"])):
+                        num = data[0]["result"][i]["patent"]["publication_number"]
+                        title = data[0]["result"][i]["patent"]["title"].lower()
+                        if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
+                            results.append("https://patents.google.com/patent/" + num + "/en")
+        print(len(results))
         return results
 
     def get_patents(self, CN=False):
@@ -421,13 +465,6 @@ class Patents:
     def extract_VH_VL(self, df=None):
         if df == None:
             df = self.search_results
-        df = df[
-            df.Title.str.contains("sars")
-            | df.Title.str.contains("covid")
-            | df.Title.str.contains("coronavirus")
-            | df.Title.str.contains("mers")
-        ]
-        df = df.reset_index(drop=True)
         df = Patents.get_wipo_sequences(df)
         outputdf = pd.DataFrame(
             {
@@ -501,8 +538,6 @@ class Patents:
                     )
         outputdf.drop_duplicates(keep="first", inplace=True)
         outputdf = outputdf.reset_index(drop=True)
-        outputdf = outputdf[outputdf["HCVR"] != pd.Series([""] * outputdf.shape[0])]
-        outputdf = outputdf.reset_index(drop=True)
         self.output = outputdf
         return outputdf
 
@@ -516,7 +551,7 @@ class Patents:
                         break
                 if dummy:
                     seq_list = Patents.get_seq_listing(df.loc[i,'URL'])
-                    df.loc[i,'Content'] = df.loc[i,'Cotent'] + [seq_list] 
+                    df.loc[i,'Content'] = df.loc[i,'Content'] + [seq_list] 
         return df
 
     def get_seq_listing(URL):
@@ -529,40 +564,32 @@ class Patents:
         path = '/pub/published_pct_sequences/publication/'
         ftp.cwd(path+year+'/')
         filelist = [item for item in ftp.nlst() if '.' not in item]
-        breaker = False
         for file in filelist:
-            ftp.cwd(path+year+'/'+file)
-            ftp.retrbinary("RETR " + 'listing.json', open('patents/data/listing.json' , 'wb').write)
-            listing = pd.read_json('patents/data/listing.json')
-            for i in range(listing.shape[0]):
-                if listing.loc[i,'listing']['wonumber']== wonumber:
-                    breaker = True
-                    break
-            os.remove('patents/data/listing.json')
-            if breaker:
-                folder = file
+            ftp.cwd(path+year+'/'+file+'/')
+            filelist2 = [item for item in ftp.nlst() if '.' not in item]
+            if wo_folder in filelist2:
+                ftp.cwd(wo_folder)
+                ziplist = [file for file in ftp.nlst() if file != 'applicant.txt']
+                if not os.path.exists('patents/data/temp'):
+                    os.makedirs('patents/data/temp')
+                else:
+                    for item in os.listdir('patents/data/temp'):
+                        os.remove('patents/data/temp/'+item)
+                for file in ziplist:
+                    ftp.retrbinary("RETR " + file, open('patents/data/temp/'+file , 'wb').write)
+                    with zipfile.ZipFile('patents/data/temp/'+file, 'r') as zip_ref:
+                        zip_ref.extractall('patents/data/temp/')
+                ftp.close()
+                txtlist = [file for file in os.listdir('patents/data/temp') if '.txt' in file]
+                for file in txtlist:
+                    with open('patents/data/temp/'+file, 'r', errors= 'ignore') as f:
+                        sl = [line.rstrip('\n') for line in f]
+                        output = output + ' '.join(sl)
+                for item in os.listdir('patents/data/temp'):
+                    os.remove('patents/data/temp/'+item)
+                os.rmdir('patents/data/temp')
                 break
-        if breaker:
-            ftp.cwd(path+year+'/'+folder+'/'+wo_folder)
-            filelist = [file for file in ftp.nlst() if file != 'applicant.txt']
-            if not os.path.exists('patents/data/temp'):
-                os.makedirs('patents/data/temp')
-            for file in filelist:
-                ftp.retrbinary("RETR " + file, open('patents/data/temp/'+file , 'wb').write)
-                with zipfile.ZipFile('patents/data/temp/'+file, 'r') as zip_ref:
-                    zip_ref.extractall('patents/data/temp/')
-            ftp.close()
-            filelist = [file for file in os.listdir('patents/data/temp') if '.txt' in file]
-            for file in filelist:
-                with open('patents/data/temp/'+file, 'r') as f:
-                    sl = [line.rstrip('\n') for line in f]
-                    output = output + ' '.join(sl)
-            for item in os.listdir('patents/data/temp'):
-                os.remove('patents/data/temp/'+item)
-            os.rmdir('patents/data/temp')
-            return output
-        else:
-            return ''
+        return output
 
     def save_search_output(self, filepath: str = "patents/search_results.json"):
         self.search_results.to_json(filepath)
@@ -613,5 +640,5 @@ test = Patents()
 # test.save_search_output("patents/search_results.json")
 test.load_search_output("patents/search_results_new.json")
 test.extract_VH_VL()
-test.save_final_output("patents/search_results_new.json")
+test.save_final_output("patents/search_results_new.csv")
 
