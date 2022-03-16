@@ -17,7 +17,9 @@ def get_soup(url):
     * BeautifulSoup from bs4
     """
     # Get the response to the request to the url
-    request = requests.get(url, allow_redirects=True)
+    s = requests.Session()
+
+    request = s.get(url, allow_redirects=True)
     # Get the beautiful soup
     soup = BeautifulSoup(request.content, 'html.parser')
     return soup

@@ -215,7 +215,7 @@ class Fab:
 
     @property
     def output(self):
-        attrs = ('CDR_loops', 'VH', 'VL')
+        attrs = ('VH', 'VL') # 'CDR_loops',
         return {attr: getattr(self, attr) for attr in attrs}
 
     def __repr__(self):
