@@ -139,8 +139,8 @@ class IDsLoader:
         self.input_data = None
         # ids_possible is partly saved by the jsons (save_genbank)
         self.ids_possible = {id_name: {} for id_name in id_finding}
-        self.ids_mentions = {}  # This is made redundant by df_papers
-        self.papers = {}  # This is made redundant by df_papers
+        self._ids_mentions = {}  # This is made redundant by df_papers
+        self._papers = {}  # This is made redundant by df_papers
         self.df_papers = None
 
     def __call__(self, save=True, backup=False):
@@ -178,15 +178,15 @@ class IDsLoader:
     def get_df_papers(self):
         """Create a csv from papers."""
         paper_dataset = []
-        assert set(self.papers.keys()) == set(self.ids_mentions.keys())
-        dois = set(self.papers.keys())
+        assert set(self._papers.keys()) == set(self._ids_mentions.keys())
+        dois = set(self._papers.keys())
 
         for doi in dois:
             # non-unique dois
-            for info in self.papers[doi]:
+            for info in self._papers[doi]:
                 paper_entry = {'doi': doi}
                 paper_entry.update(info)
-                paper_entry.update(self.ids_mentions[doi])
+                paper_entry.update(self._ids_mentions[doi])
                 paper_dataset.append(paper_entry)
         self.df_papers = DataFrame(paper_dataset)
 
@@ -228,12 +228,12 @@ class IDsLoader:
         if self._no_doi(id_paper):
             return
         paper_identifier = self._get_paper_identifier(id_paper)
-        paper_info = self.papers.get(paper_identifier, None)
+        paper_info = self._papers.get(paper_identifier, None)
         basic_paper_info = {field: id_paper[field] for field in self.basic_paper_fields}
         if not paper_info:
-            self.papers[paper_identifier] = [basic_paper_info]
+            self._papers[paper_identifier] = [basic_paper_info]
         else:
-            self.papers[paper_identifier].append(basic_paper_info)
+            self._papers[paper_identifier].append(basic_paper_info)
 
     def _get_paper_identifier(self, id_paper):
         doi = id_paper['paper_types']['doi']['doi']
@@ -257,7 +257,7 @@ class IDsLoader:
             self._load_ids(possible_ids, paper_identifier)
             mention_ids = paper_type['mention_ids']
             self._load_mentions(mention_ids, paper_identifier)
-            self.papers[paper_identifier][-1][type_name] = paper_type[type_name]
+            self._papers[paper_identifier][-1][type_name] = paper_type[type_name]
 
 
     def _load_ids(self, possible_ids, paper_identifier):
@@ -270,10 +270,10 @@ class IDsLoader:
                     self.ids_possible[id_name][possible_id_value].add(paper_identifier)
 
     def _load_mentions(self, mention_ids, paper_identifier):
-        mention_dict = self.ids_mentions.get(paper_identifier, None)
+        mention_dict = self._ids_mentions.get(paper_identifier, None)
         if not mention_dict:
-            self.ids_mentions[paper_identifier] = mention_ids
+            self._ids_mentions[paper_identifier] = mention_ids
         else:
             for id_desc, mentioned in mention_ids.items():
-                already_mentioned = self.ids_mentions[paper_identifier][id_desc]
-                self.ids_mentions[paper_identifier][id_desc] = already_mentioned or mentioned
+                already_mentioned = self._ids_mentions[paper_identifier][id_desc]
+                self._ids_mentions[paper_identifier][id_desc] = already_mentioned or mentioned
