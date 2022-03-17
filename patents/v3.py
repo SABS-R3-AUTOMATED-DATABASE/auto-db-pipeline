@@ -10,16 +10,35 @@ import ftplib
 import zipfile
 
 KEYWORDS = [
-            ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV', 'SARS'],
+    ["SARS-CoV-2", "COVID-19", "coronavirus", "SARS-CoV", "MERS-CoV", "SARS"],
+    ["antibody", "antibodies", "nanobody", "immunoglobulin", "MAb", "nanobodies"],
+    [
+        "neutralizing",
+        "neutralize",
+        "neutralization",
+        "bind",
+        "binding",
+        "inhibit",
+        "targeting",
+    ],
+    [
+        "heavy chain",
+        "complementarity determining region",
+        "gene",
+        "epitope",
+        "receptor-binding domain",
+        "rbd",
+        "spike protein",
+        "VHH",
+    ],
+]
+KEYWORDS_patents = [
+    ["SARS-CoV-2", "COVID-19", "coronavirus", "MERS", "SARS"],
+    ["antibody", "nanobody", "immunoglobulin"],
+    ["neutralize", "bind", "inhibit", "target"],
+    ["heavy chain", "CDR", "RBD", "monoclonal", "polyclonal", "amino acid", "sequence"],
+]
 
-            ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb', 'nanobodies'],
-
-            ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
-                'inhibit', 'targeting'],
-
-            ['heavy chain', 'complementarity determining region', 'gene',
-                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
-            ]
 
 class Patents:
     def __init__(self) -> None:
@@ -44,22 +63,40 @@ class Patents:
         finally:
             return random_ua.rstrip()
 
-    def get_patent_urls(CN: bool = False ,keywords = KEYWORDS, start_year :int  = 2003):
+    def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003):
         """
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
         """
         results = []
         now = datetime.now()
+        url_part_1 = "https://patents.google.com/xhr/query?url=q%3D" + "%2B".join(
+            [
+                "("
+                + "%2BOR%2B".join(
+                    ["(" + keyword.replace(" ", "%2B") + ")" for keyword in item]
+                )
+                + ")"
+                for item in keywords
+            ]
+        )
+
         if CN == True:
-            url_part_1 = 'https://patents.google.com/xhr/query?url=q%3D' + '%2B'.join(['('+'%2BOR%2B'.join(['('+keyword.replace(' ','%2B')+')' for keyword in item])+')' for item in KEYWORDS])+ '%26country%3DCN'
+            url_part_2 = url_part_1 + "%26country%3DCN"
         else:
-            url_part_1 = 'https://patents.google.com/xhr/query?url=q%3D' + '%2B'.join(['('+'%2BOR%2B'.join(['('+keyword.replace(' ','%2B')+')' for keyword in item])+')' for item in KEYWORDS])+ '%2B(C07K16%252f10)'
-        for j in range(start_year,int(now.strftime("%Y"))):
-            print(j,datetime.now())
-            url_first_half = url_part_1+ '%26before%3Dfiling%3A' + str(j+1)+'0101%26after%3Dfiling%3A' + str(j) + '0101%26num%3D100'
+            url_part_2 = url_part_1 + "%2B(C07K16%252f10)"
+        for j in range(start_year, int(now.strftime("%Y"))):
+            print(j, datetime.now())
+            url_first_half = (
+                url_part_2
+                + "%26before%3Dfiling%3A"
+                + str(j + 1)
+                + "0101%26after%3Dfiling%3A"
+                + str(j)
+                + "0101%26num%3D100"
+            )
             headers = {"User-Agent": Patents.get_random_ua()}
-            req = requests.get(url_first_half+ '&exp=', headers=headers)
+            req = requests.get(url_first_half + "&exp=", headers=headers)
             main_data = req.json()
             pages = main_data["results"]["total_num_pages"]
             data = main_data["results"]["cluster"]
@@ -67,23 +104,44 @@ class Patents:
                 for i in range(len(data[0]["result"])):
                     num = data[0]["result"][i]["patent"]["publication_number"]
                     title = data[0]["result"][i]["patent"]["title"].lower()
-                    if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
-                        results.append("https://patents.google.com/patent/" + num + "/en")
-            for i in range(1,pages):
+                    if (
+                        "sars" in title
+                        or "cov" in title
+                        or "coronavirus" in title
+                        or "mers" in title
+                    ):
+                        results.append(
+                            "https://patents.google.com/patent/" + num + "/en"
+                        )
+            for i in range(1, pages):
                 headers = {"User-Agent": Patents.get_random_ua()}
-                req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
+                req = requests.get(
+                    url_first_half + "%26page%3D" + str(i) + "&exp=", headers=headers
+                )
                 main_data = req.json()
                 data = main_data["results"]["cluster"]
                 if data[0]:
                     for i in range(len(data[0]["result"])):
                         num = data[0]["result"][i]["patent"]["publication_number"]
                         title = data[0]["result"][i]["patent"]["title"].lower()
-                        if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
-                            results.append("https://patents.google.com/patent/" + num + "/en")
-        url_first_half = url_part_1+ '%26after%3Dfiling%3A' + now.strftime("%Y") + '0101%26num%3D100'
+                        if (
+                            "sars" in title
+                            or "cov" in title
+                            or "coronavirus" in title
+                            or "mers" in title
+                        ):
+                            results.append(
+                                "https://patents.google.com/patent/" + num + "/en"
+                            )
+        url_first_half = (
+            url_part_2
+            + "%26after%3Dfiling%3A"
+            + now.strftime("%Y")
+            + "0101%26num%3D100"
+        )
         headers = {"User-Agent": Patents.get_random_ua()}
-        req = requests.get(url_first_half+ '&exp=', headers=headers)
-        print(url_first_half+ '&exp=')
+        req = requests.get(url_first_half + "&exp=", headers=headers)
+        print(url_first_half + "&exp=")
         main_data = req.json()
         pages = main_data["results"]["total_num_pages"]
         data = main_data["results"]["cluster"]
@@ -91,27 +149,42 @@ class Patents:
             for i in range(len(data[0]["result"])):
                 num = data[0]["result"][i]["patent"]["publication_number"]
                 title = data[0]["result"][i]["patent"]["title"].lower()
-                if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
+                if (
+                    "sars" in title
+                    or "cov" in title
+                    or "coronavirus" in title
+                    or "mers" in title
+                ):
                     results.append("https://patents.google.com/patent/" + num + "/en")
-        for i in range(1,pages):
-                headers = {"User-Agent": Patents.get_random_ua()}
-                req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
-                main_data = req.json()
-                data = main_data["results"]["cluster"]
-                if data[0]:
-                    for i in range(len(data[0]["result"])):
-                        num = data[0]["result"][i]["patent"]["publication_number"]
-                        title = data[0]["result"][i]["patent"]["title"].lower()
-                        if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
-                            results.append("https://patents.google.com/patent/" + num + "/en")
-        print(len(results))
+        for i in range(1, pages):
+            headers = {"User-Agent": Patents.get_random_ua()}
+            req = requests.get(
+                url_first_half + "%26page%3D" + str(i) + "&exp=", headers=headers
+            )
+            main_data = req.json()
+            data = main_data["results"]["cluster"]
+            if data[0]:
+                for i in range(len(data[0]["result"])):
+                    num = data[0]["result"][i]["patent"]["publication_number"]
+                    title = data[0]["result"][i]["patent"]["title"].lower()
+                    if (
+                        "sars" in title
+                        or "cov" in title
+                        or "coronavirus" in title
+                        or "mers" in title
+                    ):
+                        results.append(
+                            "https://patents.google.com/patent/" + num + "/en"
+                        )
         return results
 
-    def get_patents(self, CN=False):
+    def get_patents(self, CN: bool = False, keywords=KEYWORDS, start_year: int = 2003):
         """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
-        patents = Patents.get_patent_urls()
+        patents = Patents.get_patent_urls(keywords=keywords, start_year=start_year)
         if CN is True:
-            patents_cn = Patents.get_patent_urls(CN=True)
+            patents_cn = Patents.get_patent_urls(
+                CN=True, keywords=keywords, start_year=start_year
+            )
             patents = list(set(patents) | set(patents_cn))
         df = pd.DataFrame(
             {
@@ -204,25 +277,30 @@ class Patents:
     #     else:
     #         return seq1(VR.replace(" ", ""))
 
-
-    def extract_seq_from_id_US(content: list, id):
+    def extract_seq_from_id_US(content: list, id: str):
+        """
+        Use extracted seq id nos to locate actual sequences in Content txt, this function works for US patents
+        """
         seq = ""
         origin = ""
         text = content[-1]
-        splitter = id+'.{10,200}\s'+id+'(?=\s*[A-Za-z])'
-        splitter = re.findall(splitter,text)
+        splitter = id + ".{10,200}\s" + id + "(?=\s*[A-Za-z])"
+        splitter = re.findall(splitter, text)
         if len(splitter) > 0:
             text = text.split(splitter[0])[1]
-            text = re.sub('\d+','',text)
-            text = re.sub('\s{2,}','',text)
-            seqs = re.search(r'([A-Z][a-z]{2}\s*){10,}(?!=[A-Z][a-z]{2})',text)
+            text = re.sub("\d+", "", text)
+            text = re.sub("\s{2,}", "", text)
+            seqs = re.search(r"([A-Z][a-z]{2}\s*){10,}(?!=[A-Z][a-z]{2})", text)
             if seqs:
-                if len(seqs.group().replace(" ","")) > 120:
+                if len(seqs.group().replace(" ", "")) > 120:
                     seq = seqs.group()
                     origin = splitter[0]
         return seq, origin
 
-    def extract_seq_from_id(content: list, id):
+    def extract_seq_from_id(content: list, id: str):
+        """
+        Use extracted seq id nos to locate actual sequences in Content txt, this function works for CN, KR and WO patents
+        """
         splitted_text = "".join(content).replace("<br>", "").split("<210>")
         seq = ""
         origin = ""
@@ -253,6 +331,9 @@ class Patents:
             return "", ""
 
     def CN113817052A(Content: list, URL: str):
+        """
+        Special function for this particualr patent because regex is not able to extract information correctly but it contains a number of sequences
+        """
         outputdf = pd.DataFrame(
             {
                 "URL": [],
@@ -296,6 +377,9 @@ class Patents:
         return outputdf
 
     def CN111978395A(Content: list, URL: str):
+        """
+        Special function for this particualr patent because regex is not able to extract information correctly but it contains a number of sequences
+        """
         outputdf = pd.DataFrame(
             {
                 "URL": [],
@@ -349,6 +433,9 @@ class Patents:
         return outputdf
 
     def extract_ids_from_string(elem: str):
+        """
+        Use regex to identify sentences that could indicate that a pair of seq id nos that corresponds to VH and VL of an antibody, or a single seq id no of a nanobody(single domain antibody)
+        """
         if "cdr" not in elem and "fc" not in elem and len(elem) < 700:
             output = []
             if "light and heavy chain" in elem and "light chain" not in elem:
@@ -376,7 +463,13 @@ class Patents:
                 or ("hcvr" in elem and "lcvr" in elem)
                 or ("vh" in elem and "vl" in elem)
             ):
-                if "nucle" not in elem and "constant" not in elem and " fc " not in elem and " ch " not in elem and " cl " not in elem:
+                if (
+                    "nucle" not in elem
+                    and "constant" not in elem
+                    and " fc " not in elem
+                    and " ch " not in elem
+                    and " cl " not in elem
+                ):
                     item = re.findall("(?<=seq id no:)\d+", elem)
                     item_and = re.findall(
                         "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
@@ -428,6 +521,9 @@ class Patents:
                 return output
 
     def ID_to_df(items: list, Content: list, URL: str):
+        """
+        Use extracted seq id nos to extract coressponding antibody sequences from the Content of the patents
+        """
         outputdf = pd.DataFrame(
             {
                 "URL": [],
@@ -466,7 +562,7 @@ class Patents:
                     axis=0,
                 )
             elif len(ids) == 1:
-                if 'US' in URL:
+                if "US" in URL:
                     hcseq, hco = Patents.extract_seq_from_id_US(Content, ids[0])
                 else:
                     hcseq, hco = Patents.extract_seq_from_id(Content, ids[0])
@@ -490,28 +586,42 @@ class Patents:
         return outputdf
 
     def get_us_sequences(df):
+        """
+        Access USTPO website to download possible txt sequence listings and add into Content column
+        """
         for i in range(df.shape[0]):
-            if 'US' in df.loc[i,'URL']:
+            if "US" in df.loc[i, "URL"]:
                 dummy = False
-                for _ in df.loc[i,'Claim']:
-                    if 'seq id no' in _.lower():
+                for _ in df.loc[i, "Claim"]:
+                    if "seq id no" in _.lower():
                         dummy = True
                         break
                 if dummy:
-                    num = re.findall('(?<=US)\d+',str(df.loc[i,"URL"]))[0]
-                    url = 'https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO1&Sect2=HITOFF&d=PALL&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.htm&r=1&f=G&l=50&s1='
-                    url = url + num + '.PN.&OS=PN/' + num + '&RS=PN/' + num
+                    num = re.findall("(?<=US)\d+", str(df.loc[i, "URL"]))[0]
+                    url = (
+                        "https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO1&Sect2=HITOFF&d=P"
+                        + "ALL&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.htm&r=1&f=G&l=50&s1="
+                    )
+                    url = url + num + ".PN.&OS=PN/" + num + "&RS=PN/" + num
                     headers = requests.utils.default_headers()
-                    headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
-                    page = requests.get(url, headers = headers)
-                    soup = BeautifulSoup(page.content, 'html.parser')
-                    text = soup.text.replace('\n',' ')
-                    splitted = text.split('SEQUENCE LISTINGS')
-                    if len(splitted) >1:                    
-                        df.loc[i,'Content'] = df.loc[i,'Content'] + [splitted[-1]] 
+                    headers["User-Agent"] = (
+                        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                        + "(KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"
+                    )
+                    page = requests.get(url, headers=headers)
+                    soup = BeautifulSoup(page.content, "html.parser")
+                    text = soup.text.replace("\n", " ")
+                    splitted = text.split("SEQUENCE LISTINGS")
+                    if len(splitted) > 1:
+                        df.loc[i, "Content"] = df.loc[i, "Content"] + [splitted[-1]]
         return df
 
-    def extract_VH_VL(self, df=None):
+    def extract_sequences(self, df=None, hide: bool = True):
+        """
+        The main funtion, the input is the filtered search results df
+        and outputs a df with anti/nano-body sequences
+        The hide arg is about hiding antibodiess possibly exists in the patetns but we are unable to extract the sequence details
+        """
         if df == None:
             df = self.search_results
         df = Patents.get_us_sequences(df)
@@ -588,109 +698,99 @@ class Patents:
                     )
         outputdf.drop_duplicates(keep="first", inplace=True)
         outputdf = outputdf.reset_index(drop=True)
-        outputdf = outputdf[outputdf["HCVR"] != pd.Series([""] * outputdf.shape[0])]
-        outputdf = outputdf.reset_index(drop=True)
+        if hide:
+            outputdf = outputdf[outputdf["HCVR"] != pd.Series([""] * outputdf.shape[0])]
+            outputdf = outputdf.reset_index(drop=True)
         self.output = outputdf
         return outputdf
 
     def get_wipo_sequences(df):
+        """
+        Check if there is potential sequence in WIPO patents, if so, download possible sequence listing file and add to Content column
+        """
         for i in range(df.shape[0]):
-            if 'WO' in df.loc[i,'URL']:
+            if "WO" in df.loc[i, "URL"]:
                 dummy = False
-                for _ in df.loc[i,'Claim']:
-                    if 'seq id no' in _.lower():
+                for _ in df.loc[i, "Claim"]:
+                    if "seq id no" in _.lower():
                         dummy = True
                         break
                 if dummy:
-                    seq_list = Patents.get_seq_listing(df.loc[i,'URL'])
-                    df.loc[i,'Content'] = df.loc[i,'Content'] + [seq_list] 
+                    seq_list = Patents.get_seq_listing(df.loc[i, "URL"])
+                    df.loc[i, "Content"] = df.loc[i, "Content"] + [seq_list]
         return df
 
-    def get_seq_listing(URL):
-        output = ''
+    def get_seq_listing(URL: str):
+        """
+        Access the ftp server of WIPO patent to download Sequence listing files uploaded with the patent
+        Download and read the txt files and add the sequences into Content column
+        """
+        output = ""
         year = URL[36:40]
-        wonumber = URL[34:36]+URL[38:40]+'/'+URL[40:46]
-        wo_folder = URL[34:36]+URL[38:40]+'_'+URL[40:46]
-        ftp = ftplib.FTP('ftp.wipo.int')
+        wo_folder = URL[34:36] + URL[38:40] + "_" + URL[40:46]
+        ftp = ftplib.FTP("ftp.wipo.int")
         ftp.login()
-        path = '/pub/published_pct_sequences/publication/'
-        ftp.cwd(path+year+'/')
-        filelist = [item for item in ftp.nlst() if '.' not in item]
+        path = "/pub/published_pct_sequences/publication/"
+        ftp.cwd(path + year + "/")
+        filelist = [item for item in ftp.nlst() if "." not in item]
         for file in filelist:
-            ftp.cwd(path+year+'/'+file+'/')
-            filelist2 = [item for item in ftp.nlst() if '.' not in item]
+            ftp.cwd(path + year + "/" + file + "/")
+            filelist2 = [item for item in ftp.nlst() if "." not in item]
             if wo_folder in filelist2:
                 ftp.cwd(wo_folder)
-                ziplist = [file for file in ftp.nlst() if file != 'applicant.txt']
-                if not os.path.exists('patents/data/temp'):
-                    os.makedirs('patents/data/temp')
+                ziplist = [file for file in ftp.nlst() if file != "applicant.txt"]
+                if not os.path.exists("/data/temp"):
+                    os.makedirs("/data/temp")
                 else:
-                    for item in os.listdir('patents/data/temp'):
-                        os.remove('patents/data/temp/'+item)
-                for file in ziplist:
-                    ftp.retrbinary("RETR " + file, open('patents/data/temp/'+file , 'wb').write)
-                    with zipfile.ZipFile('patents/data/temp/'+file, 'r') as zip_ref:
-                        zip_ref.extractall('patents/data/temp/')
+                    for item in os.listdir("/data/temp"):
+                        os.remove("/data/temp/" + item)
+                for zip in ziplist:
+                    ftp.retrbinary("RETR " + zip, open("/data/temp/" + zip, "wb").write)
+                    with zipfile.ZipFile("/data/temp/" + zip, "r") as zip_ref:
+                        zip_ref.extractall("/data/temp/")
                 ftp.close()
-                txtlist = [file for file in os.listdir('patents/data/temp') if '.txt' in file]
-                for file in txtlist:
-                    with open('patents/data/temp/'+file, 'r', errors= 'ignore') as f:
-                        sl = [line.rstrip('\n') for line in f]
-                        output = output + ' '.join(sl)
-                for item in os.listdir('patents/data/temp'):
-                    os.remove('patents/data/temp/'+item)
-                os.rmdir('patents/data/temp')
+                txtlist = [file for file in os.listdir("/data/temp") if ".txt" in file]
+                for txt in txtlist:
+                    with open("/data/temp/" + txt, "r", errors="ignore") as f:
+                        sl = [line.rstrip("\n") for line in f]
+                        output = output + " ".join(sl)
+                for item in os.listdir("/data/temp"):
+                    os.remove("/data/temp/" + item)
+                os.rmdir("/data/temp")
                 break
         return output
 
-    def save_search_output(self, filepath: str = "patents/search_results.json"):
+    def save_search_output(self, filepath: str = "data/patent_search_results.json"):
         self.search_results.to_json(filepath)
 
-    def load_search_output(self, filepath: str = "patents/search_results.json"):
+    def load_search_output(self, filepath: str = "data/patent_search_results.json"):
         self.search_results = pd.read_json(filepath)
 
-    def save_final_output(self, filepath: str = "patents/patent_results.csv"):
+    def save_final_output(self, filepath: str = "data/patent__sequence_results.csv"):
         self.output.to_csv(filepath, index=False)
 
-    # def process_results(self):
-    #     df = self.search_results
-    #     df = df[
-    #         df.Title.str.contains("sars-cov-2")
-    #         | df.Title.str.contains("covid")
-    #         | df.Title.str.contains("coronavirus")
-    #     ]
-    #     df = df.reset_index(drop=True)
-    #     df["Note"] = ""
-    #     df["Note"] = df["Note"].astype(object)
-    #     df["Seq"] = ""
-    #     df["Seq"] = df["Seq"].astype(object)
-    #     for i in range(df.shape[0]):
-    #         notes = []
-    #         seqid = []
-    #         for _ in df.loc[i, "Claim"]:
-    #             if (
-    #                 "heavy chain"
-    #                 or "cdr"
-    #                 or "determining region"
-    #                 or "hcvr"
-    #                 or "light chain"
-    #                 or "lcvr" in _.lower()
-    #             ):
-    #                 if "seq id no" or "amino acid sequence" in _.lower():
-    #                     notes.append(_)
-    #                     item = re.findall("seq id nos*S:*\.*\s*\d+", _.lower())
-    #                     seqid = list(set(seqid) | set(item))
-    #         df.at[i, "Note"] = notes
-    #         df.at[i, "Seq"] = seqid
-    #     df = df[df["Seq"] != pd.Series([[]] * df.shape[0])]
-    #     df = df.reset_index(drop=True)
-    #     self.filtered_results = df
+    def get_seq(
+        self,
+        CN: bool = True,
+        keywords=KEYWORDS,
+        start_year=2003,
+        save_json: bool = False,
+        save_csv: bool = True,
+    ):
+        search_results = Patents.get_patents(
+            self, CN=CN, keywords=keywords, start_year=start_year
+        )
+        if save_json:
+            search_results.to_json("data/patent_search_results.json")
+        sequences = Patents.extract_sequences(search_results)
+        if save_csv:
+            sequences.to_csv("data/patent__sequence_results.csv", index=False)
+        return sequences
 
 
 test = Patents()
 # test.get_patents(CN=True)
 # test.save_search_output("patents/search_results_new.json")
 test.load_search_output("patents/search_results_new.json")
-test.extract_VH_VL()
+test.extract_sequences()
 test.save_final_output("patents/patent_results_new_us.csv")
-
