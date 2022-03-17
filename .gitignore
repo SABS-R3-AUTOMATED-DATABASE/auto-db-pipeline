@@ -22,5 +22,4 @@ paperscraper/testfile.ipynb
 *.cif
 genbank/data/protein_handles2.json
 
-*.csv
 get_additional_info/__pycache__
