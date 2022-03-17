@@ -72,7 +72,6 @@ def get_patent_urls(keywords=KEYWORDS, start_year: int = 2003):
         url_part_1 + "%2B(C07K16%252f10)%26country%3D" + country
         for country in country_list
     ] + [url_part_1 + "%26country%3DCN"]
-    print(url_list)
     for url_part_2 in url_list:
         for j in range(start_year, int(now.strftime("%Y"))):
             url_first_half = (
@@ -163,6 +162,7 @@ def get_patent_urls(keywords=KEYWORDS, start_year: int = 2003):
                         results.append(
                             "https://patents.google.com/patent/" + num + "/en"
                         )
+        print(url_part_2,datetime.now())
     results = list(set(results))
     print("Collecting ", len(results), " Patent URLs takes", datetime.now() - now)
     return results
