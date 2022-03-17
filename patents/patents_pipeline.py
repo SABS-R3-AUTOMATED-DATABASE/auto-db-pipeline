@@ -35,7 +35,6 @@ KEYWORDS_patents = [
 
 
 def get_seq(
-    self,
     CN: bool = True,
     keywords=KEYWORDS,
     start_year=2003,
