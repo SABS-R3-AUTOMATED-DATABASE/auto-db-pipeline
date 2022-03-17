@@ -19,3 +19,4 @@ paperscraper/testfile.ipynb
 data/biorxiv_all*.jsonl
 *.ent
 patents/search_results.json
+patents/search_results_new.json
