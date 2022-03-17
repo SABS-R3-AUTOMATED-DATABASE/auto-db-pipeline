@@ -22,24 +22,24 @@ def get_seq_listing(URL: str):
         if wo_folder in filelist2:
             ftp.cwd(wo_folder)
             ziplist = [file for file in ftp.nlst() if file != "applicant.txt"]
-            if not os.path.exists("/data/temp"):
-                os.makedirs("/data/temp")
+            if not os.path.exists("data/temp"):
+                os.makedirs("data/temp")
             else:
-                for item in os.listdir("/data/temp"):
-                    os.remove("/data/temp/" + item)
+                for item in os.listdir("data/temp"):
+                    os.remove("data/temp/" + item)
             for zip in ziplist:
-                ftp.retrbinary("RETR " + zip, open("/data/temp/" + zip, "wb").write)
-                with zipfile.ZipFile("/data/temp/" + zip, "r") as zip_ref:
-                    zip_ref.extractall("/data/temp/")
+                ftp.retrbinary("RETR " + zip, open("data/temp/" + zip, "wb").write)
+                with zipfile.ZipFile("data/temp/" + zip, "r") as zip_ref:
+                    zip_ref.extractall("data/temp/")
             ftp.close()
-            txtlist = [file for file in os.listdir("/data/temp") if ".txt" in file]
+            txtlist = [file for file in os.listdir("data/temp") if ".txt" in file]
             for txt in txtlist:
-                with open("/data/temp/" + txt, "r", errors="ignore") as f:
+                with open("data/temp/" + txt, "r", errors="ignore") as f:
                     sl = [line.rstrip("\n") for line in f]
                     output = output + " ".join(sl)
-            for item in os.listdir("/data/temp"):
-                os.remove("/data/temp/" + item)
-            os.rmdir("/data/temp")
+            for item in os.listdir("data/temp"):
+                os.remove("data/temp/" + item)
+            os.rmdir("data/temp")
             break
     return output
 

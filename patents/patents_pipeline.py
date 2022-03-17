@@ -1,5 +1,7 @@
 import pandas as pd
+import re
 from datetime import datetime
+import os
 from patents2sequences import extract_sequences
 from keywords2patents import get_patents
 
@@ -36,20 +38,36 @@ KEYWORDS_patents = [
 
 def get_seq(
     keywords=KEYWORDS,
-    start_year=2003,
+    start_year: int =2003,
+    load_json: bool = True,
     save_json: bool = True,
     save_csv: bool = True,
 ):
     starttime = datetime.now()
-    search_results = get_patents(keywords=keywords, start_year=start_year)
+    
+    if load_json:
+        not_found = True
+        for item in os.listdir("/data/patents"):
+            match = re.findall("patent\_search\_results\_\d{8}\.json",item)
+            if match:
+                not_found = False
+                search_results = pd.read_json(match[0])
+                print('Loading patent search results',match[0], 'if a new search is needed please set load_json = False.')
+                break
+        if not_found:
+            print('No json file about patents found, starting a new search.')
+            search_results = get_patents()   
+    else:
+        search_results = get_patents()
+    
     if save_json:
         search_results.to_json(
-            "data/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
+            "data/patents/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
         )
     sequences = extract_sequences(search_results)
     if save_csv:
         sequences.to_csv(
-            "data/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
+            "data/patents/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
             index=False,
         )
     print("The whole process takes", datetime.now() - starttime)
