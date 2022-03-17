@@ -44,14 +44,13 @@ def get_seq(
     save_csv: bool = True,
 ):
     starttime = datetime.now()
-    
+    not_found = True
     if load_json:
-        not_found = True
-        for item in os.listdir("/data/patents"):
+        for item in os.listdir("data/patents"):
             match = re.findall("patent\_search\_results\_\d{8}\.json",item)
             if match:
                 not_found = False
-                search_results = pd.read_json(match[0])
+                search_results = pd.read_json("data/patents/" + match[0])
                 print('Loading patent search results',match[0], 'if a new search is needed please set load_json = False.')
                 break
         if not_found:
@@ -59,8 +58,7 @@ def get_seq(
             search_results = get_patents()   
     else:
         search_results = get_patents()
-    
-    if save_json:
+    if save_json and not_found:
         search_results.to_json(
             "data/patents/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
         )
