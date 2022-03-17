@@ -14,13 +14,10 @@ genbank/old_notebooks
 genbank/__pycache__
 genbank/elink.dtd
 **/.vscode
-paperscraper/.ipynb_checkpoints/
-paperscraper/check_coverage.ipynb
-paperscraper/testfile.ipynb
+data/patents/patent_search_results_*.json
 **/biorxiv_all*.jsonl
 *.ent
 *.cif
 genbank/data/protein_handles2.json
-
 *.csv
 get_additional_info/__pycache__
