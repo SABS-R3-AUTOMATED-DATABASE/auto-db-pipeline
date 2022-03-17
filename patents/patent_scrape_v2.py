@@ -61,7 +61,7 @@ class Patents:
             main_data = req.json()
             pages = main_data["results"]["total_num_pages"]
             data = main_data["results"]["cluster"]
-            if data:
+            if data[0]:
                 for i in range(len(data[0]["result"])):
                     num = data[0]["result"][i]["patent"]["publication_number"]
                     title = data[0]["result"][i]["patent"]["title"].lower()
@@ -72,7 +72,7 @@ class Patents:
                 req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
                 main_data = req.json()
                 data = main_data["results"]["cluster"]
-                if data:
+                if data[0]:
                     for i in range(len(data[0]["result"])):
                         num = data[0]["result"][i]["patent"]["publication_number"]
                         title = data[0]["result"][i]["patent"]["title"].lower()
@@ -85,23 +85,23 @@ class Patents:
         main_data = req.json()
         pages = main_data["results"]["total_num_pages"]
         data = main_data["results"]["cluster"]
-        if data:
+        if data[0]:
             for i in range(len(data[0]["result"])):
                 num = data[0]["result"][i]["patent"]["publication_number"]
                 title = data[0]["result"][i]["patent"]["title"].lower()
                 if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
                     results.append("https://patents.google.com/patent/" + num + "/en")
         for i in range(1,pages):
-                headers = {"User-Agent": Patents.get_random_ua()}
-                req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
-                main_data = req.json()
-                data = main_data["results"]["cluster"]
-                if data:
-                    for i in range(len(data[0]["result"])):
-                        num = data[0]["result"][i]["patent"]["publication_number"]
-                        title = data[0]["result"][i]["patent"]["title"].lower()
-                        if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
-                            results.append("https://patents.google.com/patent/" + num + "/en")
+            headers = {"User-Agent": Patents.get_random_ua()}
+            req = requests.get(url_first_half+ "%26page%3D" + str(i) + "&exp=", headers=headers)
+            main_data = req.json()
+            data = main_data["results"]["cluster"]
+            if data[0]:
+                for i in range(len(data[0]["result"])):
+                    num = data[0]["result"][i]["patent"]["publication_number"]
+                    title = data[0]["result"][i]["patent"]["title"].lower()
+                    if 'sars' in title or 'cov' in title or 'coronavirus' in title or 'mers' in title:
+                        results.append("https://patents.google.com/patent/" + num + "/en")
         print(len(results))
         return results
 
@@ -203,16 +203,16 @@ class Patents:
     #         return seq1(VR.replace(" ", ""))
 
     def extract_seq_from_id(content: list, id):
-        splited_text = "".join(content).replace("<br>", "").split("<210>")
+        splitted_text = "".join(content).replace("<br>", "").split("<210>")
         seq = ""
         origin = ""
-        if splited_text:
+        if splitted_text:
             seqs = []
             origins = []
-            for i in range(1, len(splited_text)):
-                if splited_text[i].split(">"):
-                    seqs.append(splited_text[i].split(">")[-1])
-                    origins.append(splited_text[i].split(">")[-2][:-4])
+            for i in range(1, len(splitted_text)):
+                if splitted_text[i].split(">"):
+                    seqs.append(splitted_text[i].split(">")[-1])
+                    origins.append(splitted_text[i].split(">")[-2][:-4])
             for elem in seqs:
                 item = re.findall("\A\s*\d+(?!\d)", elem)
                 if item:
