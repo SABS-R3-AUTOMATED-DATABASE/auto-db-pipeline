@@ -50,7 +50,7 @@ def get_random_ua():
         return random_ua.rstrip()
 
 
-def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003):
+def get_patent_urls(keywords=KEYWORDS, start_year: int = 2003):
     """
     Get the first 1000 results in google patent search results.
     The url is obtained by using Fetch/XHR in Chrome developer mode
@@ -67,18 +67,64 @@ def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003)
             for item in keywords
         ]
     )
-
-    if CN == True:
-        url_part_2 = url_part_1 + "%26country%3DCN"
-    else:
-        url_part_2 = url_part_1 + "%2B(C07K16%252f10)"
-    for j in range(start_year, int(now.strftime("%Y"))):
+    country_list = ["CN", "KR", "US", "WO"]
+    url_list = [
+        url_part_1 + "%2B(C07K16%252f10)%26country%3D" + country
+        for country in country_list
+    ] + [url_part_1 + "%26country%3DCN"]
+    print(url_list)
+    for url_part_2 in url_list:
+        for j in range(start_year, int(now.strftime("%Y"))):
+            url_first_half = (
+                url_part_2
+                + "%26before%3Dfiling%3A"
+                + str(j + 1)
+                + "0101%26after%3Dfiling%3A"
+                + str(j)
+                + "0101%26num%3D100"
+            )
+            headers = {"User-Agent": get_random_ua()}
+            req = requests.get(url_first_half + "&exp=", headers=headers)
+            main_data = req.json()
+            pages = main_data["results"]["total_num_pages"]
+            data = main_data["results"]["cluster"]
+            if data[0]:
+                for i in range(len(data[0]["result"])):
+                    num = data[0]["result"][i]["patent"]["publication_number"]
+                    title = data[0]["result"][i]["patent"]["title"].lower()
+                    if (
+                        "sars" in title
+                        or "cov" in title
+                        or "coronavirus" in title
+                        or "mers" in title
+                    ):
+                        results.append(
+                            "https://patents.google.com/patent/" + num + "/en"
+                        )
+            for i in range(1, pages):
+                headers = {"User-Agent": get_random_ua()}
+                req = requests.get(
+                    url_first_half + "%26page%3D" + str(i) + "&exp=", headers=headers
+                )
+                main_data = req.json()
+                data = main_data["results"]["cluster"]
+                if data[0]:
+                    for i in range(len(data[0]["result"])):
+                        num = data[0]["result"][i]["patent"]["publication_number"]
+                        title = data[0]["result"][i]["patent"]["title"].lower()
+                        if (
+                            "sars" in title
+                            or "cov" in title
+                            or "coronavirus" in title
+                            or "mers" in title
+                        ):
+                            results.append(
+                                "https://patents.google.com/patent/" + num + "/en"
+                            )
         url_first_half = (
             url_part_2
-            + "%26before%3Dfiling%3A"
-            + str(j + 1)
-            + "0101%26after%3Dfiling%3A"
-            + str(j)
+            + "%26after%3Dfiling%3A"
+            + now.strftime("%Y")
             + "0101%26num%3D100"
         )
         headers = {"User-Agent": get_random_ua()}
@@ -117,54 +163,15 @@ def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003)
                         results.append(
                             "https://patents.google.com/patent/" + num + "/en"
                         )
-    url_first_half = (
-        url_part_2 + "%26after%3Dfiling%3A" + now.strftime("%Y") + "0101%26num%3D100"
-    )
-    headers = {"User-Agent": get_random_ua()}
-    req = requests.get(url_first_half + "&exp=", headers=headers)
-    main_data = req.json()
-    pages = main_data["results"]["total_num_pages"]
-    data = main_data["results"]["cluster"]
-    if data[0]:
-        for i in range(len(data[0]["result"])):
-            num = data[0]["result"][i]["patent"]["publication_number"]
-            title = data[0]["result"][i]["patent"]["title"].lower()
-            if (
-                "sars" in title
-                or "cov" in title
-                or "coronavirus" in title
-                or "mers" in title
-            ):
-                results.append("https://patents.google.com/patent/" + num + "/en")
-    for i in range(1, pages):
-        headers = {"User-Agent": get_random_ua()}
-        req = requests.get(
-            url_first_half + "%26page%3D" + str(i) + "&exp=", headers=headers
-        )
-        main_data = req.json()
-        data = main_data["results"]["cluster"]
-        if data[0]:
-            for i in range(len(data[0]["result"])):
-                num = data[0]["result"][i]["patent"]["publication_number"]
-                title = data[0]["result"][i]["patent"]["title"].lower()
-                if (
-                    "sars" in title
-                    or "cov" in title
-                    or "coronavirus" in title
-                    or "mers" in title
-                ):
-                    results.append("https://patents.google.com/patent/" + num + "/en")
+    results = list(set(results))
     print("Collecting ", len(results), " Patent URLs takes", datetime.now() - now)
     return results
 
 
-def get_patents(CN: bool = True, keywords=KEYWORDS, start_year: int = 2003):
+def get_patents(keywords=KEYWORDS, start_year: int = 2003):
     """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
     starttime = datetime.now()
     patents = get_patent_urls(keywords=keywords, start_year=start_year)
-    if CN is True:
-        patents_cn = get_patent_urls(CN=True, keywords=keywords, start_year=start_year)
-        patents = list(set(patents) | set(patents_cn))
     df = pd.DataFrame(
         {
             "URL": [],
