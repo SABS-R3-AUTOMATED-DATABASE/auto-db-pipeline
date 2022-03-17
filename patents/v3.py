@@ -4,7 +4,7 @@ import numpy as np
 import time
 import pandas as pd
 import re
-from datetime import datetime
+from datetime import date, datetime
 import os
 import ftplib
 import zipfile
@@ -68,6 +68,7 @@ class Patents:
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
         """
+        starttime = datetime.now()
         results = []
         now = datetime.now()
         url_part_1 = "https://patents.google.com/xhr/query?url=q%3D" + "%2B".join(
@@ -175,10 +176,12 @@ class Patents:
                         results.append(
                             "https://patents.google.com/patent/" + num + "/en"
                         )
+        print("Collecting Patent URLs takes", datetime.now() - starttime)
         return results
 
     def get_patents(self, CN: bool = False, keywords=KEYWORDS, start_year: int = 2003):
         """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
+        starttime = datetime.now()
         patents = Patents.get_patent_urls(keywords=keywords, start_year=start_year)
         if CN is True:
             patents_cn = Patents.get_patent_urls(
@@ -261,10 +264,11 @@ class Patents:
             if content is not None:
                 df.loc[i, "Abstract"] = content.text
             if (i + 1) % 10 == 0:
-                print(str(i + 1) + "/" + str(df.shape[0]), datetime.now())
+                print(str(i + 1) + "/" + str(df.shape[0]), datetime.now() - starttime)
             if i % 100 == 0 and i != 0:
                 time.sleep(600)
         self.search_results = df
+        print("Dowloading Patents takes", datetime.now() - starttime)
         return df
 
     # def translate_seq(VR: str):
@@ -804,7 +808,7 @@ class Patents:
                 "data/patent_sequence_results_" + now.strftime("%Y%m%d") + ".csv",
                 index=False,
             )
-        print(datetime.now() - starttime)
+        print("The whole process takes", datetime.now() - starttime)
         return sequences
 
 
