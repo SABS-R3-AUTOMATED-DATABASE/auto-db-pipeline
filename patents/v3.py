@@ -86,7 +86,6 @@ class Patents:
         else:
             url_part_2 = url_part_1 + "%2B(C07K16%252f10)"
         for j in range(start_year, int(now.strftime("%Y"))):
-            print(j, datetime.now())
             url_first_half = (
                 url_part_2
                 + "%26before%3Dfiling%3A"
@@ -760,37 +759,59 @@ class Patents:
                 break
         return output
 
-    def save_search_output(self, filepath: str = "data/patent_search_results.json"):
-        self.search_results.to_json(filepath)
+    def save_search_output(self, filepath: str = None):
+        now = datetime.now()
+        if filepath:
+            self.search_results.to_json(filepath)
+        else:
+            self.search_results.to_json(
+                "data/patent_search_results_" + now.strftime("%Y%m%d") + ".json"
+            )
 
-    def load_search_output(self, filepath: str = "data/patent_search_results.json"):
+    def load_search_output(self, filepath):
         self.search_results = pd.read_json(filepath)
 
-    def save_final_output(self, filepath: str = "data/patent__sequence_results.csv"):
-        self.output.to_csv(filepath, index=False)
+    def save_final_output(self, filepath: str = None):
+        now = datetime.now()
+        if filepath:
+            self.search_results.to_csv(filepath)
+        else:
+            self.search_results.to_csv(
+                "data/patent_sequence_results_" + now.strftime("%Y%m%d") + ".csv"
+            )
 
     def get_seq(
         self,
         CN: bool = True,
         keywords=KEYWORDS,
         start_year=2003,
-        save_json: bool = False,
+        save_json: bool = True,
         save_csv: bool = True,
     ):
+        starttime = datetime.now()
+        now = datetime.now()
         search_results = Patents.get_patents(
             self, CN=CN, keywords=keywords, start_year=start_year
         )
+        self.search_results = search_results
         if save_json:
-            search_results.to_json("data/patent_search_results.json")
+            search_results.to_json(
+                "data/patent_search_results_" + now.strftime("%Y%m%d") + ".json"
+            )
         sequences = Patents.extract_sequences(search_results)
         if save_csv:
-            sequences.to_csv("data/patent__sequence_results.csv", index=False)
+            sequences.to_csv(
+                "data/patent_sequence_results_" + now.strftime("%Y%m%d") + ".csv",
+                index=False,
+            )
+        print(datetime.now() - starttime)
         return sequences
 
 
 test = Patents()
 # test.get_patents(CN=True)
 # test.save_search_output("patents/search_results_new.json")
-test.load_search_output("patents/search_results_new.json")
-test.extract_sequences()
-test.save_final_output("patents/patent_results_new_us.csv")
+# test.load_search_output("patents/search_results_new.json")
+# test.extract_sequences()
+# test.save_final_output("patents/patent_results_new_us.csv")
+test.get_seq()
