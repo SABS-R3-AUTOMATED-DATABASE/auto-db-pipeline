@@ -44,7 +44,6 @@ def get_seq(
 ):
     starttime = datetime.now()
     search_results = get_patents(self, CN=CN, keywords=keywords, start_year=start_year)
-    self.Patent_content = search_results
     if save_json:
         search_results.to_json(
             "data/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
@@ -55,7 +54,6 @@ def get_seq(
             "data/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
             index=False,
         )
-    self.sequence_output = sequences
     print("The whole process takes", datetime.now() - starttime)
     return sequences
 
