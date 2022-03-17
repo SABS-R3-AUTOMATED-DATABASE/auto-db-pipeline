@@ -28,21 +28,20 @@ KEYWORDS = [
 ]
 KEYWORDS_patents = [
     ["SARS-CoV-2", "COVID-19", "coronavirus", "MERS", "SARS"],
-    ["antibody", "nanobody", "immunoglobulin"],
+    ["antibody", "nanobody", "immunoglobulin", "molecule"],
     ["neutralize", "bind", "inhibit", "target"],
-    ["heavy chain", "CDR", "RBD", "monoclonal", "polyclonal", "amino acid", "sequence"],
+    ["heavy chain", "CDR", "RBD", "monoclonal", "polyclonal", "amino acid", "sequence", "S protein"],
 ]
 
 
 def get_seq(
-    CN: bool = True,
     keywords=KEYWORDS,
     start_year=2003,
     save_json: bool = True,
     save_csv: bool = True,
 ):
     starttime = datetime.now()
-    search_results = get_patents(CN=CN, keywords=keywords, start_year=start_year)
+    search_results = get_patents(keywords=keywords, start_year=start_year)
     if save_json:
         search_results.to_json(
             "data/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
@@ -57,4 +56,4 @@ def get_seq(
     return sequences
 
 
-seq = get_seq(CN=True)
+seq = get_seq()

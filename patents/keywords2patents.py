@@ -88,6 +88,7 @@ def get_patent_urls(keywords=KEYWORDS, start_year: int = 2003):
             main_data = req.json()
             pages = main_data["results"]["total_num_pages"]
             data = main_data["results"]["cluster"]
+            print(j,pages)
             if data[0]:
                 for i in range(len(data[0]["result"])):
                     num = data[0]["result"][i]["patent"]["publication_number"]
