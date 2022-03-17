@@ -6,7 +6,10 @@ import re
 
 def get_structure_from_sabdab(seq_input):
 
-    ''' Take sequence as input and return PDB structure from SAbDab '''
+    ''' Function that searches SAbDab for an antibody structure.
+
+    param seq_input: string amino acid sequence
+    '''
 
     # get similar structures from SAbDAb
     print('Getting templates...')
@@ -28,7 +31,10 @@ def get_structure_from_sabdab(seq_input):
 
 def get_structure_from_VH_VL(seq_dict):
 
-    ''' Use if input sequence has both VH and VL seqs '''
+    '''Function to retrieve structure from SAbDab if have both VH and VL sequences
+
+    param seq_dict: dictionary of VH and VL amino acid sequences where keys are VH, VL
+    '''
 
     # validate sequences as AA sequences (i.e. correct input)
     if database._validate_sequence(seq_dict['VH']) is True:
@@ -48,7 +54,9 @@ def get_structure_from_VH_VL(seq_dict):
 
 def get_structure_from_1_seq():
 
-    ''' Use if only a single input sequence (e.g. if no annotation in paper extracted from) '''
+    '''Function to get best structure based on only one sequence (if only one available from scraping, unpaired)
+    '''
+
     # sometimes only one sequence may be extracted from paper (likely to be VH but code generalised to deal with whatever key given)
     # same method for extracting best structure as for when you have both VH and VL
 
@@ -66,7 +74,12 @@ def get_structure_from_1_seq():
     return
 
 
-def get_structure(seq_dict):
+def get_structure_main(seq_dict):
+
+    '''Main function to call to get structures from SAbDab: others called within main
+
+    param seq_dict: dictionary of sequences from antibody chains
+    '''
 
     if len(seq_dict) == 2:
         get_structure_from_VH_VL(seq_dict)
@@ -75,10 +88,3 @@ def get_structure(seq_dict):
         get_structure_from_1_seq(seq_dict)
 
     return
-
-
-# test input dict of VH and VL sequences
-seq_dict = {'VH': 'EVQLVQSGAEVSQPGESLKISCKGSGYSFTGYWISWVRQMPGKGLEWMGIIYPGDSDTKYTPSFQGQVTISTDKSINTAYLQWSSLKASDTAMYYCARRGDGLYYYGMDVWGQGTTVTVSS',
-            'VL': 'EIVMTQSHTLLPVTPGEPASITCRSSQSLLHSNGYNYLDWYLQKPGQSPQLLIYLGSNRASGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCMQALQTPQTFGQGTKVDIK'}
-
-get_structure(seq_dict)

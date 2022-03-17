@@ -12,8 +12,13 @@ igblastprocess = IGBLASTprocess()
 
 def standardise_seqs(csv_file, vh_col_name, vl_col_name):
 
-    '''input csv file and names of columns containing VH and VL sequences
-        output df with original info and correctly formatted sequences (all single letter AA)'''
+    '''Function to convert sequences in wrong format (nucleotide sequences or 3-letter AA format) into correct format (single letter AA)
+
+    param csv_file: input csv returned by various webscraping parts of pipeline, containing columns of sequences
+    param vh_col_name: name of column in csv file containing VH sequences
+    param vl_col_name: name of column in csv file containing VL sequences
+    returns df: pandas dataframe of original csv with corrected sequences
+    '''
 
     # convert patent output to dataframe
     df = pd.read_csv(csv_file)
@@ -62,8 +67,14 @@ def standardise_seqs(csv_file, vh_col_name, vl_col_name):
 
 def correction_and_add_cdrs(df, outfile_name):
 
-    '''filter sequences to check anarci, if ok then get cdrs and germlines; add this extra info to a new final df
-    count how many sequences lost by N/A (e.g. if unpaired) or failing anarci'''
+    '''Function to run correctly formatted sequences through ANARCI to correct numbering/length if necessary, then get CDRs and germlines.
+    This additional data is then added to the original dataframe. Function also counts how many sequences are lost by being N/A (e.g. if unpaired) or failing ANARCI
+
+    param df: output dataframe from standardise_seqs() function containing correctly formatted amino acid sequences in columns 'VH' and 'VL'
+    param outfile_name: specify name for output csv of updated df
+
+    returns corrected_seqs_with_cdrs: updated dataframe of original data from source, with corrected sequences, and additional data (CDRs, germlines)
+    '''
 
     # go through new cols and correct sequence length with anarci
     corrected_vh = []
@@ -155,7 +166,3 @@ def correction_and_add_cdrs(df, outfile_name):
     corrected_seqs_with_cdrs.to_csv(outfile_name)
 
     return corrected_seqs_with_cdrs
-
-
-df = standardise_seqs(csv_file='pdbs-2022_03_08.csv', vh_col_name='VH', vl_col_name='VL')
-final_df = correction_and_add_cdrs(df=df, outfile_name='pdb_output.csv')
