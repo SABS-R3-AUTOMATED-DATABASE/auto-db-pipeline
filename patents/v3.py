@@ -68,7 +68,6 @@ class Patents:
         Get the first 1000 results in google patent search results.
         The url is obtained by using Fetch/XHR in Chrome developer mode
         """
-        starttime = datetime.now()
         results = []
         now = datetime.now()
         url_part_1 = "https://patents.google.com/xhr/query?url=q%3D" + "%2B".join(
@@ -141,7 +140,6 @@ class Patents:
         )
         headers = {"User-Agent": Patents.get_random_ua()}
         req = requests.get(url_first_half + "&exp=", headers=headers)
-        print(url_first_half + "&exp=")
         main_data = req.json()
         pages = main_data["results"]["total_num_pages"]
         data = main_data["results"]["cluster"]
@@ -176,18 +174,19 @@ class Patents:
                         results.append(
                             "https://patents.google.com/patent/" + num + "/en"
                         )
-        print("Collecting Patent URLs takes", datetime.now() - starttime)
+        print("Collecting ",len(results)," Patent URLs takes", datetime.now() - now)
         return results
 
-    def get_patents(self, CN: bool = False, keywords=KEYWORDS, start_year: int = 2003):
+    def get_patents(self, CN: bool = False, keywords=KEYWORDS, start_year: int = 2003, patents = None):
         """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
         starttime = datetime.now()
-        patents = Patents.get_patent_urls(keywords=keywords, start_year=start_year)
-        if CN is True:
-            patents_cn = Patents.get_patent_urls(
-                CN=True, keywords=keywords, start_year=start_year
-            )
-            patents = list(set(patents) | set(patents_cn))
+        if patents == None:
+            patents = Patents.get_patent_urls(keywords=keywords, start_year=start_year)
+            if CN is True:
+                patents_cn = Patents.get_patent_urls(
+                    CN=True, keywords=keywords, start_year=start_year
+                )
+                patents = list(set(patents) | set(patents_cn))
         df = pd.DataFrame(
             {
                 "URL": [],
@@ -199,7 +198,7 @@ class Patents:
                 "Abstract": [],
                 "Table": [],
             },
-            dtype="str",
+            dtype="object",
         )
         df["URL"] = pd.Series(patents, dtype="str")
         for i in range(df.shape[0]):
@@ -218,57 +217,58 @@ class Patents:
                 title = title.split("\n")[0]
                 title = re.split(r"- ", title, maxsplit=1)[1]
             title = title.lower()
-            df.loc[i, "Title"] = title
+            df.at[i, "Title"] = title
             for content in soup.find_all("div", class_="claim-text"):
                 unwanted = content.find("span", class_="google-src-text")
-                if unwanted is not None:
+                if unwanted:
                     unwanted.extract()
                 claim = content.text
                 claim = claim.replace("\n", "")
                 claims.append(claim)
-            df.loc[i, "Claim"] = claims
+                
+            df.at[i, "Claim"] = claims
             for content in soup.find_all("div", class_="description-paragraph"):
                 unwanted = content.find("span", class_="google-src-text")
-                if unwanted is not None:
+                if unwanted:
                     unwanted.extract()
                 text = content.text
                 text = text.replace("\n", "")
                 texts.append(text)
             for content in soup.find_all("div", class_="description-line"):
                 unwanted = content.find("span", class_="google-src-text")
-                if unwanted is not None:
+                if unwanted:
                     unwanted.extract()
                 text = content.text
                 text = text.replace("\n", "")
                 texts.append(text)
-            df.loc[i, "Content"] = texts
+            df.at[i, "Content"] = texts
             for content in soup.find_all("td", class_="description-td"):
                 unwanted = content.find("span", class_="google-src-text")
-                if unwanted is not None:
+                if unwanted:
                     unwanted.extract()
                 table = content.text
                 table = table.replace("\n", "")
                 tables.append(table)
-            df.loc[i, "Table"] = tables
+            df.at[i, "Table"] = tables
             fig_links = soup.find_all("meta", itemprop="full")
-            if len(fig_links) != 0:
+            if fig_links:
                 for link in fig_links:
                     links.append(link["content"])
-            df.loc[i, "Fig"] = links
+            df.at[i, "Fig"] = links
             for content in soup.find_all("div", class_="patent-image"):
                 for a in content.find_all("a", href=True):
                     if a["href"] not in figs:
                         figs.append(a["href"])
-            df.loc[i, "Fig_in_text"] = figs
+            df.at[i, "Fig_in_text"] = figs
             content = soup.find("div", class_="abstract")
-            if content is not None:
-                df.loc[i, "Abstract"] = content.text
-            if (i + 1) % 10 == 0:
+            if content:
+                df.at[i, "Abstract"] = content.text
+            if (i + 1) % 20 == 0:
                 print(str(i + 1) + "/" + str(df.shape[0]), datetime.now() - starttime)
             if i % 100 == 0 and i != 0:
                 time.sleep(600)
         self.search_results = df
-        print("Dowloading Patents takes", datetime.now() - starttime)
+        print("Dowloading ",len(patents)," Patents takes", datetime.now() - starttime)
         return df
 
     # def translate_seq(VR: str):
@@ -616,7 +616,7 @@ class Patents:
                     text = soup.text.replace("\n", " ")
                     splitted = text.split("SEQUENCE LISTINGS")
                     if len(splitted) > 1:
-                        df.loc[i, "Content"] = df.loc[i, "Content"] + [splitted[-1]]
+                        df.at[i, "Content"] = df.at[i, "Content"] + [splitted[-1]]
         return df
 
     def extract_sequences(self, df=None, hide: bool = True):
@@ -720,7 +720,7 @@ class Patents:
                         break
                 if dummy:
                     seq_list = Patents.get_seq_listing(df.loc[i, "URL"])
-                    df.loc[i, "Content"] = df.loc[i, "Content"] + [seq_list]
+                    df.at[i, "Content"] = df.at[i, "Content"] + [seq_list]
         return df
 
     def get_seq_listing(URL: str):
@@ -793,19 +793,18 @@ class Patents:
         save_csv: bool = True,
     ):
         starttime = datetime.now()
-        now = datetime.now()
         search_results = Patents.get_patents(
             self, CN=CN, keywords=keywords, start_year=start_year
         )
         self.search_results = search_results
         if save_json:
             search_results.to_json(
-                "data/patent_search_results_" + now.strftime("%Y%m%d") + ".json"
+                "data/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
             )
         sequences = Patents.extract_sequences(search_results)
         if save_csv:
             sequences.to_csv(
-                "data/patent_sequence_results_" + now.strftime("%Y%m%d") + ".csv",
+                "data/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
                 index=False,
             )
         print("The whole process takes", datetime.now() - starttime)
@@ -818,4 +817,8 @@ test = Patents()
 # test.load_search_output("patents/search_results_new.json")
 # test.extract_sequences()
 # test.save_final_output("patents/patent_results_new_us.csv")
-test.get_seq()
+# test.get_seq(CN = True)
+with open("patents/urls.txt", 'r') as f:
+    urls = [line.rstrip('\n') for line in f]
+patents = test.get_patents(patents=urls)
+patents.to_json("data/patent_search_results.json")
