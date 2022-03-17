@@ -1,8 +1,33 @@
-## Input / Output
+## Pipeline explanation
 
-We start with keywords, and use [keywords2papers.py](keywords2papers.py) to get to papers, and then use [papers2info.py](papers2info.py) to get to protein informatics.
+
+To get the papers from keywords we call `keywords2papers.py`. This gets a dataset of paper metadata. To scrape the IDs from the papers (dois) we call `papers2ids.py`. This gets a dataset of paper metadata and IDs, as well as whether ID descriptions are mentioned (e.g. is 'genbank' mentioned in the paper). By default, `papers2ids.py` calls `keywords2papers.py` if the paper metadata for that date does not already exist.
+
+The file `papers2ids.py` calls `paper.py` which creates a "paper" object. Then, `paper.py` fetches the pubmed IDs (pmid and pmc) using the `fetch_types.py`. Then, `paper.py` calls `paper_types.py`. Then, `paper_types.py` calls `fetch_text.py` and interfaces with the full texts by calling `types_interface.py`. Then, `types_interface.py` uses regular expressions from `extract_ids.py` to retrieve both the possible IDs and the mentions of the ID descriptors.
+
+### IDs Mentions
+
+```
+id_checking = {'genbank': r"(genbank|National Genetic Sequence Data Base)",
+                'pdb': r"(pdb|protein data bank)",
+                'accession': r"(accession)",
+                'protein': r"(protein|antibody|antibodies)",
+                'nucleotide': r"nucleotide",
+                'geninfo': r"(geninfo|gi number)",
+                'refseq': r"(refseq|reference sequence)"
+            }
+
+```
 
 ---
+## Easily go from..
+
+1. Protein ID to Associated Publication (api with GenBank and PDB datasets)
+2. Protein ID to Papers it's in (api with publications, runtime (12 hours))
+3. Protein ID to Papers it's cited in (api with both G & P protein datasets and publications)
+
+---
+
 ## Protein ID formatting
 ### GenBank protein IDs
 "Three letters followed by five digits, a period, and a version number."

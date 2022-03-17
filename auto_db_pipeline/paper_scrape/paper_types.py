@@ -1,7 +1,8 @@
 """
-Object representations of the paper types: Doi, pmid, pmc.
+Representations of the paper types: Doi, pmid, pmc.
+Called by paper.py
 
-Note that we can optioanlly choose to include the paper text
+Note that we can optionally choose to include the paper text
 in the representations.
 """
 import requests
@@ -14,6 +15,7 @@ class Doi:
         self.doi = doi
         if not self:
             return
+        print('getting doi')
         self.journal = journal
         self.set_url(journal)
         self.interface = Interface(doi, authors, self.paper_text)
@@ -23,10 +25,16 @@ class Doi:
         return bool(self.doi)
 
     def __repr__(self):
-        """Representation of the doi paper type for retrieval."""
+        """Representation."""
+        return str(self.output)
+
+    @property
+    def output(self):
+        """Output of the doi paper type for retrieval."""
+        representation = {'doi': self.doi}
         if not self:
-            return None
-        representation = {'doi': self.doi, 'interface': repr(self.interface)}
+            return representation
+        representation.update(self.interface.output)
         return representation
 
     def set_url(self, journal):
@@ -75,6 +83,7 @@ class Pmid:
         self.pmid = pmid
         if not self:
             return
+        print('getting pmid')
         self.url = self.url_pmid
         self.interface = Interface(doi, authors, self.paper_text, pmid)
 
@@ -83,10 +92,17 @@ class Pmid:
         return bool(self.pmid)
 
     def __repr__(self):
-        """Representation of the pmid paper type for retrieval."""
+        """Representation."""
+        return str(self.output)
+
+    @property
+    def output(self):
+        """Output of the pmid paper type for retrieval."""
+        representation = {'pmid': self.pmid}
         if not self:
+            print('reached here')
             return None
-        representation = {'pmid': self.pmid, 'interface': repr(self.interface)}
+        representation.update(self.interface.output)
         return representation
 
     @property
@@ -105,6 +121,7 @@ class Pmc:
         self.pmc = pmc
         if not self:
             return
+        print('getting pmc')
         self.url = self.url_pmc
         self.interface = Interface(doi, authors, self.paper_text)
 
@@ -113,10 +130,16 @@ class Pmc:
         return bool(self.pmc)
 
     def __repr__(self):
-        """Representation of the pmc paper type for retrieval."""
+        """Representation."""
+        return str(self.output)
+
+    @property
+    def output(self):
+        """Output of the pmc paper type for retrieval."""
+        representation = {'pmc': self.pmc}
         if not self:
             return None
-        representation = {'pmc': self.pmc, 'interface': repr(self.interface)}
+        representation.update(self.interface.output)
         return representation
 
     @property
@@ -128,3 +151,17 @@ class Pmc:
         """Default paper text."""
         if self.url:
             return get_text(self.url)
+
+class PaperType:
+    """General paper type class."""
+
+    def __init__(self, type_id):
+        self.type_id = type_id
+        if not self:
+            return
+
+    def __bool__(self):
+        """Return whether the paper type can be considered to exist."""
+        return bool(self.type_id)
+
+    # Can probably remove doi and pmid from types_interface

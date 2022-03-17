@@ -1,3 +1,4 @@
+
 SAbDab-master/
 old_keyword_files/
 
@@ -13,6 +14,10 @@ genbank/old_notebooks
 genbank/__pycache__
 genbank/elink.dtd
 **/.vscode
-data/biorxiv_all*.jsonl
-*.ent
 data/patents/patent_search_results_*.json
+**/biorxiv_all*.jsonl
+*.ent
+*.cif
+genbank/data/protein_handles2.json
+*.csv
+get_additional_info/__pycache__
