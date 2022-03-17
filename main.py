@@ -3,8 +3,12 @@ import pandas as pd
 import numpy as np
 import json
 
+from sympy import sequence
+
 from auto_db_pipeline.genbank.run_genbank_pipeline import run_genbank_pipeline
 from auto_db_pipeline.papers2ids import Papers
+from auto_db_pipeline.patents.patents_pipeline import get_seq
+
 
 # TODO: multiprocessing after keywords are generated
 def main():
@@ -13,8 +17,7 @@ def main():
   keywords = get_keywords() 
 
   ''' Search for seqs from patents'''
-  patent_seqs = get_seqs_from_patents(keywords)
-
+  patents = get_seq()
   ''' Search for seqs from papers '''
   # scrape paper text for pdb/genbank ids
   papers = Papers(selected_date="2022_03_08")

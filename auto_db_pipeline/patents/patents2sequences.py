@@ -1,9 +1,9 @@
 import pandas as pd
 import re
-from US_patents import get_us_sequences
-from WIPO_patents import get_wipo_sequences
-from speical_cases import CN111978395A, CN113817052A
-from seqid2seq import extract_seq_from_id, extract_seq_from_id_US
+from .US_patents import get_us_sequences
+from .WIPO_patents import get_wipo_sequences
+from .speical_cases import CN111978395A, CN113817052A
+from .seqid2seq import extract_seq_from_id, extract_seq_from_id_US
 
 
 def extract_ids_from_string(elem: str):

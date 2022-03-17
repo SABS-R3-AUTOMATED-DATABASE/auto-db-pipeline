@@ -2,8 +2,8 @@ import pandas as pd
 import re
 from datetime import datetime
 import os
-from patents2sequences import extract_sequences
-from keywords2patents import get_patents
+from .patents2sequences import extract_sequences
+from .keywords2patents import get_patents
 
 KEYWORDS = [
     ["SARS-CoV-2", "COVID-19", "coronavirus", "SARS-CoV", "MERS-CoV", "SARS"],
