@@ -6,7 +6,6 @@ from speical_cases import CN111978395A, CN113817052A
 from seqid2seq import extract_seq_from_id, extract_seq_from_id_US
 
 
-
 def extract_ids_from_string(elem: str):
     """
     Use regex to identify sentences that could indicate that a pair of seq id nos that corresponds to VH and VL of an antibody, or a single seq id no of a nanobody(single domain antibody)
@@ -14,9 +13,7 @@ def extract_ids_from_string(elem: str):
     if "cdr" not in elem and "fc" not in elem and len(elem) < 700:
         output = []
         if "light and heavy chain" in elem and "light chain" not in elem:
-            items = re.findall(
-                "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
-            )
+            items = re.findall("(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem)
             if items:
                 for item in items:
                     item = re.findall("\d+", item)
@@ -24,9 +21,7 @@ def extract_ids_from_string(elem: str):
                         output.append([item[1] + "/" + item[0], elem])
             return output
         if "heavy and light chain" in elem and "heavy chain" not in elem:
-            items = re.findall(
-                "(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem
-            )
+            items = re.findall("(?<=seq id no:)\d+\s*and\s*[seq id no:]*\s*\d+", elem)
             if items:
                 for item in items:
                     item = re.findall("\d+", item)
@@ -86,15 +81,12 @@ def extract_ids_from_string(elem: str):
             item2 = re.findall("(?<=seq id no:)\d+(?!\d+)\s*\-*\s*\d+", elem)
             if item2:
                 item2 = re.findall("\d+", item2[0])
-                item2 = [
-                    str(i) for i in list(range(int(item2[0]), 1 + int(item2[1])))
-                ]
+                item2 = [str(i) for i in list(range(int(item2[0]), 1 + int(item2[1])))]
             items = list(set(item) | set(item2))
             if items:
                 for item in items:
                     output.append([item, elem])
             return output
-
 
 
 def ID_to_df(items: list, Content: list, URL: str):
@@ -187,21 +179,15 @@ def extract_sequences(df, hide: bool = True):
             outputdf = pd.concat(
                 [
                     outputdf,
-                    CN113817052A(
-                        Content=df.loc[i, "Content"], URL=df.loc[i, "URL"]
-                    ),
+                    CN113817052A(Content=df.loc[i, "Content"], URL=df.loc[i, "URL"]),
                 ],
                 axis=0,
             )
-        elif (
-            df.loc[i, "URL"] == "https://patents.google.com/patent/CN111978395A/en"
-        ):
+        elif df.loc[i, "URL"] == "https://patents.google.com/patent/CN111978395A/en":
             outputdf = pd.concat(
                 [
                     outputdf,
-                    CN111978395A(
-                        Content=df.loc[i, "Content"], URL=df.loc[i, "URL"]
-                    ),
+                    CN111978395A(Content=df.loc[i, "Content"], URL=df.loc[i, "URL"]),
                 ],
                 axis=0,
             )
@@ -235,9 +221,7 @@ def extract_sequences(df, hide: bool = True):
                 outputdf = pd.concat(
                     [
                         outputdf,
-                        ID_to_df(
-                            summary, df.loc[i, "Content"], df.loc[i, "URL"]
-                        ),
+                        ID_to_df(summary, df.loc[i, "Content"], df.loc[i, "URL"]),
                     ],
                     axis=0,
                 )

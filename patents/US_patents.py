@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 import re
 
 
-
-
 def get_us_sequences(df):
     """
     Access USTPO website to download possible txt sequence listings and add into Content column

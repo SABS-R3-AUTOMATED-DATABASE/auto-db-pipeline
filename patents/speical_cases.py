@@ -1,7 +1,5 @@
-
 import pandas as pd
 from seqid2seq import extract_seq_from_id
-
 
 
 def CN113817052A(Content: list, URL: str):
@@ -49,6 +47,7 @@ def CN113817052A(Content: list, URL: str):
             axis=0,
         )
     return outputdf
+
 
 def CN111978395A(Content: list, URL: str):
     """

@@ -2,6 +2,7 @@ import os
 import ftplib
 import zipfile
 
+
 def get_seq_listing(URL: str):
     """
     Access the ftp server of WIPO patent to download Sequence listing files uploaded with the patent
@@ -41,6 +42,7 @@ def get_seq_listing(URL: str):
             os.rmdir("/data/temp")
             break
     return output
+
 
 def get_wipo_sequences(df):
     """

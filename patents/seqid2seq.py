@@ -1,5 +1,6 @@
 import re
 
+
 def extract_seq_from_id(content: list, id: str):
     """
     Use extracted seq id nos to locate actual sequences in Content txt, this function works for CN, KR and WO patents
@@ -33,6 +34,7 @@ def extract_seq_from_id(content: list, id: str):
     else:
         return "", ""
 
+
 def extract_seq_from_id_US(content: list, id: str):
     """
     Use extracted seq id nos to locate actual sequences in Content txt, this function works for US patents
@@ -51,4 +53,4 @@ def extract_seq_from_id_US(content: list, id: str):
             if len(seqs.group().replace(" ", "")) > 120:
                 seq = seqs.group()
                 origin = splitter[0]
-    return seq, origin        
+    return seq, origin

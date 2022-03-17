@@ -30,6 +30,7 @@ KEYWORDS = [
     ],
 ]
 
+
 def get_random_ua():
     """Function that gets a random user agent to access the webpages"""
     random_ua = ""
@@ -47,6 +48,7 @@ def get_random_ua():
         print(str(ex))
     finally:
         return random_ua.rstrip()
+
 
 def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003):
     """
@@ -94,9 +96,7 @@ def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003)
                     or "coronavirus" in title
                     or "mers" in title
                 ):
-                    results.append(
-                        "https://patents.google.com/patent/" + num + "/en"
-                    )
+                    results.append("https://patents.google.com/patent/" + num + "/en")
         for i in range(1, pages):
             headers = {"User-Agent": get_random_ua()}
             req = requests.get(
@@ -118,10 +118,7 @@ def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003)
                             "https://patents.google.com/patent/" + num + "/en"
                         )
     url_first_half = (
-        url_part_2
-        + "%26after%3Dfiling%3A"
-        + now.strftime("%Y")
-        + "0101%26num%3D100"
+        url_part_2 + "%26after%3Dfiling%3A" + now.strftime("%Y") + "0101%26num%3D100"
     )
     headers = {"User-Agent": get_random_ua()}
     req = requests.get(url_first_half + "&exp=", headers=headers)
@@ -156,20 +153,17 @@ def get_patent_urls(CN: bool = False, keywords=KEYWORDS, start_year: int = 2003)
                     or "coronavirus" in title
                     or "mers" in title
                 ):
-                    results.append(
-                        "https://patents.google.com/patent/" + num + "/en"
-                    )
-    print("Collecting ",len(results)," Patent URLs takes", datetime.now() - now)
+                    results.append("https://patents.google.com/patent/" + num + "/en")
+    print("Collecting ", len(results), " Patent URLs takes", datetime.now() - now)
     return results
+
 
 def get_patents(CN: bool = True, keywords=KEYWORDS, start_year: int = 2003):
     """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
     starttime = datetime.now()
     patents = get_patent_urls(keywords=keywords, start_year=start_year)
     if CN is True:
-        patents_cn = get_patent_urls(
-            CN=True, keywords=keywords, start_year=start_year
-        )
+        patents_cn = get_patent_urls(CN=True, keywords=keywords, start_year=start_year)
         patents = list(set(patents) | set(patents_cn))
     df = pd.DataFrame(
         {
@@ -250,5 +244,5 @@ def get_patents(CN: bool = True, keywords=KEYWORDS, start_year: int = 2003):
             print(str(i + 1) + "/" + str(df.shape[0]), datetime.now() - starttime)
         if i % 100 == 0 and i != 0:
             time.sleep(600)
-    print("Dowloading ",len(patents)," Patents takes", datetime.now() - starttime)
+    print("Dowloading ", len(patents), " Patents takes", datetime.now() - starttime)
     return df

@@ -1,6 +1,5 @@
-
 import pandas as pd
-from datetime import  datetime
+from datetime import datetime
 from patents2sequences import extract_sequences
 from keywords2patents import get_patents
 
@@ -35,7 +34,6 @@ KEYWORDS_patents = [
 ]
 
 
-
 def get_seq(
     self,
     CN: bool = True,
@@ -45,9 +43,7 @@ def get_seq(
     save_csv: bool = True,
 ):
     starttime = datetime.now()
-    search_results = get_patents(
-        self, CN=CN, keywords=keywords, start_year=start_year
-    )
+    search_results = get_patents(self, CN=CN, keywords=keywords, start_year=start_year)
     self.Patent_content = search_results
     if save_json:
         search_results.to_json(
@@ -64,6 +60,4 @@ def get_seq(
     return sequences
 
 
-
-seq = get_seq(CN = True)
-
+seq = get_seq(CN=True)
