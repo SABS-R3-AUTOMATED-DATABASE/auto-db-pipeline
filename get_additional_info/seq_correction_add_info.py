@@ -65,13 +65,12 @@ def standardise_seqs(csv_file, vh_col_name, vl_col_name):
     return df
 
 
-def correction_and_add_cdrs(df, outfile_name):
+def correction_and_add_cdrs(df):
 
     '''Function to run correctly formatted sequences through ANARCI to correct numbering/length if necessary, then get CDRs and germlines.
     This additional data is then added to the original dataframe. Function also counts how many sequences are lost by being N/A (e.g. if unpaired) or failing ANARCI
 
     param df: output dataframe from standardise_seqs() function containing correctly formatted amino acid sequences in columns 'VH' and 'VL'
-    param outfile_name: specify name for output csv of updated df
 
     returns corrected_seqs_with_cdrs: updated dataframe of original data from source, with corrected sequences, and additional data (CDRs, germlines)
     '''
@@ -99,7 +98,7 @@ def correction_and_add_cdrs(df, outfile_name):
 
                 # otherwise run function to filter seqs through anarci
                 else:
-                    cdr_and_germlines, sequences = get_CDRs_and_germlines(row)
+                    cdr_and_germlines, sequences = get_CDRs_and_germlines(str(row))
                     # if anarci doesn't fail, add seqs to list
                     if cdr_and_germlines != '':
                         seq = sequences
@@ -126,7 +125,7 @@ def correction_and_add_cdrs(df, outfile_name):
 
                 # otherwise run function to filter seqs through anarci
                 else:
-                    cdr_and_germlines, sequences = get_CDRs_and_germlines(row)
+                    cdr_and_germlines, sequences = get_CDRs_and_germlines(str(row))
                     # if anarci doesn't fail, add seqs to list
                     if cdr_and_germlines != '':
                         seq = sequences
@@ -163,6 +162,5 @@ def correction_and_add_cdrs(df, outfile_name):
     # add new seqs to existing info from original csv/df
     corrected_df = pd.concat([df, seqs_updated], axis=1)
     corrected_seqs_with_cdrs = pd.concat([corrected_df.reset_index(drop=True), cdr_germlines_df.reset_index(drop=True)], axis=1)
-    corrected_seqs_with_cdrs.to_csv(outfile_name)
 
     return corrected_seqs_with_cdrs

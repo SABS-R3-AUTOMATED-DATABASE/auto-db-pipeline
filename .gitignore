@@ -15,7 +15,8 @@ data/patents/patent_search_results_*.json
 **/biorxiv_all*.jsonl
 *.ent
 *.cif
-*.csv
+
+genbank/data/protein_handles2.json
 get_additional_info/__pycache__
 
 auto_db_pipeline/genbank/data
