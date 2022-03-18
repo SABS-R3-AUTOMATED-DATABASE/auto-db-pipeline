@@ -2,7 +2,6 @@ import pandas as pd
 from seq_correction_add_info import standardise_seqs
 from seq_correction_add_info import correction_and_add_cdrs
 import time
-from functools import reduce
 
 # NOTE have outputs for patents, PDB, GenBank but not SI yet, will need to add in
 
