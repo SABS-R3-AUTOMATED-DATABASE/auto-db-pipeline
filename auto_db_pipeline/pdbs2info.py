@@ -21,7 +21,7 @@ logger.addHandler(file_handler)
 class PdbIDs:
     """Collection of all the PDB IDs from paper searching."""
 
-    save_every = 500
+    save_every = 25
     backup_every = 10_000
 
     def __init__(self, selected_date=None):
@@ -190,7 +190,6 @@ class PdbsLoader:
     @property
     def n_new_dois(self):
         return len(self.new_dois)
-
 
     @property
     def used_pdb_ids(self):

@@ -85,8 +85,6 @@ class PdbID:
 
 
     def __repr__(self) -> str:
-        if not self.is_pdb_id:
-            return None
         return str(self.output)
 
     def _get_fabs(self):
@@ -105,8 +103,10 @@ class PdbID:
     def _get_pdb_file(self):
         """Get the pdb file.
         This automatically caches if the file already exists in the filepath."""
-        pdb_list = PdbID._get_pdb_list()
-        self.pdb_file = pdb_list.retrieve_pdb_file(self.pdb_id, file_format="pdb", pdir=PDB_FILEPATH)
+        self.pdb_file = database._get_filepath(self.pdb_id)
+        if not self.pdb_file:
+            pdb_list = PdbID._get_pdb_list()
+            self.pdb_file = pdb_list.retrieve_pdb_file(self.pdb_id, file_format="pdb", pdir=PDB_FILEPATH)
 
     def _get_seq_repr(self):
         """Get the sequence representation of a PDB."""
@@ -119,7 +119,7 @@ class PdbID:
         if not self.seq_repr:
             self._get_seq_repr()
         for chain_id, chain_seq in self.seq_repr.items():
-            self._anarci_output[chain_id] = run_anarci(chain_seq)
+            self._anarci_output[chain_id] = run_anarci([['seq', chain_seq]])
 
     def _check_anarci_if_antibody(self) -> bool:
         """Check with ANARCI if the PDB is an antibody."""
