@@ -68,6 +68,11 @@ def get_seq(
             "data/patents/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
             index=False,
         )
+        equences.to_csv(
+            "data/webscrape_outputs/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
+            index=False,
+        )
+        
     print("The whole process takes", datetime.now() - starttime)
     return sequences
 

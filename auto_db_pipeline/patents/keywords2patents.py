@@ -34,7 +34,7 @@ KEYWORDS = [
 def get_random_ua():
     """Function that gets a random user agent to access the webpages"""
     random_ua = ""
-    ua_file = "patents/user-agents.txt"
+    ua_file = "auto_db_pipeline/patents/user-agents.txt"
     try:
         with open(ua_file) as f:
             lines = f.readlines()
