@@ -1,14 +1,14 @@
+import imp
 import pandas as pd
 import numpy as np
 import json
 
-from genbank.keywords2ids import GenbankSearch
-from genbank.ids2protein import ProteinRetrieval
-from genbank.proteins2info import InfoRetrieval
-from genbank.info2csv import PopulateDatabase
-from genbank.evaluate_genbank_search import EvaluateGenbankSearch
+from sympy import sequence
 
+from auto_db_pipeline.genbank.run_genbank_pipeline import run_genbank_pipeline
 from auto_db_pipeline.papers2ids import Papers
+from auto_db_pipeline.patents.patents_pipeline import get_seq
+
 
 # TODO: multiprocessing after keywords are generated
 def main():
@@ -16,22 +16,8 @@ def main():
   # TODO: write this function and make dynamics for functions below
   keywords = get_keywords() 
 
-  ''' Search for seqs from genbank IDs'''
-  genbanksearch = GenbankSearch(keywords)
-  genbanksearch()
-
-  proteinretrival = ProteinRetrieval()
-  proteinretrival()
-
-  inforetreival = InfoRetrieval()
-  inforetreival(classification_method='anarci')
-
-  populatedb = PopulateDatabase()
-  populatedb()
-
   ''' Search for seqs from patents'''
-  patent_seqs = get_seqs_from_patents(keywords)
-
+  patents = get_seq()
   ''' Search for seqs from papers '''
   # scrape paper text for pdb/genbank ids
   papers = Papers(selected_date="2022_03_08")
@@ -42,6 +28,11 @@ def main():
   paper_urls = get_dois()
   supp_seqs = get_seqs_from_supp(paper_urls)
 
+  ''' Search for seqs from genbank IDs'''
+  # needs to be run after jesses code
+  # keywords_disease must be a list of covid specific keywords
+  run_genbank_pipeline(keywords_disease, selected_date, output_path)
+  
   ''' Combine all outputs and get statistics'''
     
 

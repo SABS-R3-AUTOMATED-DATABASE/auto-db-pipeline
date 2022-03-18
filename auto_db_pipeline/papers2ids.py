@@ -14,6 +14,7 @@ DATAPATH = "../data/papers2ids/"
 FILENAME_PAPERS = "paper_ids"
 FILENAME_ERRORS = "errors"
 DATATYPE = ".jsonl"
+BACKUP_PATH = "backups/"
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -38,12 +39,12 @@ class Papers:
         self.errors = []
         self.loader = IDsLoader(self.selected_date)
 
-    def __call__(self):
+    def __call__(self, backup=True):
         """Iterate through the papers, go from papers 2 ids. Perhaps
         keywords 2 ids if necessary."""
         self.get_input_data()
         self.get_papers()
-        self.loader()
+        self.loader(backup=backup)
 
     def __getitem__(self, i):
         """Index the object by indexing its paper objects."""
@@ -89,7 +90,7 @@ class Papers:
         backup_path = ""
         backup_suffix = ""
         if backup:
-            backup_path = "backups/"
+            backup_path = BACKUP_PATH
             backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
 
         papers_path = f"{DATAPATH}{backup_path}{FILENAME_PAPERS}-{self.selected_date}{backup_suffix}{DATATYPE}"
@@ -131,37 +132,73 @@ class IDsLoader:
     def __init__(self, selected_date=None):
         """
         The papers attribute is a dictionary indexed by doi.
-        The po"""
+        The possible ids is a dictonary indexed by id name, and each
+        value is itself a dictionary indexed by possible ID and a list of
+        dois that have that possible ID."""
         self.selected_date = selected_date
-        self.id_papers = None
+        self.input_data = None
+        # ids_possible is partly saved by the jsons (save_genbank)
         self.ids_possible = {id_name: {} for id_name in id_finding}
-        self.ids_mentions = {}
-        self.papers = {}
+        self._ids_mentions = {}  # This is made redundant by df_papers
+        self._papers = {}  # This is made redundant by df_papers
         self.df_papers = None
 
-    def __call__(self):
-        self.get_id_papers()
+    def __call__(self, save=True, backup=False):
+        self.get_input_data()
         self.load_papers()
         self.get_df_papers()
-        self.save_df_papers()
+        if save:
+            self.save_df_papers()
+            self.save_genbank()
+        if backup:
+            self.save_df_papers(backup=backup)
+
+    def save_genbank(self):
+        """Save the GenBank stuff for FS."""
+        protein_types = ('genbank_protein_id', 'genbank_protein_accession', 'refseq_id')
+        nucleotide_types = ('genbank_nucleotide_accession', 'refseq_id')
+
+        protein_output = []
+        for protein_type in protein_types:
+            protein_output += list(self.ids_possible[protein_type].keys())
+
+        nucleotide_output =     []
+        for nucleotide_type in nucleotide_types:
+            nucleotide_output += list(self.ids_possible[nucleotide_type].keys())
+
+        protein_path = f"{DATAPATH}genbank_proteins-{self.selected_date}.json"
+        with open(protein_path, 'w') as f:
+            json.dump(protein_output, f)
+
+        nucleotide_path = f"{DATAPATH}genbank_nucleotides-{self.selected_date}.json"
+        with open(nucleotide_path, 'w') as f:
+            json.dump(nucleotide_output, f)
+
 
     def get_df_papers(self):
         """Create a csv from papers."""
         paper_dataset = []
-        assert set(self.papers.keys()) == set(self.ids_mentions.keys())
-        dois = set(self.papers.keys())
+        assert set(self._papers.keys()) == set(self._ids_mentions.keys())
+        dois = set(self._papers.keys())
 
         for doi in dois:
             # non-unique dois
-            for info in self.papers[doi]:
+            for info in self._papers[doi]:
                 paper_entry = {'doi': doi}
                 paper_entry.update(info)
-                paper_entry.update(self.ids_mentions[doi])
+                paper_entry.update(self._ids_mentions[doi])
                 paper_dataset.append(paper_entry)
         self.df_papers = DataFrame(paper_dataset)
 
-    def save_df_papers(self):
-        self.df_papers.to_csv(f"{DATAPATH}papers-{self.selected_date}.csv", index=False)
+    def save_df_papers(self, backup=False):
+        backup_path = ""
+        backup_suffix = ""
+        if backup:
+            backup_path = BACKUP_PATH
+            backup_suffix = "-" + datetime.now().strftime("%Y_%m_%d_%Hh%Mm")
+
+        path = f"{DATAPATH}{backup_path}papers-{self.selected_date}{backup_suffix}.csv"
+        self.df_papers.to_csv(path, index=False)
 
     @property
     def id_names(self):
@@ -178,25 +215,25 @@ class IDsLoader:
             raise ValueError(f"The ID name needs to be one of the following: {self.id_names}")
         return list(self.ids_possible[id_name].keys())
 
-    def get_id_papers(self):
+    def get_input_data(self):
         path = f"{DATAPATH}{FILENAME_PAPERS}-{self.selected_date}{DATATYPE}"
         df = read_json(path_or_buf = path, lines = True, orient = 'records', convert_dates=False)
-        self.id_papers = df.to_dict(orient='records')
+        self.input_data = df.to_dict(orient='records')
 
     def load_papers(self):
-        for id_paper in self.id_papers:
+        for id_paper in self.input_data:
             self._load_paper(id_paper)
 
     def _get_basic_paper_info(self, id_paper):
         if self._no_doi(id_paper):
             return
         paper_identifier = self._get_paper_identifier(id_paper)
-        paper_info = self.papers.get(paper_identifier, None)
+        paper_info = self._papers.get(paper_identifier, None)
         basic_paper_info = {field: id_paper[field] for field in self.basic_paper_fields}
         if not paper_info:
-            self.papers[paper_identifier] = [basic_paper_info]
+            self._papers[paper_identifier] = [basic_paper_info]
         else:
-            self.papers[paper_identifier].append(basic_paper_info)
+            self._papers[paper_identifier].append(basic_paper_info)
 
     def _get_paper_identifier(self, id_paper):
         doi = id_paper['paper_types']['doi']['doi']
@@ -220,7 +257,7 @@ class IDsLoader:
             self._load_ids(possible_ids, paper_identifier)
             mention_ids = paper_type['mention_ids']
             self._load_mentions(mention_ids, paper_identifier)
-            self.papers[paper_identifier][-1][type_name] = paper_type[type_name]
+            self._papers[paper_identifier][-1][type_name] = paper_type[type_name]
 
 
     def _load_ids(self, possible_ids, paper_identifier):
@@ -233,10 +270,10 @@ class IDsLoader:
                     self.ids_possible[id_name][possible_id_value].add(paper_identifier)
 
     def _load_mentions(self, mention_ids, paper_identifier):
-        mention_dict = self.ids_mentions.get(paper_identifier, None)
+        mention_dict = self._ids_mentions.get(paper_identifier, None)
         if not mention_dict:
-            self.ids_mentions[paper_identifier] = mention_ids
+            self._ids_mentions[paper_identifier] = mention_ids
         else:
             for id_desc, mentioned in mention_ids.items():
-                already_mentioned = self.ids_mentions[paper_identifier][id_desc]
-                self.ids_mentions[paper_identifier][id_desc] = already_mentioned or mentioned
+                already_mentioned = self._ids_mentions[paper_identifier][id_desc]
+                self._ids_mentions[paper_identifier][id_desc] = already_mentioned or mentioned
