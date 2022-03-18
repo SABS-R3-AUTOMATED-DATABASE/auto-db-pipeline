@@ -10,16 +10,17 @@ old_keyword_files/
 keywords/.pytest_cache
 keywords/tests/__pycache__
 .vscode
-genbank/old_notebooks
-genbank/__pycache__
-genbank/elink.dtd
 **/.vscode
-paperscraper/.ipynb_checkpoints/
-paperscraper/check_coverage.ipynb
-paperscraper/testfile.ipynb
+data/patents/patent_search_results_*.json
 **/biorxiv_all*.jsonl
 *.ent
 *.cif
-genbank/data/protein_handles2.json
 
+genbank/data/protein_handles2.json
 get_additional_info/__pycache__
+
+auto_db_pipeline/genbank/data
+auto_db_pipeline/genbank/old_files
+auto_db_pipeline/genbank/__pycache__
+run_genbank_pipeline.ipynb
+auto_db_pipeline/genbank/*.dtd
