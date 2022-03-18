@@ -30,7 +30,8 @@ def main():
 
   ''' Search for seqs from genbank IDs'''
   # needs to be run after jesses code
-  run_genbank_pipeline(keywords, path_to_jesses_ids, output_path)
+  # keywords_disease must be a list of covid specific keywords
+  run_genbank_pipeline(keywords_disease, selected_date, output_path)
   
   ''' Combine all outputs and get statistics'''
     
