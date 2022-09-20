@@ -29,7 +29,7 @@ class InfoRetrieval:
     translate_nucleotides(self)
     filter_AB_entries(self)
     classify_vh_vl(self)
-    find_antigen(self)
+    find_antigen(self, known_antigens)
     find_fragment_id(self)
     group_by_publication(self)
     pair_vh_vl(self)
@@ -46,7 +46,7 @@ class InfoRetrieval:
     AB_paired.json: json file containg paired heavy and light chains
     AB_unpaired.json: json file containg unpaired heavy and light chains
     '''
-    def __init__(self, proteins_file_path='genbank/data/protein_handles.json'):
+    def __init__(self, proteins_file_path='../../data/genbank/handles_protein.json'):
 
         with open(proteins_file_path, 'r') as infile:
             self.entries = json.load(infile)
@@ -141,7 +141,7 @@ class InfoRetrieval:
             except Exception:
                 entry['chain'] = 'unassigned'
 
-    def find_antigen(self):
+    def find_antigen(self, known_antigens):
         '''
         Finds the antigen the antibody binds to. Searches defintions of
         genbank entries for keywords and labels them accordingly.
@@ -150,37 +150,17 @@ class InfoRetrieval:
         for entry in self.entries:
             definition = entry['GBSeq_definition'].lower()
             title = entry['GBSeq_references'][0]['GBReference_title'].lower()
-            covid = ['coronavirus', 'sars-cov', 'sars']
-            mers = ['mers-cov', 'mers']
-            cov_2 = ['sars-cov-2', 'covid-19']
-            cov_1 = ['sars-cov-1']
-            spike = ['spike', 'spike protein']
-            rbd = ['receptor binding domain', 'rbd']
 
-            if (any(word in definition for word in cov_2)
-                    or any(word in title for word in cov_2)):
-                entry['antigen'] = 'SARS-CoV-2'
-                if (any(word in definition for word in spike)
-                        or any(word in title for word in spike)):
-                    entry['antigen'] = 'SARS-CoV-2, Spike protein'
-                if (any(word in definition for word in rbd)
-                        or any(word in title for word in rbd)):
-                    entry['antigen'] = 'SARS-CoV-2, Spike protein RBD'
-
-            elif (any(word in definition for word in cov_1)
-                    or any(word in title for word in cov_1)):
-                entry['antigen'] = 'SARS-CoV-1'
-
-            elif (any(word in definition for word in covid)
-                    or any(word in title for word in covid)):
-                entry['antigen'] = 'SARS-CoV'
-
-            elif (any(word in definition for word in mers)
-                    or any(word in title for word in mers)):
-                entry['antigen'] = 'MERS-CoV'
-
-            else:
-                entry['antigen'] = 'not determined'
+            entry['antigen'] = []
+            for antigen, words in known_antigens.items():
+                if any(word in definition for word in words):
+                    entry['antigen'].append(antigen)
+                elif any(word in title for word in words):
+                    entry['antigen'].append(antigen)
+            
+            # if no antigen was found
+            if not entry['antigen']:
+                entry['antigen'] = 'unknown'
                 n_antigen_not_found += 1
 
         print('Number of entries where antigen was determined:',
@@ -598,7 +578,8 @@ class InfoRetrieval:
     def __call__(self, db='protein', classification_method=False,
                  paired_out_file_path='genbank/data/AB_paired.json',
                  unpaired_out_file_path='genbank/data/AB_unpaired.json',
-                 nanobod_out_file_path='genbank/data/nanobody.json'):
+                 nanobod_out_file_path='genbank/data/nanobody.json',
+                 known_antigens={}):
         '''
         runs functions in correct order
 
@@ -624,7 +605,7 @@ class InfoRetrieval:
             self.classify_vh_vl_anarci()
         else:
             self.classify_vh_vl()
-        self.find_antigen()
+        self.find_antigen(known_antigens)
         self.find_fragment_id()
         self.find_nanobodies()
         self.seperate_nanobodies()

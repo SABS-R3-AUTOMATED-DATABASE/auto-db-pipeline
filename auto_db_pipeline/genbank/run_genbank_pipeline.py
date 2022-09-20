@@ -27,7 +27,7 @@ def create_keywords(keywords_disease):
     return keywords
 
 
-def run_genbank_pipeline(keywords_disease, date, output_path):
+def run_genbank_pipeline(keywords_disease, known_antigens, date, output_path):
     '''Main function that runs the genbank pipeline.
 
     param keywords_disease: keywords to search genbank protein database
@@ -68,7 +68,8 @@ def run_genbank_pipeline(keywords_disease, date, output_path):
         db='protein', classification_method='anarci',
         paired_out_file_path='data/genbank/AB_paired_protein.json',
         unpaired_out_file_path='data/genbank/AB_unpaired_protein.json',
-        nanobod_out_file_path='data/genbank/nanobody_protein.json')
+        nanobod_out_file_path='data/genbank/nanobody_protein.json',
+        known_antigens=known_antigens)
 
     # get info from nucleotide handles
     inforetreival = InfoRetrieval(

@@ -11,7 +11,7 @@ from auto_db_pipeline.patents.patents_pipeline import get_seq
 
 
 # TODO: multiprocessing after keywords are generated
-def main():
+def get_all_fucking_sequences():
   ''' Get keywords for papers/genbank/patent search '''
   # TODO: write this function and make dynamics for functions below
   keywords = get_keywords() 
@@ -31,7 +31,13 @@ def main():
   ''' Search for seqs from genbank IDs'''
   # needs to be run after jesses code
   # keywords_disease must be a list of covid specific keywords
-  run_genbank_pipeline(keywords_disease, selected_date, output_path)
+  known_antigens = {'COVID': ['coronavirus', 'sars-cov', 'sars'],
+                  'MERS': ['mers-cov', 'mers'],
+                  'SARS-COV-2': ['sars-cov-2', 'covid-19'],
+                  'SARS-COV-1': ['sars-cov-1'],
+                  'Spike protein': ['spike', 'spike protein'],
+                  'RBD': ['receptor binding domain', 'rbd']}
+  run_genbank_pipeline(keywords_disease, known_antigens, selected_date, output_path)
   
   ''' Combine all outputs and get statistics'''
     

@@ -35,6 +35,13 @@ class TestProteins2info(unittest.TestCase):
                                   'GBReference_title': 'Title 1'}],
                               'GBSeq_definition': 'LAMBDA, ABD123'}]
 
+        self.known_antigens = {'COVID': ['coronavirus', 'sars-cov', 'sars'],
+                               'MERS': ['mers-cov', 'mers'],
+                               'SARS-COV-2': ['sars-cov-2', 'covid-19'],
+                               'SARS-COV-1': ['sars-cov-1'],
+                               'Spike protein': ['spike', 'spike protein'],
+                               'RBD': ['receptor binding domain', 'rbd']}
+
         json.load = MagicMock(return_value=self.test_entries)
         self.genbank = proteins2info.InfoRetrieval()
 
@@ -88,15 +95,15 @@ class TestProteins2info(unittest.TestCase):
         self.assertEqual(entries[3]['chain'], 'H')
 
     def test_find_antigen(self):
-        self.genbank.find_antigen()
+        self.genbank.find_antigen(self.known_antigens)
         # check if the antigen of the example entries was detected correctly
         entries = self.genbank.entries
-        self.assertEqual(entries[0]['antigen'], 'SARS-CoV')
+        self.assertEqual(entries[0]['antigen'], ['COVID'])
         self.assertEqual(entries[1]['antigen'],
-                         'SARS-CoV-2, Spike protein RBD')
-        self.assertEqual(entries[2]['antigen'], 'MERS-CoV')
-        self.assertEqual(entries[3]['antigen'], 'MERS-CoV')
-        self.assertEqual(entries[4]['antigen'], 'not determined')
+                         ['SARS-COV-2', 'RBD'])
+        self.assertEqual(entries[2]['antigen'], ['MERS'])
+        self.assertEqual(entries[3]['antigen'], ['MERS'])
+        self.assertEqual(entries[4]['antigen'], 'unknown')
 
     def test_find_fragment_id(self):
         self.genbank.find_fragment_id()
@@ -157,7 +164,7 @@ class TestProteins2info(unittest.TestCase):
         # overwrite entires with example entries
         self.genbank.entries = self.entries_gb
         self.genbank.classify_vh_vl()
-        self.genbank.find_antigen()
+        self.genbank.find_antigen(self.known_antigens)
         self.genbank.find_fragment_id()
         self.genbank.group_by_publication()
         self.genbank.pair_vh_vl()
