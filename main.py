@@ -37,7 +37,7 @@ def get_all_fucking_sequences():
                   'SARS-COV-1': ['sars-cov-1'],
                   'Spike protein': ['spike', 'spike protein'],
                   'RBD': ['receptor binding domain', 'rbd']}
-  run_genbank_pipeline(keywords_disease, known_antigens, selected_date, output_path)
+  run_genbank_pipeline(keywords_disease, known_antigens, output_path)
   
   ''' Combine all outputs and get statistics'''
     

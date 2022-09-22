@@ -42,24 +42,11 @@ def run_genbank_pipeline(keywords_disease, known_antigens, date, output_path):
     genbanksearch(
         out_file_path='data/genbank/ids_protein.json')
 
-    # combine with protein ids from papers
-    scraped_protein_ids = f'data/papers2ids/genbank_proteins-{date}.json'
-    idscombination = Combination(
-        'data/genbank/ids_protein.json', scraped_protein_ids)
-    idscombination(ids_out_file_path='data/genbank/ids_protein_combined.json')
-
     # fetch protein entries
     proteinretrival = ProteinRetrieval(
-        ids_file_path='data/genbank/ids_protein_combined.json')
+        ids_file_path='data/genbank/ids_protein.json')
     proteinretrival(db='protein',
                     out_file_path='data/genbank/handles_protein.json')
-
-    # fetch nucleotide entries
-    scraped_nt_ids = f'data/papers2ids/genbank_nucleotides-{date}.json'
-    proteinretrival = ProteinRetrieval(
-        ids_file_path=scraped_nt_ids)
-    proteinretrival(db='nucleotide',
-                    out_file_path='data/genbank/handles_nt.json')
 
     # get info from protein handles
     inforetreival = InfoRetrieval(
@@ -71,33 +58,10 @@ def run_genbank_pipeline(keywords_disease, known_antigens, date, output_path):
         nanobod_out_file_path='data/genbank/nanobody_protein.json',
         known_antigens=known_antigens)
 
-    # get info from nucleotide handles
-    inforetreival = InfoRetrieval(
-        proteins_file_path='data/genbank/handles_nt.json')
-    inforetreival(
-        db='protein', classification_method='anarci',
-        paired_out_file_path='data/genbank/AB_paired_nt.json',
-        unpaired_out_file_path='data/genbank/AB_unpaired_nt.json',
-        nanobod_out_file_path='data/genbank/nanobody_nt.json')
-
-    # combine information from nucleotide and proteins
-    combination = Combination(
-        'data/genbank/AB_paired_protein.json',
-        'data/genbank/AB_paired_nt.json')
-    combination('data/genbank/AB_paired_combined.json')
-    combination = Combination(
-        'data/genbank/AB_unpaired_protein.json',
-        'data/genbank/AB_unpaired_nt.json')
-    combination('data/genbank/AB_unpaired_combined.json')
-    combination = Combination(
-        'data/genbank/nanobody_protein.json',
-        'data/genbank/nanobody_nt.json')
-    combination('data/genbank/nanobody_combined.json')
-
     # populate csv
     populatedb = PopulateDatabase(
-        paired_path='data/genbank/AB_paired_combined.json',
-        unpaired_path='data/genbank/AB_unpaired_combined.json',
-        nanobod_path='data/genbank/nanobody_combined.json')
+        paired_path='data/genbank/AB_paired_protein.json',
+        unpaired_path='data/genbank/AB_unpaired_protein.json',
+        nanobod_path='data/genbank/nanobody_protein.json')
     populatedb(out_file_paired=output_path+'ab_database.csv',
                out_file_unpaired=output_path+'ab_database_unpaired.csv')
