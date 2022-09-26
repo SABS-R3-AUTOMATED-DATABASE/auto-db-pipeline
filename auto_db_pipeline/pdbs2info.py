@@ -300,6 +300,10 @@ class PdbsLoader:
         path = f"{DATAPATH}{backup_path}{FILENAME_PDBS}-{self.selected_date}{backup_suffix}.csv"
         self.df_output.to_csv(path, index=False)
 
+    def load_df_output(self):
+        path = f"{DATAPATH}{FILENAME_PDBS}-{self.selected_date}.csv"
+        return pd.read_csv(path, index_col=0)
+
     @staticmethod
     def _load_fabs(datum):
         for fab in datum['fabs']:
