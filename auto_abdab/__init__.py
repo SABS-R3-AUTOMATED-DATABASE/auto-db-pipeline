@@ -1,0 +1,1 @@
+from auto_abdab.genbank_pipeline import genbank_pipeline

@@ -5,9 +5,7 @@ import json
 
 from sympy import sequence
 
-from auto_db_pipeline.genbank.run_genbank_pipeline import run_genbank_pipeline
-from auto_db_pipeline.papers2ids import Papers
-from auto_db_pipeline.patents.patents_pipeline import get_seq
+from auto_abdab import genbank_pipeline
 
 
 # TODO: multiprocessing after keywords are generated
@@ -37,7 +35,7 @@ def get_all_fucking_sequences():
                   'SARS-COV-1': ['sars-cov-1'],
                   'Spike protein': ['spike', 'spike protein'],
                   'RBD': ['receptor binding domain', 'rbd']}
-  run_genbank_pipeline(keywords_disease, known_antigens, output_path)
+  genbank_pipeline(keywords_disease, known_antigens, output_path)
   
   ''' Combine all outputs and get statistics'''
     

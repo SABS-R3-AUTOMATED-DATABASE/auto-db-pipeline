@@ -1,5 +1,4 @@
-from keywords2ids import GenbankSearch
-from json_combination import Combination
+from auto_abdab.genbank_pipeline.keywords2ids import GenbankSearch
 from ids2protein import ProteinRetrieval
 from proteins2info import InfoRetrieval
 from info2csv import PopulateDatabase
@@ -27,11 +26,10 @@ def create_keywords(keywords_disease):
     return keywords
 
 
-def run_genbank_pipeline(keywords_disease, known_antigens, date, output_path):
+def genbank_pipeline(keywords_disease, known_antigens, output_path):
     '''Main function that runs the genbank pipeline.
 
     param keywords_disease: keywords to search genbank protein database
-    param selected_date: date of genbank ids from papers to select
     param output_path: directory where output csvs are saved
     '''
     # create disease specific keywords
