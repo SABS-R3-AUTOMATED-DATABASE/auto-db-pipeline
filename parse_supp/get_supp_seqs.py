@@ -114,7 +114,7 @@ def get_supp_seqs(url):
     return pd.concat(df_seqs)
 
 
-if __name__ == "__main__":
+def get_seqs_from_supp(url_list):
     # url_list = [
     #     'https://www.nature.com/articles/s41586-021-04060-7',
     #     'https://www.biorxiv.org/content/10.1101/2020.12.31.424729v1',
@@ -123,9 +123,9 @@ if __name__ == "__main__":
     #     'https://www.nature.com/articles/s41586-021-03696-9',
     # ]
 
-    url_list = [
-        'https://www.nature.com/articles/s41586-021-04060-7'
-    ]
+    # url_list = [
+    #     'https://www.nature.com/articles/s41586-021-04060-7'
+    # ]
 
     df_seqs = []
     for url in url_list:
@@ -140,3 +140,5 @@ if __name__ == "__main__":
     print('Number of sequences scraped: {}'.format(len(all_sequences)))
     print('Example output:')
     print(all_sequences.head(10))
+
+    return all_sequences

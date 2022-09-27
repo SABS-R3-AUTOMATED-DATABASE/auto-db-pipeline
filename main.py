@@ -8,6 +8,7 @@ from sympy import sequence
 from auto_db_pipeline.genbank.run_genbank_pipeline import run_genbank_pipeline
 from auto_db_pipeline.papers2ids import Papers
 from auto_db_pipeline.patents.patents_pipeline import get_seq
+from parse_supp.get_supp_seqs import get_seqs_from_supp
 
 
 # TODO: multiprocessing after keywords are generated
