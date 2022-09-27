@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 import os
 from .patents2sequences import extract_sequences
-from .keywords2patents import get_patents
+from .keywords2patents import Patents
 
 KEYWORDS = [
     ["SARS-CoV-2", "COVID-19", "coronavirus", "SARS-CoV", "MERS-CoV", "SARS"],
@@ -36,45 +36,28 @@ KEYWORDS_patents = [
 ]
 
 
-def get_seq(
-    keywords=KEYWORDS,
+def get_seq_from_patents(
+    keywords=KEYWORDS_patents,
     start_year: int =2003,
     load_json: bool = True,
     save_json: bool = True,
     save_csv: bool = True,
+    path:str = "data/patents",
 ):
     starttime = datetime.now()
-    not_found = True
+    patents = Patents(keywords,start_year)
     if load_json:
-        for item in os.listdir("data/patents"):
-            match = re.findall("patent\_search\_results\_\d{8}\.json",item)
-            if match:
-                not_found = False
-                search_results = pd.read_json("data/patents/" + match[0])
-                print('Loading patent search results',match[0], 'if a new search is needed please set load_json = False.')
-                break
-        if not_found:
-            print('No json file about patents found, starting a new search.')
-            search_results = get_patents()   
-    else:
-        search_results = get_patents()
-    if save_json and not_found:
-        search_results.to_json(
-            "data/patents/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
-        )
-    sequences = extract_sequences(search_results)
+        patents.load_patents(path)
+    if not patents.patents:
+        patents.get_patents()
+    if save_json:
+        patents.save_patents(path)
+    sequences = extract_sequences(patents.patents)
     if save_csv:
         sequences.to_csv(
             "data/patents/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
             index=False,
         )
-        equences.to_csv(
-            "data/webscrape_outputs/patent_sequence_results_" + starttime.strftime("%Y%m%d") + ".csv",
-            index=False,
-        )
-        
-    print("The whole process takes", datetime.now() - starttime)
+
     return sequences
 
-
-seq = get_seq()
