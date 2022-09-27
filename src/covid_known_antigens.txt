@@ -1,0 +1,7 @@
+antigen: possible names/abbreviations
+COVID: coronavirus, sars-cov, sars
+MERS: mers-cov, mers
+SARS-COV-2: sars-cov-2, covid-19
+SARS-COV-1: sars-cov-1
+Spike protein: spike, spike protein
+RBD: receptor binding domain, rbd

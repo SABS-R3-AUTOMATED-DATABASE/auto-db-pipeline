@@ -9,13 +9,18 @@ from auto_db_pipeline.genbank.run_genbank_pipeline import run_genbank_pipeline
 from auto_db_pipeline.papers2ids import Papers
 from auto_db_pipeline.patents.patents_pipeline import get_seq
 from parse_supp.get_supp_seqs import get_seqs_from_supp
+from auto_db_pipeline.get_additional_info.collate_results import collate_results
+from auto_db_pipeline.keywords_antigens import loadkeywords, load_known_antigens
 
 
 # TODO: multiprocessing after keywords are generated
 def get_all_fucking_sequences():
   ''' Get keywords for papers/genbank/patent search '''
   # TODO: write this function and make dynamics for functions below
-  keywords = get_keywords() 
+  keywords_disease = load_known_antigens('/src/covid_keywords.txt')
+  ''' Get known antigens for genbank'''
+  known_antigens = load_known_antigens('/src/covid_known_antigens.txt')
+
 
   ''' Search for seqs from patents'''
   patents = get_seq()
@@ -38,9 +43,10 @@ def get_all_fucking_sequences():
                   'SARS-COV-1': ['sars-cov-1'],
                   'Spike protein': ['spike', 'spike protein'],
                   'RBD': ['receptor binding domain', 'rbd']}
-  run_genbank_pipeline(keywords_disease, known_antigens, output_path)
+  run_genbank_pipeline(keywords_disease, known_antigens, output_path='data/genbank/')
   
   ''' Combine all outputs and get statistics'''
+  collate_results(outfile_name='data/final_antibody_db.csv')
     
 
-main()
+get_all_fucking_sequences()
