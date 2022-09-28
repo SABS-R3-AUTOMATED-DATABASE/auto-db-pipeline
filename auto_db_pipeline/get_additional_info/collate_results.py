@@ -22,15 +22,14 @@ def collate_results(outfile_name):
     print('Running dataframes through IgBLAST and ANARCI...')
 
     print('PATENT')
-    patent_output = standardise_seqs(csv_file='data/webscrape_outputs/patent_results.csv', vh_col_name='HCVR', vl_col_name='LCVR')
+    patent_output = standardise_seqs(csv_file='data/patents/patent_sequence_results.csv', vh_col_name='HCVR', vl_col_name='LCVR')
     patent_output = correction_and_add_cdrs(patent_output)
     patent_output.rename(columns={'HC_Description': 'VH Description', 'LC_Description': 'VL Description'}, inplace=True)
 
     print('SI')
     supp_output = standardise_seqs(csv_file='data/supp_info/supp_seqs.csv', vh_col_name='HCVR', vl_col_name='LCVR')
     supp_output = correction_and_add_cdrs(supp_output)
-    # TODO change this line to rename columns
-    supp_output.rename(columns={'HC_Description': 'VH Description', 'LC_Description': 'VL Description'}, inplace=True)
+    supp_output.rename(columns={'Binds_to': 'Binds to', 'Origin': 'Source'}, inplace=True)
 
     print('PDB')
     pdb_output = pd.read_csv('data/webscrape_outputs/pdbs-2022_03_08.csv')
@@ -56,7 +55,7 @@ def collate_results(outfile_name):
         for rows in df.iterrows():
             if df is patent_output:
                 source.append('Patent')
-            elif fg is supp_output:
+            elif df is supp_output:
                 source.append('SI')
             elif df is pdb_output:
                 source.append('PDB')

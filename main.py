@@ -16,14 +16,13 @@ from auto_db_pipeline.keywords_antigens import load_keywords, load_known_antigen
 # TODO: multiprocessing after keywords are generated
 def get_all_fucking_sequences():
   ''' Get keywords for papers/genbank/patent search '''
-  # TODO: write this function and make dynamics for functions below
   keywords_disease = load_keywords('/src/covid_keywords.txt')
   ''' Get known antigens for genbank'''
   known_antigens = load_known_antigens('/src/covid_known_antigens.txt')
 
 
   ''' Search for seqs from patents'''
-  patents = get_seq_from_patents()
+  get_seq_from_patents(keywords_disease)
 
   ''' Search for seqs from SI '''
   # scrape paper text for pdb/genbank ids
