@@ -1,8 +1,10 @@
 import json
 from anarci import run_anarci
 import re
-from ABDB import database as db
 from Bio.Seq import Seq
+from Bio.PDB import PDBList, MMCIFParser
+from Bio.SeqUtils import seq1
+import pandas as pd
 
 
 class InfoRetrieval:
@@ -61,6 +63,8 @@ class InfoRetrieval:
 
         self.pattern = re.compile(self.pdb_id_regex,
                                   flags=re.IGNORECASE | re.VERBOSE)
+        
+        self.db_summary = pd.read_csv('sabdab_summary_all.tsv', sep='\t')
 
     def translate_nucleotides(self):
         '''
@@ -390,7 +394,7 @@ class InfoRetrieval:
               n_unpaired)
         print('----------')
 
-    def get_chains_from_sabdab(self, entry):
+    def get_chains_from_sabdab(self,entry):
         '''
         Returns the heavy-light chain pairing of a protein entry with a
         corresponding PDB entry.
@@ -409,34 +413,48 @@ class InfoRetrieval:
 
         if self.pattern.match(id):
 
-            pdb_id = id.split('_')[0]
-            p = db.fetch(pdb_id)
+            pdb_id = id.split('_')[0].lower()
 
-            if p is not None:
+            p = self.db_summary[self.db_summary.pdb == pdb_id]
+
+            if len(p) > 0:
+
+
+                # get chain sequences from pdb
+                pdb = PDBList(pdb='./pdbs/', verbose=False)
+                pdb.retrieve_pdb_file(pdb_id, pdir='./pdbs', overwrite=True)
+                parser = MMCIFParser(QUIET=True)
+                structure = parser.get_structure(pdb_id, f'./pdbs/{pdb_id}.cif')
+                chains = {chain.id:seq1(''.join(residue.resname for residue in chain)) for chain in structure.get_chains()}
+
 
                 if chain == 'H':
-                    for fab in p.fabs:
-                        numb = fab.get_numbering()
-                        if "".join(numb['H'].values()) in seq.upper():
-
-                            try:
-                                H = "".join(numb['H'].values())
-                                L = "".join(numb['L'].values())
-                                return (H, L)
-                            except KeyError:
-                                return None
-
-                if chain == 'L':
-                    for fab in p.fabs:
-                        numb = fab.get_numbering()
-                        if "".join(numb['L'].values()) in seq.upper():
-
-                            try:
-                                H = "".join(numb['H'].values())
-                                L = "".join(numb['L'].values())
-                                return (H, L)
-                            except KeyError:
-                                return None
+                    for index, row in p.iterrows():
+            
+                        try: # sometimes chains names are wrong in sabdab ignore these cases
+                            if chains[row.Hchain] in seq.upper(): #This line causes it to fail sometimes
+                                try:
+                        
+                                    return (chains[row.Hchain], chains[row.Lchain])
+                                except KeyError:
+                        
+                                    return None
+                        except KeyError:
+                            continue
+                    return None
+                
+                elif chain == 'L':
+                    for index, row in p.iterrows():
+                        try: # sometimes chains names are wrong in sabdab ignore these cases
+                            if chains[row.Lchain] in seq.upper(): 
+                                try:
+                                    return (chains[row.Hchain], chains[row.Lchain])
+                                except KeyError:
+                        
+                                    return None
+                        except KeyError:
+                            continue
+                    return None
             else:
                 return None
         else:

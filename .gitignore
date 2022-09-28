@@ -24,3 +24,4 @@ auto_db_pipeline/genbank/old_files
 auto_db_pipeline/genbank/__pycache__
 run_genbank_pipeline.ipynb
 auto_db_pipeline/genbank/*.dtd
+auto_db_pipeline/genbank/pdbs/*
