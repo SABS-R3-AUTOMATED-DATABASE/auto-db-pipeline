@@ -6,12 +6,32 @@ import zipfile
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+import numpy as np
+import time
+
+def get_random_ua():
+    """Function that gets a random user agent to access the webpages"""
+    random_ua = ""
+    ua_file = "auto_db_pipeline/patents/user-agents.txt"
+    try:
+        with open(ua_file) as f:
+            lines = f.readlines()
+        if len(lines) > 0:
+            prng = np.random.RandomState()
+            index = prng.permutation(len(lines) - 1)
+            idx = np.asarray(index, dtype=np.int64)[0]
+            random_ua = lines[int(idx)]
+    except Exception as ex:
+        print("Exception in random_ua")
+        print(str(ex))
+    finally:
+        return random_ua.rstrip()
 
 def get_us_sequences(df):
     """
     Access USTPO website to download possible txt sequence listings and add into Content column
     """
-    for i in range(df.shape[0]):
+    for i in tqdm(range(df.shape[0])):
         if "US" in df.loc[i, "URL"]:
             dummy = False
             for _ in df.loc[i, "Claim"]:
@@ -25,18 +45,35 @@ def get_us_sequences(df):
                     + "ALL&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.htm&r=1&f=G&l=50&s1="
                 )
                 url = url + num + ".PN.&OS=PN/" + num + "&RS=PN/" + num
-                headers = requests.utils.default_headers()
-                headers["User-Agent"] = (
-                    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                    + "(KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"
-                )
-                page = requests.get(url, headers=headers)
-                soup = BeautifulSoup(page.content, "html.parser")
-                text = soup.text.replace("\n", " ")
-                splitted = text.split("SEQUENCE LISTINGS")
-                if len(splitted) > 1:
-                    df.loc[i, "Content"] = df.loc[i, "Content"] + [splitted[-1]]
+                # headers = requests.utils.default_headers()
+                # headers["User-Agent"] = (
+                #     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                #     + "(KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"
+                # )
+                headers = {
+                    "User-Agent": get_random_ua(),
+                    "Accept-Encoding": "*",
+                    "Connection": "keep-alive"
+                }
+                delay = 5
+                max_retry = 5
+                for _ in range(max_retry):
+                    try:
+                        page = requests.get(url, headers=headers)
+                        soup = BeautifulSoup(page.content, "html.parser")
+                        text = soup.text.replace("\n", " ")
+                        splitted = text.split("SEQUENCE LISTINGS")
+                        if len(splitted) > 1:
+                            df.loc[i, "Content"] = df.loc[i, "Content"] + [splitted[-1]]
+                        page.close()
+                        break                # do not loop after a successfull download...
+                    except:
+                        time.sleep(delay)
+                        delay *= 2
+                else:                # signal an abort if download was not possible
+                    print(f"Failed for {url} after {max_retry} attempts")
     return df
+
 
 def get_seq_listing(URL: str):
     """
@@ -83,7 +120,7 @@ def get_wipo_sequences(df):
     """
     Check if there is potential sequence in WIPO patents, if so, download possible sequence listing file and add to Content column
     """
-    for i in range(df.shape[0]):
+    for i in tqdm(range(df.shape[0])):
         if "WO" in df.loc[i, "URL"]:
             dummy = False
             for _ in df.loc[i, "Claim"]:
@@ -94,6 +131,7 @@ def get_wipo_sequences(df):
                 seq_list = get_seq_listing(df.loc[i, "URL"])
                 df.loc[i, "Content"] = df.loc[i, "Content"] + [seq_list]
     return df
+
 
 def extract_seq_from_id(content: list, id: str):
     """
@@ -260,44 +298,39 @@ def ID_to_df(items: list, Content: list, URL: str):
             else:
                 hcseq, hco = extract_seq_from_id(Content, ids[0])
                 lcseq, lco = extract_seq_from_id(Content, ids[1])
-            outputdf = pd.concat(
-                [
-                    outputdf,
-                    pd.DataFrame(
-                        {
-                            "URL": [URL],
-                            "HCVR": [hcseq],
-                            "LCVR": [lcseq],
-                            "HC_Description": [hco],
-                            "LC_Description": [lco],
-                            "Source": ["(" + item[0] + ") " + item[1]],
-                        },
-                        dtype="str",
-                    ),
-                ],
-                axis=0,
+            outputdf = outputdf.append(
+                pd.DataFrame(
+                    {
+                        "URL": [URL],
+                        "HCVR": [hcseq],
+                        "LCVR": [lcseq],
+                        "HC_Description": [hco],
+                        "LC_Description": [lco],
+                        "Source": ["(" + item[0] + ") " + item[1]],
+                    },
+                    dtype="str",
+                ),
+                ignore_index=True,
             )
+
         elif len(ids) == 1:
             if "US" in URL:
                 hcseq, hco = extract_seq_from_id_US(Content, ids[0])
             else:
                 hcseq, hco = extract_seq_from_id(Content, ids[0])
-            outputdf = pd.concat(
-                [
-                    outputdf,
-                    pd.DataFrame(
-                        {
-                            "URL": [URL],
-                            "HCVR": [hcseq],
-                            "LCVR": [""],
-                            "HC_Description": [hco],
-                            "LC_Description": [""],
-                            "Source": ["(" + item[0] + ") " + item[1]],
-                        },
-                        dtype="str",
-                    ),
-                ],
-                axis=0,
+            outputdf = outputdf.append(
+                pd.DataFrame(
+                    {
+                        "URL": [URL],
+                        "HCVR": [hcseq],
+                        "LCVR": [lcseq],
+                        "HC_Description": [hco],
+                        "LC_Description": [lco],
+                        "Source": ["(" + item[0] + ") " + item[1]],
+                    },
+                    dtype="str",
+                ),
+                ignore_index=True,
             )
     return outputdf
 
@@ -306,7 +339,6 @@ def extract_sequences(df):
     """
     The main funtion, the input is the filtered search results df
     and outputs a df with anti/nano-body sequences
-    The hide arg is about hiding antibodiess possibly exists in the patetns but we are unable to extract the sequence details
     """
     print("Gathering extra information for US patents...")
     df = get_us_sequences(df)
@@ -323,13 +355,12 @@ def extract_sequences(df):
         },
         dtype="str",
     )
+    print("Extracting antibody sequences from patents...")
     for i in tqdm(range(df.shape[0])):
         list_of_ids = []
         for _ in df.loc[i, "Claim"] + df.loc[i, "Content"]:
             if "seq id no" in _.lower():
-                edited = re.sub(
-                    "seq id nos*:*\.*\s*(?=\d+)", "seq id no:", _.lower()
-                )
+                edited = re.sub("seq id nos*:*\.*\s*(?=\d+)", "seq id no:", _.lower())
                 edited = list(
                     set(edited)
                     | set(re.split("\. ", edited))
@@ -350,13 +381,11 @@ def extract_sequences(df):
             for _ in set_of_ids:
                 source = [i[1] for i in list_of_ids if i[0] == _]
                 summary.append([_, sorted(source, key=len)[0]])
-            outputdf = pd.concat(
-                [
-                    outputdf,
-                    ID_to_df(summary, df.loc[i, "Content"], df.loc[i, "URL"]),
-                ],
-                axis=0,
+            outputdf = outputdf.append(
+                ID_to_df(summary, df.loc[i, "Content"], df.loc[i, "URL"]),
+                ignore_index=True,
             )
+
     outputdf.drop_duplicates(keep="first", inplace=True)
     outputdf = outputdf.reset_index(drop=True)
     outputdf = outputdf[outputdf["HCVR"] != pd.Series([""] * outputdf.shape[0])]
