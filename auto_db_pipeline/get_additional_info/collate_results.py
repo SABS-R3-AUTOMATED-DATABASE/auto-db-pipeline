@@ -26,6 +26,12 @@ def collate_results(outfile_name):
     patent_output = correction_and_add_cdrs(patent_output)
     patent_output.rename(columns={'HC_Description': 'VH Description', 'LC_Description': 'VL Description'}, inplace=True)
 
+    print('SI')
+    supp_output = standardise_seqs(csv_file='data/supp_info/supp_seqs.csv', vh_col_name='HCVR', vl_col_name='LCVR')
+    supp_output = correction_and_add_cdrs(supp_output)
+    # TODO change this line to rename columns
+    supp_output.rename(columns={'HC_Description': 'VH Description', 'LC_Description': 'VL Description'}, inplace=True)
+
     print('PDB')
     pdb_output = pd.read_csv('data/webscrape_outputs/pdbs-2022_03_08.csv')
     pdb_output = correction_and_add_cdrs(pdb_output)
@@ -44,19 +50,22 @@ def collate_results(outfile_name):
 
     # add cols to show source
     print('Adding webscraping source to database...')
-    dataframes = [patent_output, pdb_output, genbank_output]  # NOTE add SI once sorted
+    dataframes = [patent_output, supp_output, pdb_output, genbank_output]  # NOTE add SI once sorted
     source = []
     for df in dataframes:
         for rows in df.iterrows():
             if df is patent_output:
                 source.append('Patent')
+            elif fg is supp_output:
+                source.append('SI')
             elif df is pdb_output:
                 source.append('PDB')
             elif df is genbank_output:
                 source.append('GenBank')
 
     print('Creating final database...')
-    final_database = pd.concat([patent_output, pdb_output])
+    final_database = pd.concat([patent_output, supp_output])
+    final_database = pd.concat([final_database, pdb_output])
     final_database = pd.concat([final_database, genbank_output])
     final_database['Scrape source'] = source
 

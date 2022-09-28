@@ -141,4 +141,5 @@ def get_seqs_from_supp(url_list):
     print('Example output:')
     print(all_sequences.head(10))
 
-    return all_sequences
+    all_sequences.to_csv('data/supp_info/supp_seqs.csv')
+    #return all_sequences

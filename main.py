@@ -10,21 +10,22 @@ from auto_db_pipeline.papers2ids import Papers
 from auto_db_pipeline.patents.patents_pipeline import get_seq_from_patents
 from parse_supp.get_supp_seqs import get_seqs_from_supp
 from auto_db_pipeline.get_additional_info.collate_results import collate_results
-from auto_db_pipeline.keywords_antigens import loadkeywords, load_known_antigens
+from auto_db_pipeline.keywords_antigens import load_keywords, load_known_antigens
 
 
 # TODO: multiprocessing after keywords are generated
 def get_all_fucking_sequences():
   ''' Get keywords for papers/genbank/patent search '''
   # TODO: write this function and make dynamics for functions below
-  keywords_disease = load_known_antigens('/src/covid_keywords.txt')
+  keywords_disease = load_keywords('/src/covid_keywords.txt')
   ''' Get known antigens for genbank'''
   known_antigens = load_known_antigens('/src/covid_known_antigens.txt')
 
 
   ''' Search for seqs from patents'''
   patents = get_seq_from_patents()
-  ''' Search for seqs from papers '''
+
+  ''' Search for seqs from SI '''
   # scrape paper text for pdb/genbank ids
   papers = Papers(selected_date="2022_03_08")
   papers()
@@ -32,17 +33,11 @@ def get_all_fucking_sequences():
   # scrape supplementary files
   # TODO: merge this into paper scraper function above
   paper_urls = get_dois()
-  supp_seqs = get_seqs_from_supp(paper_urls)
+  get_seqs_from_supp(paper_urls)
+
+  ''' Search seqs from pdb'''
 
   ''' Search for seqs from genbank IDs'''
-  # needs to be run after jesses code
-  # keywords_disease must be a list of covid specific keywords
-  known_antigens = {'COVID': ['coronavirus', 'sars-cov', 'sars'],
-                  'MERS': ['mers-cov', 'mers'],
-                  'SARS-COV-2': ['sars-cov-2', 'covid-19'],
-                  'SARS-COV-1': ['sars-cov-1'],
-                  'Spike protein': ['spike', 'spike protein'],
-                  'RBD': ['receptor binding domain', 'rbd']}
   run_genbank_pipeline(keywords_disease, known_antigens, output_path='data/genbank/')
   
   ''' Combine all outputs and get statistics'''
