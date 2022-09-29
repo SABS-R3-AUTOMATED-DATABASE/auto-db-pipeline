@@ -5,7 +5,7 @@ def load_keywords(filepath):
         keywords_disease.split(', ')
     return keywords_disease
 
-def load_known_antigend(filepath=None):
+def load_known_antigens(filepath=None):
     '''Load known antigens from text file. If no path is provided empty dict is return'''
     if filepath=None:
         return {}

@@ -11,6 +11,7 @@ from auto_db_pipeline.patents.patents_pipeline import get_seq_from_patents
 from parse_supp.get_supp_seqs import get_seqs_from_supp
 from auto_db_pipeline.get_additional_info.collate_results import collate_results
 from auto_db_pipeline.keywords_antigens import load_keywords, load_known_antigens
+from auto_db_pipeline.keywords2papers import Keywords2Papers
 
 
 # TODO: multiprocessing after keywords are generated
@@ -25,16 +26,16 @@ def get_all_fucking_sequences():
   get_seq_from_patents(keywords_disease)
 
   ''' Search for seqs from SI '''
-  # scrape paper text for pdb/genbank ids
-  papers = Papers(selected_date="2022_03_08")
-  papers()
+  k2p = Keywords2Papers(keywords_disease)
+  pubmed_results = k2p.get_pubmed()
+  biorxiv_results = k2p.get_biorxiv()
 
-  # scrape supplementary files
-  # TODO: merge this into paper scraper function above
-  paper_urls = get_dois()
-  get_seqs_from_supp(paper_urls)
+  # TODO: function that produces urls
+
+  get_seqs_from_supp(paper_urls_list)
 
   ''' Search seqs from pdb'''
+  # TODO: add pdb function
 
   ''' Search for seqs from genbank IDs'''
   run_genbank_pipeline(keywords_disease, known_antigens, output_path='data/genbank/')
