@@ -14,20 +14,22 @@ from paperscraper.utils import dump_papers
 from paperscraper.get_dumps.biorxiv import biorxiv
 from pandas import read_json
 from os.path import isfile
+from constants import DATEFORMAT, KEYWORDS
 
 # pylint: disable=dangerous-default-value
 
-KEYWORDS = [
-            ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV', 'SARS'],
 
-            ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb', 'nanobodies'],
-
-            ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
-                'inhibit', 'targeting'],
-
-            ['heavy chain', 'complementarity determining region', 'gene',
-                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
-            ]
+#KEYWORDS = [
+#            ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV', 'SARS'],
+#
+#            ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb', 'nanobodies'],
+#
+#            ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
+#                'inhibit', 'targeting'],
+#
+#            ['heavy chain', 'complementarity determining region', 'gene',
+#                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
+#            ]
 
 FIELDS = ["title", "authors", "date", "abstract", "journal", "doi"]
 START_DATE = "None"
@@ -39,9 +41,6 @@ FILENAME_BIORXIV_ALL = "biorxiv_all"
 DATAPATH = "../data/keywords2papers/"
 DATATYPE = ".jsonl"
 
-DATEFORMAT = "%Y_%m_%d"
-
-
 class Keywords2Papers:
     """"
     Use date format "%Y_%m_%d".
@@ -49,8 +48,17 @@ class Keywords2Papers:
 
     valid_filenames = [FILENAME_PUBMED, FILENAME_BIORXIV, FILENAME_BIORXIV_ALL]
 
-    def __init__(self, selected_date: str = None):
+    def __init__(self, disease_keywords, selected_date: str = None):
         """Get the selected date and initialize the attributes."""
+        # initialise keywords
+        self.KEYWORDS = [
+            ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb', 'nanobodies'],
+            ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
+                'inhibit', 'targeting'],
+            ['heavy chain', 'complementarity determining region', 'gene',
+                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
+            ]
+        self.KEYWORDS.insert(0, disease_keywords)
         self.selected_date = Keywords2Papers.get_default_date(selected_date)
         self.biorxiv_results, self.pubmed_results = None, None
 
@@ -63,7 +71,7 @@ class Keywords2Papers:
             self.pubmed_results = self.load_output(FILENAME_PUBMED)
             return self.pubmed_results
 
-        self.pubmed_results = Keywords2Papers.fetch_pubmed()
+        self.pubmed_results = Keywords2Papers.fetch_pubmed(keywords=self.KEYWORDS)
         self.store_output(self.pubmed_results, FILENAME_PUBMED)
         return self.pubmed_results
 
@@ -85,7 +93,7 @@ class Keywords2Papers:
         if not biorxiv_all_exists:
             self.fetch_biorxiv_all()
 
-        self.biorxiv_results = self.fetch_biorxiv_local()
+        self.biorxiv_results = self.fetch_biorxiv_local(keywords=self.KEYWORDS)
         self.store_output(self.biorxiv_results, FILENAME_BIORXIV)
         return self.biorxiv_results
 
@@ -139,7 +147,7 @@ class Keywords2Papers:
         return date.today().strftime(DATEFORMAT)
 
 
-    def fetch_biorxiv_local(self, keywords: list[Union[str, list[str]]] = KEYWORDS) -> list[dict]:
+    def fetch_biorxiv_local(self, keywords: list[Union[str, list[str]]]) -> list[dict]:
         """
         Search for papers in the dump using keywords.
         Args:
@@ -191,7 +199,7 @@ class Keywords2Papers:
 
     @staticmethod
     def fetch_pubmed(
-        keywords: list[Union[str, list[str]]] = KEYWORDS,
+        keywords: list[Union[str, list[str]]],
         fields: list = FIELDS,
         start_date: str = START_DATE,
         end_date: str = END_DATE
