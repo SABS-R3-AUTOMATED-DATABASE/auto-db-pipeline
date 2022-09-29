@@ -7,6 +7,7 @@ import time
 import re
 import os
 from tqdm import tqdm
+from typing import List, Union
 
 KEYWORDS = [
     ["SARS-CoV-2", "COVID-19", "coronavirus", "SARS-CoV", "MERS-CoV", "SARS"],
@@ -34,7 +35,7 @@ KEYWORDS = [
 
 
 def get_random_ua():
-    """Function that gets a random user agent to access the webpages"""
+    """Method that gets a random user agent to access the webpages"""
     random_ua = ""
     ua_file = "auto_db_pipeline/patents/user-agents.txt"
     try:
@@ -53,7 +54,15 @@ def get_random_ua():
 
 
 class Patents:
-    def __init__(self, keywords=KEYWORDS, start_year: int = 2003):
+    """
+    Args:
+        keywords (List[Union[str, List[str]]]): List of keywords to be used in
+            google patents search. The outer list level will be considered as AND
+            separated keys, the inner level as OR separated.
+        start_year (int): Start year for the search. Needs to be in format:
+            YYYY, e.g. 2022. Defaults to 2003
+    """
+    def __init__(self, keywords: List[Union[str, List[str]]] = KEYWORDS, start_year: int = 2003):
         self.keywords = keywords
         self.start_year = start_year
         self.patent_urls = ""
@@ -62,8 +71,10 @@ class Patents:
     def get_patent_urls(self):
         """
         Get the first 1000 results in google patent search results.
-        The url is obtained by using Fetch/XHR in Chrome developer mode
+        Search queries are sent for CN, KR, US and WO regions seperately for each year.
+        The urls are obtained by using Fetch/XHR in Chrome developer mode
         """
+        print('Seaching Google Patents using the given keywords...')
         results = []
         now = datetime.now()
         url_part_1 = "https://patents.google.com/xhr/query?url=q%3D" + "%2B".join(
@@ -138,9 +149,13 @@ class Patents:
         self.patent_urls = results
 
     def get_patents(self):
-        """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
-        if not self.patent_urls.empty:
+        """
+        Downloads the relevant patents from google patents using the patent numbers.
+        This method taks around 6 hours to run to prevent getting blocked for sending too many requests.
+        """
+        if not self.patent_urls:
             self.get_patent_urls()
+        print('Downloading text from Google Patents...')
         df = pd.DataFrame(
             {
                 "URL": [],
@@ -221,15 +236,17 @@ class Patents:
         self.patents = df
 
     def save_patents(self, path: str = "data/patents"):
+        """Saves the content of all the patents into a json file"""
         starttime = datetime.now()
         path = path + "/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
-        if self.patents:
+        if not self.patents.empty:
             print(f"Saving the patents to {path}")
             self.patents.to_json(path)
         else:
             print("No patents to be saved")
 
     def load_patents(self, path: str = "data/patents"):
+        """Search for and load json file containing patent information"""
         not_found = True
         for item in os.listdir(path):
             match = re.findall("patent\_search\_results\_\d{8}\.json", item)

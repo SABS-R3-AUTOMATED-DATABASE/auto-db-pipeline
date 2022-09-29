@@ -66,11 +66,11 @@ def get_us_sequences(df):
                         if len(splitted) > 1:
                             df.loc[i, "Content"] = df.loc[i, "Content"] + [splitted[-1]]
                         page.close()
-                        break                # do not loop after a successfull download...
+                        break
                     except:
                         time.sleep(delay)
                         delay *= 2
-                else:                # signal an abort if download was not possible
+                else:
                     print(f"Failed for {url} after {max_retry} attempts")
     return df
 
@@ -337,8 +337,8 @@ def ID_to_df(items: list, Content: list, URL: str):
 
 def extract_sequences(df):
     """
-    The main funtion, the input is the filtered search results df
-    and outputs a df with anti/nano-body sequences
+    The main funtion, the input is the filtered search results dataframe
+    and outputs a dataframe with anti/nano-body sequences
     """
     print("Gathering extra information for US patents...")
     df = get_us_sequences(df)

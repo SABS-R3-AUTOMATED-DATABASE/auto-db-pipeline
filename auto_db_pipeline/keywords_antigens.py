@@ -7,7 +7,7 @@ def load_keywords(filepath):
 
 def load_known_antigend(filepath=None):
     '''Load known antigens from text file. If no path is provided empty dict is return'''
-    if filepath=None:
+    if filepath==None:
         return {}
     else:
         known_antigens = dict()
