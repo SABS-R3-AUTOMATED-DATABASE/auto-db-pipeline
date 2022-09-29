@@ -14,20 +14,10 @@ from paperscraper.utils import dump_papers
 from paperscraper.get_dumps.biorxiv import biorxiv
 from pandas import read_json
 from os.path import isfile
+from constants import DATEFORMAT, KEYWORDS
 
 # pylint: disable=dangerous-default-value
 
-KEYWORDS = [
-            ['SARS-CoV-2', 'COVID-19', 'coronavirus', 'SARS-CoV', 'MERS-CoV', 'SARS'],
-
-            ['antibody', 'antibodies', 'nanobody', 'immunoglobulin', 'MAb', 'nanobodies'],
-
-            ['neutralizing', 'neutralize', 'neutralization', 'bind', 'binding',
-                'inhibit', 'targeting'],
-
-            ['heavy chain', 'complementarity determining region', 'gene',
-                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
-            ]
 
 FIELDS = ["title", "authors", "date", "abstract", "journal", "doi"]
 START_DATE = "None"
@@ -38,9 +28,6 @@ FILENAME_BIORXIV_ALL = "biorxiv_all"
 
 DATAPATH = "../data/keywords2papers/"
 DATATYPE = ".jsonl"
-
-DATEFORMAT = "%Y_%m_%d"
-
 
 class Keywords2Papers:
     """"
