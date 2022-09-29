@@ -12,6 +12,7 @@ from parse_supp.get_supp_seqs import get_seqs_from_supp
 from auto_db_pipeline.get_additional_info.collate_results import collate_results
 from auto_db_pipeline.keywords_antigens import load_keywords, load_known_antigens
 from auto_db_pipeline.keywords2papers import Keywords2Papers
+from auto_db_pipeline.papers2urls import papers2urls
 
 
 # TODO: multiprocessing after keywords are generated
@@ -29,10 +30,8 @@ def get_all_fucking_sequences():
   k2p = Keywords2Papers(keywords_disease)
   pubmed_results = k2p.get_pubmed()
   biorxiv_results = k2p.get_biorxiv()
-
-  # TODO: function that produces urls
-
-  get_seqs_from_supp(paper_urls_list)
+  paper_urls = papers2urls(pubmed_results, biorxiv_results)
+  get_seqs_from_supp(paper_urls)
 
   ''' Search seqs from pdb'''
   # TODO: add pdb function
