@@ -1,3 +1,10 @@
+'''
+Helper functions required for the pipeline
+'''
+
+import pandas as pd
+import numpy as np
+
 def load_keywords(filepath):
     '''Load disease specific keywords from text file'''
     with open(filepath, 'r') as keyword_file:
@@ -18,3 +25,10 @@ def load_known_antigens(filepath=None):
             names = line.strip().split(': ')[1].split(', ')
             known_antigens[antigen] = names
         return known_antigens
+
+def papers2urls(pubmed, biorxiv):
+    '''Function to get list of urls from papers'''
+    df = pd.concat([pd.DataFrame(pubmed), pd.DataFrame(biorxiv)])
+    df.replace('', np.nan, inplace=True)
+    df.dropna(subset=['doi'], inplace=True)
+    return ['http://doi.org/' + x for x in df.doi.values]
