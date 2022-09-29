@@ -9,6 +9,7 @@ from tqdm import tqdm
 import numpy as np
 import time
 
+
 def get_random_ua():
     """Function that gets a random user agent to access the webpages"""
     random_ua = ""
@@ -26,6 +27,7 @@ def get_random_ua():
         print(str(ex))
     finally:
         return random_ua.rstrip()
+
 
 def get_us_sequences(df):
     """
@@ -53,7 +55,7 @@ def get_us_sequences(df):
                 headers = {
                     "User-Agent": get_random_ua(),
                     "Accept-Encoding": "*",
-                    "Connection": "keep-alive"
+                    "Connection": "keep-alive",
                 }
                 delay = 5
                 max_retry = 5

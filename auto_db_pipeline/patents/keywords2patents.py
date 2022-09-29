@@ -62,7 +62,10 @@ class Patents:
         start_year (int): Start year for the search. Needs to be in format:
             YYYY, e.g. 2022. Defaults to 2003
     """
-    def __init__(self, keywords: List[Union[str, List[str]]] = KEYWORDS, start_year: int = 2003):
+
+    def __init__(
+        self, keywords: List[Union[str, List[str]]] = KEYWORDS, start_year: int = 2003
+    ):
         self.keywords = keywords
         self.start_year = start_year
         self.patent_urls = ""
@@ -74,7 +77,7 @@ class Patents:
         Search queries are sent for CN, KR, US and WO regions seperately for each year.
         The urls are obtained by using Fetch/XHR in Chrome developer mode
         """
-        print('Seaching Google Patents using the given keywords...')
+        print("Seaching Google Patents using the given keywords...")
         results = []
         now = datetime.now()
         url_part_1 = "https://patents.google.com/xhr/query?url=q%3D" + "%2B".join(
@@ -155,7 +158,7 @@ class Patents:
         """
         if not self.patent_urls:
             self.get_patent_urls()
-        print('Downloading text from Google Patents...')
+        print("Downloading text from Google Patents...")
         df = pd.DataFrame(
             {
                 "URL": [],

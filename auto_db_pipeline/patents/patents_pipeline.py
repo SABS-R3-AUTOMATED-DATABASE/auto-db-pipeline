@@ -7,30 +7,32 @@ from .patents2sequences import extract_sequences
 from .keywords2patents import Patents
 from typing import List, Union
 
-#KEYWORDS_patents = [
+# KEYWORDS_patents = [
 #    ["SARS-CoV-2", "COVID-19", "coronavirus", "MERS", "SARS"],
 #    ["antibody", "nanobody", "immunoglobulin", "molecule"],
 #    ["neutralize", "bind", "inhibit", "target"],
 #    ["heavy chain", "CDR", "RBD", "monoclonal", "polyclonal", "amino acid", "sequence", "S protein"],
-#]
+# ]
+
 
 def get_keywords(disease_keywords):
     KEYWORDS_patents = [
-    ["antibody", "nanobody", "immunoglobulin", "molecule"],
-    ["neutralize", "bind", "inhibit", "target"],
-    ["heavy chain", "CDR", "monoclonal", "polyclonal", "amino acid", "sequence"],
+        ["antibody", "nanobody", "immunoglobulin", "molecule"],
+        ["neutralize", "bind", "inhibit", "target"],
+        ["heavy chain", "CDR", "monoclonal", "polyclonal", "amino acid", "sequence"],
     ]
     KEYWORDS_patents.insert(0, disease_keywords.split(", "))
     return KEYWORDS_patents
 
+
 def get_seq_from_patents(
     keywords_disease: List[str],
-    start_year: int =2003,
+    start_year: int = 2003,
     load_json: bool = False,
     save_json: bool = False,
     save_csv: bool = True,
-    path:str = "data/patents",
-    ):
+    path: str = "data/patents",
+):
     """
     Args:
         keywords_disease (List[str]): List of keywords related to the disease of interest
@@ -59,8 +61,7 @@ def get_seq_from_patents(
 
     if save_csv:
         sequences.to_csv(
-            "data/patents/patent_sequence_results.csv",
-            index=False,
+            "data/patents/patent_sequence_results.csv", index=False,
         )
 
     return sequences
