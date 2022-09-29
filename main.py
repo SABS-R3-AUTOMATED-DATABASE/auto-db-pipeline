@@ -13,6 +13,7 @@ from auto_db_pipeline.get_additional_info.collate_results import collate_results
 from auto_db_pipeline.keywords_antigens import load_keywords, load_known_antigens
 from auto_db_pipeline.keywords2papers import Keywords2Papers
 from auto_db_pipeline.papers2urls import papers2urls
+from auto_db_pipeline.keywords2pdbs import get_and_save_pdbs
 
 
 # TODO: multiprocessing after keywords are generated
@@ -22,6 +23,7 @@ def get_all_fucking_sequences():
   ''' Get known antigens for genbank'''
   known_antigens = load_known_antigens('/src/covid_known_antigens.txt')
 
+  get_and_save_pdbs()
 
   ''' Search for seqs from patents'''
   get_seq_from_patents(keywords_disease)
@@ -38,9 +40,9 @@ def get_all_fucking_sequences():
 
   ''' Search for seqs from genbank IDs'''
   run_genbank_pipeline(keywords_disease, known_antigens, output_path='data/genbank/')
-  
+
   ''' Combine all outputs and get statistics'''
   collate_results(outfile_name='data/final_antibody_db.csv')
-    
+
 
 get_all_fucking_sequences()
