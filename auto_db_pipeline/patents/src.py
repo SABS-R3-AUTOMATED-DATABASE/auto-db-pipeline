@@ -174,10 +174,12 @@ class Patents:
                         results.append(
                             "https://patents.google.com/patent/" + num + "/en"
                         )
-        print("Collecting ",len(results)," Patent URLs takes", datetime.now() - now)
+        print("Collecting ", len(results), " Patent URLs takes", datetime.now() - now)
         return results
 
-    def get_patents(self, CN: bool = False, keywords=KEYWORDS, start_year: int = 2003, patents = None):
+    def get_patents(
+        self, CN: bool = False, keywords=KEYWORDS, start_year: int = 2003, patents=None
+    ):
         """This function taks around 4 hours to run to prevent getting blocked for accessing too many times in a short period of time"""
         starttime = datetime.now()
         if patents == None:
@@ -225,7 +227,7 @@ class Patents:
                 claim = content.text
                 claim = claim.replace("\n", "")
                 claims.append(claim)
-                
+
             df.at[i, "Claim"] = claims
             for content in soup.find_all("div", class_="description-paragraph"):
                 unwanted = content.find("span", class_="google-src-text")
@@ -268,7 +270,7 @@ class Patents:
             if i % 100 == 0 and i != 0:
                 time.sleep(600)
         self.search_results = df
-        print("Dowloading ",len(patents)," Patents takes", datetime.now() - starttime)
+        print("Dowloading ", len(patents), " Patents takes", datetime.now() - starttime)
         return df
 
     # def translate_seq(VR: str):
@@ -818,7 +820,7 @@ test = Patents()
 # test.extract_sequences()
 # test.save_final_output("patents/patent_results_new_us.csv")
 # test.get_seq(CN = True)
-with open("patents/urls.txt", 'r') as f:
-    urls = [line.rstrip('\n') for line in f]
+with open("patents/urls.txt", "r") as f:
+    urls = [line.rstrip("\n") for line in f]
 patents = test.get_patents(patents=urls)
 patents.to_json("data/patent_search_results.json")
