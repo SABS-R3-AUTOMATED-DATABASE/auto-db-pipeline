@@ -1,5 +1,5 @@
 import pandas as pd
-from .seqid2seq import extract_seq_from_id
+from .patents2sequences import extract_seq_from_id
 
 
 def CN113817052A(Content: list, URL: str):
