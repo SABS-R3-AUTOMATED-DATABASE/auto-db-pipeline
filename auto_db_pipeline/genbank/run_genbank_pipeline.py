@@ -27,7 +27,7 @@ def create_keywords(keywords_disease):
     return keywords
 
 
-def run_genbank_pipeline(keywords_disease, known_antigens, date, output_path):
+def get_seqs_from_genbank(keywords_disease, known_antigens, output_path):
     '''Main function that runs the genbank pipeline.
 
     param keywords_disease: keywords to search genbank protein database

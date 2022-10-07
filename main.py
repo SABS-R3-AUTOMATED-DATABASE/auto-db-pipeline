@@ -1,14 +1,9 @@
-import imp
-import pandas as pd
-import numpy as np
-import json
-
-from sympy import sequence
-
-from auto_db_pipeline.genbank.run_genbank_pipeline import run_genbank_pipeline
-from auto_db_pipeline.papers2ids import Papers
+from auto_db_pipeline.utils import load_keywords, load_known_antigens, papers2urls
 from auto_db_pipeline.patents.patents_pipeline import get_seq_from_patents
+from auto_db_pipeline.keywords2papers import Keywords2Papers
 from parse_supp.get_supp_seqs import get_seqs_from_supp
+
+from auto_db_pipeline.genbank.run_genbank_pipeline import get_seqs_from_genbank
 from auto_db_pipeline.get_additional_info.collate_results import collate_results
 from auto_db_pipeline.keywords_antigens import load_keywords, load_known_antigens
 from auto_db_pipeline.keywords2papers import Keywords2Papers
@@ -37,8 +32,8 @@ def get_all_fucking_sequences():
   _ = get_or_update_pdb_chains()
 
   ''' Search for seqs from genbank IDs'''
-  run_genbank_pipeline(keywords_disease, known_antigens, output_path='data/genbank/')
-
+  get_seqs_from_genbank(keywords_disease, known_antigens, output_path='data/genbank/')
+  
   ''' Combine all outputs and get statistics'''
   collate_results(outfile_name='data/final_antibody_db.csv')
 
