@@ -32,9 +32,9 @@ def collate_results(outfile_name):
     supp_output.rename(columns={'Binds_to': 'Binds to', 'Origin': 'Source'}, inplace=True)
 
     print('PDB')
-    pdb_output = pd.read_csv('data/webscrape_outputs/pdbs-2022_03_08.csv')
+    pdb_output = pd.read_csv('data/pdbs/pdbs.csv')
     pdb_output = correction_and_add_cdrs(pdb_output)
-    pdb_output.rename(columns={'pdb_id': 'PDB ID', 'used_sabdab': 'Used SAbDab?', 'Name_VH': 'VH Description', 'Name_VL': 'VL Description'}, inplace=True)
+    pdb_output.rename(columns={'pdb_id': 'PDB ID', 'VH_id': 'VH Description', 'VL_id': 'VL Description'}, inplace=True)
 
     print('GENBANK')
     genbank_output1 = standardise_seqs(csv_file='data/genbank/ab_database.csv', vh_col_name='VH', vl_col_name='VL')
