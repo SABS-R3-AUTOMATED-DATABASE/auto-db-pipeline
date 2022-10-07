@@ -126,11 +126,6 @@ def get_selected_pdbs(keywords_disease, save=True):
             json.dump(list(pdbs), f)
     return dfs, pdbs
 
-def get_covabdab_pdbs():
-    path = "../data/external_pdbs/covabdab.json"
-    with open(path, "r", encoding='utf8') as f:
-        return json.load(f)
-
 def _get_fields(handle):
     output = dict()
     struct = handle.get("struct")
