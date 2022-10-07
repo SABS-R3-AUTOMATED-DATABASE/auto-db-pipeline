@@ -29,11 +29,11 @@ def get_all_fucking_sequences():
   get_seqs_from_supp(paper_urls)
 
   ''' Search seqs from pdb'''
-  _ = get_or_update_pdb_chains()
+  _ = get_or_update_pdb_chains(keywords_disease, save=True)
 
   ''' Search for seqs from genbank IDs'''
   get_seqs_from_genbank(keywords_disease, known_antigens, output_path='data/genbank/')
-  
+
   ''' Combine all outputs and get statistics'''
   collate_results(outfile_name='data/final_antibody_db.csv')
 

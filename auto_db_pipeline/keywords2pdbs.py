@@ -7,7 +7,6 @@ from os.path import isfile
 from Bio.SeqUtils import seq1
 from Bio.PDB import MMCIFParser
 from Bio.PDB.PDBList import PDBList
-from constants import KEYWORDS_PDB
 
 OUTPUT_PATH = './data/pdbs/'  # This is for the main.py file location
 SABDAB_LINK = 'http://opig.stats.ox.ac.uk/webapps/newsabdab/sabdab/summary/all/'
@@ -18,8 +17,8 @@ SEARCH_COLUMNS = ('pdbx_descriptor', 'title', 'pdbx_keywords', 'text', 'paper_ti
                 'antigen_species')
 
 
-def get_or_update_pdb_chains(save=True):
-    dfs, _ = get_selected_pdbs()
+def get_or_update_pdb_chains(keywords_disease, save=True):
+    dfs, _ = get_selected_pdbs(keywords_disease)
     pdbl = PDBList(verbose=False, obsolete_pdb="None")
     parser = MMCIFParser(QUIET=True)
     entries = {}
@@ -109,7 +108,7 @@ def get_or_update_sabdab_info(save=True):
             json.dump(problems, f)
     return dff, problems
 
-def get_selected_pdbs(save=True):
+def get_selected_pdbs(keywords_disease, save=True):
     dff, _ = get_or_update_sabdab_info(save=True)
     obsolete = get_obsolete()
     df = get_sabdab_pdb_df()
@@ -118,7 +117,7 @@ def get_selected_pdbs(save=True):
     for col in dff.select_dtypes('object').columns:
         dff[col] = dff[col].str.upper()
 
-    dataframes = list(map(lambda col_name: dff.loc[_matches(dff, col_name)], SEARCH_COLUMNS))
+    dataframes = list(map(lambda col_name: dff.loc[_matches(dff, col_name, keywords_disease)], SEARCH_COLUMNS))
     pdbs = set(pd.concat(dataframes).index)
     dfs = dff.loc[dff.index.isin(pdbs)]
     if save:
@@ -148,17 +147,17 @@ def _get_fields(handle):
             output['paper_title'] = title
     return output
 
-def _iterate_keywords(input_text):
+def _iterate_keywords(input_text, keywords_disease):
     if isinstance(input_text, float):
         return False
     output = False
-    for condition in KEYWORDS_PDB:
+    for condition in keywords_disease:
         output = output or (condition in input_text)
     return output
 
-def _matches(df, col_name):
+def _matches(df, col_name, keywords_disease):
     # series = df[col_name].loc[~df[col_name].isna()]
-    return df[col_name].map(lambda entry_text: _iterate_keywords(entry_text))
+    return df[col_name].map(lambda entry_text: _iterate_keywords(entry_text, keywords_disease))
 
 
 

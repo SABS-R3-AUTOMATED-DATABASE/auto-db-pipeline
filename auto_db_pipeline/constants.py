@@ -11,7 +11,3 @@ KEYWORDS = [
             ['heavy chain', 'complementarity determining region', 'gene',
                 'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
             ]
-
-KEYWORDS_PDB = ("COVID", "MERS", "CORONAVIRUS", "SARS",
-                "MIDDLE EAST RESPIRATORY SYNDROME")
-
