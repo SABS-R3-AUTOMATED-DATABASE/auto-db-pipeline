@@ -8,7 +8,7 @@ from Bio.SeqUtils import seq1
 from Bio.PDB import MMCIFParser
 from Bio.PDB.PDBList import PDBList
 
-OUTPUT_PATH = './data/pdbs/'  # This is for the main.py file location
+OUTPUT_PATH = '../data/pdbs/'  # This is for the main.py file location
 SABDAB_LINK = 'http://opig.stats.ox.ac.uk/webapps/newsabdab/sabdab/summary/all/'
 KEYWORDS2PDBS_PATH = "../data/keywords2pdbs/"
 PDB_FILEPATH = f'{KEYWORDS2PDBS_PATH}PDBs/'
