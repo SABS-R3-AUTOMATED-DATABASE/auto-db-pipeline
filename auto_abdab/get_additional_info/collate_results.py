@@ -22,23 +22,23 @@ def collate_results(outfile_name):
     print('Running dataframes through IgBLAST and ANARCI...')
 
     print('PATENT')
-    patent_output = standardise_seqs(csv_file='data/patents/patent_sequence_results.csv', vh_col_name='HCVR', vl_col_name='LCVR')
+    patent_output = standardise_seqs(csv_file='../data/patents/patent_sequence_results.csv', vh_col_name='HCVR', vl_col_name='LCVR')
     patent_output = correction_and_add_cdrs(patent_output)
     patent_output.rename(columns={'HC_Description': 'VH Description', 'LC_Description': 'VL Description'}, inplace=True)
 
     print('SI')
-    supp_output = standardise_seqs(csv_file='data/supp_info/supp_seqs.csv', vh_col_name='HCVR', vl_col_name='LCVR')
+    supp_output = standardise_seqs(csv_file='../data/supp_info/supp_seqs.csv', vh_col_name='HCVR', vl_col_name='LCVR')
     supp_output = correction_and_add_cdrs(supp_output)
     supp_output.rename(columns={'Binds_to': 'Binds to', 'Origin': 'Source'}, inplace=True)
 
     print('PDB')
-    pdb_output = pd.read_csv('data/pdbs/pdbs.csv')
+    pdb_output = pd.read_csv('../data/pdbs/pdbs.csv')
     pdb_output = correction_and_add_cdrs(pdb_output)
     pdb_output.rename(columns={'pdb_id': 'PDB ID', 'VH_id': 'VH Description', 'VL_id': 'VL Description'}, inplace=True)
 
     print('GENBANK')
-    genbank_output1 = standardise_seqs(csv_file='data/genbank/ab_database.csv', vh_col_name='VH', vl_col_name='VL')
-    genbank_output2 = standardise_seqs(csv_file='data/genbank/ab_database_unpaired.csv', vh_col_name='VH', vl_col_name='VL')
+    genbank_output1 = standardise_seqs(csv_file='../data/genbank/ab_database.csv', vh_col_name='VH', vl_col_name='VL')
+    genbank_output2 = standardise_seqs(csv_file='../data/genbank/ab_database_unpaired.csv', vh_col_name='VH', vl_col_name='VL')
     print('genbank paired')
     genbank_output1 = correction_and_add_cdrs(genbank_output1)
     print('genbank unpaired')

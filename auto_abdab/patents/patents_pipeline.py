@@ -61,7 +61,7 @@ def get_seq_from_patents(
 
     if save_csv:
         sequences.to_csv(
-            "data/patents/patent_sequence_results.csv", index=False,
+            "../data/patents/patent_sequence_results.csv", index=False,
         )
 
     return sequences

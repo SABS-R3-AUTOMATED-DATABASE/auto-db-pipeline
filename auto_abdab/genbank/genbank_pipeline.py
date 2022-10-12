@@ -40,28 +40,28 @@ def get_seqs_from_genbank(keywords_disease, known_antigens, output_path):
     # search genbank
     genbanksearch = GenbankSearch(keywords)
     genbanksearch(
-        out_file_path='data/genbank/ids_protein.json')
+        out_file_path='../data/genbank/ids_protein.json')
 
     # fetch protein entries
     proteinretrival = ProteinRetrieval(
-        ids_file_path='data/genbank/ids_protein.json')
+        ids_file_path='../data/genbank/ids_protein.json')
     proteinretrival(db='protein',
-                    out_file_path='data/genbank/handles_protein.json')
+                    out_file_path='../data/genbank/handles_protein.json')
 
     # get info from protein handles
     inforetreival = InfoRetrieval(
-        proteins_file_path='data/genbank/handles_protein.json')
+        proteins_file_path='../data/genbank/handles_protein.json')
     inforetreival(
         db='protein', classification_method='anarci',
-        paired_out_file_path='data/genbank/AB_paired_protein.json',
-        unpaired_out_file_path='data/genbank/AB_unpaired_protein.json',
-        nanobod_out_file_path='data/genbank/nanobody_protein.json',
+        paired_out_file_path='../data/genbank/AB_paired_protein.json',
+        unpaired_out_file_path='../data/genbank/AB_unpaired_protein.json',
+        nanobod_out_file_path='../data/genbank/nanobody_protein.json',
         known_antigens=known_antigens)
 
     # populate csv
     populatedb = PopulateDatabase(
-        paired_path='data/genbank/AB_paired_protein.json',
-        unpaired_path='data/genbank/AB_unpaired_protein.json',
-        nanobod_path='data/genbank/nanobody_protein.json')
+        paired_path='../data/genbank/AB_paired_protein.json',
+        unpaired_path='../data/genbank/AB_unpaired_protein.json',
+        nanobod_path='../data/genbank/nanobody_protein.json')
     populatedb(out_file_paired=output_path+'ab_database.csv',
                out_file_unpaired=output_path+'ab_database_unpaired.csv')
