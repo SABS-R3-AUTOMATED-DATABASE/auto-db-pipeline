@@ -64,7 +64,7 @@ class InfoRetrieval:
         self.pattern = re.compile(self.pdb_id_regex,
                                   flags=re.IGNORECASE | re.VERBOSE)
         
-        self.db_summary = pd.read_csv('sabdab_summary_all.tsv', sep='\t')
+        self.db_summary = pd.read_csv('../src/sabdab_summary_all.tsv', sep='\t')
 
     def translate_nucleotides(self):
         '''
@@ -421,10 +421,10 @@ class InfoRetrieval:
 
 
                 # get chain sequences from pdb
-                pdb = PDBList(pdb='./pdbs/', verbose=False)
-                pdb.retrieve_pdb_file(pdb_id, pdir='./pdbs', overwrite=True)
+                pdb = PDBList(pdb='../data/pdb_files/', verbose=False)
+                pdb.retrieve_pdb_file(pdb_id, pdir='../data/pdb_files', overwrite=True)
                 parser = MMCIFParser(QUIET=True)
-                structure = parser.get_structure(pdb_id, f'./pdbs/{pdb_id}.cif')
+                structure = parser.get_structure(pdb_id, f'../data/pdb_files/{pdb_id}.cif')
                 chains = {chain.id:seq1(''.join(residue.resname for residue in chain)) for chain in structure.get_chains()}
 
 

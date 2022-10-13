@@ -71,31 +71,29 @@ class ProteinRetrieval:
 
         # Entrez.efetch can only get 10'000 entires at a time use the generator
         # function to produce chunks of 10'000 ids
-        # id_chunks = self.chunks(self.ids, 10000)
+        id_chunks = self.chunks(self.ids, 10000)
 
         # loop through chunks and append to list
 
-        # for id_chunk in id_chunks:
-        # entries_handle = Entrez.efetch(db=db, id=id_chunk, rettype="gb",
-        # retmode="xml")
-        # self.entries += Entrez.read(entries_handle, validate=False)
+        for id_chunk in id_chunks:
+            entries_handle = Entrez.efetch(db=db, id=id_chunk, rettype="gb",
+            retmode="xml")
+            self.entries += Entrez.read(entries_handle, validate=False)
 
-        i = 0
-        for id in self.ids:
-            i += 1
-            # Entrez.efetch handles aproximately 25 searches per second
-            try:
-                entries_handle = Entrez.efetch(db=db, id=id, rettype="gb",
-                                               retmode="xml")
-                self.entries += Entrez.read(entries_handle, validate=False)
+        #i = 0
+        #for id in self.ids:
+        #    i += 1
+        #    # Entrez.efetch handles aproximately 25 searches per second
+        #    try:
+        #        entries_handle = Entrez.efetch(db=db, id=id, rettype="gb",
+        #                                       retmode="xml")
+        #        self.entries += Entrez.read(entries_handle, validate=False)
+        #    except HTTPError:
+        #        pass
+        #    if i == 1 or i % 100 == 0 or i == len(self.ids):
+        #        self.progress(i, len(self.ids))
 
-            except HTTPError:
-                pass
-
-            if i == 1 or i % 100 == 0 or i == len(self.ids):
-                self.progress(i, len(self.ids))
-
-        print('\n number of protein handles retrieved:', len(self.entries))
+        print('number of protein handles retrieved:', len(self.entries))
         print('----------')
 
     def remove_junk(self):

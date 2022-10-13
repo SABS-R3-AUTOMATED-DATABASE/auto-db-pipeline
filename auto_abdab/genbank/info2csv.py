@@ -223,11 +223,11 @@ class PopulateDatabase:
 
         for paired_seq in self.paired_seqs:
             row = self.prepare_paired_row(paired_seq)
-            self.df_p = self.df_p.append(row, ignore_index=True)
+            self.df_p = pd.concat([self.df_p,row], ignore_index=True)
 
         for nanobody in self.nanobodies:
             row = self.prepare_unpaired_nano_row(nanobody)
-            self.df_p = self.df_p.append(row, ignore_index=True)
+            self.df_p = pd.concat([self.df_p,row], ignore_index=True)
 
         self.df_p.fillna('NaN', inplace=True)
 
@@ -245,7 +245,7 @@ class PopulateDatabase:
         for group in self.unpaired_seqs:
             for unpaired_seq in group:
                 row = self.prepare_unpaired_nano_row(unpaired_seq)
-                self.df_up = self.df_up.append(row, ignore_index=True)
+                self.df_up = pd.concat([self.df_p,row], ignore_index=True)
 
         self.df_up.fillna('NaN', inplace=True)
 
@@ -278,9 +278,9 @@ class PopulateDatabase:
                     seen = True
 
             if not seen:
-                df_p2 = df_p2.append(current_row)
+                df_p2 = pd.concat([df_p2, current_row])
             else:
-                self.df_duplicates = self.df_duplicates.append(current_row)
+                self.df_duplicates = pd.concat([self.df_duplicates, current_row])
 
         self.df_p = df_p2
         print('Number of paired database entires after duplicate removal:',

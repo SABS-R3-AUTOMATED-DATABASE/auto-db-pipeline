@@ -14,7 +14,6 @@ from paperscraper.utils import dump_papers
 from paperscraper.get_dumps.biorxiv import biorxiv
 from pandas import read_json
 from os.path import isfile
-from constants import DATEFORMAT, KEYWORDS
 
 # pylint: disable=dangerous-default-value
 
@@ -31,6 +30,8 @@ from constants import DATEFORMAT, KEYWORDS
 #                'epitope', 'receptor-binding domain', 'rbd', 'spike protein', 'VHH']
 #            ]
 
+
+DATEFORMAT = "%Y_%m_%d"
 FIELDS = ["title", "authors", "date", "abstract", "journal", "doi"]
 START_DATE = "None"
 END_DATE = "None"
@@ -230,7 +231,7 @@ class Keywords2Papers:
 
     @staticmethod
     def _query_pubmed(
-        keywords: list[Union[str, list[str]]] = KEYWORDS,
+        keywords: list[Union[str, list[str]]],
         fields: list = FIELDS,
         start_date: str = START_DATE,
         end_date: str = END_DATE
@@ -256,6 +257,9 @@ class Keywords2Papers:
         # Translate keywords into query.
         query = get_query_from_keywords_and_date(keywords=keywords, start_date=start_date,
                                                 end_date=end_date)
+        
+        print(query)
+        print(fields)
         output = get_pubmed_papers(query, fields)
         output = [{field: entry.get(field, None) for field in fields} for entry in output]
         return output

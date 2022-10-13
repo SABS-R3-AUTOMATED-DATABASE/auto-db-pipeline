@@ -1,8 +1,8 @@
 from Bio.SeqUtils import seq1
 import pandas as pd
-from igblastnprocess import IGBLASTprocess
-from igblastnprocess import get_vdj_of_species
-from retrieve_cdr_germlines import get_CDRs_and_germlines
+from .igblastnprocess import IGBLASTprocess
+from .igblastnprocess import get_vdj_of_species
+from .retrieve_cdr_germlines import get_CDRs_and_germlines
 import re
 
 igblastprocess = IGBLASTprocess()
@@ -22,6 +22,10 @@ def standardise_seqs(csv_file, vh_col_name, vl_col_name):
 
     # convert patent output to dataframe
     df = pd.read_csv(csv_file)
+
+    # remove non-ascii characters from sequence data
+    df[vh_col_name].replace({r'[^\x00-\x7F]+':''}, regex=True, inplace=True)
+    df[vl_col_name].replace({r'[^\x00-\x7F]+':''}, regex=True, inplace=True)
 
     # go through rows of sequences columns in df and standardise to single letter AA format
     aa_3_characters = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Ile', 'Pro', 'Thr', 'Phe', 'Asn', 'Gly', 'His', 'Leu', 'Arg', 'Trp', 'Ala', 'Val', 'Glu', 'Tyr', 'Met']

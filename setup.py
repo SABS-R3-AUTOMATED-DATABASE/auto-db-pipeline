@@ -5,9 +5,9 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setup(
-    name='auto-abdab',
+    name='auto_abdab',
     version='0.0.1',
-    description='auto-abdab: Pipeline to automatically generate disease-specific antibody databases',
+    description='auto_abdab: Pipeline to automatically generate disease-specific antibody databases',
     license='BSD 3-clause license',
     maintainer='Emily Jin, Fabian Spoendlin, Gemma Gordon, Hongyu Qian, Jesse Murray',
     long_description=long_description,
@@ -18,6 +18,14 @@ setup(
         '': ['*.txt']
     },
     install_requires=[
-        'pandas'
+        'pandas',
+        'requests',
+        'bs4',
+        'tqdm',
+        'numpy',
+        'biopython',
+        'paperscraper',
+        'pypdb',
+        'anarci'
     ],
 )

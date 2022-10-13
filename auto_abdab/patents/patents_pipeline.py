@@ -21,7 +21,7 @@ def get_keywords(disease_keywords):
         ["neutralize", "bind", "inhibit", "target"],
         ["heavy chain", "CDR", "monoclonal", "polyclonal", "amino acid", "sequence"],
     ]
-    KEYWORDS_patents.insert(0, disease_keywords.split(", "))
+    KEYWORDS_patents.insert(0, disease_keywords)
     return KEYWORDS_patents
 
 
@@ -31,7 +31,7 @@ def get_seq_from_patents(
     load_json: bool = False,
     save_json: bool = False,
     save_csv: bool = True,
-    path: str = "data/patents",
+    path: str = "../data/patents",
 ):
     """
     Args:

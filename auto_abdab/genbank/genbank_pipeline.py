@@ -1,8 +1,8 @@
-from keywords2ids import GenbankSearch
-from json_combination import Combination
-from ids2protein import ProteinRetrieval
-from proteins2info import InfoRetrieval
-from info2csv import PopulateDatabase
+from .keywords2ids import GenbankSearch
+from .json_combination import Combination
+from .ids2protein import ProteinRetrieval
+from .proteins2info import InfoRetrieval
+from .info2csv import PopulateDatabase
 import http.client
 http.client.HTTPConnection._http_vsn = 10
 http.client.HTTPConnection._http_vsn_str = 'HTTP/1.0'

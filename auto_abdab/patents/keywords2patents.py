@@ -37,7 +37,7 @@ KEYWORDS = [
 def get_random_ua():
     """Method that gets a random user agent to access the webpages"""
     random_ua = ""
-    ua_file = "auto_db_pipeline/patents/user-agents.txt"
+    ua_file = "../auto_abdab/patents/user-agents.txt"
     try:
         with open(ua_file) as f:
             lines = f.readlines()
@@ -238,7 +238,7 @@ class Patents:
                 time.sleep(600)
         self.patents = df
 
-    def save_patents(self, path: str = "data/patents"):
+    def save_patents(self, path: str = "../data/patents"):
         """Saves the content of all the patents into a json file"""
         starttime = datetime.now()
         path = path + "/patent_search_results_" + starttime.strftime("%Y%m%d") + ".json"
@@ -248,11 +248,11 @@ class Patents:
         else:
             print("No patents to be saved")
 
-    def load_patents(self, path: str = "data/patents"):
+    def load_patents(self, path: str = "../data/patents"):
         """Search for and load json file containing patent information"""
         not_found = True
         for item in os.listdir(path):
-            match = re.findall("patent\_search\_results\_\d{8}\.json", item)
+            match = re.findall(r"patent\_search\_results\_\d{8}\.json", item)
             if match:
                 not_found = False
                 self.patents = pd.read_json(path + "/" + match[0])

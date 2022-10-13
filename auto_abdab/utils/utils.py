@@ -17,7 +17,7 @@ def load_known_antigens(filepath=None):
         return {}
     else:
         known_antigens = dict()
-        with open('../../src/covid_known_antigens.txt', 'r') as antigens_file:
+        with open(filepath, 'r') as antigens_file:
             antigens_text = antigens_file.readlines()[1:]
         for line in antigens_text:
             antigen = line.strip().split(': ')[0]

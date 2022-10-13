@@ -1,6 +1,6 @@
 import pandas as pd
-from seq_correction_add_info import standardise_seqs
-from seq_correction_add_info import correction_and_add_cdrs
+from .seq_correction_add_info import standardise_seqs
+from .seq_correction_add_info import correction_and_add_cdrs
 import time
 from functools import reduce
 
@@ -27,7 +27,7 @@ def collate_results(outfile_name):
     patent_output.rename(columns={'HC_Description': 'VH Description', 'LC_Description': 'VL Description'}, inplace=True)
 
     print('SI')
-    supp_output = standardise_seqs(csv_file='../data/supp_info/supp_seqs.csv', vh_col_name='HCVR', vl_col_name='LCVR')
+    supp_output = standardise_seqs(csv_file='../data/supp_info/supp_seqs.csv', vh_col_name='VH', vl_col_name='VL')
     supp_output = correction_and_add_cdrs(supp_output)
     supp_output.rename(columns={'Binds_to': 'Binds to', 'Origin': 'Source'}, inplace=True)
 
@@ -69,9 +69,9 @@ def collate_results(outfile_name):
     final_database['Scrape source'] = source
 
     # clean up dataframe
-    final_database.drop(['Unnamed: 0', 'Description_VB', 'Description_VA', 'Description_Vunassigned', 'chain_id'], axis=1, inplace=True)
+    final_database.drop(['Unnamed: 0', 'Description_VB', 'Description_VA'], axis=1, inplace=True)
     cols = ['Scrape source', 'URL', 'Source', 'Reference', 'DOI',
-                                    'PDB ID', 'Used SAbDab?',
+                                    'PDB ID',
                                     'GenBank ID VH', 'GenBank ID VL', 'Binds to', 'Origin',
                                     'Date added', 'VH Description', 'VL Description',
                                     'VH', 'VL', 'CDRH1', 'CDRH2', 'CDRH3', 'CDRL1', 'CDRL2', 'CDRL3', 'Heavy J gene',
